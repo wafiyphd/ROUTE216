@@ -1,0 +1,42 @@
+body {font-family: "Catamaran";}
+
+.container-jumbo {background-color: #212121; }
+	
+.nav {background: transparent;}
+.nav img {padding-left: 20px; width: 30%;}
+.navbar-right li button, .navbar-right li button:focus {color: white; font-weight; background: none; border-radius: 4px;outline: none; letter-spacing: 2px; border: 2px solid white; }
+.navbar-right li button:hover, .navbar-right li button:active {color: rgba(0,0,0,0.7); background: white; outline: none; }
+
+.main-container {background-image: url(../images/jumbo1.jpg);}
+
+.signup-container {padding-top: 40px; }
+.signup-container h3 {font-weight: bold; text-align: center;  color: white;}
+.signup-container h4 {text-align: center;  color: white;}
+
+.signup-wrap {box-shadow:0 12px 15px 0 rgba(0,0,0,.24); margin: auto; margin-top: 20px; margin-bottom: 50px; }
+.signup-form {padding:40px 40px 70px 40px; background: rgba(59,55,55,.8); }
+.signup-form .group{margin-top: 10px; margin-bottom:20px;}
+
+.signup-form .label, .signup-form .input {width:100%; color:#aaa; display:block; outline: none; font-size: 100%; }
+.signup-form .input {border:none; padding:10px 20px; border-radius:5px; background:rgba(255,255,255,.5); color:#fff; }
+.signup-form .button{width:100%; color:#fff; display:block; outline: none; font-size: 100%; border:none; padding:10px 20px; border-radius:25px; }
+.signup-form p {color:#aaa; font-size: 80%; padding-top: 20px;}
+.member {display: none}
+.trainer {display:none}
+
+.signup-form .button{background: rgba(205, 97, 85, 1);}
+.signup-form .button:hover{background: rgba(250, 97, 85, 1); }
+
+.signup-form .radio {cursor: pointer; }
+.signup-form .radio input { visibility: hidden; }
+.signup-form .radio .choice { width:100%; padding: 10px; border: 2px solid #EEE; display: inline-block; color: #fff; border-radius: 5px; }
+
+.signup-form .radio input:checked + .choice { border-color: #64B5F6; background-color: rgba(100, 181, 246, 0.9); }
+
+.footer-container {background-color: #212121; color: white;}
+.footer-container a {color:#dcdcdc; font-weight: bold;}	
+.footer-container img {height: 30%; width: 30%; }
+.footer-container .footer-col {margin-top: 15px; margin-bottom: 20px; }
+.footer-container .footer-col ul { margin: 0; padding: 0; }
+
+.footer-container .sub-footer {color: white; background: #000000; padding: 10px; }

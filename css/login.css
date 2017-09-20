@@ -1,0 +1,17 @@
+.login-wrap {width: 100%; margin-left:0; margin-right:0; background:url(../images/jumbo1.jpg) no-repeat center; box-shadow:0 12px 15px 0 rgba(0,0,0,.24); color: white;} 
+.login-wrap a {color: #808080;text-decoration:none; font-weight: bold}
+.login-wrap a:hover{text-decoration:none}
+.login-container {padding:40px 70px 70px 70px; background:rgba(59,55,55,.8); }
+.login-container hr {height: 1px; border-top: 2px solid #808080 }
+
+.login-form .group {margin-top: 10px; margin-bottom:20px; }
+.login-form .group .label, .login-form .group .input, .login-form .group .button {width:100%; color:#fff; display:block; outline: none; font-size: 100%; }
+.login-form .group .button {border:none; padding:10px 20px; border-radius:25px; background: #5499C7; margin-top: 40px;}
+.login-form .group .button:hover{ background: #85C1E9; }
+.login-form .group .input {border:none; padding:10px 20px; border-radius:5px; background:rgba(255,255,255,.5); }
+.login-form .group .label{color: #808080; }
+
+.login-form .forgot{ padding-top: 20px; text-align:center; }
+.login-form .sign-up { font-weight: bold; color: #808080; text-align: center; padding-top: 10px; }
+.login-form .sign-up input { border:none; padding:10px 20px; border-radius:25px; background:rgba(205, 97, 85, 1); width:100%; color:#fff; display:block; outline: none; }
+.login-form .sign-up input:hover{ background: rgba(250, 97, 85, 1); }
