@@ -38,5 +38,8 @@ body {font-family: "Catamaran";}
 .footer-container img {height: 30%; width: 30%; }
 .footer-container .footer-col {margin-top: 15px; margin-bottom: 20px; }
 .footer-container .footer-col ul { margin: 0; padding: 0; }
+.footer-container .social-icons ul{ display: inline; list-style-type: none; }
+
+.footer-container .social-icons li { list-style: none;  float: left; margin-right: 20px; }	
 
 .footer-container .sub-footer {color: white; background: #000000; padding: 10px; }

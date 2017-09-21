@@ -4,6 +4,7 @@ session_start();
 require_once 'dbconnect.php';
 
 $error = false;
+
 if( isset($_POST['login']) ) { 
   
   $username = trim($_POST['username']);
@@ -40,13 +41,13 @@ if( isset($_POST['login']) ) {
 		   if ($cm == 1) {
 			   $_SESSION['user'] = $row['user_id'];
 			   $errMSG = "Successful Login";
-		       header("Location: membertest.php");	
+		       header("Location: member.php");	
 		   }
 		   
 		   else {
 			   $_SESSION['user'] = $row['user_id'];
 			   $errMSG = "Successful Login";
-		       header("Location: trainertest.php");	
+		       header("Location: trainer.php");	
 		   }   
 	   } 
 	   
@@ -87,6 +88,7 @@ if( isset($_POST['login']) ) {
 		<nav class="nav navbar-default"><!-- Navigation bar -->
 			<div class="container">	
 				<ul class="nav navbar-nav navbar-right">
+					<li><a href="signup.php"><button type="button" class="btn navbar-btn" ><strong>Sign Up</strong></button></a></li>
 					<li><a><button type="button" class="btn navbar-btn" data-toggle="modal" data-target="#loginModal"><strong>Log In</strong></button></a></li>
 				</ul>
 				
@@ -218,11 +220,11 @@ if( isset($_POST['login']) ) {
 		
 		<div class="container signup-col text-center">
 			<div class="container signup-box col-md-6">
-				<a href=""><img class="img-responsive" src="images/member.png"></img></a>
+				
 			</div>
 			
 			<div class="container signup-box col-md-6">
-				<a href=""><img class="img-responsive" src="images/trainer.png"></img></a>
+				
 			</div>
 		</div>
 		<br><br><br><br>
@@ -231,28 +233,34 @@ if( isset($_POST['login']) ) {
 	<div class="container-fluid footer-container">
 		
 		<div class="container footer-col">
-			<div class="col-md-6">
-				<img src="images/routeW.png"></img>
-			</div>
-		
-			<div class="col-md-6">
-				<span style="float:right;"><a href="#top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a></span>
+			<div class="row">
+				<div class="col-lg-6">
+					<img src="images/routeW.png"></img><br>
+					<ul class="social-icons">
+						<li><a href="#"><i class="fa fa-3x fa-facebook-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-3x fa-twitter-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-3x fa-instagram"></i></a></li>
+					</ul>
+				</div>
+			
+				<div class="col-lg-6">
+					<span style="float:right;"><a href="#top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a></span>
+					
+				</div>
 			</div>
 		</div>
 		
 		<div class="container sub-footer"><!-- Sub Footer -->				
 			
-			<div class="col-sm-6">
+			<div class="col-sm-12 col-lg-6">
 			&copy Copyright 2017 <strong>ROUTE.</strong>
 			</div>
 			
-			<div class="col-sm-6">
+			<div class="col-sm-12 col-lg-6">
 				<span style="float:right">
-					<a href="#">Home</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+					<a href="index.php">Home</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 					<a href="#">About</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-					<a href="#">Features</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-					<a href="#">Log In</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-					<a href="#">Sign Up</a>
+					<a href="signup.php">Sign Up</a>
 				</span>
 			</div>		
 		</div><!-- End Sub Footer -->

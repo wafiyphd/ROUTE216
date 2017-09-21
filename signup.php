@@ -43,13 +43,13 @@
 		   if ($cm == 1) {
 			   $_SESSION['user'] = $row['user_id'];
 			   $errMSG = "Successful Login";
-		       header("Location: membertest.php");	
+		       header("Location: member.php");	
 		   }
 		   
 		   else {
 			   $_SESSION['user'] = $row['user_id'];
 			   $errMSG = "Successful Login";
-		       header("Location: trainertest.php");	
+		       header("Location: trainer.php");	
 		   }   
 	   } 
 	   
@@ -384,31 +384,38 @@
 	<div class="container-fluid footer-container">
 		
 		<div class="container footer-col">
-			<div class="col-md-6">
-				<img src="images/routeW.png"></img>
-			</div>
-		
-			<div class="col-md-6">
-				<span style="float:right;"><a href="#top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a></span>
+			<div class="row">
+				<div class="col-lg-6">
+					<img src="images/routeW.png"></img><br>
+					<ul class="social-icons">
+						<li><a href="#"><i class="fa fa-3x fa-facebook-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-3x fa-twitter-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-3x fa-instagram"></i></a></li>
+					</ul>
+				</div>
+			
+				<div class="col-lg-6">
+					<span style="float:right;"><a href="#top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a></span>
+					
+				</div>
 			</div>
 		</div>
 		
 		<div class="container sub-footer"><!-- Sub Footer -->				
 			
-			<div class="col-sm-6">
+			<div class="col-sm-12 col-lg-6">
 			&copy Copyright 2017 <strong>ROUTE.</strong>
 			</div>
 			
-			<div class="col-sm-6">
+			<div class="col-sm-12 col-lg-6">
 				<span style="float:right">
-					<a href="#">Home</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+					<a href="index.php">Home</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 					<a href="#">About</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-					<a href="#">Features</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-					<a href="#">Log In</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-					<a href="#">Sign Up</a>
+					<a href="signup.php">Sign Up</a>
 				</span>
 			</div>		
 		</div><!-- End Sub Footer -->
+		
 		<br><br>
 	</div>
 	
