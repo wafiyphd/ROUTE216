@@ -161,7 +161,7 @@
 	
    if ($res) {
     $errTyp = "success";
-	$errMSG = "Successfully signed up.";
+	$errMSG = "Successfully signed up. You may now log in.";
 	
     unset($username); unset($name); unset($email); unset($pass); unset($rpass); unset($specialty); unset($level);
    } 
@@ -239,7 +239,7 @@
 							<hr>
 							<div class="login-form">
 							
-								<form id="login" action="" method="post" autocomplete="off">
+								<form id="login" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" autocomplete="off">
 							
 									<div class="group">
 										<label for="username" class="label">Username</label>

@@ -1,0 +1,20 @@
+body {font-family: "Catamaran";}
+
+button a{text-decoration: none; color: white; }
+
+.container-jumbo {background-color: #212121;}
+
+.nav {background: transparent;}
+.nav img {padding-top: 10px; padding-left: 20px; width: 20%;}
+
+.navbar-right li button, .navbar-right li button:focus {color: white; font-weight; background: none; border-radius: 3px;outline: none; letter-spacing: 2px; border: 2px solid white; }
+.navbar-right li button:hover, .navbar-right li button:active {color: rgba(0,0,0,0.7); background: white; outline: none; }
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+	background-color:transparent
+}
+
+.navbar-nav > li > a {
+	padding-top:5px !important; 
+	padding-bottom:10px !important;
+	height:60px;
+}
