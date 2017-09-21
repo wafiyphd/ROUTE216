@@ -3,6 +3,7 @@ body {font-family: "Catamaran";}
 .padding-0{padding-right:0; padding-left:0; }
 
 .container-jumbo {background-image: url(../images/jumbo.jpg); background-position: center; background-size: cover; }
+.fail-login .alert{font-size: 110%}
 	
 .nav {background: transparent;}
 .navbar-right li button, .navbar-right li button:focus {color: white; font-weight; background: none; border-radius: 4px;outline: none; letter-spacing: 2px; border: 2px solid white; }

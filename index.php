@@ -52,7 +52,7 @@ if( isset($_POST['login']) ) {
 	   } 
 	   
 	   else {
-		   $errMSG = "Incorrect Credentials, Try again...";
+		   $errMSG = "Incorrect Credentials for logging in, please try again...";
 	   }
   }
 }
@@ -94,6 +94,14 @@ if( isset($_POST['login']) ) {
 				
 			</div>
 		</nav><!-- End of nav bar -->
+		
+		<?php if (isset($errMSG)) {
+				echo '<div class="container fail-login">
+						<div class="alert alert-danger text-center">
+							<p><i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp;'; echo $errMSG; echo'</p>
+						</div>
+					  </div>';}
+		?>
 		
 		<div class="modal fade" id="loginModal"><!-- Start of login modal -->
 			<div class="modal-dialog">
