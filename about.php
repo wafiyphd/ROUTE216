@@ -175,7 +175,8 @@ if( isset($_POST['login']) ) {
 	</div>
 	
 	<div class="container-fluid info">
-		<div class="container info-container">
+		<div class="container info-container text-center">
+			<img src="images/why.jpg"></img><br><br>
 			
 		</div>
 	</div>

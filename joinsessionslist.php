@@ -1,19 +1,71 @@
-<?php
-	ob_start();
-	session_start();
-	require_once 'dbconnect.php';
-	
-	if (isset($_SESSION['user'])!="" ) { 
-	$res= mysqli_query($mysqli, "SELECT * FROM user WHERE user_id=".$_SESSION['user']);
-	$userRow= mysqli_fetch_array($res);
-	}
-?>
+<?php 
+ob_start();
+session_start();
+require_once 'dbconnect.php';
 
+ if ( isset($_SESSION['user'])!="" ) { 
+ $res=mysqli_query($mysqli, "SELECT * FROM user WHERE user_id=".$_SESSION['user']);
+ $userRow=mysqli_fetch_array($res);
+ }
+ 
+ $error = false;
+
+if( isset($_POST['login']) ) { 
+  
+  $username = trim($_POST['username']);
+  $username = strip_tags($username);
+  $username = htmlspecialchars($username);
+  
+  $pass = trim($_POST['password']);
+  $pass = strip_tags($pass);
+  $pass = htmlspecialchars($pass);  
+  
+  // if there's no error, continue to login
+  if (!$error) {
+	  
+	   $password = hash('sha256', $pass); // password hashing using SHA256
+		
+	   $query = "SELECT user_id, username, password FROM user WHERE username='$username'";
+	   $res=mysqli_query($mysqli,$query);
+	   
+	   // check whether user exists in the database
+	   $row=mysqli_fetch_array($res);
+	   $count = mysqli_num_rows($res);
+	   
+	   // check whether user is a member
+	   $querymember = "SELECT user_id FROM member WHERE username='$username'";
+	   $qm = mysqli_query($mysqli,$querymember);
+	   $cm = mysqli_num_rows($qm);
+	   
+	   // check whether user is a trainer
+	   $querytrainer = "SELECT user_id FROM trainer WHERE username='$username'";
+	   $qt = mysqli_query($mysqli, $querytrainer);
+	   $cq = mysqli_num_rows($qt);
+	   
+	   if( $count == 1 && $row['password']==$password ) {
+		   if ($cm == 1) {
+			   $_SESSION['user'] = $row['user_id'];
+			   $errMSG = "Successful Login";
+		       header("Location: member.php");	
+		   }
+		   
+		   else {
+			   $_SESSION['user'] = $row['user_id'];
+			   $errMSG = "Successful Login";
+		       header("Location: trainer.php");	
+		   }   
+	   } 
+	   
+	   else {
+		   $errMSG = "Incorrect Credentials for logging in, please try again...";
+	   }
+	}
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	
-	<title>Home - ROUTE</title>
+	<title>About - ROUTE</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="favicon.ico" type="image/x-icon"> 
@@ -25,16 +77,14 @@
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
 
-	<link rel="stylesheet" href="css/home.css">
+	<link rel="stylesheet" href="css/joinsessionslist.css">
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script>$('#loginModal').modal('show'); </script>
-
+  
 </head>
 
 <body>
-
 	<div class="container-jumbo">
 	
 		<nav class="nav navbar-default"><!-- Navigation bar -->
@@ -58,44 +108,46 @@
 					</li>
 				</ul>
 			</div>
-		</nav>
+		</nav><!-- End of nav bar -->
 		
-		<div class="container container-header">
-			<h2><strong>Welcome, <?php echo $userRow['fullname']?>. You are a member!</strong></h2>
-			<h3>This is your home page. You may now start using ROUTE.</h3>
-			<hr>
+		<div class="container header-container">
+			<div class="container main-header">
+				<h2><strong>Join a session.</strong></h2>
+				<h3>Pick from the many available sessions we have provided for you.</h3>
+			</div>
 		</div>
+		
 	</div>
 	
-	<div class= "container content-container">
-		<div class="row">
-			<div class="col-xs-12 col-lg-9">
-				<div class="pic-container col-lg-12">
-					<div class="hover">
-						<a href="joinsessionslist.php"><img src="images/option1.jpg"></img><div class="caption">JOIN AVAILABLE SESSIONS</div></a>		
-					</div>
-				</div>
-				<div class="pic-container col-lg-12">
-					<div class="hover">
-						<a href="#"><img src="images/option2.jpg"></img><div class="caption">VIEW SESSIONS HISTORY</div></a>	
-					</div>
-				</div>
-				<div class="pic-container col-lg-12">
-					<div class="hover">
-						<a href="#"><img src="images/option3.jpg"></img><div class="caption">EDIT PROFILE</div></a>	
-					</div>
-				</div>
-				<div class="pic-container col-lg-12">
-					<div class="hover">
-						<a href="review.php"><img src="images/option1.jpg"></img><div class="caption">TEST REVIEW</div></a>	
-					</div>
+	<div class="container-fluid info">
+		<div class="container info-container text-center">
+			<div class="row">
+				<div class="col-lg-4">
+					<table class="table borderless">
+						<tr>
+							<td>Example title</td>
+							<td>Example trainer name</td>
+						</tr>
+						<tr>
+							<td>Example type & category</td>
+							<td>Example trainer specialty</td>
+						</tr>
+						<tr>
+							<td>Example date</td>
+							<td>Example trainer average rating</td>
+						</tr>
+						<tr>
+							<td>Example time</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>Example fee</td>
+							<td>Example join button</td>
+						</tr>
+					</table>
 				</div>
 			</div>
-			<div class="col-xs-12 col-lg-3">
-				<p><strong>May put something here</strong></p>
-				<img src="images/thinking.png"></img><img src="images/thinking.png"></img><img src="images/thinking.png"></img><img src="images/thinking.png"></img><br>
-				<img src="images/thinking.png"></img><img src="images/thinking.png"></img><img src="images/thinking.png"></img><img src="images/thinking.png"></img>
-			</div>
+			
 		</div>
 	</div>
 	

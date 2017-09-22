@@ -195,8 +195,7 @@ if( isset($_POST['login']) ) {
 			<div class = "main-header">
 				<br> ROUTE. <br>
 				Commit to a healthier lifestyle.
-				<hr>
-				<br><br><br><br>
+				<hr><br><br><br><br>
 			</div>
 			
 		</div>
