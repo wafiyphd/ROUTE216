@@ -120,34 +120,103 @@ if( isset($_POST['login']) ) {
 	</div>
 	
 	<div class="container-fluid info">
-		<div class="container info-container text-center">
+		<div class="container info-container">
 			<div class="row">
-				<div class="col-lg-4">
-					<table class="table borderless">
-						<tr>
-							<td>Example title</td>
-							<td>Example trainer name</td>
-						</tr>
-						<tr>
-							<td>Example type & category</td>
-							<td>Example trainer specialty</td>
-						</tr>
-						<tr>
-							<td>Example date</td>
-							<td>Example trainer average rating</td>
-						</tr>
-						<tr>
-							<td>Example time</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td>Example fee</td>
-							<td>Example join button</td>
-						</tr>
-					</table>
+				<div class="col-lg-6">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<div class="col-lg-6 border-right">
+								<ul>
+									<li><strong>This is a title</strong> </li>
+									<li><strong>Category:  </strong>Group -- Sports </li>
+									<li><strong>Date: </strong>23/10/17</li>
+									<li><strong>Time: </strong>4:00PM </li>
+									<li><strong>Fee: </strong>FREE  </li>
+								</ul>
+							</div>
+							<div class="col-lg-6">
+								<ul class="">
+									<li><strong>John Wick</strong> </li>
+									<li><strong>Specialty: </strong> Boxing </li>
+									<li><strong>Average Rating: </strong> 4.5 </li>
+									<li><button class="btn join-btn pull-right">Join</button> </li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<div class="col-lg-6 border-right">
+								<ul>
+									<li><strong>This is a title</strong> </li>
+									<li><strong>Category:  </strong>Group -- Sports </li>
+									<li><strong>Date: </strong>23/10/17</li>
+									<li><strong>Time: </strong>4:00PM </li>
+									<li><strong>Fee: </strong>FREE  </li>
+								</ul>
+							</div>
+							<div class="col-lg-6">
+								<ul class="">
+									<li><strong>Jane Wick</strong> </li>
+									<li><strong>Specialty: </strong> Cardio </li>
+									<li><strong>Average Rating: </strong> 4.5 </li>
+									<li><button class="btn join-btn pull-right">Join</button> </li>
+								</ul>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-			
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<div class="col-lg-6 border-right">
+								<ul>
+									<li><strong>This is a title</strong> </li>
+									<li><strong>Category:  </strong>Group -- Sports </li>
+									<li><strong>Date: </strong>23/10/17</li>
+									<li><strong>Time: </strong>4:00PM </li>
+									<li><strong>Fee: </strong>FREE  </li>
+								</ul>
+							</div>
+							<div class="col-lg-6">
+								<ul class="">
+									<li><strong>John Wick</strong> </li>
+									<li><strong>Specialty: </strong> Boxing </li>
+									<li><strong>Average Rating: </strong> 4.5 </li>
+									<li><button class="btn join-btn pull-right">Join</button> </li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<div class="col-lg-6 border-right">
+								<ul>
+									<li><strong>This is a title</strong> </li>
+									<li><strong>Category:  </strong>Group -- Sports </li>
+									<li><strong>Date: </strong>23/10/17</li>
+									<li><strong>Time: </strong>4:00PM </li>
+									<li><strong>Fee: </strong>FREE  </li>
+								</ul>
+							</div>
+							<div class="col-lg-6">
+								<ul class="">
+									<li><strong>Jane Wick</strong> </li>
+									<li><strong>Specialty: </strong> Cardio </li>
+									<li><strong>Average Rating: </strong> 4.5 </li>
+									<li><button class="btn join-btn pull-right">Join</button> </li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	

@@ -18,8 +18,14 @@ body {background-image: url(../images/bg.jpg); background-repeat: repeat; font-f
 .header-container {padding-bottom: 25px; }
 .header-container .main-header {color: white;}
 
+.panel {box-shadow:0 10px 10px 0 rgba(0,0,0,.24);}
 .info-container img {height: 50%; width: 50% }
+.borderless tr {border:none}
+.border-right {border-right: 1px solid #CCD1D1 ;}
+.btn {color: white; font-weight: bold; border:none; background: #5499C7;}
 
+.panel-body ul {list-style-type: none; margin: 0; padding: 0;}
+.panel-body {text-align: left; margin: 5px;}
 .footer-container {background-color: #212121; color: white;}
 .footer-container a {color:#dcdcdc; font-weight: bold;}	
 .footer-container img {height: 30%; width: 30%; }
