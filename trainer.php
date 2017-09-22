@@ -72,7 +72,7 @@
 			<div class="col-xs-12 col-lg-9">
 				<div class="pic-container col-lg-12">
 					<div class="hover">
-						<a href="#"><img src="images/option1.jpg"></img><div class="caption">CREATE NEW SESSION</div></a>		
+						<a href="record.php"><img src="images/option1.jpg"></img><div class="caption">CREATE NEW SESSION</div></a>		
 					</div>
 				</div>
 				<div class="pic-container col-lg-12">
