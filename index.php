@@ -5,7 +5,7 @@ require_once 'dbconnect.php';
 
 // redirects to users' home page when already signed in
  if ( isset($_SESSION['user'])!="" ) { 
-	$res=mysqli_query($mysqli, "SELECT * FROM users WHERE user_id=".$_SESSION['user']);
+	$res=mysqli_query($mysqli, "SELECT * FROM user WHERE user_id=".$_SESSION['user']);
 	$userRow=mysqli_fetch_array($res);
 	$id = $userRow['user_id'];
 
@@ -23,7 +23,7 @@ require_once 'dbconnect.php';
 	    header("Location: member.php");	
     }
    
-    else {
+    elseif (cq == 1) {
 	    header("Location: trainer.php");	 
 	}
 }
