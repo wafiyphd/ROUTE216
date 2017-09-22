@@ -40,9 +40,9 @@
 		<nav class="nav navbar-default"><!-- Navigation bar -->
 			<div class="container">
 				<ul class="nav navbar-nav navbar-left"> 
-					<li><a href="member.php" class="navbar-brand" id="#top"><img class="img-responsive" src="images/routeW.png"></a></li>
-					<li><a href="member.php"><button class="btn navbar-btn"><strong>Home</strong></button></a></li>
-					<li><a href="#"><button class="btn navbar-btn"><strong>About</strong></button></a></li>		
+					<li><a href="index.php" class="navbar-brand" id="#top"><img class="img-responsive" src="images/routeW.png"></a></li>
+					<li><a href="index.php"><button class="btn navbar-btn"><strong>Home</strong></button></a></li>
+					<li><a href="about.php"><button class="btn navbar-btn"><strong>About</strong></button></a></li>		
 				</ul>
 				
 				<ul class="nav navbar-nav navbar-right">
@@ -61,7 +61,7 @@
 		</nav>
 		
 		<div class="container container-header">
-			<h2><strong>Welcome, <?php echo $userRow['fullname']?>! You are a member!</strong></h2>
+			<h2><strong>Welcome, <?php echo $userRow['fullname']?>. You are a member!</strong></h2>
 			<h3>This is your home page. You may now start using ROUTE.</h3>
 			<hr>
 		</div>
@@ -72,7 +72,7 @@
 			<div class="col-xs-12 col-lg-9">
 				<div class="pic-container col-lg-12">
 					<div class="hover">
-						<a href="#"><img src="images/option1.jpg"></img><div class="caption">JOIN SESSIONS</div></a>		
+						<a href="#"><img src="images/option1.jpg"></img><div class="caption">JOIN AVAILABLE SESSIONS</div></a>		
 					</div>
 				</div>
 				<div class="pic-container col-lg-12">
@@ -127,7 +127,7 @@
 			
 			<div class="col-sm-12 col-lg-6">
 				<span style="float:right">
-					<a href="member.php">Home</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+					<a href="index.php">Home</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 					<a href="#">About</a>
 				</span>
 			</div>	

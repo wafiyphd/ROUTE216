@@ -320,7 +320,7 @@
 									<div class="row">
 										<div class="col-sm-12 col-lg-6">
 											<label class="radio">
-											  <input type="radio" name="user" value="member" onclick="show1();">
+											  <input type="radio" name="user" value="member" onclick="show1();" checked>
 											  <div class="choice">Member</div>
 											</label>
 										</div>
@@ -356,7 +356,7 @@
 								
 								<p>By signing up, you agree to ROUTE’s Terms of Service and Privacy Policy.</p>
 								<div class="group">
-									<input type="submit" name="signup" class="button" value="Sign Up">
+									<input type="submit" name="signup" class="button" value="Sign Up"></input>
 								</div>
 								
 								<?php

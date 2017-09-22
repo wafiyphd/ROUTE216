@@ -3,6 +3,31 @@ ob_start();
 session_start();
 require_once 'dbconnect.php';
 
+// redirects to users' home page when already signed in
+ if ( isset($_SESSION['user'])!="" ) { 
+	$res=mysqli_query($mysqli, "SELECT * FROM users WHERE user_id=".$_SESSION['user']);
+	$userRow=mysqli_fetch_array($res);
+	$id = $userRow['user_id'];
+
+	// check whether user is a member
+	$querymember = "SELECT user_id FROM member WHERE user_id='$id'";
+	$qm = mysqli_query($mysqli,$querymember);
+	$cm = mysqli_num_rows($qm);
+
+	// check whether user is a trainer
+	$querytrainer = "SELECT user_id FROM trainer WHERE user_id='$id'";
+	$qt = mysqli_query($mysqli, $querytrainer);
+	$cq = mysqli_num_rows($qt);
+
+    if ($cm == 1) {
+	    header("Location: member.php");	
+    }
+   
+    else {
+	    header("Location: trainer.php");	 
+	}
+}
+			
 $error = false;
 
 if( isset($_POST['login']) ) { 
@@ -85,16 +110,34 @@ if( isset($_POST['login']) ) {
 
 	<div id="#top" class="container-jumbo">
 	
-		<nav class="nav navbar-default"><!-- Navigation bar -->
-			<div class="container">	
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="signup.php"><button type="button" class="btn navbar-btn" ><strong>Sign Up</strong></button></a></li>
-					<li><a><button type="button" class="btn navbar-btn" data-toggle="modal" data-target="#loginModal"><strong>Log In</strong></button></a></li>
-				</ul>
-				
-			</div>
-		</nav><!-- End of nav bar -->
+		<div class="container">	
+			<nav class="nav navbar-default"><!-- Navigation bar -->
 		
+			
+			
+				<div class="navbar-header">
+				  <button class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span> 
+				  </button>
+				</div>
+				
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav navbar-left"> 
+						<li><a href="index.php"><button class="btn navbar-btn"><strong>Home</strong></button></a></li>
+						<li><a href="about.php"><button class="btn navbar-btn"><strong>About</strong></button></a></li>		
+					</ul>
+					
+					
+				
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="signup.php"><button class="btn navbar-btn" ><strong>Sign Up</strong></button></a></li>
+						<li><a><button class="btn navbar-btn" data-toggle="modal" data-target="#loginModal"><strong>Log In</strong></button></a></li>
+					</ul>
+				</div>
+			</nav><!-- End of nav bar -->
+		</div>
 		<?php if (isset($errMSG)) {
 				echo '<div class="container fail-login">
 						<div class="alert alert-danger text-center">
@@ -163,30 +206,40 @@ if( isset($_POST['login']) ) {
 	<div class="container-fluid info-fluid text-center">
 		
 		<div class="container info-container">
-			<h3>What is ROUTE?</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-			Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-			Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-			Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			<span class="big">What is ROUTE?</span>
+			<p class="small">ROUTE creates a seamless experience between both trainers and members, by allowing both parties to create and modify their 
+			schedules on the go. It allows both fitness trainers and fitness members  to log their available times for training sessions, 
+			both for personal and group-related purposes.</p>
 			
-			<h3>Lorem ipsum?</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-			Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>	
+			<span class="big">Background</span>
+			<p class="small">ROUTE intends to alleviate problems such as the lack of time. This issue arises particularly with 
+			fitness trainers and fitness members. Either party is typically unable to be present at a gym or studio to 
+			log and book training sessions due to conflicting schedules. As life is hectic, both fitness trainers and
+			fitness members cannot always be in the same place to book a session.</p>	
 			
-			<h3>Objectives</h3>
-			<div class="container pic-container col-sm-4 padding-0">
-				<img src="images/phone.jpg"></img><div class="overlay"><div class="caption">CONVENIENT<hr></div></div>
-				
-			</div>
+			<span class="big">Aims</span>
+			<p class="small">ROUTE aims to create a one-stop application that synchronizes multiple schedules in one place, 
+			consisting of both fitness trainers’ and fitness members’. It will also allow both groups to quickly and 
+			seamlessly book sessions without having to meet face to face beforehand, saving time and putting the main emphasis on fitness.</p>
 			
-			<div class="container pic-container col-sm-4 padding-0">
-				<img src="images/mirror.jpg"></img><div class="overlay"><div class="caption">MOTIVATION<hr></div></div>
-				
-			</div>
-			
-			<div class="container pic-container col-sm-4 padding-0">
-				<img src="images/winner.jpg"><div class="overlay"></div></img><div class="caption">CONNECTION<hr></div>
-				
+			<span class="big">Objectives</span>
+			<div class="container">
+				<div class="row">
+					<div class="pic-container col-sm-4 col-lg-4 ">
+						<img src="images/phone.jpg"></img><div class="overlay"><div class="caption">CONVENIENT<hr></div><div class="moreinfo">Despite a busy schedule, 
+														both parties can simply book sessions online, review a trainer, etc. from anywhere.</div></div>
+					</div>
+					
+					<div class="pic-container col-sm-4 col-lg-4 ">
+						<img src="images/mirror.jpg"></img><div class="overlay"><div class="caption">PRODUCTIVITY<hr></div><div class="moreinfo">Allow sessions to be booked on the go,
+						without having to interfere with a trainer’s or member’s busy schedule, with real-time updates.</div></div>
+					</div>
+					
+					<div class="pic-container col-sm-4 col-lg-4 ">
+						<img src="images/winner.jpg"></img><div class="overlay"></img><div class="caption">TIME-SAVING<hr></div><div class="moreinfo">Book a session without having to 
+						hysically be at a gym or a studio.</div></div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -217,25 +270,26 @@ if( isset($_POST['login']) ) {
 		</div>
 		
 	</div>
-	
-	
+
 	<div class="container-fluid signup-container ">
 		<div class="container main-header">
-			Register for ROUTE.
-			<div>Free to join. <br> Free sessions every week.</div>
-			<hr>	
-		</div>
-		
-		<div class="container signup-col text-center">
-			<div class="container signup-box col-md-6">
+			<div class="row">
+				<div class="col-lg-6 col-xs-12">
+					<span class="big">Register for ROUTE.</span><br>
+					Free to join. <br> Free sessions every week.
+					<hr>
+				</div>
 				
-			</div>
-			
-			<div class="container signup-box col-md-6">
-				
+				<div class="signupnow col-lg-6 col-xs-12 text-center">
+					<span class="big">Ready to join up?</span>
+					<div class="row">
+						<div class="col-lg-12 col-xs-12">
+							<a href='signup.php'><button class="btn"><strong>Sign Up</strong></button></a>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-		<br><br><br><br>
 	</div>
 	
 	<div class="container-fluid footer-container">

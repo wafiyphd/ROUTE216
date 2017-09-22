@@ -1,6 +1,6 @@
 body {background-image: url(../images/bg.jpg); background-repeat: repeat; font-family: "Catamaran";}
 
-.container-jumbo {background-image: url(../images/jumbo.jpg); background-position: center; background-position: cover; margin-bottom: 20px; overflow: visible;}
+.container-jumbo {background-image: url(../images/jumbo.jpg); background-position: center; margin-bottom: 20px; overflow: visible;}
 
 .nav {background: transparent; overflow: visible;}
 .nav img {padding-top: 10px; width: auto; max-height: 100%}
@@ -9,25 +9,16 @@ body {background-image: url(../images/bg.jpg); background-repeat: repeat; font-f
 .navbar-left li button:hover { color:white; border-bottom: 2px solid white; border-radius: 0px; outline:none; } 
 .navbar-left li button:focus:active, .navbar-left li button:active { color: white; outline:none; background: rgba(0,0,0,0.2) }
 
-.container-header { padding-top: 20px; padding-bottom: 20px; color: white; background: transparent; }
-.container-header hr { margin-top: 20px; width: 35%; padding-bottom: 50px; float: left;}
-
-.content-container {padding-bottom: 5px;}
-.pic-container {padding-bottom: 15px;}
-.pic-container img {max-height: 100%; max-width: 100%; position: relative; -webkit-transition: all 0.8s;}
-
-.hover {overflow: hidden}
-.hover:hover img {-webkit-transform: scale(1.2);}
-.hover:hover .caption {letter-spacing: 1px} 
-
-.pic-container .caption { color: white; font-size: 200%; font-weight: bold; position: absolute; top: 32%; left: 10%; width: 100%; -webkit-transition: all 0.8s; }
-.pic-container a {color: white}
-
 .navbar-right li button, .navbar-right li button:focus {color: white; background: none; border-radius: 3px;outline: none; letter-spacing: 2px; border: 2px solid white; }
 .navbar-right li button:hover, .navbar-right li button:active {color: rgba(0,0,0,0.7); background: white; outline: none; }
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover { background-color:transparent }
 
 .navbar-nav > li > a { padding-top:5px !important;  padding-bottom:10px !important; height:60px;}
+
+.header-container {padding-bottom: 25px; }
+.header-container .main-header {color: white;}
+
+.info {background-image: url(../images/features.jpg); background-position: cover; }
 
 .footer-container {background-color: #212121; color: white;}
 .footer-container a {color:#dcdcdc; font-weight: bold;}	
