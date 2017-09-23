@@ -17,13 +17,23 @@
 		$title = strip_tags($title);
 		$title = htmlspecialchars($title);
 	  
-		$date = trim($_POST["date"]);
-		$date = strip_tags($date);
-		$date = htmlspecialchars($date);
+		$day = trim($_POST["day"]);
+		$day = strip_tags($day);
+		$day = htmlspecialchars($day);
+		
+		$month = trim($_POST["month"]);
+		$month = strip_tags($month);
+		$month = htmlspecialchars($month);
+		
+		$year = trim($_POST["year"]);
+		$year = strip_tags($year);
+		$year = htmlspecialchars($year);
+		
+		$clock = trim($_POST["clock"]);
+		$clock = strip_tags($clock);
+		$clock = htmlspecialchars($clock);
 	  
-		$time = trim($_POST["time"]);
-		$time = strip_tags($time);
-		$time = htmlspecialchars($time);
+		$period = $_POST["timeperiod"];
 	  
 		$fee = trim($_POST["fee"]);
 		$fee = strip_tags($fee);
@@ -41,68 +51,110 @@
 		$maxpax = strip_tags($maxpax);
 		$maxpax = htmlspecialchars($maxpax);  
 		
-	if ($_POST['session'] == "group") {
-		if (!isset($_POST['type'])) {
+		$category = $_POST['session'];
+	
+		// date validation --
+		if ($day < 1 Or $day > 31) {
 			$error = true;
 			$errTyp = "danger";
-			$errMsg = "Please pick a session type.";
+			$errMsg = "Please enter a valid date.";
 		}
 		
-		if (empty(($_POST['maxpax']))) {
+		if ($month == "April" or $month == "June" or $month == "September" or $month == "November") {
+			if ($day > 30) {
+				$error = true;
+				$errTyp = "danger";
+				$errMsg = "Please enter a valid date.";
+			}
+		}
+		
+		if ($month == "February") {
+			if ($day > 29) {
+				$error = true;
+				$errTyp = "danger";
+				$errMsg = "Please enter a valid date.";
+			}
+		}
+		
+		if ($year < 2017) {
 			$error = true;
 			$errTyp = "danger";
-			$errMsg = "Please enter a maximum number of participants.";
+			$errMsg = "Please enter a valid year.";
 		}
-	}
-	
-	if(!isset($_POST['session'])) {
-		$error = true;
-		$errTyp = "danger";
-		$errMsg = "Please select either Personal or Group.";
-	}
-	
-	if( !$error ) {
-		if ($_POST['session'] == "personal") {
-			$trainer_id = $userRow['user_id'];
-			$trainer_name = $userRow['fullname'];
-			
-			$query = "INSERT INTO session(title, date, time, fee, status, trainer_id, trainer_name)
-			VALUES ('$title', '$date', '$time', '$fee', 'Available', '$trainer_id', '$trainer_name')";
-			$res = mysqli_query($mysqli, $query);
-			$id = mysqli_insert_id($mysqli);
-
-			$newquery = "INSERT INTO personal_session(notes, session_id)
-			VALUES ('$notes', '$id')";
-			$res = mysqli_query($mysqli, $newquery);
-		}
-
-		elseif ($_POST['session'] == "group") {
-			$type = $_POST['type'];
-			$trainer_id = $userRow['user_id'];
-			$trainer_name = $userRow['fullname'];
-			
-			$query = "INSERT INTO session(title, date, time, fee, status, trainer_id, trainer_name)
-			VALUES ('$title', '$date', '$time', '$fee', 'Available', '$trainer_id', '$trainer_name')";
-			$res = mysqli_query($mysqli, $query);
-			$id = mysqli_insert_id($mysqli);
-
-			$newquery = "INSERT INTO group_session(type, maxpax, session_id)
-			VALUES ('$type', '$maxpax', '$id')";
-			$res = mysqli_query($mysqli, $newquery);	
-		}
+		// -- ends here 
 		
-		if ($res) {
-			$errTyp = "success";
-			$errMsg = "Successfully recorded a training session.";
-		
-			unset($title); unset($date); unset($time); unset($fee); unset($notes); unset($type); unset($maxpax);
-			header("Location: trainer.php");
-		} else {
+		if (!isset($_POST['timeperiod'])) {
+			$error = true;
 			$errTyp = "danger";
-			$errMsg = "Something went wrong, try again later..."; 
+			$errMsg = "Please select AM or PM.";
+		}
+			
+		if ($category == "group") {
+			if (!isset($_POST['type'])) {
+				$error = true;
+				$errTyp = "danger";
+				$errMsg = "Please pick a session type.";
+			}
+			
+			if (empty(($_POST['maxpax']))) {
+				$error = true;
+				$errTyp = "danger";
+				$errMsg = "Please enter a maximum number of participants.";
+			}
+		}
+		
+		if(!isset($_POST['session'])) {
+			$error = true;
+			$errTyp = "danger";
+			$errMsg = "Please select either Personal or Group.";
+		}
+		
+		if( !$error ) {
+			
+			$date = $day .' '.$month.' '.$year;
+			$time = $clock .' '.$period;
+			
+			if ($category == "personal") {
+				$trainer_id = $userRow['user_id'];
+				$trainer_name = $userRow['fullname'];
+				
+				$query = "INSERT INTO session(title, category, date, time, fee, status, trainer_id, trainer_name)
+				VALUES ('$title', '$category', '$date', '$time', '$fee', 'Available', '$trainer_id', '$trainer_name')";
+				$res = mysqli_query($mysqli, $query);
+				$id = mysqli_insert_id($mysqli);
+
+				$newquery = "INSERT INTO personal_session(notes, session_id)
+				VALUES ('$notes', '$id')";
+				$res = mysqli_query($mysqli, $newquery);
+			}
+
+			elseif ($category == "group") {
+				$type = $_POST['type'];
+				$trainer_id = $userRow['user_id'];
+				$trainer_name = $userRow['fullname'];
+				
+				$query = "INSERT INTO session(title, category, date, time, fee, status, trainer_id, trainer_name)
+				VALUES ('$title', '$category', '$date', '$time', '$fee', 'Available', '$trainer_id', '$trainer_name')";
+				$res = mysqli_query($mysqli, $query);
+				$id = mysqli_insert_id($mysqli);
+
+				$newquery = "INSERT INTO group_session(type, maxpax, session_id)
+				VALUES ('$type', '$maxpax', '$id')";
+				$res = mysqli_query($mysqli, $newquery);	
+			}
+			
+			if ($res) {
+				$errTyp = "success";
+				$errMsg = "Successfully recorded a training session.";
+			
+				unset($title); unset($date); unset($time); unset($fee); unset($notes); unset($type); unset($maxpax);
+				header("Location: trainer.php");
+			} else {
+				$errTyp = "danger";
+				$errMsg = "Something went wrong, try again later..."; 
+			}
 		}
 	}
-}
 ?>
 
 <!DOCTYPE html>
@@ -168,7 +220,6 @@
 		<div class="container container-header">
 			<h2><strong>Welcome, <?php echo $userRow['fullname']?>!</strong></h2>
 			<h3>You may record a new training session here.</h3>
-			<hr>
 		</div>
 	</div>
 	
@@ -190,12 +241,52 @@
 
 							<div class = "group">
 								<label for="date" class="label">Date</label>
-								<input id="date" type="date" name="date" class="input" required>
+								<div class="row">
+									<div class="col-lg-3">
+										<input id="day" type="number" name="day" class="input date" value="1" required>
+									</div>
+									<div class="col-lg-6">
+										<select id="month" name="month" class="input" required>
+											<option value="January">January</option><option value="February">February</option>
+											<option value="March">March</option><option value="April">April</option>
+											<option value="May">May</option><option value="June">June</option>
+											<option value="July">July</option><option value="August">August</option>
+											<option value="September" selected>September</option><option value="October">October</option>
+											<option value="November">November</option><option value="December">December</option>
+										</select>
+									</div>
+									<div class="col-lg-3">
+										<input id="year" type="number" name="year" class="input date" value="2017" required>
+									</div>
+								</div>
 							</div>
 
 							<div class = "group">
 								<label for="time" class="label">Time</label>
-								<input id="time" type="time" name="time" class="input" required>
+								<div class="row">
+									<div class="col-lg-9">
+										<select id="clock" name="clock" class="input" required>
+											<option value="1:00">1:00</option><option value="1:30">1:30</option>
+											<option value="2:00">2:00</option><option value="2:30">2:30</option>
+											<option value="3:00">3:00</option><option value="3:30">3:30</option>
+											<option value="4:00">4:00</option><option value="4:30">4:30</option>
+											<option value="5:00">5:00</option><option value="5:30">5:30</option>
+											<option value="6:00">6:00</option><option value="6:30">6:30</option>
+											<option value="7:00">7:00</option><option value="7:30">7:30</option>
+											<option value="8:00">8:00</option><option value="8:30">8:30</option>
+											<option value="9:00">9:00</option><option value="9:30">9:30</option>
+											<option value="10:00">10:00</option><option value="10:30">10:30</option>
+											<option value="11:00">11:00</option><option value="11:30">11:30</option>
+											<option value="12:00">12:00</option><option value="12:30">12:30</option>
+										</select>
+									</div>
+									<div class="col-lg-3">
+										<div class="radio-group timeperiod">
+											<input type="radio" id="AM" name="timeperiod" value="AM"><label for="AM">AM</label>
+											<input type="radio" id="PM" name="timeperiod" value="PM"><label for="PM">&nbsp;PM</label>
+										</div>
+									</div>
+								</div>
 							</div>
 
 							<div class = "group">

@@ -18,7 +18,7 @@ body {background-image: url(../images/bg.jpg); background-repeat: repeat; font-f
 .container-header { padding-top: 20px; padding-bottom: 20px; color: white; background: transparent; }
 .container-header hr { margin-top: 20px; width: 35%; padding-bottom: 50px; float: left;}
 
-.main-container {background-image: url(../images/exercise.jpg);}
+.main-container {background-image: url(../images/darkrecord.jpg);}
 
 .record-container {padding-top: 40px;}
 .record-container h3 {font-weight: bold; text-align: center;  color: white;}
@@ -31,8 +31,16 @@ body {background-image: url(../images/bg.jpg); background-repeat: repeat; font-f
 .record-form .label, .record-form .input {width:100%; color:#d9d9d9; display:block; outline: none; font-size: 100%; }
 .record-form .input {border:none; padding:10px 20px; border-radius:5px; background:rgba(55,55,55,.5); color:#fff; }
 .record-form .button{width:100%; color:#fff; display:block; outline: none; font-size: 100%; border:none; padding:10px 20px; border-radius:25px; }
+.record-form .date {font-family: "Roboto"}
+.record-form .group select {font-family: "Roboto"}
+
+.record-form .timeperiod input { position: absolute; visibility: hidden; display: none; }
+.record-form .timeperiod label { color: white; display: inline-block; cursor: pointer; padding: 10px 10px; }
+.record-form .timeperiod input:checked + label { color: white; background-color: rgba(100, 181, 246, 0.9); }
+
 .record-form p {color:#aaa; font-size: 80%; padding-top: 20px;}
 .record-form h3 {color: #eee;}
+
 .personalsession {display: none}
 .groupsession {display:none}
 

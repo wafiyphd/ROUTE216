@@ -3,12 +3,12 @@ ob_start();
 session_start();
 require_once 'dbconnect.php';
 
- if ( isset($_SESSION['user'])!="" ) { 
- $res=mysqli_query($mysqli, "SELECT * FROM user WHERE user_id=".$_SESSION['user']);
- $userRow=mysqli_fetch_array($res);
- }
+if ( isset($_SESSION['user'])!="" ) { 
+$res=mysqli_query($mysqli, "SELECT * FROM user WHERE user_id=".$_SESSION['user']);
+$userRow=mysqli_fetch_array($res);
+}
  
- $error = false;
+$error = false;
 
 if( isset($_POST['login']) ) { 
   
@@ -121,102 +121,38 @@ if( isset($_POST['login']) ) {
 	
 	<div class="container-fluid info">
 		<div class="container info-container">
+			
 			<div class="row">
-				<div class="col-lg-6">
-					<div class="panel panel-default">
-						<div class="panel-body">
-							<div class="col-lg-6 border-right">
-								<ul>
-									<li><strong>This is a title</strong> </li>
-									<li><strong>Category:  </strong>Group -- Sports </li>
-									<li><strong>Date: </strong>23/10/17</li>
-									<li><strong>Time: </strong>4:00PM </li>
-									<li><strong>Fee: </strong>FREE  </li>
-								</ul>
+			
+				<?php
+				$all_sessions = "SELECT * FROM session";
+				if ($result = mysqli_query($mysqli, $all_sessions)) {
+					while ($row = mysqli_fetch_row($result)){
+						echo '<div class="col-lg-6">
+							<div class="panel panel-default">
+								<div class="panel-body">
+									<div class="col-lg-6 border-right">
+										<ul>
+											<li><strong>'; echo ucfirst($row[2]); echo '</strong> </li>
+											<li><strong>Category: </strong>'; echo ucfirst($row[1]); echo' </li>
+											<li><strong>Date: </strong>'; echo $row[3]; echo'</li>
+											<li><strong>Time: </strong>'; echo $row[4]; echo' </li>
+											<li><strong>Fee: </strong>'; echo $row[5]; echo' </li>
+										</ul>
+									</div>
+									<div class="col-lg-6">
+										<ul class="">
+											<li><strong>'; echo ucwords($row[8]); echo '</strong> </li>
+											<li><strong>Specialty: </strong>'; echo' </li>
+											<li><strong>Average Rating: </strong> 4.5 </li>
+											<li><button class="btn join-btn pull-right">Join</button> </li>
+										</ul>
+									</div>
+								</div>
 							</div>
-							<div class="col-lg-6">
-								<ul class="">
-									<li><strong>John Wick</strong> </li>
-									<li><strong>Specialty: </strong> Boxing </li>
-									<li><strong>Average Rating: </strong> 4.5 </li>
-									<li><button class="btn join-btn pull-right">Join</button> </li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<div class="panel panel-default">
-						<div class="panel-body">
-							<div class="col-lg-6 border-right">
-								<ul>
-									<li><strong>This is a title</strong> </li>
-									<li><strong>Category:  </strong>Group -- Sports </li>
-									<li><strong>Date: </strong>23/10/17</li>
-									<li><strong>Time: </strong>4:00PM </li>
-									<li><strong>Fee: </strong>FREE  </li>
-								</ul>
-							</div>
-							<div class="col-lg-6">
-								<ul class="">
-									<li><strong>Jane Wick</strong> </li>
-									<li><strong>Specialty: </strong> Cardio </li>
-									<li><strong>Average Rating: </strong> 4.5 </li>
-									<li><button class="btn join-btn pull-right">Join</button> </li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
+						</div>'; }} ?>
 			</div>
-			<div class="row">
-				<div class="col-lg-6">
-					<div class="panel panel-default">
-						<div class="panel-body">
-							<div class="col-lg-6 border-right">
-								<ul>
-									<li><strong>This is a title</strong> </li>
-									<li><strong>Category:  </strong>Group -- Sports </li>
-									<li><strong>Date: </strong>23/10/17</li>
-									<li><strong>Time: </strong>4:00PM </li>
-									<li><strong>Fee: </strong>FREE  </li>
-								</ul>
-							</div>
-							<div class="col-lg-6">
-								<ul class="">
-									<li><strong>John Wick</strong> </li>
-									<li><strong>Specialty: </strong> Boxing </li>
-									<li><strong>Average Rating: </strong> 4.5 </li>
-									<li><button class="btn join-btn pull-right">Join</button> </li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<div class="panel panel-default">
-						<div class="panel-body">
-							<div class="col-lg-6 border-right">
-								<ul>
-									<li><strong>This is a title</strong> </li>
-									<li><strong>Category:  </strong>Group -- Sports </li>
-									<li><strong>Date: </strong>23/10/17</li>
-									<li><strong>Time: </strong>4:00PM </li>
-									<li><strong>Fee: </strong>FREE  </li>
-								</ul>
-							</div>
-							<div class="col-lg-6">
-								<ul class="">
-									<li><strong>Jane Wick</strong> </li>
-									<li><strong>Specialty: </strong> Cardio </li>
-									<li><strong>Average Rating: </strong> 4.5 </li>
-									<li><button class="btn join-btn pull-right">Join</button> </li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			
 		</div>
 	</div>
 	
