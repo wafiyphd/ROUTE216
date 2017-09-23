@@ -9,22 +9,14 @@ require_once 'dbconnect.php';
 	$userRow=mysqli_fetch_array($res);
 	$id = $userRow['user_id'];
 
-	// check whether user is a member
-	$querymember = "SELECT user_id FROM member WHERE user_id='$id'";
-	$qm = mysqli_query($mysqli,$querymember);
-	$cm = mysqli_num_rows($qm);
-
-	// check whether user is a trainer
-	$querytrainer = "SELECT user_id FROM trainer WHERE user_id='$id'";
-	$qt = mysqli_query($mysqli, $querytrainer);
-	$cq = mysqli_num_rows($qt);
-
-    if ($cm == 1) {
-	    header("Location: member.php");	
-    }
-   
-    elseif (cq == 1) {
-	    header("Location: trainer.php");	 
+	// check whether user is a member or trainer
+	$userkind = $userRow['user_kind'];
+	if ($userkind === "member") {
+		header("Location: member.php");
+	}
+	
+	elseif ($userkind == "trainer") {
+		 header("Location: trainer.php");
 	}
 }
 			

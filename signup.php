@@ -29,15 +29,8 @@
 	   $row=mysqli_fetch_array($res);
 	   $count = mysqli_num_rows($res);
 	   
-	   // check whether user is a member
-	   $querymember = "SELECT user_id FROM member WHERE username='$username'";
-	   $qm = mysqli_query($mysqli,$querymember);
-	   $cm = mysqli_num_rows($qm);
+	   // check whether user is a member or a trainer 
 	   
-	   // check whether user is a trainer
-	   $querytrainer = "SELECT user_id FROM trainer WHERE username='$username'";
-	   $qt = mysqli_query($mysqli, $querytrainer);
-	   $cq = mysqli_num_rows($qt);
 	   
 	   if( $count == 1 && $row['password']==$password ) {
 		   if ($cm == 1) {
@@ -82,6 +75,8 @@
   $rpass = trim($_POST['rpassword']);
   $rpass = strip_tags($rpass);
   $rpass = htmlspecialchars($rpass);
+  
+  $userkind = $_POST['user'];
 	  
   //check if email is taken
   $query = "SELECT username FROM user WHERE username='$username'";
@@ -107,7 +102,7 @@
 	$errMSG = "Password does not match."; 
     }
 
-  if ($_POST['user'] == "trainer") {
+  if ($userkind == "trainer") {
 	  
 	  if (empty(($_POST['specialty']))) {
 			$error = true;
@@ -116,7 +111,7 @@
 		}
 	}
 	
-  if ($_POST['user'] == "member") {
+  if ($userkind == "member") {
 		if (!isset($_POST['level'])) {
 			$error = true;
 			$errTyp = "danger";
@@ -135,10 +130,10 @@
 	// password encrypt using SHA256();
     $password = hash('sha256', $pass);
 	
-	if ($_POST['user'] == "member") {
+	if ($userkind == "member") {
 		$level = $_POST['level'];
 		
-		$query = "INSERT INTO user(username, email, fullname, password) VALUES('$username','$email','$name','$password')";
+		$query = "INSERT INTO user(user_kind, username, email, fullname, password) VALUES('$userkind','$username','$email','$name','$password')";
 		$res = mysqli_query($mysqli, $query);
 		$id = mysqli_insert_id($mysqli);
 		
@@ -146,11 +141,11 @@
 		$res = mysqli_query($mysqli, $newquery);	
 	}
 	
-	elseif ($_POST['user'] == "trainer") { 
+	elseif ($userkind == "trainer") { 
 	
 		$specialty = trim($_POST['specialty']);
 		
-		$query = "INSERT INTO user(username, email, fullname, password) VALUES('$username','$email','$name','$password')";
+		$query = "INSERT INTO user(user_kind, username, email, fullname, password) VALUES('$userkind','$username','$email','$name','$password')";
 		$res = mysqli_query($mysqli, $query);	
 		$id = mysqli_insert_id($mysqli);
 		
@@ -320,7 +315,7 @@
 									<div class="row">
 										<div class="col-sm-12 col-lg-6">
 											<label class="radio">
-											  <input type="radio" name="user" value="member" onclick="show1();" checked>
+											  <input type="radio" name="user" value="member" onclick="show1();">
 											  <div class="choice">Member</div>
 											</label>
 										</div>
