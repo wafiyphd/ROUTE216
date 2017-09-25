@@ -11,6 +11,7 @@ body {font-family: "Catamaran";}
 .container-jumbo {background-image: url(../images/jumbo.jpg); background-position: center; background-size: cover; }
 .fail-login .alert{font-size: 110%}	
 .nav {background: transparent;}
+.nav img {padding-top: 10px; width: auto; max-height: 100%}
 
 .navbar-left li button, .navbar-left li button:focus {padding-top: 10px; color:white; background: none; letter-spacing: 2px; outline: none; border-bottom: 2px solid rgba(0,0,0,0); } 
 .navbar-left li button:hover { color:white; border-bottom: 2px solid white; border-radius: 0px; outline:none; } 

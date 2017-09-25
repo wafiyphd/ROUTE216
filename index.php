@@ -105,8 +105,6 @@ if( isset($_POST['login']) ) {
 		<div class="container">	
 			<nav class="nav navbar-default"><!-- Navigation bar -->
 		
-			
-			
 				<div class="navbar-header">
 				  <button class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 					<span class="icon-bar"></span>
@@ -117,12 +115,11 @@ if( isset($_POST['login']) ) {
 				
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-left"> 
+						<li><a href="index.php" class="navbar-brand" id="#top"><img class="img-responsive" src="images/routeW.png"></a></li>
 						<li><a href="index.php"><button class="btn navbar-btn"><strong>Home</strong></button></a></li>
 						<li><a href="about.php"><button class="btn navbar-btn"><strong>About</strong></button></a></li>		
 					</ul>
-					
-					
-				
+	
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="signup.php"><button class="btn navbar-btn" ><strong>Sign Up</strong></button></a></li>
 						<li><a><button class="btn navbar-btn" data-toggle="modal" data-target="#loginModal"><strong>Log In</strong></button></a></li>

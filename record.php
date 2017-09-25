@@ -315,17 +315,17 @@
 							<div id="#groupsession" class="group session" style="display:none">
 								<label for="session" class="label">Session Type</label>
 									<label class="radio">
-										<input type="radio" name="type" value="sport">
+										<input type="radio" name="type" value="Sport">
 										<div class="choice">Sport</div>
 									</label>
 									
 									<label class="radio">
-										<input type="radio" name="type" value="dance">
+										<input type="radio" name="type" value="Dance">
 										<div class="choice">Dance</div>
 									</label>
 									
 									<label class="radio">
-										<input type="radio" name="type" value="mma">
+										<input type="radio" name="type" value="MMA">
 										<div class="choice">MMA</div>
 									</label>
 												
