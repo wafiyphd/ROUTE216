@@ -26,6 +26,7 @@ body {background-image: url(../images/bg.jpg); background-repeat: repeat; font-f
 .btn-join {color: white; font-weight: bold; border:none; background: #5499C7; margin-left: 15px; margin-top: 30px; }
 .btn-un {color:white; font-weight: bold; border: none; background: rgba(205, 97, 85, 1); margin-left: 15px;  margin-top: 30px;  }
 .hidden {display:none}
+.title {font-size: 105% }
 
 .header {font-size: 200%; font-weight: bold;}
 .big { font-size: 180%; font-weight: bold; color: #616161}

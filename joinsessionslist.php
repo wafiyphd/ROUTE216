@@ -253,8 +253,7 @@ if( isset($_POST['login']) ) {
 								<div class="panel-body">
 									<div class="col-lg-6 border-right">
 										<ul>
-											<li class="title"><strong>Session Info</strong> </li>
-											<li><strong><?php echo ucfirst($row[2]); ?></strong> </li>
+											<li><strong><p class="title"><?php echo ucfirst($row[2]); ?></p></strong> </li>
 											<li><strong>Status: </strong><?php echo $row[6]; ?></li>
 											<li><strong>Date: </strong><?php echo $row[3]; ?></li>
 											<li><strong>Time: </strong><?php echo $row[4]; ?></li>
@@ -264,8 +263,7 @@ if( isset($_POST['login']) ) {
 									</div>
 									<div class="col-lg-6">
 										<ul>
-											<li><strong class="title">Trainer Info</strong></li>
-											<li><strong>Name: </strong><?php echo ucwords($row[8]); ?> </li>
+											<li><strong>Trainer Name: </strong><?php echo ucwords($row[8]); ?> </li>
 											<li><strong>Average Rating: </strong>Not Yet</li>		
 										</ul>
 										<form id="join-personal" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
@@ -303,10 +301,9 @@ if( isset($_POST['login']) ) {
 								<div class="panel-body">
 									<div class="col-lg-6 border-right">
 										<ul>
-											<li><strong>Session Info</strong></li>
-											<li><strong><?php echo ucfirst($row[2]); ?></strong> </li>
+											<li><strong><p class="title"><?php echo ucfirst($row[2]); ?></p></strong> </li>
 											<li><strong>Joined (current/max): </strong><?php echo $row[11]; ?> / <?php echo$row[10]; ?></li>
-												<li><strong>Type: </strong><?php echo $row[9]; ?></li>
+											<li><strong>Type: </strong><?php echo $row[9]; ?></li>
 											<li><strong>Date: </strong><?php echo $row[3]; ?></li>
 											<li><strong>Time: </strong><?php echo $row[4]; ?></li>
 											<li><strong>Fee: </strong>RM <?php echo $row[5]; ?></li>
@@ -315,8 +312,7 @@ if( isset($_POST['login']) ) {
 									</div>
 									<div class="col-lg-6">
 										<ul>
-											<li><strong>Trainer Info</strong></li>
-											<li><strong>Name: </strong><?php echo ucwords($row[8]); ?> </li>
+											<li><strong>Trainer Name: </strong><?php echo ucwords($row[8]); ?> </li>
 											<li><strong>Average Rating: </strong>Not Yet</li>
 										</ul>
 										<form id="join-group" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
