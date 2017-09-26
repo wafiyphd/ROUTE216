@@ -9,13 +9,12 @@ Ran by Wafiy & Hannah.
 Done:
 1. Sign Up and Login with validations 
 2. Recording new session (trainer use case)
-
+3. View all avaialable sessions to choose from and join (except pagination & filters (?) )
 
 What to do:
 1. User profiles
-2. View all avaialable sessions to choose from and join (member use case)
-3. View joined sessions history and - (member use case)
-4. -Review trainer (member use case)
+2. View joined sessions history and - (member use case)
+3. -Review trainer (member use case)
 4. Update a session's details/information (trainer use case)
 5. Home page
 6. Users' home page
