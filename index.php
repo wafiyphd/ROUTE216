@@ -194,25 +194,11 @@ if( isset($_POST['login']) ) {
 	<div class="container-fluid info-fluid text-center">
 		
 		<div class="container info-container">
-			<span class="big">What is ROUTE?</span>
-			<p class="small">ROUTE creates a seamless experience between both trainers and members, by allowing both parties to create and modify their 
-			schedules on the go. It allows both fitness trainers and fitness members  to log their available times for training sessions, 
-			both for personal and group-related purposes.</p>
 			
-			<span class="big">Background</span>
-			<p class="small">ROUTE intends to alleviate problems such as the lack of time. This issue arises particularly with 
-			fitness trainers and fitness members. Either party is typically unable to be present at a gym or studio to 
-			log and book training sessions due to conflicting schedules. As life is hectic, both fitness trainers and
-			fitness members cannot always be in the same place to book a session.</p>	
-			
-			<span class="big">Aims</span>
-			<p class="small">ROUTE aims to create a one-stop application that synchronizes multiple schedules in one place, 
-			consisting of both fitness trainers’ and fitness members’. It will also allow both groups to quickly and 
-			seamlessly book sessions without having to meet face to face beforehand, saving time and putting the main emphasis on fitness.</p>
-			
-			<span class="big">Objectives</span>
 			<div class="container">
+			<hr>
 				<div class="row">
+					
 					<div class="pic-container col-sm-4 col-lg-4 ">
 						<img src="images/phone.jpg"></img><div class="overlay"><div class="caption">CONVENIENT<hr></div><div class="moreinfo">Despite a busy schedule, 
 														both parties can simply book sessions online, review a trainer, etc. from anywhere.</div></div>
@@ -227,7 +213,10 @@ if( isset($_POST['login']) ) {
 						<img src="images/winner.jpg"></img><div class="overlay"></img><div class="caption">TIME-SAVING<hr></div><div class="moreinfo">Book a session without having to 
 						hysically be at a gym or a studio.</div></div>
 					</div>
+					
 				</div>
+				<hr>
+				<a href="about.php"><p class="pull-right">Learn More&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></p></a>
 			</div>
 		</div>
 	</div>

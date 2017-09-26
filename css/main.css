@@ -34,7 +34,7 @@ body {font-family: "Catamaran";}
 .main-container .main-header {margin-left: 40px; font-size: 300%; font-weight: bold;}
 .main-container .main-header hr{margin-left: 0; margin-top: 20px; width: 40%;}
 
-.info-fluid {background-image: url(../images/bg.jpg); background-repeat: repeat; }
+.info-fluid {background-image: url(../images/info.jpg);}
 .info-fluid > .container >.container {padding-top: 10px }
 .info-container {margin-top: 25px; margin-bottom: 30px;}
 .info-container p {font-size: 120% }
@@ -46,7 +46,8 @@ body {font-family: "Catamaran";}
 
 .info-container .big {font-weight: bold; font-size: 200%}
 .info-container .small {}
-
+.info-container .row > hr {margin-top: 50px; width: 50%; padding-bottom: 15px;}
+.info-container .pull-right {color: white; font-size: 110%; font-weight: bold}
 .features-container {color: white; background-image: url(../images/features.jpg); padding-top: 15px; padding-bottom: 25px;}
 .features-container hr {margin-top: 20px; width: 50%; padding-bottom: 15px;}
 .features-container h3 {font-size: 300%; font-weight: bold;}

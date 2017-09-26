@@ -60,7 +60,7 @@
 			$errMsg = "Please enter a valid date.";
 		}
 		
-		if ($month == "April" or $month == "June" or $month == "September" or $month == "November") {
+		if ($month == 4 or $month == 6 or $month == 9 or $month == 11) {
 			if ($day > 30) {
 				$error = true;
 				$errTyp = "danger";
@@ -68,7 +68,7 @@
 			}
 		}
 		
-		if ($month == "February") {
+		if ($month == 2) {
 			if ($day > 29) {
 				$error = true;
 				$errTyp = "danger";
@@ -111,7 +111,7 @@
 		
 		if( !$error ) {
 			
-			$date = $day .' '.$month.' '.$year;
+			$date = $year.'-'.$month.'-'.$day;
 			$time = $clock .' '.$period;
 			
 			if ($category == "personal") {
@@ -247,12 +247,12 @@
 									</div>
 									<div class="col-lg-6">
 										<select id="month" name="month" class="input" required>
-											<option value="January">January</option><option value="February">February</option>
-											<option value="March">March</option><option value="April">April</option>
-											<option value="May">May</option><option value="June">June</option>
-											<option value="July">July</option><option value="August">August</option>
-											<option value="September" selected>September</option><option value="October">October</option>
-											<option value="November">November</option><option value="December">December</option>
+											<option value="1">January</option><option value="2">February</option>
+											<option value="3">March</option><option value="4">April</option>
+											<option value="5">May</option><option value="6">June</option>
+											<option value="7">July</option><option value="8">August</option>
+											<option value="9" selected>September</option><option value="10">October</option>
+											<option value="11">November</option><option value="12">December</option>
 										</select>
 									</div>
 									<div class="col-lg-3">
