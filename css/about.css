@@ -18,7 +18,15 @@ body {background-image: url(../images/bg.jpg); background-repeat: repeat; font-f
 .header-container {padding-bottom: 25px; }
 .header-container .main-header {color: white;}
 
-.info-container img {height: 50%; width: 50% }
+.info-container .background h2 {color: #57585b; }
+.info-container .background blockquote {padding-bottom: 1px; }
+.info-container .background h5 {color: #8a8b8f; font-size: 85%; }
+.info-container .background p {text-align: justified; }
+
+.info-container .features-wrap h2 {color: #57585b; }
+.info-container .features h3 {color: #7d7e82; }
+.info-container .features blockquote {padding-bottom: 1px; }
+.info-container .features h5 {color: #97989b; font-size: 85%; }
 
 .footer-container {background-color: #212121; color: white;}
 .footer-container a {color:#dcdcdc; font-weight: bold;}	
