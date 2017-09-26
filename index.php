@@ -111,13 +111,14 @@ if( isset($_POST['login']) ) {
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span> 
 				  </button>
+				  <a class="navbar-brand" href="index.php"><img class="img-responsive" src="images/routeW.png"></a>
 				</div>
 				
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-left"> 
-						<li><a href="index.php" class="navbar-brand" id="#top"><img class="img-responsive" src="images/routeW.png"></a></li>
 						<li><a href="index.php"><button class="btn navbar-btn"><strong>Home</strong></button></a></li>
 						<li><a href="about.php"><button class="btn navbar-btn"><strong>About</strong></button></a></li>		
+						<li><a href="contact.php"><button class="btn navbar-btn"><strong>Contact</strong></button></a></li>		
 					</ul>
 	
 					<ul class="nav navbar-nav navbar-right">
@@ -127,20 +128,19 @@ if( isset($_POST['login']) ) {
 				</div>
 			</nav><!-- End of nav bar -->
 		</div>
-		<?php if (isset($errMSG)) {
-				echo '<div class="container fail-login">
-						<div class="alert alert-danger text-center">
-							<p><i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp;'; echo $errMSG; echo'</p>
-						</div>
-					  </div>';}
-		?>
+		
+		<?php if (isset($errMSG)) { ?>
+				<div class="container fail-login">
+					<div class="alert alert-danger text-center">
+						<p><i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp;<?php echo $errMSG; ?></p>
+					</div>
+				</div> <?php } ?>
 		
 		<div class="modal fade" id="loginModal"><!-- Start of login modal -->
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="login-wrap">
 						<div class="login-container">
-			
 							<h3><strong>Log In</strong></h3>
 							<hr>
 							<div class="login-form">
@@ -176,6 +176,7 @@ if( isset($_POST['login']) ) {
 						</div>
 					</div>
 				</div>
+		
 			</div>
 		</div><!-- End of Login modal -->
 		
@@ -196,20 +197,21 @@ if( isset($_POST['login']) ) {
 		<div class="container info-container">
 			
 			<div class="container">
+			<h3>About ROUTE.</h3>
 			<hr>
 				<div class="row">
 					
-					<div class="pic-container col-sm-4 col-lg-4 ">
+					<div class="pic-container col-sm-4 col-lg-4 padding-0">
 						<img src="images/phone.jpg"></img><div class="overlay"><div class="caption">CONVENIENT<hr></div><div class="moreinfo">Despite a busy schedule, 
 														both parties can simply book sessions online, review a trainer, etc. from anywhere.</div></div>
 					</div>
 					
-					<div class="pic-container col-sm-4 col-lg-4 ">
+					<div class="pic-container col-sm-4 col-lg-4 padding-0">
 						<img src="images/mirror.jpg"></img><div class="overlay"><div class="caption">PRODUCTIVITY<hr></div><div class="moreinfo">Allow sessions to be booked on the go,
 						without having to interfere with a trainer’s or member’s busy schedule, with real-time updates.</div></div>
 					</div>
 					
-					<div class="pic-container col-sm-4 col-lg-4 ">
+					<div class="pic-container col-sm-4 col-lg-4 padding-0">
 						<img src="images/winner.jpg"></img><div class="overlay"></img><div class="caption">TIME-SAVING<hr></div><div class="moreinfo">Book a session without having to 
 						hysically be at a gym or a studio.</div></div>
 					</div>
@@ -221,47 +223,77 @@ if( isset($_POST['login']) ) {
 		</div>
 	</div>
 	
-		
 	<div class="container-fluid features-container text-center">
 		
-		<div class="container pic-container-2">
-		
+		<div class="container">
 			<h3>ROUTE Features.</h3>
 			<hr>
-
-			<div class="col-md-6">
-				<a href="https://placeholder.com"><img class="img-responsive" src="http://via.placeholder.com/500x250"></a><div class="caption">Join individual training sessions</div>
+			
+			<span class="big">As a Member</span>
+			<div class="row pic-row">
+				
+				<div class="col-lg-6 col-xs-12 images">
+					<img class="img-responsive" src="images/1.png">
+				</div>
+				<div class=" col-lg-6 col-xs-12 images">
+					<img class="img-responsive " src="http://via.placeholder.com/500x250"><div class="caption">Submit trainer reviews</div>
+				</div>
 			</div>
-			<div class="col-md-6">
-				<a href="https://placeholder.com"><img class="img-responsive" src="http://via.placeholder.com/500x250"></a><div class="caption">Join group sessions</div>
-			</div>
-		</div>
-		<br>
-		<div class="container pic-container-2">
-			<div class="col-md-6">
-				<a href="https://placeholder.com"><img class="img-responsive" src="http://via.placeholder.com/500x250"></a><div class="caption">Record sessions history</div>
-			</div>
-			<div class="col-md-6">
-				<a href="https://placeholder.com"><img class="img-responsive" src="http://via.placeholder.com/500x250"></a><div class="caption">Review trainers</div>
+			<hr>
+			<span class="big">As a Trainer</span>
+			<div class="row pic-row">
+				
+				<div class="col-lg-6 col-xs-12 images">
+					<img class="img-responsive" src="images/2.png">
+				</div>
+				<div class="col-lg-6 col-xs-12 images ">
+					<img class="img-responsive" src="http://via.placeholder.com/500x250"><div class="caption">Receive constructive feedback</div>
+				</div>
 			</div>
 		</div>
 		
 	</div>
 
-	<div class="container-fluid signup-container ">
-		<div class="container main-header">
-			<div class="row">
-				<div class="col-lg-6 col-xs-12">
-					<span class="big">Register for ROUTE.</span><br>
-					Free to join. <br> Free sessions every week.
-					<hr>
+	<div class="container-fluid combine">
+		<div class="container-fluid signup-container ">
+			<div class="container main-header">
+				<div class="row">
+					<div class="col-lg-6 col-xs-12 header">
+						<span class="big">Register for ROUTE.</span><br>
+						<p>Free to join. <br> Free sessions every week.</p>
+						
+					</div>
+					
+					<div class="col-lg-6 col-xs-12 text-center">
+						<span class="big">Ready to join up?</span>
+						<div class="row">
+							<div class="col-lg-12 col-xs-12">
+								<a href='signup.php'><button class="btn"><strong>Sign Up</strong></button></a>
+							</div>
+						</div>
+					</div>
 				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="container-fluid contact-container ">
+			<div class="container main-header">
 				
-				<div class="signupnow col-lg-6 col-xs-12 text-center">
-					<span class="big">Ready to join up?</span>
+				<div class="row">
+					<div class="col-lg-6 col-xs-12 text-center">
+						<span class="big">Got any inquries?</span>
+						<div class="row">
+							<div class="col-lg-12 col-xs-12">
+								<a href='contact.php'><button class="btn"><strong>Contact Us</strong></button></a>
+							</div>
+						</div>
+					</div>
+						
 					<div class="row">
-						<div class="col-lg-12 col-xs-12">
-							<a href='signup.php'><button class="btn"><strong>Sign Up</strong></button></a>
+						<div class="col-lg-6 col-xs-12 pull-right header">
+							<span class="big">Contact Us.</span><br>
+							<p>Send any feedback.<br>Send any inquiries.</p>
+							
 						</div>
 					</div>
 				</div>
@@ -298,7 +330,8 @@ if( isset($_POST['login']) ) {
 			<div class="col-sm-12 col-lg-6">
 				<span style="float:right">
 					<a href="index.php">Home</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-					<a href="#">About</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+					<a href="about.php">About</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+					<a href="contact.php">Contact</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 					<a href="signup.php">Sign Up</a>
 				</span>
 			</div>		

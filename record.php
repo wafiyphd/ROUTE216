@@ -10,6 +10,8 @@
 	if ( isset($_SESSION['user'])!="" ) { 
 	$res= mysqli_query($mysqli, "SELECT * FROM user WHERE user_id=".$_SESSION['user']);
 	$userRow= mysqli_fetch_array($res);
+	} else {
+		header("Location: index.php");	
 	}
 
 	if (isset($_POST['record'])) {
@@ -194,33 +196,51 @@
 
 	<div class="container-jumbo">
 	
-		<nav class="nav navbar-default"><!-- Navigation bar -->
-			<div class="container">
-				<ul class="nav navbar-nav navbar-left"> 
-					<li><a href="trainer.php" class="navbar-brand" id="#top"><img class="img-responsive" src="images/routeW.png"></a></li>
-					<li><a href="trainer.php"><button class="btn navbar-btn"><strong>Home</strong></button></a></li>
-					<li><a href="#"><button class="btn navbar-btn"><strong>About</strong></button></a></li>		
-				</ul>
+		<div class="container">
+			<nav class="nav navbar-default"><!-- Navigation bar -->
+				<div class="navbar-header">
+				  <button class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span> 
+				  </button>
+				  <a class="navbar-brand" href="index.php"><img class="img-responsive" src="images/routeW.png"></a>
+				</div>
 				
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-						<a href="#" data-toggle="dropdown" class="dropdown-toggle">
-							<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo $userRow['fullname']?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
-						</a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Profile</a></li>
-								<li class="divider"></li>
-								<li><a href="logout.php?logout"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span>&nbsp;Log Out</a></li>
-							</ul>
-					</li>
-				</ul>
-			</div>
-		</nav>
-		
-		<div class="container container-header">
-			<h2><strong>Welcome, <?php echo $userRow['fullname']?>!</strong></h2>
-			<h3>You may record a new training session here.</h3>
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav navbar-left"> 
+						<li><a href="index.php"><button class="btn navbar-btn"><strong>Home</strong></button></a></li>
+						<li><a href="about.php"><button class="btn navbar-btn"><strong>About</strong></button></a></li>		
+						<li><a href="contact.php"><button class="btn navbar-btn"><strong>Contact</strong></button></a></li>		
+					</ul>
+				
+					<ul class="nav navbar-nav navbar-right desktop">
+						<li class="dropdown ">
+							<a href="#" data-toggle="dropdown" class="dropdown-toggle">
+								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo $userRow['fullname']?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
+							</a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Profile</a></li>
+									<li class="divider"></li>
+									<li><a href="logout.php?logout"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span>&nbsp;Log Out</a></li>
+								</ul>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right mobile">
+						<li><a href="#"><button class="btn navbar-btn">Profile</button></a></li>
+						<li><a href="logout.php?logout"><button class="btn navbar-btn"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span>&nbsp;Log Out</button></a></li>
+					</ul>
+				</div>
+			</nav>
 		</div>
+		
+		<div class="container header-container">
+			<div class="container main-header">
+				<p class="header">Recording a new training session.</p>
+				<p class="title">Reminder: Please enter a meaningful and helpful name for session name for the members.</p>
+			</div>
+		</div>
+		
 	</div>
 	
 	<div class="container-fluid main-container">
@@ -230,8 +250,6 @@
 				
 				<div class="record-wrap text-center">
 					<div class="record-form">
-						<h3><strong>Record a Training Session</strong></h3>
-						<br>	
 						
 						<form action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" autocomplete="off">
 							<div class = "group">
@@ -391,8 +409,9 @@
 			
 			<div class="col-sm-12 col-lg-6">
 				<span style="float:right">
-					<a href="trainer.php">Home</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-					<a href="#">About</a>
+					<a href="index.php">Home</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+					<a href="about.php">About</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+					<a href="contact.php">Contact</a>
 				</span>
 			</div>	
 		</div><!-- End Sub Footer -->

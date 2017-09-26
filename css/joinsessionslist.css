@@ -1,34 +1,46 @@
-body {background-image: url(../images/bg.jpg); background-repeat: repeat; font-family: "Catamaran";}
+@media only screen and (max-width: 759px) {
+	.desktop {display: none}
+	.mobile {display: block}
+	.navbar-right li button, .navbar-right li button:focus {font-weight: strong; padding-top: 10px; color:white; background: none; letter-spacing: 2px; outline: none; border-bottom: 2px solid rgba(0,0,0,0); }
+	.navbar-right li button:active, .navbar-right li button:active { color: white; outline:none; background: rgba(0,0,0,0.2) }
+	.info-container .pic-container .moreinfo {font-size: 100%; opacity: 1; color: white; transition: opacity .50s ease-in-out; position: absolute; font-weight: bold; top: 60%; left: 5%; width: 90%;}
+}
 
-.container-jumbo {background-image: url(../images/jumbo.jpg); background-position: center; margin-bottom: 20px; overflow: visible;}
+@media only screen and (min-width: 760px) {
+	.navbar-right li button, .navbar-right li button:focus {margin-top: 15px; color: white; background: none; border-radius: 3px;outline: none; letter-spacing: 2px; border: 2px solid white; }
+	.navbar-right li button:hover, .navbar-right li button:active {color: rgba(0,0,0,0.7); background: white; outline: none; }
+	.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover { background-color:transparent }
+	.desktop {display: block}
+	.mobile {display: none}
+	.info-container .pic-container .moreinfo {font-size: 100%; opacity: 0; color: white; transition: opacity .50s ease-in-out; position: absolute; font-weight: bold; top: 60%; left: 5%; width: 90%;}
+	.info-container .pic-container .overlay:hover .moreinfo  {opacity: 1; color: white;  font-size: 100%; position: absolute; font-weight: bold; top: 60%; left: 5%; width: 90%;}
+}
 
-.nav {background: transparent; overflow: visible;}
-.nav img {padding-top: 10px; width: auto; max-height: 100%}
+body {font-family: "Catamaran";}
+
+.container-jumbo {background-image: url(../images/jumbo.jpg); background-position: center; background-size: cover; margin-bottom: 20px;}
+.nav {background: transparent;}
+.nav img {width: auto; max-height: 200%}
 
 .navbar-left li button, .navbar-left li button:focus {padding-top: 10px; color:white; background: none; letter-spacing: 2px; outline: none; border-bottom: 2px solid rgba(0,0,0,0); } 
 .navbar-left li button:hover { color:white; border-bottom: 2px solid white; border-radius: 0px; outline:none; } 
 .navbar-left li button:focus:active, .navbar-left li button:active { color: white; outline:none; background: rgba(0,0,0,0.2) }
 
-.navbar-right li button, .navbar-right li button:focus {color: white; background: none; border-radius: 3px;outline: none; letter-spacing: 2px; border: 2px solid white; }
-.navbar-right li button:hover, .navbar-right li button:active {color: rgba(0,0,0,0.7); background: white; outline: none; }
-.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover { background-color:transparent }
-
 .navbar-nav > li > a { padding-top:5px !important;  padding-bottom:10px !important; height:60px;}
 
 .header-container {padding-bottom: 25px; }
-.header-container .main-header {color: white;}
+.header-container .main-header {color: white; margin-top: 20px;}
+.main-header .title {font-size: 120%; }
+.main-header .header {font-size: 200%; font-weight: bold;}
+
 .fail-login .alert{font-size: 110%}	
 
 .panel {box-shadow:0 10px 10px 0 rgba(0,0,0,.25);}
-.info-container img {height: 50%; width: 50% }
-.borderless tr {border:none}
 .border-right {border-right: 1px solid #CCD1D1 ;}
 .btn-join {color: white; font-weight: bold; border:none; background: #5499C7; margin-left: 15px; margin-top: 30px; }
 .btn-un {color:white; font-weight: bold; border: none; background: rgba(205, 97, 85, 1); margin-left: 15px;  margin-top: 30px;  }
 .hidden {display:none}
-.title {font-size: 105% }
 
-.header {font-size: 200%; font-weight: bold;}
 .big { font-size: 180%; font-weight: bold; color: #616161}
 hr { width: 80%;  height: 2px; border: 0; border-top: 1px solid #9E9E9E }
 .padding-0{padding-right:0; padding-left:0; margin: 0}

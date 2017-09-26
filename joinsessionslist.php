@@ -6,6 +6,8 @@ require_once 'dbconnect.php';
 if ( isset($_SESSION['user'])!="" ) { 
 $res=mysqli_query($mysqli, "SELECT * FROM user WHERE user_id=".$_SESSION['user']);
 $userRow=mysqli_fetch_array($res);
+} else {
+	header("Location: index.php");	
 }
  
 $offset = 0;
@@ -185,28 +187,43 @@ if( isset($_POST['login']) ) {
 <body>
 	<div class="container-jumbo">
 	
-		<nav class="nav navbar-default"><!-- Navigation bar -->
-			<div class="container">
-				<ul class="nav navbar-nav navbar-left"> 
-					<li><a href="index.php" class="navbar-brand" id="#top"><img class="img-responsive" src="images/routeW.png"></a></li>
-					<li><a href="index.php"><button class="btn navbar-btn"><strong>Home</strong></button></a></li>
-					<li><a href="about.php"><button class="btn navbar-btn"><strong>About</strong></button></a></li>		
-				</ul>
+		<div class="container">
+			<nav class="nav navbar-default"><!-- Navigation bar -->
+				<div class="navbar-header">
+				  <button class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span> 
+				  </button>
+				  <a class="navbar-brand" href="index.php"><img class="img-responsive" src="images/routeW.png"></a>
+				</div>
 				
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-						<a href="#" data-toggle="dropdown" class="dropdown-toggle">
-							<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo $userRow['fullname']?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
-						</a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Profile</a></li>
-								<li class="divider"></li>
-								<li><a href="logout.php?logout"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span>&nbsp;Log Out</a></li>
-							</ul>
-					</li>
-				</ul>
-			</div>
-		</nav><!-- End of nav bar -->
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav navbar-left"> 
+						<li><a href="index.php"><button class="btn navbar-btn"><strong>Home</strong></button></a></li>
+						<li><a href="about.php"><button class="btn navbar-btn"><strong>About</strong></button></a></li>		
+						<li><a href="contact.php"><button class="btn navbar-btn"><strong>Contact</strong></button></a></li>		
+					</ul>
+				
+					<ul class="nav navbar-nav navbar-right desktop">
+						<li class="dropdown ">
+							<a href="#" data-toggle="dropdown" class="dropdown-toggle">
+								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo $userRow['fullname']?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
+							</a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Profile</a></li>
+									<li class="divider"></li>
+									<li><a href="logout.php?logout"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span>&nbsp;Log Out</a></li>
+								</ul>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right mobile">
+						<li><a href="#"><button class="btn navbar-btn">Profile</button></a></li>
+						<li><a href="logout.php?logout"><button class="btn navbar-btn"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span>&nbsp;Log Out</button></a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
 		
 		<div class="container header-container">
 			<div class="container main-header">
@@ -245,7 +262,7 @@ if( isset($_POST['login']) ) {
 				<hr>
 				<p class="big">Choose which personal session to join</p>
 				<?php $personal_query = "SELECT p.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, notes, member_id 
-				from session s, personal_session p where category='personal' AND p.session_id = s.session_id";
+				from session s, personal_session p where category='personal' AND p.session_id = s.session_id ORDER BY date";
 				if ($result = mysqli_query($mysqli, $personal_query)) {
 					while ($row = mysqli_fetch_row($result)){ ?>
 						<div class="col-lg-6">
@@ -292,7 +309,7 @@ if( isset($_POST['login']) ) {
 				<hr>
 				<p class="big">Choose which group session to join</p>
 				<?php $group_query = "SELECT g.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, type, maxpax, count 
-				from session s, group_session g WHERE category='group' AND g.session_id = s.session_id";
+				from session s, group_session g WHERE category='group' AND g.session_id = s.session_id ORDER BY date";
 				if ($result = mysqli_query($mysqli, $group_query)) {
 					while ($row = mysqli_fetch_row($result)){ 
 						?>
@@ -371,7 +388,8 @@ if( isset($_POST['login']) ) {
 			<div class="col-sm-12 col-lg-6">
 				<span style="float:right">
 					<a href="index.php">Home</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-					<a href="#">About</a>
+					<a href="about.php">About</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+					<a href="contact.php">Contact</a>
 				</span>
 			</div>	
 		</div><!-- End Sub Footer -->

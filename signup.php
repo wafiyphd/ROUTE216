@@ -208,21 +208,38 @@
 
 	<div id="#top" class="container-jumbo">
 	
-		<nav class="nav navbar-default"><!-- Navigation bar -->
-			<div class="container">
-				<div class="nav navbar-header">
-					<ul class="nav navbar-nav">
-					  <li><a href="index.php" class="navbar-brand" id="#top"><img class="img-responsive" src="images/routeW.png"></a></li>
-					</ul>
+		<div class="container">	
+			<nav class="nav navbar-default"><!-- Navigation bar -->
+				<div class="navbar-header">
+				  <button class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span> 
+				  </button>
+				  <a class="navbar-brand" href="index.php"><img class="img-responsive" src="images/routeW.png"></a>
 				</div>
 				
-				
-				<ul class="nav navbar-nav navbar-right">
-					<li><a><button class="btn navbar-btn" data-toggle="modal" data-target="#loginModal"><strong>Log In</strong></button></a></li>
-				</ul>
-				
-			</div>
-		</nav> <!-- End of Navigation bar -->
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav navbar-left"> 
+						<li><a href="index.php"><button class="btn navbar-btn"><strong>Home</strong></button></a></li>
+						<li><a href="about.php"><button class="btn navbar-btn"><strong>About</strong></button></a></li>		
+						<li><a href="contact.php"><button class="btn navbar-btn"><strong>Contact</strong></button></a></li>		
+					</ul>
+	
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="signup.php"><button class="btn navbar-btn" ><strong>Sign Up</strong></button></a></li>
+						<li><a><button class="btn navbar-btn" data-toggle="modal" data-target="#loginModal"><strong>Log In</strong></button></a></li>
+					</ul>
+				</div>
+			</nav><!-- End of nav bar -->
+		</div>
+		
+		<?php if (isset($errMSG)) { ?>
+				<div class="container fail-login">
+					<div class="alert alert-danger text-center">
+						<p><i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp;<?php echo $errMSG; ?></p>
+					</div>
+				</div> <?php } ?>
 		
 		<div class="modal fade" id="loginModal"><!-- Start of login modal -->
 			<div class="modal-dialog">
@@ -268,12 +285,18 @@
 			</div>
 		</div><!-- End of Login modal -->
 		
+		<div class="container header-container">
+			<div class="container main-header">
+				<p class="header">Signing up for ROUTE.</p>
+				<p class="title">Commit to a healthier lifestyle now</h4>
+			</div>
+		</div>
+		
 	</div><!-- Jumbotron ends here -->
 	
 	<div class="container-fluid main-container">
+	
 		<div class="container signup-container">
-			<h3>Sign up for ROUTE</h3>
-			<h4>Commit to a healthier lifestyle now</h4>
 		
 			<div class="row">
 				
@@ -405,10 +428,11 @@
 			<div class="col-sm-12 col-lg-6">
 				<span style="float:right">
 					<a href="index.php">Home</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-					<a href="#">About</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+					<a href="about.php">About</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+					<a href="contact.php">Contact</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 					<a href="signup.php">Sign Up</a>
 				</span>
-			</div>		
+			</div>	
 		</div><!-- End Sub Footer -->
 		
 		<br><br>

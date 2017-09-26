@@ -18,9 +18,10 @@
 
 body {font-family: "Catamaran";}
 
-.container-jumbo {background-image: url(../images/jumbo.jpg); background-position: center; background-size: cover; margin-bottom: 20px;}
+.container-jumbo {background-image: url(../images/jumbo.jpg); background-position: center; background-size: cover;}
 .nav {background: transparent;}
 .nav img {width: auto; max-height: 200%}
+
 .fail-login .alert{margin-top: 20px; font-size: 110%}	
 
 .navbar-left li button, .navbar-left li button:focus {padding-top: 10px; color:white; background: none; letter-spacing: 2px; outline: none; border-bottom: 2px solid rgba(0,0,0,0); } 
@@ -34,15 +35,20 @@ body {font-family: "Catamaran";}
 .main-header .title {font-size: 120% }
 .main-header .header {font-size: 200%; font-weight: bold;}
 
-.info-container .background h2 {color: #57585b; }
-.info-container .background blockquote {padding-bottom: 1px; }
-.info-container .background h5 {color: #8a8b8f; font-size: 85%; }
-.info-container .background p {text-align: justified; }
+.contact-fluid {background-image: url(../images/table.jpg); background-size: cover; }
 
-.info-container .features-wrap h2 {color: #57585b; }
-.info-container .features h3 {color: #7d7e82; }
-.info-container .features blockquote {padding-bottom: 1px; }
-.info-container .features h5 {color: #97989b; font-size: 85%; }
+.contact-wrap {box-shadow:0 12px 15px 0 rgba(0,0,0,.24); margin: auto; margin-top: 20px; margin-bottom: 50px; }
+.contact-form {padding:40px 40px 70px; background: rgba(59,55,55,.9); }
+.contact-form .group{margin-top: 10px; margin-bottom:20px;}
+
+.contact-form .label, .contact-form .input {width:100%; color:#aaa; display:block; outline: none; font-size: 100%; }
+.contact-form .input {border:none; padding:10px 20px; border-radius:5px; background:rgba(255,255,255,.5); color:#fff; }
+.contact-form .button{width:100%; color:#fff; display:block; outline: none; font-size: 100%; border:none; padding:10px 20px; border-radius:25px; background: rgba(205, 97, 85, 1); }
+.contact-form .button:hover{background: rgba(250, 97, 85, 1); }
+
+.contact-form .input-text {width:100%; color:#aaa; display:block; outline: none; font-size: 100%; border:none; padding:50px 20px; border-radius:5px; background:rgba(255,255,255,.5); color:#fff;}
+.contact-form p {font-weight: bold; color:white; font-size: 120%; }
+.contact-form h3 {font-weight: bold; color:white;}
 
 .footer-container {background-color: #212121; color: white;}
 .footer-container a {color:#dcdcdc; font-weight: bold;}	

@@ -6,6 +6,8 @@
 	if (isset($_SESSION['user'])!="" ) { 
 	$res= mysqli_query($mysqli, "SELECT * FROM user WHERE user_id=".$_SESSION['user']);
 	$userRow= mysqli_fetch_array($res);
+	} else {
+		header("Location: index.php");	
 	}
 ?>
 
@@ -37,34 +39,51 @@
 
 	<div class="container-jumbo">
 	
-		<nav class="nav navbar-default"><!-- Navigation bar -->
-			<div class="container">
-				<ul class="nav navbar-nav navbar-left"> 
-					<li><a href="index.php" class="navbar-brand" id="#top"><img class="img-responsive" src="images/routeW.png"></a></li>
-					<li><a href="index.php"><button class="btn navbar-btn"><strong>Home</strong></button></a></li>
-					<li><a href="about.php"><button class="btn navbar-btn"><strong>About</strong></button></a></li>		
-				</ul>
+		<div class="container">
+			<nav class="nav navbar-default"><!-- Navigation bar -->
+				<div class="navbar-header">
+				  <button class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span> 
+				  </button>
+				  <a class="navbar-brand" href="index.php"><img class="img-responsive" src="images/routeW.png"></a>
+				</div>
 				
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-						<a href="#" data-toggle="dropdown" class="dropdown-toggle">
-							<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo $userRow['fullname']?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
-						</a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Profile</a></li>
-								<li class="divider"></li>
-								<li><a href="logout.php?logout"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span>&nbsp;Log Out</a></li>
-							</ul>
-					</li>
-				</ul>
-			</div>
-		</nav>
-		
-		<div class="container container-header">
-			<h2><strong>Welcome, <?php echo $userRow['fullname']?>! You are a Trainer!</strong></h2>
-			<h3>This is your home page. You may now start using ROUTE.</h3>
-			<hr>
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav navbar-left"> 
+						<li><a href="index.php"><button class="btn navbar-btn"><strong>Home</strong></button></a></li>
+						<li><a href="about.php"><button class="btn navbar-btn"><strong>About</strong></button></a></li>		
+						<li><a href="contact.php"><button class="btn navbar-btn"><strong>Contact</strong></button></a></li>		
+					</ul>
+				
+					<ul class="nav navbar-nav navbar-right desktop">
+						<li class="dropdown ">
+							<a href="#" data-toggle="dropdown" class="dropdown-toggle">
+								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo $userRow['fullname']?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
+							</a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Profile</a></li>
+									<li class="divider"></li>
+									<li><a href="logout.php?logout"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span>&nbsp;Log Out</a></li>
+								</ul>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right mobile">
+						<li><a href="#"><button class="btn navbar-btn">Profile</button></a></li>
+						<li><a href="logout.php?logout"><button class="btn navbar-btn"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span>&nbsp;Log Out</button></a></li>
+					</ul>
+				</div>
+			</nav>
 		</div>
+		
+		<div class="container header-container">
+			<div class="container main-header">
+				<p class="header">Welcome, <?php echo $userRow['fullname']; ?>. This is your home page! [Temporary: You are a trainer]</p>
+				<p class="title">You may now start using ROUTE. Select what you want to do below.</p>
+			</div>
+		</div>
+		
 	</div>
 	
 	<div class= "container content-container">
@@ -92,9 +111,7 @@
 				</div>
 			</div>
 			<div class="col-xs-12 col-lg-3">
-				<p><strong>May put something here</strong></p>
-				<img src="images/thinking.png"></img><img src="images/thinking.png"></img><img src="images/thinking.png"></img><img src="images/thinking.png"></img><br>
-				<img src="images/thinking.png"></img><img src="images/thinking.png"></img><img src="images/thinking.png"></img><img src="images/thinking.png"></img>
+				
 			</div>
 		</div>
 	</div>
@@ -128,7 +145,8 @@
 			<div class="col-sm-12 col-lg-6">
 				<span style="float:right">
 					<a href="index.php">Home</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-					<a href="#">About</a>
+					<a href="about.php">About</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+					<a href="contact.php">Contact</a>
 				</span>
 			</div>	
 		</div><!-- End Sub Footer -->
