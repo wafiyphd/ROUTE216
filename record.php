@@ -148,9 +148,9 @@
 			if ($res) {
 				$errTyp = "success";
 				$errMsg = "Successfully recorded a training session.";
-			
 				unset($title); unset($date); unset($time); unset($fee); unset($notes); unset($type); unset($maxpax);
-				header("Location: trainer.php");
+				header("Location: trainer.php?success=0'");
+				
 			} else {
 				$errTyp = "danger";
 				$errMsg = "Something went wrong, try again later..."; 

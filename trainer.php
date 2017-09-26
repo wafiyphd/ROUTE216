@@ -9,6 +9,10 @@
 	} else {
 		header("Location: index.php");	
 	}
+	
+	if ( isset($_GET['success']) && $_GET['success'] == 0) {
+		$message = "Successfully created new training session.";
+	}
 ?>
 
 <!DOCTYPE html>
@@ -87,6 +91,12 @@
 	</div>
 	
 	<div class= "container content-container">
+		<?php if (isset($_GET['success'])) { ?>
+					<div class="container fail-login">
+						<div class="alert alert-success text-center">
+							<p><i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp;<?php echo $message; ?></p>
+						</div>
+					</div> <?php } ?>
 		<div class="row">
 			<div class="col-xs-12 col-lg-9">
 				<div class="pic-container col-lg-12">
