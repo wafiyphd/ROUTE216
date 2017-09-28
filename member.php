@@ -97,17 +97,17 @@
 				</div>
 				<div class="pic-container col-lg-12">
 					<div class="hover">
-						<a href="#"><img src="images/option2.jpg"></img><div class="caption">VIEW SESSIONS HISTORY</div></a>	
-					</div>
-				</div>
-				<div class="pic-container col-lg-12">
-					<div class="hover">
-						<a href="#"><img src="images/option3.jpg"></img><div class="caption">EDIT PROFILE</div></a>	
+						<a href="viewhistory.php"><img src="images/option2.jpg"></img><div class="caption">VIEW SESSIONS HISTORY</div></a>	
 					</div>
 				</div>
 				<div class="pic-container col-lg-12">
 					<div class="hover">
 						<a href="review.php"><img src="images/option1.jpg"></img><div class="caption">TEST REVIEW</div></a>	
+					</div>
+				</div>
+				<div class="pic-container col-lg-12">
+					<div class="hover">
+						<a href="#"><img src="images/option3.jpg"></img><div class="caption">EDIT PROFILE</div></a>	
 					</div>
 				</div>
 			</div>

@@ -111,7 +111,7 @@
 				</div>
 				<div class="pic-container col-lg-12">
 					<div class="hover">
-						<a href="#"><img src="images/option3.jpg"></img><div class="caption">ALL MY REVIEWS</div></a>	
+						<a href="viewhistory.php"><img src="images/option3.jpg"></img><div class="caption">VIEW MY SESSIONS</div></a>	
 					</div>
 				</div>
 				<div class="pic-container col-lg-12">
