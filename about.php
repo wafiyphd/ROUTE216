@@ -25,36 +25,27 @@ if( isset($_POST['login']) ) {
 	  
 	   $password = hash('sha256', $pass); // password hashing using SHA256
 		
-	   $query = "SELECT user_id, username, password FROM user WHERE username='$username'";
+	   $query = "SELECT user_id, username, user_kind, password FROM user WHERE username='$username'";
 	   $res=mysqli_query($mysqli,$query);
 	   
 	   // check whether user exists in the database
 	   $row=mysqli_fetch_array($res);
 	   $count = mysqli_num_rows($res);
 	   
-	   // check whether user is a member
-	   $querymember = "SELECT user_id FROM member WHERE username='$username'";
-	   $qm = mysqli_query($mysqli,$querymember);
-	   $cm = mysqli_num_rows($qm);
-	   
-	   // check whether user is a trainer
-	   $querytrainer = "SELECT user_id FROM trainer WHERE username='$username'";
-	   $qt = mysqli_query($mysqli, $querytrainer);
-	   $cq = mysqli_num_rows($qt);
-	   
 	   if( $count == 1 && $row['password']==$password ) {
-		   if ($cm == 1) {
+		   if ($row['user_kind'] == "member") {
 			   $_SESSION['user'] = $row['user_id'];
 			   $errMSG = "Successful Login";
 		       header("Location: member.php");	
 		   }
 		   
-		   else {
+		   elseif ($row['user_kind'] == "trainer"){
 			   $_SESSION['user'] = $row['user_id'];
 			   $errMSG = "Successful Login";
 		       header("Location: trainer.php");	
 		   }   
 	   } 
+	   
 	   
 	   else {
 		   $errMSG = "Incorrect Credentials for logging in, please try again...";
