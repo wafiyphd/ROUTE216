@@ -12,32 +12,46 @@
 	
 	if( isset($_POST['review']) ) {
 	 
-	 if (!isset($_POST['rating']) ) {
-		 $errMSG = "Incorrect Credentials, Try again...";
-	 }
-    
-	else {
+		if (!isset($_POST['prating']) || !isset($_POST['erating']) || !isset($_POST['srating'])) {
+			 $errType = "danger";
+			 $errMSG = "Please pick a rating for all the criterias.";
+		}
+		
+		else {
+			
+			$sessionid = $_POST['sessionid'];
+			
+			$query = mysqli_query($mysqli, "SELECT trainer_id, trainer_name from session where session_id = '$sessionid'");
+			$sessionRow = mysqli_fetch_row($query);
+			
+			$reviewerid = $userRow['user_id'];
+			$reviewername = $userRow['fullname'];
+			$trainerid = $sessionRow[0];
+			$trainername = $sessionRow[1];
+			
+			$prating = $_POST['prating'];
+			$erating = $_POST['erating'];
+			$srating = $_POST['srating'];
+			
+			$avg = ($prating + $erating + $srating) / 3;
+
+			$comments = htmlspecialchars($_POST['comments']);
+			
+			$query = "INSERT INTO review(reviewer_id, reviewer_name, trainer_id, trainer_name, session_id, timestamp, profrat, engrat, sesrat, totalrating, comments) 
+						VALUES('$reviewerid','$reviewername','$trainerid','$trainername','$sessionid', NOW(),'$prating','$erating','$srating','$avg','$comments')";
+			$res = mysqli_query($mysqli, $query);
+			
+		    if ($res) {
+			 $errType = "success";
+			 $errMSG = "Successfully submitted review";
+			 header("Location: member.php?success=0'");
+		    } else {
+			 $errType = "danger";
+			 $errMSG = "Something went wrong, try again later..."; 
+		    } 
+		}
 	 
-	 $restaurantID = $restRow['restaurantId'];
-	 $restaurantName = $restRow['restaurantName'];
-	 $rating = $_POST['rating'];
-	 $review = htmlspecialchars($_POST['comments']);
-	 $reviewerName = $userRow['userName'];
-	 $reviewerID = $userRow['userId'];
-	 
-	 $query = "INSERT INTO reviews(restaurant_id, restaurant_name, rating, review, reviewer_name, reviewer_id, review_date) VALUES('$restaurantID','$restaurantName','$rating','$review','$reviewerName','$reviewerID', NOW())";
-	 $res = mysqli_query($mysqli, $query);
-    
-   if ($res) {
-    $errType = "success";
-    $errMSG = "Successfully submitted review";
-   } else {
-    $errType = "danger";
-    $errMSG = "Something went wrong, try again later..."; 
-   } 
 	}
-	 
- }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -173,42 +187,19 @@
 											<label class="star star-1" for="sstar-1"></label>
 										</div>
 										
-										<script>
-											$('#rating input').on('change', function() {
-											   prating = $('input[name="prating"]:checked', '#rating').val()); 
-											});
-
-											
-											prating;
-											erating; 
-											srating;
-											
-											document.write(prating);
-											document.write(erating);
-											document.write(srating);
-										</script>
 									</div>
 									
 									<div id="#group" class="group">
-										<script>
-											$('#rating input').on('change', function() {
-											   alert($('input[name="prating"]:checked', '#rating').val()); 
-											});
-
-											
-											prating; 
-											erating; 
-											srating;
-											
-											document.write(prating);
-											document.write(erating);
-											document.write(srating);
-										</script>
+										
 									</div>
 									
 									<div class="group">
 										<label for="comments" class="label">Comments</label>
-										<textarea id="comments"  type="text" name="comments" rows="6" class="input" value="<?php echo $name ?>" required></textarea>
+										<textarea id="comments"  type="text" name="comments" rows="6" class="input" required></textarea>
+									</div>
+									
+									<div class="group">
+										<input name="sessionid" class="hidden" value="<?php echo $row[0]; ?>"></input>
 									</div>
 									
 									<div class="group">

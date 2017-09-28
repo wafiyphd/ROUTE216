@@ -70,7 +70,7 @@ label.star:before { content: '\f006'; font-family: FontAwesome; }
 
 .inline {font-weight: bold; color:#ccc; display: inline-block; text-align: left; padding-top: 10px;}
 .rating-wrap {display: inline-block; color: #aaa; background: rgba(0,0,0,0); }
-
+.hidden {display: none}
 .big {font-weight: bold; font-size: 120%; }
 
 .info-wrap {margin: auto; margin-top: 10px; margin-bottom: 20px; }
