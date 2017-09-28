@@ -83,7 +83,7 @@
 		
 		<div class="container header-container">
 			<div class="container main-header">
-				<p class="header">Welcome, <?php echo $userRow['fullname']; ?>. This is your home page! [Temporary: You are a trainer]</p>
+				<p class="header">Welcome, <?php echo ucwords($userRow['fullname']); ?>. This is your home page!</p>
 				<p class="title">You may now start using ROUTE. Select what you want to do below.</p>
 			</div>
 		</div>
