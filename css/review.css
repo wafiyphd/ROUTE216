@@ -25,6 +25,7 @@ body {font-family: "Catamaran";}
 .navbar-left li button, .navbar-left li button:focus {padding-top: 10px; color:white; background: none; letter-spacing: 2px; outline: none; border-bottom: 2px solid rgba(0,0,0,0); } 
 .navbar-left li button:hover { color:white; border-bottom: 2px solid white; border-radius: 0px; outline:none; } 
 .navbar-left li button:focus:active, .navbar-left li button:active { color: white; outline:none; background: rgba(0,0,0,0.2) }
+.navbar-left li button:active { color:white; border-bottom: 2px solid white; border-radius: 0px; outline:none;}
 
 .navbar-nav > li > a { padding-top:5px !important;  padding-bottom:10px !important; height:60px;}
 

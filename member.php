@@ -12,6 +12,7 @@
 	if ( isset($_GET['success']) && $_GET['success'] == 0) {
 		$message = "Successfully submitted review.";
 	}
+	
 ?>
 
 <!DOCTYPE html>
@@ -107,11 +108,6 @@
 				<div class="pic-container col-lg-12">
 					<div class="hover">
 						<a href="viewhistory.php"><img src="images/option2.jpg"></img><div class="caption">VIEW SESSIONS HISTORY</div></a>	
-					</div>
-				</div>
-				<div class="pic-container col-lg-12">
-					<div class="hover">
-						<a href="review.php"><img src="images/option1.jpg"></img><div class="caption">TEST REVIEW</div></a>	
 					</div>
 				</div>
 				<div class="pic-container col-lg-12">

@@ -147,7 +147,7 @@ $error = false;
 								<div class="panel-body">
 									<div class="col-lg-6 border-right">
 										<ul>
-											<li><strong><p class="title"><?php echo ucfirst($row[2]); ?></p></strong> </li>
+											<li><strong><p><?php echo ucfirst($row[2]); ?></p></strong> </li>
 											<li><strong>Status: </strong><?php echo $row[6]; ?></li>
 											<li><strong>Date: </strong><?php echo $row[3]; ?></li>
 											<li><strong>Time: </strong><?php echo $row[4]; ?></li>
