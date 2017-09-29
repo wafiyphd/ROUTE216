@@ -44,13 +44,17 @@
 		    if ($res) {
 			 $errType = "success";
 			 $errMSG = "Successfully submitted review";
-			 header("Location: member.php?success=0'");
+			 header("Location: member.php?success=0");
 		    } else {
 			 $errType = "danger";
 			 $errMSG = "Something went wrong, try again later..."; 
 		    } 
 		}
 	 
+	}
+	
+	if ( isset($_GET['id']) ) {
+		$sessionid = $_GET['id'];
 	}
 ?>
 <!DOCTYPE html>
@@ -126,7 +130,7 @@
 		</div>
 		
 	</div>
-	<?php $session = mysqli_query($mysqli, "SELECT * from session WHERE session_id = 36");
+	<?php $session = mysqli_query($mysqli, "SELECT * from session WHERE session_id = '$sessionid'");
 	$row = mysqli_fetch_row($session); ?>
 		
 	<div class="container-fluid content-container">
