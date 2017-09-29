@@ -358,7 +358,7 @@
 								</div>
 											
 						<div class = "group">
-							<button type="record" name="record" class="button" value="Record Session">Record Session</button>
+							<button type="submit" name="record" class="button" value="Record Session">Record Session</button>
 						</div>
 						
 						<?php

@@ -22,68 +22,6 @@ if($_GET['pageno'])
 }
 $error = false;
 
-if( isset($_POST['login']) ) { 
-  
-  $username = trim($_POST['username']);
-  $username = strip_tags($username);
-  $username = htmlspecialchars($username);
-  
-  $pass = trim($_POST['password']);
-  $pass = strip_tags($pass);
-  $pass = htmlspecialchars($pass);  
-  
-  // if there's no error, continue to login
-  if (!$error) {
-	  
-	   $password = hash('sha256', $pass); // password hashing using SHA256
-		
-	   $query = "SELECT user_id, username, password FROM user WHERE username='$username'";
-	   $res=mysqli_query($mysqli,$query);
-	   
-	   // check whether user exists in the database
-	   $row=mysqli_fetch_array($res);
-	   $count = mysqli_num_rows($res);
-	   
-	   // check whether user is a member
-	   $querymember = "SELECT user_id FROM member WHERE username='$username'";
-	   $qm = mysqli_query($mysqli,$querymember);
-	   $cm = mysqli_num_rows($qm);
-	   
-	   // check whether user is a trainer
-	   $querytrainer = "SELECT user_id FROM trainer WHERE username='$username'";
-	   $qt = mysqli_query($mysqli, $querytrainer);
-	   $cq = mysqli_num_rows($qt);
-	   
-	   if( $count == 1 && $row['password']==$password ) {
-		   if ($cm == 1) {
-			   $_SESSION['user'] = $row['user_id'];
-			   $errMSG = "Successful Login";
-		       header("Location: member.php");	
-		   }
-		   
-		   else {
-			   $_SESSION['user'] = $row['user_id'];
-			   $errMSG = "Successful Login";
-		       header("Location: trainer.php");	
-		   }   
-	   } 
-	   
-	   else {
-		   $alertType = "danger";
-		   $errMSG = "Incorrect Credentials for logging in, please try again...";
-	   }
-		
-		if ($res) {
-			$errTyp = "success";
-			$errMsg = "Successfully recorded a training session.";
-			header("Location: updatesession.php?success=0'");
-				
-		} else {
-			$errTyp = "danger";
-			$errMsg = "Something went wrong, try again later..."; 
-		}
-	}
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
