@@ -245,7 +245,7 @@ $error = false;
 											<?php 		} else { ?>
 															<button type="submit" name="review" id="review" class="btn btn-un pull-right" disabled>Review</button> 
 											<?php }} elseif ($row[6] == "Completed") { ?>
-															<button type="submit" name="review" id="review" class="btn btn-join pull-right">Review</button> 	
+															<button type="submit" name="review" id="review" class="btn btn-join pull-right"><a href="review.php?id=<?php echo $row[0]; ?>">Review</a></button> 	
 											<?php }} elseif ($userkind == "trainer") {
 														if ($row[6] == "Available") { ?>
 															<button type="submit" name="update" id="update" class="btn btn-join pull-right" onclick="form.action='updatesession.php?id=<?php echo $row[0]?>';">Update</button>

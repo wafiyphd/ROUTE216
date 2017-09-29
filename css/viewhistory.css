@@ -42,6 +42,7 @@ body {font-family: "Catamaran";}
 .btn-join {color: white; font-weight: bold; border:none; background: #5499C7; margin-left: 15px; margin-top: 30px; }
 .btn-un {color:white; font-weight: bold; border: none; background: rgba(205, 97, 85, 1); margin-left: 15px;  margin-top: 30px;  }
 .hidden {display:none}
+.btn-join a, .btn-un a {text-decoration: none; color:white; }
 
 .big { font-size: 180%; font-weight: bold; color: #616161}
 hr { width: 80%;  height: 2px; border: 0; border-top: 1px solid #9E9E9E }
