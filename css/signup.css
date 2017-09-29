@@ -1,20 +1,17 @@
 @media only screen and (max-width: 759px) {
 	.navbar-right li button, .navbar-right li button:focus {font-weight: strong; padding-top: 10px; color:white; background: none; letter-spacing: 2px; outline: none; border-bottom: 2px solid rgba(0,0,0,0); }
 	.navbar-right li button:active, .navbar-right li button:active { color: white; outline:none; background: rgba(0,0,0,0.2) }
-	.info-container .pic-container .moreinfo {font-size: 100%; opacity: 1; color: white; transition: opacity .50s ease-in-out; position: absolute; font-weight: bold; top: 60%; left: 5%; width: 90%;}
 }
 
 @media only screen and (min-width: 760px) {
 	.navbar-right li button, .navbar-right li button:focus {margin-top: 15px; color: white; background: none; border-radius: 3px;outline: none; letter-spacing: 2px; border: 2px solid white; }
 	.navbar-right li button:hover, .navbar-right li button:active {color: rgba(0,0,0,0.7); background: white; outline: none; }
 	.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover { background-color:transparent }
-	.info-container .pic-container .moreinfo {font-size: 100%; opacity: 0; color: white; transition: opacity .50s ease-in-out; position: absolute; font-weight: bold; top: 60%; left: 5%; width: 90%;}
-	.info-container .pic-container .overlay:hover .moreinfo  {opacity: 1; color: white;  font-size: 100%; position: absolute; font-weight: bold; top: 60%; left: 5%; width: 90%;}
 }
 
 body {font-family: "Catamaran";}
 
-.container-jumbo {background-image: url(../images/jumbo.jpg); background-position: center; background-size: cover;}
+.container-jumbo {background-color: #212121;}
 .nav {background: transparent;}
 .nav img {width: auto; max-height: 200%}
 
@@ -24,19 +21,19 @@ body {font-family: "Catamaran";}
 
 .navbar-nav > li > a { padding-top:5px !important;  padding-bottom:10px !important; height:60px;}
 
-.header-container {padding-bottom: 25px; }
+.header-container {padding-bottom: 20px; }
 .header-container .main-header {color: white; margin-top: 20px;}
-.main-header .title {font-size: 120% }
+.main-header .title {font-weight: normal; font-size: 50%; }
 .main-header .header {font-size: 200%; font-weight: bold;}
 
-.main-container {background-image: url(../images/bg1.png);}
+.main-container {background-image: url(../images/keyboard.jpg); background-size: cover;}
 
 .signup-container {padding-top: 40px; }
 .signup-container h3 {font-weight: bold; text-align: center;  color: white;}
 .signup-container h4 {text-align: center;  color: white;}
 
 .signup-wrap {box-shadow:0 12px 15px 0 rgba(0,0,0,.24); margin: auto; margin-top: 20px; margin-bottom: 50px; }
-.signup-form {padding:40px 40px 70px 40px; background: rgba(59,55,55,.8); }
+.signup-form {padding:40px 40px 70px 40px; background: rgba(59,55,55,1); }
 .signup-form .group{margin-top: 10px; margin-bottom:20px;}
 
 .signup-form .label, .signup-form .input {width:100%; color:#aaa; display:block; outline: none; font-size: 100%; }

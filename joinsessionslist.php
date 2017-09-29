@@ -208,7 +208,7 @@ if( isset($_POST['login']) ) {
 					<ul class="nav navbar-nav navbar-right desktop">
 						<li class="dropdown ">
 							<a href="#" data-toggle="dropdown" class="dropdown-toggle">
-								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo $userRow['fullname']?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
+								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo ucwords($userRow['fullname'])?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
 							</a>
 								<ul class="dropdown-menu">
 									<li><a href="#">Profile</a></li>
@@ -227,8 +227,7 @@ if( isset($_POST['login']) ) {
 		
 		<div class="container header-container">
 			<div class="container main-header">
-				<p class="header">Join a session.</p>
-				<p class="title">Pick from the many available sessions the trainers have provided for you.</p>
+				<p class="header">Join a session. &nbsp;<span class="title">Pick from the many available sessions the trainers have provided.</span></p>
 			</div>
 		</div>
 		

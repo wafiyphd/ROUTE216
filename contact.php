@@ -127,7 +127,7 @@ if( isset($_POST['submit']) ) {
 					<ul class="nav navbar-nav navbar-right desktop">
 						<li class="dropdown ">
 							<a href="#" data-toggle="dropdown" class="dropdown-toggle">
-								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo $userRow['fullname']?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
+								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo ucwords($userRow['fullname']) ?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
 							</a>
 								<ul class="dropdown-menu">
 									<li><a href="#">Profile</a></li>
@@ -203,8 +203,7 @@ if( isset($_POST['submit']) ) {
 		
 		<div class="container header-container">
 			<div class="container main-header">
-				<p class="header">Contact ROUTE.</p>
-				<p class="title">For any inquiries regarding ROUTE.</p>
+				<p class="header">Contact ROUTE. &nbsp;<span class="title">For any inquiries regarding ROUTE.</span></p>
 			</div>
 		</div>	
 	</div>

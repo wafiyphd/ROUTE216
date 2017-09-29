@@ -287,8 +287,7 @@
 		
 		<div class="container header-container">
 			<div class="container main-header">
-				<p class="header">Signing up for ROUTE.</p>
-				<p class="title">Commit to a healthier lifestyle now</h4>
+				<p class="header">Signing up for ROUTE. &nbsp;<span class="title">Commit to a healthier lifestyle now.</span></p>
 			</div>
 		</div>
 		

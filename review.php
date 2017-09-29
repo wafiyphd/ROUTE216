@@ -124,8 +124,7 @@
 		
 		<div class="container header-container">
 			<div class="container main-header">
-				<p class="header">Reviewing Session & Trainer.</p>
-				<p class="title">Provide constructive feedback for the trainers.</p>
+				<p class="header">Reviewing Session & Trainer. &nbsp;<span class="title">Provide constructive feedback for the trainers.</span></p>
 			</div>
 		</div>
 		
@@ -199,7 +198,7 @@
 									
 									<div class="group">
 										<label for="comments" class="label">Comments</label>
-										<textarea id="comments"  type="text" name="comments" rows="6" class="input" required></textarea>
+										<textarea id="comments"  type="text" name="comments" rows="8" class="input" required></textarea>
 									</div>
 									
 									<div class="group">

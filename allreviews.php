@@ -120,7 +120,7 @@
 					<ul class="nav navbar-nav navbar-right desktop">
 						<li class="dropdown ">
 							<a href="#" data-toggle="dropdown" class="dropdown-toggle">
-								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo $userRow['fullname']?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
+								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo ucwords($userRow['fullname'])?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
 							</a>
 								<ul class="dropdown-menu">
 									<li><a href="#">Profile</a></li>
@@ -139,8 +139,7 @@
 		
 		<div class="container header-container">
 			<div class="container main-header">
-				<p class="header">All Reviews Received.</p>
-				<p class="title">View all the reviews the member have written about you & your sessions.</p>
+				<p class="header">All Reviews Received. &nbsp;<span class="title">Read all the reviews the members have written regarging you & your sessions.</span></p>
 			</div>
 		</div>
 		

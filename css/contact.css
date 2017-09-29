@@ -3,7 +3,6 @@
 	.mobile {display: block}
 	.navbar-right li button, .navbar-right li button:focus {font-weight: strong; padding-top: 10px; color:white; background: none; letter-spacing: 2px; outline: none; border-bottom: 2px solid rgba(0,0,0,0); }
 	.navbar-right li button:active, .navbar-right li button:active { color: white; outline:none; background: rgba(0,0,0,0.2) }
-	.info-container .pic-container .moreinfo {font-size: 100%; opacity: 1; color: white; transition: opacity .50s ease-in-out; position: absolute; font-weight: bold; top: 60%; left: 5%; width: 90%;}
 }
 
 @media only screen and (min-width: 760px) {
@@ -12,13 +11,11 @@
 	.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover { background-color:transparent }
 	.desktop {display: block}
 	.mobile {display: none}
-	.info-container .pic-container .moreinfo {font-size: 100%; opacity: 0; color: white; transition: opacity .50s ease-in-out; position: absolute; font-weight: bold; top: 60%; left: 5%; width: 90%;}
-	.info-container .pic-container .overlay:hover .moreinfo  {opacity: 1; color: white;  font-size: 100%; position: absolute; font-weight: bold; top: 60%; left: 5%; width: 90%;}
 }
 
 body {font-family: "Catamaran";}
 
-.container-jumbo {background-image: url(../images/jumbo.jpg); background-position: center; background-size: cover;}
+.container-jumbo {background-color: #212121;}
 .nav {background: transparent;}
 .nav img {width: auto; max-height: 200%}
 
@@ -30,15 +27,15 @@ body {font-family: "Catamaran";}
 
 .navbar-nav > li > a { padding-top:5px !important;  padding-bottom:10px !important; height:60px;}
 
-.header-container {padding-bottom: 25px; }
+.header-container {padding-bottom: 20px; }
 .header-container .main-header {color: white; margin-top: 20px;}
-.main-header .title {font-size: 120% }
+.main-header .title {font-weight: normal; font-size: 50%; }
 .main-header .header {font-size: 200%; font-weight: bold;}
 
 .contact-fluid {background-image: url(../images/table.jpg); background-size: cover; }
 
-.contact-wrap {box-shadow:0 12px 15px 0 rgba(0,0,0,.24); margin: auto; margin-top: 20px; margin-bottom: 50px; }
-.contact-form {padding:40px 40px 70px; background: rgba(59,55,55,.9); }
+.contact-wrap {box-shadow:0 12px 15px 0 rgba(0,0,0,.24); margin: auto; margin-top: 20px; margin-bottom: 20px; }
+.contact-form {padding:40px 40px 40px; background: rgba(59,55,55,.9); }
 .contact-form .group{margin-top: 10px; margin-bottom:20px;}
 
 .contact-form .label, .contact-form .input {width:100%; color:#aaa; display:block; outline: none; font-size: 100%; }

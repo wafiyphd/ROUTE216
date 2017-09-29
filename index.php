@@ -237,7 +237,7 @@ if( isset($_POST['login']) ) {
 					<img class="img-responsive" src="images/2.png">
 				</div>
 				<div class="col-lg-6 col-xs-12 images ">
-					<img class="img-responsive" src="http://via.placeholder.com/500x250"><div class="caption"></div>
+					<img class="img-responsive" src="images/4.png"><div class="caption"></div>
 				</div>
 			</div>
 		</div>
