@@ -22,14 +22,6 @@ if($_GET['pageno'])
 }
 $error = false;
 
-if ( isset($_POST['join-personal'])) {
-
-}
-
-if ( isset($_POST['join-group'])) {
-	
-}
-
 if( isset($_POST['login']) ) { 
   
   $username = trim($_POST['username']);
@@ -80,6 +72,16 @@ if( isset($_POST['login']) ) {
 		   $alertType = "danger";
 		   $errMSG = "Incorrect Credentials for logging in, please try again...";
 	   }
+		
+		if ($res) {
+			$errTyp = "success";
+			$errMsg = "Successfully recorded a training session.";
+			header("Location: updatesession.php?success=0'");
+				
+		} else {
+			$errTyp = "danger";
+			$errMsg = "Something went wrong, try again later..."; 
+		}
 	}
 }
 ?>
@@ -190,15 +192,14 @@ if( isset($_POST['login']) ) {
 			
 			<div id="#personal" class="row personal">
 				<hr>
-				<p class="big">Choose which personal session to join</p>
 				<?php $userkind = $userRow['user_kind'];
 				if ($userkind == "member") {
 					$personal_query = "SELECT p.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, notes, member_id 
-				from session s, personal_session p where category='personal' AND status='completed' AND p.session_id = s.session_id
+				from session s, personal_session p where category='personal' AND p.session_id = s.session_id
 				AND member_id=".$_SESSION['user']; " ORDER BY date";
 				} elseif ($userkind == "trainer") {
 					$personal_query = "SELECT p.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, notes, member_id 
-				from session s, personal_session p where category='personal' AND status='completed' AND p.session_id = s.session_id
+				from session s, personal_session p where category='personal' AND p.session_id = s.session_id
 				AND trainer_id=".$_SESSION['user']; " ORDER BY date";					
 				}
 				if ($result = mysqli_query($mysqli, $personal_query)) {
@@ -224,11 +225,25 @@ if( isset($_POST['login']) ) {
 										<form id="join-personal" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
 											<input name="id" value="<?php echo $row[0]; ?>" class="hidden"/>
 											
-											<?php if ($userkind == "member") { ?>
-												<button type="review" name="review" id="review" class="btn btn-join pull-right">Review</button> 
-											<?php } elseif ($userkind == "trainer") { ?>
-												<button type="update" name="update" id="update" class="btn btn-un pull-right">Update</button>
-											<?php } ?>
+											<?php if ($userkind == "member") {
+													if ($row[6] == "Available") { ?>
+														<button type="submit" name="review" id="review" class="btn btn-un pull-right" disabled>Review</button> 
+											<?php } elseif ($row[6] == "Unavailable") { ?>
+														<button type="submit" name="review" id="review" class="btn btn-un pull-right" disabled>Review</button>
+											<?php } elseif ($row[6] == "Completed") { ?>
+														<button type="submit" name="review" id="review" class="btn btn-join pull-right">Review</button> 
+											<?php } elseif ($row[6] == "Cancelled") { ?>
+													<button type="submit" name="review" id="review" class="btn btn-un pull-right" disabled>Review</button>
+											<?php }} elseif ($userkind == "trainer") {
+														if ($row[6] == "Available") { ?>
+															<button type="submit" name="update" id="update" class="btn btn-join pull-right" onclick="form.action='updatesession.php?id=<?php echo $row[0]?>';">Update</button>
+											<?php		} elseif ($row[6] == "Unavailable") { ?>
+															<button type="submit" name="update" id="update" class="btn btn-join pull-right" onclick="form.action='updatesession.php?id=<?php echo $row[0]?>';">Update</button>
+											<?php 		} elseif ($row[6] == "Completed") { ?>
+															<button type="submit" name="update" id="update" class="btn btn-join pull-right" onclick="form.action='updatesession.php?id=<?php echo $row[0]?>';">Update</button>
+											<?php 		} elseif ($row[6] == "Cancelled") { ?>
+															<button type="submit" name="update" id="update" class="btn btn-join pull-right" onclick="form.action='updatesession.php?id=<?php echo $row[0]?>';">Update</button>
+											<?php }} ?>											
 										</form>
 									</div>
 								</div>
@@ -241,26 +256,26 @@ if( isset($_POST['login']) ) {
 			
 			<div id="#group" class="row group">
 				<hr>
-				<p class="big">Choose which group session to join</p>
 				<?php $userkind = $userRow['user_kind'];
 				if ($userkind == "member") {
 					$group_query = "SELECT g.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, type, maxpax, count 
-					from session s, group_session g, joined_group j WHERE category='group' AND status='completed' AND g.session_id = s.session_id 
-					AND j.session_id = s.session_id AND j.member_id=".$_SESSION['user']; "  ORDER BY date";
+					from session s, group_session g, joined_group j WHERE category='group' AND g.session_id = s.session_id 
+					AND j.session_id = s.session_id AND j.member_id=".$_SESSION['user']; " ORDER BY date";
 				} elseif ($userkind == "trainer") {
 					$group_query = "SELECT g.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, type, maxpax, count 
-					from session s, group_session g, joined_group j WHERE category='group' AND status='completed' AND g.session_id = s.session_id 
-					AND j.session_id = s.session_id AND s.trainer_id=".$_SESSION['user']; "  ORDER BY date";
+					from session s, group_session g WHERE category='group' AND g.session_id = s.session_id 
+					AND s.trainer_id=".$_SESSION['user']; " ORDER BY date";
 				}
 				if ($result = mysqli_query($mysqli, $group_query)) {
 					while ($row = mysqli_fetch_row($result)){ 
-						$_SESSION['s_id'] = $row[0]; ?>
+						?>
 						<div class="col-lg-6">
 							<div class="panel panel-default">
 								<div class="panel-body">
 									<div class="col-lg-6 border-right">
 										<ul>
 											<li><strong><p class="title"><?php echo ucfirst($row[2]); ?></p></strong> </li>
+											<li><strong>Status: </strong><?php echo $row[6]; ?></li>
 											<li><strong>Joined (current/max): </strong><?php echo $row[11]; ?> / <?php echo$row[10]; ?></li>
 											<li><strong>Type: </strong><?php echo $row[9]; ?></li>
 											<li><strong>Date: </strong><?php echo $row[3]; ?></li>
@@ -276,11 +291,33 @@ if( isset($_POST['login']) ) {
 										</ul>
 										<form id="join-group" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
 											<input name="id" value="<?php echo $row[0]; ?>" class="hidden"/>
-											<?php if ($userkind == "member") { ?>
-												<button type="review" name="review" id="review" class="btn btn-join pull-right">Review</button>
-											<?php } elseif ($userkind == "trainer") { ?>
-												<button type="update" name="update" id="update" class="btn btn-un pull-right">Update</button>
-											<?php } ?>
+											<?php $userid = $userRow['user_id'];
+											$checkjoin = mysqli_query($mysqli, "SELECT j.session_id, member_id FROM joined_group j, group_session g WHERE j.session_id = '$row[0]' AND member_id = '$userid'");
+											$checkjoin = mysqli_fetch_row($checkjoin);	
+											
+											if ($userkind == "member") {
+												if ($row[6] == "Available") {
+													if ($row[11] < $row[10]) {
+														if ($checkjoin > 0 ) {?>
+															<button type="submit" name="review" id="review" class="btn btn-un pull-right" disabled>Review</button> 
+											<?php 		} else { ?>
+															<button type="submit" name="review" id="review" class="btn btn-un pull-right" disabled>Review</button> 		
+											<?php 	}} elseif ($row[11] == $row[10] && $checkjoin > 0) { ?>
+															<button type="submit" name="review" id="review" class="btn btn-un pull-right" disabled>Review</button> 
+											<?php 		} else { ?>
+															<button type="submit" name="review" id="review" class="btn btn-un pull-right" disabled>Review</button> 
+											<?php }} elseif ($row[6] == "Completed") { ?>
+															<button type="submit" name="review" id="review" class="btn btn-join pull-right">Review</button> 	
+											<?php }} elseif ($userkind == "trainer") {
+														if ($row[6] == "Available") { ?>
+															<button type="submit" name="update" id="update" class="btn btn-join pull-right" onclick="form.action='updatesession.php?id=<?php echo $row[0]?>';">Update</button>
+											<?php		} elseif ($row[6] == "Unavailable") { ?>
+															<button type="submit" name="update" id="update" class="btn btn-join pull-right" onclick="form.action='updatesession.php?id=<?php echo $row[0]?>';">Update</button>
+											<?php 		} elseif ($row[6] == "Completed") { ?>
+															<button type="submit" name="update" id="update" class="btn btn-join pull-right" onclick="form.action='updatesession.php?id=<?php echo $row[0]?>';">Update</button>
+											<?php 		} elseif ($row[6] == "Cancelled") { ?>
+															<button type="submit" name="update" id="update" class="btn btn-join pull-right" onclick="form.action='updatesession.php?id=<?php echo $row[0]?>';">Update</button>
+											<?php }} ?>
 										</form>
 									</div>
 								</div>
