@@ -13,11 +13,11 @@ Done:
 4. View created sessions history (trainer)
 5. Review trainers (member)
 6. Home page
+7. Members' page to easily unjoin joined sessions (member)
+8. Users' home page 
 
 What to do:
-1. Fix joining session to not show completed sessions
-2. Create a new members' page to easily unjoin joined sessions
-3. Update a session's details/information (trainer)
-4. Users' home page (Add more information, eg. upcoming/latest sessions)
-5. User profiles
-6. V i s u a l  a e s t h e t i c s
+1. Not allow user to review the same session more than once
+2. Update a session's details/information (trainer)
+3. User profiles
+4. V i s u a l  a e s t h e t i c s
