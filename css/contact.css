@@ -32,9 +32,9 @@ body {font-family: "Catamaran";}
 .main-header .title {font-weight: normal; font-size: 50%; }
 .main-header .header {font-size: 200%; font-weight: bold;}
 
-.contact-fluid {background-image: url(../images/table.jpg); background-size: cover; }
+.contact-fluid {background-image: url(../images/table.jpg); background-size: cover; min-height: 65vh; }
 
-.contact-wrap {box-shadow:0 12px 15px 0 rgba(0,0,0,.24); margin: auto; margin-top: 20px; margin-bottom: 20px; }
+.contact-wrap {box-shadow:0 12px 15px 0 rgba(0,0,0,.24); margin: auto; margin-top: 30px; margin-bottom: 20px; }
 .contact-form {padding:40px 40px 40px; background: rgba(59,55,55,.9); }
 .contact-form .group{margin-top: 10px; margin-bottom:20px;}
 

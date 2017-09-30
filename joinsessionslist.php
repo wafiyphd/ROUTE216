@@ -261,7 +261,7 @@ if( isset($_POST['login']) ) {
 				<hr>
 				<p class="big">Choose which personal session to join</p>
 				<?php $personal_query = "SELECT p.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, notes, member_id 
-				from session s, personal_session p where category='personal' AND p.session_id = s.session_id ORDER BY date";
+				from session s, personal_session p where category='personal' AND p.session_id = s.session_id AND NOT status = 'Completed' ORDER BY date";
 				if ($result = mysqli_query($mysqli, $personal_query)) {
 					while ($row = mysqli_fetch_row($result)){ ?>
 						<div class="col-lg-6">
@@ -308,7 +308,7 @@ if( isset($_POST['login']) ) {
 				<hr>
 				<p class="big">Choose which group session to join</p>
 				<?php $group_query = "SELECT g.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, type, maxpax, count 
-				from session s, group_session g WHERE category='group' AND g.session_id = s.session_id ORDER BY date";
+				from session s, group_session g WHERE category='group' AND g.session_id = s.session_id AND NOT status = 'Completed' ORDER BY date";
 				if ($result = mysqli_query($mysqli, $group_query)) {
 					while ($row = mysqli_fetch_row($result)){ 
 						?>
