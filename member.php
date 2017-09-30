@@ -109,30 +109,6 @@
 				<a href="managemember.php"><div class="pic-container col-sm-4 col-lg-4">
 					<img src="images/21.png"></img><div class="overlay"><div class="moreinfo">View and manage a list of all the upcoming sessions you've joined.</div></div>
 				</div></a>
-				
-				<div class="col-lg-4 desktop">
-					<p class="big">Upcoming Training Sessions</p>
-					<table class="table table-responsive table-hover no-border">
-									
-						<tr class="tableheader">
-							<th>Session Name</th>
-							<th>Category</th>
-							<th>Date</th>
-						</tr>
-						
-						<?php $sessions = "SELECT category, title, date, status from session WHERE NOT status = 'Completed' ORDER BY date LIMIT 7";
-						if ($result = mysqli_query($mysqli, $sessions)) {
-							while ($row = mysqli_fetch_row($result)){ ?>
-						<tr>
-							<td><?php echo $row[1]; ?></td>
-							<td><?php echo ucfirst($row[0]); ?></td>
-							<td><?php echo $row[2]; ?></td>
-						</tr>
-						
-						<?php }} ?>
-						
-					</table>
-				</div>
 							
 			</div>
 			<div class="row">
@@ -143,31 +119,7 @@
 				<a href="#"><div class="pic-container col-sm-4 col-lg-4">
 					<img src="images/41.png"></img><div class="overlay"></img><div class="moreinfo">Edit your profile.</div></div>
 				</div></a>
-				
-				<div class="col-lg-4 desktop">
-					<p class="big">Popular Group Sessions</p>
-					<table class="table table-responsive table-hover no-border">
-									
-						<tr class="tableheader">
-							<th>Session Name</th>
-							<th>Date</th>
-							<th>Joined</th>
-						</tr>
-						
-						<?php $sessions = "SELECT category, title, date, status, count from session, group_session g WHERE NOT status = 'Completed' AND category='group' ORDER BY count DESC LIMIT 5";
-						if ($result = mysqli_query($mysqli, $sessions)) {
-							while ($row = mysqli_fetch_row($result)){ ?>
-						<tr>
-							<td><?php echo $row[1]; ?></td>
-							<td><?php echo $row[2]; ?></td>
-							<td><?php echo $row[4]; ?></td>
-						</tr>
-						
-						<?php }} ?>
-						
-					</table>
-				</div>
-				
+			
 			</div>
 			
 
