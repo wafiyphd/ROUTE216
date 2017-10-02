@@ -1,0 +1,69 @@
+@media only screen and (max-width: 759px) {
+	.desktop {display: none}
+	.mobile {display: block}
+	.navbar-right li button, .navbar-right li button:focus {font-weight: strong; padding-top: 10px; color:white; background: none; letter-spacing: 2px; outline: none; border-bottom: 2px solid rgba(0,0,0,0); }
+	.navbar-right li button:active, .navbar-right li button:active { color: white; outline:none; background: rgba(0,0,0,0.2) }
+}
+
+@media only screen and (min-width: 760px) {
+	.navbar-right li button, .navbar-right li button:focus {margin-top: 15px; color: white; background: none; border-radius: 3px;outline: none; letter-spacing: 2px; border: 2px solid white; }
+	.navbar-right li button:hover, .navbar-right li button:active {color: rgba(0,0,0,0.7); background: white; outline: none; }
+	.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover { background-color:transparent }
+	.desktop {display: block}
+	.mobile {display: none}
+}
+
+body {background-image: url(../images/bg.jpg); background-repeat: repeat; font-family: "Catamaran";}
+
+.container-jumbo {background-image: url(../images/jumbo.jpg); background-position: center; background-position: cover; margin-bottom: 0px;}
+	
+.nav {background: transparent;}
+.nav img {padding-top: 10px; width: auto; max-height: 100%}
+
+.navbar-left li button, .navbar-left li button:focus {padding-top: 10px; color:white; background: none; letter-spacing: 2px; outline: none; border-bottom: 2px solid rgba(0,0,0,0); } 
+.navbar-left li button:hover { color:white; border-bottom: 2px solid white; border-radius: 0px; outline:none; } 
+.navbar-left li button:focus:active, .navbar-left li button:active { color: white; outline:none; background: rgba(0,0,0,0.2) }
+
+.navbar-right li button, .navbar-right li button:focus {color: white; background: none; border-radius: 3px;outline: none; letter-spacing: 2px; border: 2px solid white; }
+.navbar-right li button:hover, .navbar-right li button:active {color: rgba(0,0,0,0.7); background: white; outline: none; }
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover { background-color:transparent }
+
+.navbar-nav > li > a { padding-top:5px !important;  padding-bottom:10px !important; height:60px;}
+
+.container-header {padding-top: 20px; padding-bottom: 20px; color: white; background: transparent; }
+.container-header hr {margin-top: 20px; width: 35%; padding-bottom: 50px; float: left;}
+
+.profile-container h3 {font-weight: bold; text-align: center;  color: black;}
+.profile-container h4 {text-align: center;  color: white;}
+.info-container {background: #fff; box-shadow:0 12px 15px 0 rgba(0,0,0,.30); margin: auto;}
+
+.profile-wrap {box-shadow:1px 6px 10px 0 rgba(0,0,0,.3); margin: auto; margin-top: 40px; margin-bottom: 40px; }
+.profile-form {padding:40px 40px 35px 40px; background: rgba(255,255,255,.8); }
+.profile-form .photo {border: 6px solid #eee; border-radius: 250px; }
+.profile-form .group{margin-top: 10px; margin-bottom:20px;}
+
+.profile-form .photolabel {text-transform: uppercase; color: #80bfff; }
+.profile-form .label {width:100%; color:#ff9999; display:block; outline: none; font-size: 85%; text-align: left; font-family: "Quicksand"; }
+.profile-form .info {font-size: 100%; color: #595959; font-family: "Palanquin"; text-align: left; padding: 5px 0 20px 7.5px;}
+.profile-form .input {width:100%; color:#d9d9d9; display:block; outline: none; font-size: 95%; font-family: "Quicksand"; }
+.profile-form .input {border:0.5px solid #cce6ff; padding:10px 15px; border-radius:5px; background:rgba(64,64,64,.5); color:#fff; }
+.profile-form .button{width:100%; color:#fff; display:block; outline: none; font-size: 100%; border:none; padding:10px 20px; border-radius:7px; }
+.profile-form .group select {font-family: "Quicksand"; border-radius:5px;}
+
+.profile-form .button{font-family: "Quicksand"; font-weight:bold; font-size: 95%; background: 	rgba(246, 101, 101, 0.9); }
+.profile-form .button:hover{background: rgba(255, 102, 102, 1); }
+
+.profile-form .radio {cursor: pointer; }
+.profile-form .radio input { visibility: hidden; }
+.profile-form .radio .choice { font-family: "Quicksand"; font-size: 90%; width:100%; padding: 10px; border: 0.6px solid #d9d9d9; display: inline-block; color: #f2f2f2; border-radius: 5px; }
+.profile-form .radio input:checked + .choice { border-color: #64B5F6; background-color: rgba(101, 173, 246, 0.85); }
+
+.footer-container {background-color: #212121; color: white;}
+.footer-container a {color:#dcdcdc; font-weight: bold;}	
+.footer-container img {height: 30%; width: 30%; }
+.footer-container .footer-col {margin-top: 15px; margin-bottom: 20px; }
+.footer-container .footer-col ul { margin: 0; padding: 0; }
+.footer-container .footer-col .social-icons ul { display: inline; list-style-type: none; }
+.footer-container .footer-col .social-icons li { list-style: none;  float: left; margin-right: 20px; }
+
+.footer-container .sub-footer {color: white; background: #000000; padding: 10px; }

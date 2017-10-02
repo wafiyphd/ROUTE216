@@ -3,14 +3,76 @@
 	session_start();
 	require_once 'dbconnect.php';
 	
+	$error = false;
+	
 	if (isset($_SESSION['user'])!="" ) { 
-	$res= mysqli_query($mysqli, "SELECT * FROM user WHERE user_id=".$_SESSION['user']);
-	$userRow= mysqli_fetch_array($res);
+		$res= mysqli_query($mysqli, "SELECT * FROM user WHERE user_id=".$_SESSION['user']);
+		$userRow= mysqli_fetch_array($res);
 	} else {
 		header("Location: index.php");	
 	}
 	
+	if ( isset($_GET['id']) ) {
+		$sessionid = $_GET['id'];
+	}
+	
+	$trquery = "SELECT trainer_id from session WHERE trainer_id='$sessionid'";
+	if (!$res = mysqli_query($mysqli, $trquery)) {
+		header("Location: index: php");
+	}
+	
 	if( isset($_POST['update']) ) {
+		// date validation --
+		if ($day < 1 or $day > 31) {
+			$error = true;
+			$errTyp = "danger";
+			$errMsg = "Please enter a valid date.";
+		}
+			
+		if ($month == 4 or $month == 6 or $month == 9 or $month == 11) {
+			if ($day > 30) {
+				$error = true;
+				$errTyp = "danger";
+				$errMsg = "Please enter a valid date.";
+			}
+		}
+			
+		if ($month == 2) {
+			if ($day > 29) {
+				$error = true;
+				$errTyp = "danger";
+				$errMsg = "Please enter a valid date.";
+			}
+		}
+			
+		if ($year < 2017) {
+			$error = true;
+			$errTyp = "danger";
+			$errMsg = "Please enter a valid date.";
+		}
+		// -- ends here 
+			
+		if (!isset($_POST['timeperiod'])) {
+			$error = true;
+			$errTyp = "danger";
+			$errMsg = "Please select AM or PM.";
+		}
+				
+		if ($category == "group") {
+			if (!isset($_POST['type'])) {
+				$error = true;
+				$errTyp = "danger";
+				$errMsg = "Please pick a session type.";
+			}
+				
+			if (empty(($_POST['maxpax']))) {
+				$error = true;
+				$errTyp = "danger";
+				$errMsg = "Please enter a maximum number of participants.";
+			}
+		}
+		
+		if (!$error) {
 			
 			$sessionid = $_POST['sessionid'];
 			
@@ -40,17 +102,14 @@
 
 			
 		    if ($res) {
-			 $errType = "success";
-			 $errMSG = "Successfully updated training session.";
-			 header("Location: trainer.php?success=1");
+				$errType = "success";
+				$errMSG = "Successfully updated training session.";
+				header("Location: trainer.php?success=1");
 		    } else {
-			 $errType = "danger";
-			 $errMSG = "Something went wrong, try again later..."; 
+				$errType = "danger";
+				$errMSG = "Something went wrong, try again later..."; 
 		    } 
 		}
-	
-	if ( isset($_GET['id']) ) {
-		$sessionid = $_GET['id'];
 	}
 ?>
 <!DOCTYPE html>
@@ -290,12 +349,12 @@
 										</div>
 											
 										<?php
-											if ( isset($errMSG) ) {
+											if ( isset($errMsg) ) {
 										?>
 										
 										<div class="form-group">
-											<div class="alert alert-<?php echo $errType; ?>">
-												<span class="glyphicon glyphicon-info-sign"></span> <?php echo $errMSG; ?>
+											<div class="alert alert-<?php echo $errType; ?>" role="alert">
+												<span class="glyphicon glyphicon-info-sign"></span> <?php echo $errMsg; ?>
 											</div>
 										</div>
 										<?php

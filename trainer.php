@@ -69,14 +69,14 @@
 								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo ucwords($userRow['fullname'])?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
 							</a>
 								<ul class="dropdown-menu">
-									<li><a href="#">Profile</a></li>
+									<li><a href="profile.php">Profile</a></li>
 									<li class="divider"></li>
 									<li><a href="logout.php?logout"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span>&nbsp;Log Out</a></li>
 								</ul>
 						</li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right mobile">
-						<li><a href="#"><button class="btn navbar-btn">Profile</button></a></li>
+						<li><a href="profile.php"><button class="btn navbar-btn">Profile</button></a></li>
 						<li><a href="logout.php?logout"><button class="btn navbar-btn"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span>&nbsp;Log Out</button></a></li>
 					</ul>
 				</div>
@@ -114,7 +114,7 @@
 				<a href="allreviews.php"><div class="pic-container col-sm-4 col-lg-4">
 					<img src="images/32.png"></img><div class="overlay"></img><div class="moreinfo">View and read all the reviews you've received from the members.</div></div>
 				</div></a>
-				<a href="#"><div class="pic-container col-sm-4 col-lg-4">
+				<a href="profile.php"><div class="pic-container col-sm-4 col-lg-4">
 					<img src="images/41.png"></img><div class="overlay"></img><div class="moreinfo">Edit your profile.</div></div>
 				</div></a>
 				
