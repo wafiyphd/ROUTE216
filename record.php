@@ -217,7 +217,7 @@
 					<ul class="nav navbar-nav navbar-right desktop">
 						<li class="dropdown ">
 							<a href="#" data-toggle="dropdown" class="dropdown-toggle">
-								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo $userRow['fullname']?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
+								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo ucwords($userRow['fullname'])?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
 							</a>
 								<ul class="dropdown-menu">
 									<li><a href="#">Profile</a></li>
@@ -236,8 +236,7 @@
 		
 		<div class="container header-container">
 			<div class="container main-header">
-				<p class="header">Recording a new training session.</p>
-				<p class="title">Reminder: Please enter a meaningful and helpful name for session name for the members.</p>
+				<p class="header">Recording a new training session. &nbsp;<span class="title">Please enter a meaningful and helpful name for session name for the members.</span></p>
 			</div>
 		</div>
 		

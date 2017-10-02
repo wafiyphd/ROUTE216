@@ -8,14 +8,16 @@ Ran by Wafiy & Hannah.
 
 Done:
 1. Sign Up and Login with validations 
-2. Recording new session (trainer use case)
-3. View all avaialable sessions to choose from and join (except pagination & filters (?) )
-4. View joined sessions history and - (member use case)
+2. Recording new session (trainer)
+3. View all avaialable sessions to choose from and join (member)
+4. View created sessions history (trainer)
+5. Review trainers (member)
+6. Home page
+7. Members' page to easily unjoin joined sessions (member)
+8. Users' home page 
 
 What to do:
-1. User profiles
-2. -Review trainer (member use case)
-3. Update a session's details/information (trainer use case)
-4. Home page
-5. Users' home page
-6. V i s u a l  a e s t h e t i c s
+1. Not allow user to review the same session more than once
+2. Update a session's details/information (trainer)
+3. User profiles
+4. V i s u a l  a e s t h e t i c s

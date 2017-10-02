@@ -12,6 +12,7 @@
 	if ( isset($_GET['success']) && $_GET['success'] == 0) {
 		$message = "Successfully submitted review.";
 	}
+	
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +65,7 @@
 						<ul class="nav navbar-nav navbar-right desktop">
 							<li class="dropdown ">
 								<a href="#" data-toggle="dropdown" class="dropdown-toggle">
-									<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo $userRow['fullname']?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
+									<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo ucwords($userRow['fullname'])?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
 								</a>
 									<ul class="dropdown-menu">
 										<li><a href="#">Profile</a></li>
@@ -83,46 +84,45 @@
 		
 		<div class="container header-container">
 			<div class="container main-header">
-				<p class="header">Welcome, <?php echo ucwords($userRow['fullname']); ?>. This is your home page!</p>
-				<p class="title">You may now start using ROUTE. Select what you want to do below.</p>
+				<p class="header">Welcome, <?php echo ucwords($userRow['fullname']); ?>! 
+				&nbsp;<span class="title">You may now start using ROUTE. Hover over the options below for more info.</span></p>
 			</div>
 		</div>
 		
 	</div>
-	
-	<div class= "container content-container">
-		<?php if (isset($_GET['success'])) { ?>
-					<div class="container fail-login">
-						<div class="alert alert-success text-center">
-							<p><i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp;<?php echo $message; ?></p>
-						</div>
-					</div> <?php } ?>
-		<div class="row">
-			<div class="col-xs-12 col-lg-9">
-				<div class="pic-container col-lg-12">
-					<div class="hover">
-						<a href="joinsessionslist.php"><img src="images/option1.jpg"></img><div class="caption">JOIN AVAILABLE SESSIONS</div></a>		
-					</div>
-				</div>
-				<div class="pic-container col-lg-12">
-					<div class="hover">
-						<a href="viewhistory.php"><img src="images/option2.jpg"></img><div class="caption">VIEW SESSIONS HISTORY</div></a>	
-					</div>
-				</div>
-				<div class="pic-container col-lg-12">
-					<div class="hover">
-						<a href="review.php"><img src="images/option1.jpg"></img><div class="caption">TEST REVIEW</div></a>	
-					</div>
-				</div>
-				<div class="pic-container col-lg-12">
-					<div class="hover">
-						<a href="#"><img src="images/option3.jpg"></img><div class="caption">EDIT PROFILE</div></a>	
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-12 col-lg-3">
+		
+	<div class="container-fluid main-fluid">
+		<div class= "container content-container">
+			<?php if (isset($_GET['success'])) { ?>
+						<div class="container fail-login">
+							<div class="alert alert-success text-center">
+								<p><i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp;<?php echo $message; ?></p>
+							</div>
+						</div> <?php } ?>
+			
+			<div class="row">
+			
+				<a href="joinsessionslist.php"><div class="pic-container col-sm-4 col-lg-4">
+					<img src="images/11.png"></img><div class="overlay"><div class="moreinfo">Join one or more of the many available sessions the trainers have set up.</div></div>
+				</div></a>
 				
+				<a href="managemember.php"><div class="pic-container col-sm-4 col-lg-4">
+					<img src="images/21.png"></img><div class="overlay"><div class="moreinfo">View and manage a list of all the upcoming sessions you've joined.</div></div>
+				</div></a>
+							
 			</div>
+			<div class="row">
+				<a href="viewhistory.php"><div class="pic-container col-sm-4 col-lg-4">
+					<img src="images/31.png"></img><div class="overlay"></img><div class="moreinfo">View and manage all the sessions you've completed. You may also review the 
+					sessions and its trainers.</div></div>
+				</div></a>
+				<a href="#"><div class="pic-container col-sm-4 col-lg-4">
+					<img src="images/41.png"></img><div class="overlay"></img><div class="moreinfo">Edit your profile.</div></div>
+				</div></a>
+			
+			</div>
+			
+
 		</div>
 	</div>
 	

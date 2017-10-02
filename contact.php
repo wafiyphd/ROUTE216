@@ -127,7 +127,7 @@ if( isset($_POST['submit']) ) {
 					<ul class="nav navbar-nav navbar-right desktop">
 						<li class="dropdown ">
 							<a href="#" data-toggle="dropdown" class="dropdown-toggle">
-								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo $userRow['fullname']?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
+								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo ucwords($userRow['fullname']) ?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
 							</a>
 								<ul class="dropdown-menu">
 									<li><a href="#">Profile</a></li>
@@ -203,8 +203,7 @@ if( isset($_POST['submit']) ) {
 		
 		<div class="container header-container">
 			<div class="container main-header">
-				<p class="header">Contact ROUTE.</p>
-				<p class="title">For any inquiries regarding ROUTE.</p>
+				<p class="header">Contact ROUTE. &nbsp;<span class="title">For any inquiries regarding ROUTE.</span></p>
 			</div>
 		</div>	
 	</div>
@@ -252,10 +251,17 @@ if( isset($_POST['submit']) ) {
 									
 								</form>		
 								<div class="col-lg-6 add-info">
-									<br><br><br><br><br><br><br><br>
+									<br><br><br>
+									<h3>Find ROUTE around the web at:</h3>
+									<ul class="social-list">
+										<li><a href="#"><i class="fa fa-3x fa-facebook-square"></i>&nbsp;&nbsp; Route Fitness</a></li>
+										<li><a href="#"><i class="fa fa-3x fa-twitter-square"></i>&nbsp;&nbsp; @routefitness</a></li>
+										<li><a href="#"><i class="fa fa-3x fa-instagram"></i>&nbsp;&nbsp; @routefitness</a></li>
+									</ul>
+									
 									<h3>Email ROUTE at: </h3>
-									<p><i class="fa fa-envelope-o" aria-hidden="true"></i> email@email.com </p>
-									<p><i class="fa fa-envelope-o" aria-hidden="true"></i> email@email.com </p>
+									<p><i class="fa fa-envelope-o"></i> route@email.com </p>
+									<p><i class="fa fa-envelope-o"></i> route.alt@email.com </p>
 								</div>
 							</div>
 						</div>	
