@@ -33,41 +33,37 @@ body {font-family: "Catamaran";}
 .main-header .title {font-size: 120%; }
 .main-header .header {font-size: 200%; font-weight: bold;}
 
-.main-container {background-image: url(../images/darkrecord.jpg);}
+.content-container {background-image: url(../images/darkrecord.jpg);}
 
-.record-container {padding-top: 40px;}
-.record-container h3 {font-weight: bold; text-align: center;  color: white;}
-.record-container h4 {text-align: center;  color: white;}
+.update-container {padding-top: 40px;}
+.update-container h3 {font-weight: bold; text-align: center;  color: white;}
+.update-container h4 {text-align: center;  color: white;}
 
-.record-wrap {box-shadow:1px 6px 10px 0 rgba(0,0,0,.3); margin: auto; margin-top: 20px; margin-bottom: 50px; }
-.record-form {padding:40px 40px 50px 40px; background: rgba(77,77,77,.8); }
-.record-form .group{margin-top: 10px; margin-bottom:20px;}
+.update-wrap {box-shadow:1px 6px 10px 0 rgba(0,0,0,.3); margin: auto; margin-top: 20px; margin-bottom: 50px; }
+.update-form {padding:40px 40px 50px 40px; background: rgba(77,77,77,.8); }
+.update-form .group{margin-top: 10px; margin-bottom:20px;}
 
-.record-form .label {width:100%; color:#9fbfdf; display:block; outline: none; font-size: 85%; text-align: left; font-family: "Quicksand"; }
-.record-form .label-center {width:100%; color:#9fbfdf; display:block; outline: none; font-size: 85%; text-align: center; font-family: "Quicksand"; }
-.record-form .input {width:100%; color:#d9d9d9; display:block; outline: none; font-size: 100%; font-family: "Roboto"; }
-.record-form .input {border:0.5px solid #666; padding:10px 20px; border-radius:5px; background:rgba(64,64,64,.5); color:#fff; }
-.record-form .button{width:100%; color:#fff; display:block; outline: none; font-size: 100%; border:none; padding:10px 20px; border-radius:7px; }
-.record-form .date {font-family: "Roboto"}
-.record-form .group select {font-family: "Roboto"; border-radius:5px;}
+.update-form .label {width:100%; color:#9fbfdf; display:block; outline: none; font-size: 85%; text-align: left; font-family: "Quicksand"; }
+.update-form .input {width:100%; color:#d9d9d9; display:block; outline: none; font-size: 100%; font-family: "Roboto"; }
+.update-form .input {border:0.5px solid #666; padding:10px 20px; border-radius:5px; background:rgba(64,64,64,.5); color:#fff; }
+.update-form .button{width:100%; color:#fff; display:block; outline: none; font-size: 100%; border:none; padding:10px 20px; border-radius:7px; }
+.update-form .date {font-family: "Roboto"}
+.update-form .group select {font-family: "Roboto"; border-radius:5px;}
 
-.record-form .timeperiod input { position: absolute; visibility: hidden; display: none; }
-.record-form .timeperiod label { color: white; display: inline-block; cursor: pointer; padding: 10px 10px; font-family: "Quicksand"; border-radius:5px;}
-.record-form .timeperiod input:checked + label { color: white; border: 0.6px solid #6eb3f7; background-color: rgba(101, 173, 246, 0.85); }
+.update-form .timeperiod input { position: absolute; visibility: hidden; display: none; }
+.update-form .timeperiod label { color: white; display: inline-block; cursor: pointer; padding: 10px 10px; font-family: "Quicksand"; border-radius:5px;}
+.update-form .timeperiod input:checked + label { color: white; border: 0.6px solid #6eb3f7; background-color: rgba(101, 173, 246, 0.85); }
 
-.record-form p {color:#aaa; font-size: 80%; padding-top: 20px;}
-.record-form h3 {color: #eee;}
+.update-form p {color:#aaa; font-size: 80%; padding-top: 20px;}
+.update-form h3 {color: #eee;}
 
-.record-form .button{font-family: "Quicksand"; font-weight:bold; font-size: 95%; background: 	rgba(246, 101, 101, 0.9); }
-.record-form .button:hover{background: rgba(255, 102, 102, 1); }
+.update-form .button{font-family: "Quicksand"; font-weight:bold; font-size: 95%; background: 	rgba(246, 101, 101, 0.9); }
+.update-form .button:hover{background: rgba(255, 102, 102, 1); }
 
-.record-form .radio {cursor: pointer; }
-.record-form .radio input { visibility: hidden; }
-.record-form .radio .choice { font-family: "Quicksand"; font-size: 90%; width:100%; padding: 10px; border: 0.6px solid #d9d9d9; display: inline-block; color: #f2f2f2; border-radius: 5px; }
-.record-form .radio input:checked + .choice { border-color: #64B5F6; background-color: rgba(101, 173, 246, 0.85); }
-
-.personalsession {display: none}
-.groupsession {display:none}
+.update-form .radio {cursor: pointer; }
+.update-form .radio input { visibility: hidden; }
+.update-form .radio .choice { font-family: "Quicksand"; font-size: 90%; width:100%; padding: 10px; border: 0.6px solid #d9d9d9; display: inline-block; color: #f2f2f2; border-radius: 5px; }
+.update-form .radio input:checked + .choice { border-color: #64B5F6; background-color: rgba(101, 173, 246, 0.85); }
 
 .footer-container {background-color: #212121; color: white;}
 .footer-container a {color:#dcdcdc; font-weight: bold;}	

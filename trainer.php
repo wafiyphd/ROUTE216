@@ -12,6 +12,8 @@
 	
 	if ( isset($_GET['success']) && $_GET['success'] == 0) {
 		$message = "Successfully created new training session.";
+	} elseif ( isset($_GET['success']) && $_GET['success'] == 1) {
+		$message = "Successfully updated training session.";
 	}
 ?>
 

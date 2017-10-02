@@ -149,7 +149,7 @@
 				$errTyp = "success";
 				$errMsg = "Successfully recorded a training session.";
 				unset($title); unset($date); unset($time); unset($fee); unset($notes); unset($type); unset($maxpax);
-				header("Location: trainer.php?success=0'");
+				header("Location: trainer.php?success=0");
 				
 			} else {
 				$errTyp = "danger";
@@ -173,7 +173,9 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
-
+	<link href="https://fonts.googleapis.com/css?family=Palanquin" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+	
 	<link rel="stylesheet" href="css/record.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -217,7 +219,7 @@
 					<ul class="nav navbar-nav navbar-right desktop">
 						<li class="dropdown ">
 							<a href="#" data-toggle="dropdown" class="dropdown-toggle">
-								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo ucwords($userRow['fullname'])?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
+								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo $userRow['fullname']?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
 							</a>
 								<ul class="dropdown-menu">
 									<li><a href="#">Profile</a></li>
@@ -236,7 +238,8 @@
 		
 		<div class="container header-container">
 			<div class="container main-header">
-				<p class="header">Recording a new training session. &nbsp;<span class="title">Please enter a meaningful and helpful name for session name for the members.</span></p>
+				<p class="header">Recording a new training session.</p>
+				<p class="title">Reminder: Please enter a meaningful and helpful name for session name for the members.</p>
 			</div>
 		</div>
 		
@@ -244,25 +247,26 @@
 	
 	<div class="container-fluid main-container">
 		<div class="container record-container">			
-			
-			<div class="col-xs-12 col-sm-12 col-sm-offset-0 col-lg-6 col-lg-offset-3">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-sm-offset-0 col-lg-6 col-lg-offset-3">
 				
 				<div class="record-wrap text-center">
 					<div class="record-form">
 						
 						<form action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" autocomplete="off">
 							<div class = "group">
-								<label for="title" class="label">Title</label>
+								<label for="title" class="label">TITLE</label>
 								<input id="title" type="text" name="title" class="input" required>
 							</div>
 
 							<div class = "group">
-								<label for="date" class="label">Date</label>
 								<div class="row">
 									<div class="col-lg-3">
+										<label for="date" class="label">DAY</label>
 										<input id="day" type="number" name="day" class="input date" value="1" required>
 									</div>
 									<div class="col-lg-6">
+										<label for="date" class="label">MONTH</label>
 										<select id="month" name="month" class="input" required>
 											<option value="1">January</option><option value="2">February</option>
 											<option value="3">March</option><option value="4">April</option>
@@ -273,13 +277,14 @@
 										</select>
 									</div>
 									<div class="col-lg-3">
+										<label for="date" class="label">YEAR</label>
 										<input id="year" type="number" name="year" class="input date" value="2017" required>
 									</div>
 								</div>
 							</div>
 
 							<div class = "group">
-								<label for="time" class="label">Time</label>
+								<label for="time" class="label">TIME</label>
 								<div class="row">
 									<div class="col-lg-9">
 										<select id="clock" name="clock" class="input" required>
@@ -307,38 +312,38 @@
 							</div>
 
 							<div class = "group">
-								<label for="fee" class="label">Fee</label>
+								<label for="fee" class="label">FEE</label>
 								<input id="fee" type="number" name="fee" class="input" required>
 							</div>
 
 							<div class="group">			
-								<label for="session" class="label">Type of Session</label>
+								<label for="session" class="label-center">TYPE OF SESSION</label>
 									<div class="row">
 										<div class="col-sm-12 col-lg-6">
 											<label class="radio">
 												<input type="radio" name="session" value="personal" onclick="show1();">
-												<div class="choice">Personal</div>
+												<div class="choice">PERSONAL</div>
 											</label>
 										</div>
 									<div class="col-sm-12 col-lg-6">
 										<label class="radio">
 											<input type="radio" name="session" value="group" onclick="show2();">
-											<div class="choice">Group</div>
+											<div class="choice">GROUP</div>
 										</label>
 									</div>
 								</div>
 							</div>
 
 							<div id="#groupsession" class="group session" style="display:none">
-								<label for="session" class="label">Session Type</label>
+								<label for="session" class="label">SESSION TYPE</label>
 									<label class="radio">
 										<input type="radio" name="type" value="Sport">
-										<div class="choice">Sport</div>
+										<div class="choice">SPORT</div>
 									</label>
 									
 									<label class="radio">
 										<input type="radio" name="type" value="Dance">
-										<div class="choice">Dance</div>
+										<div class="choice">DANCE</div>
 									</label>
 									
 									<label class="radio">
@@ -346,18 +351,18 @@
 										<div class="choice">MMA</div>
 									</label>
 												
-									<label for = "participants" class = "label">Max participants</label>
+									<label for = "participants" class = "label">NO. OF PARTICIPANTS</label>
 									<input id = "maxpax" type = "number" name = "maxpax" class = "input" min="2" max= "30">
 							</div>
 											
 							<div id="#personalsession" class="personal session" style="display:none">
 								<div class = "group">
-									<label for ="notes" class = "label">Notes</label>
+									<label for ="notes" class = "label">NOTES</label>
 									<input id="notes" input type="text" name="notes" class = "input"></div>
 								</div>
 											
 						<div class = "group">
-							<button type="submit" name="record" class="button" value="Record Session">Record Session</button>
+							<button type="submit" name="record" class="button" value="Record">RECORD</button>
 						</div>
 						
 						<?php
@@ -373,6 +378,7 @@
 						<?php
 							}
 						?>
+						</div>
 					</form>
 				</div>
 			</div>
