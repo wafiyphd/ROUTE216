@@ -16,8 +16,8 @@ Done:
 7. Members' page to easily unjoin joined sessions (member)
 8. Users' home page
 9. Update a session's details/information (trainer)
+10. User profiles
 
 What to do:
 1. Not allow user to review the same session more than once
-2. User profiles
-3. V i s u a l  a e s t h e t i c s
+2. V i s u a l  a e s t h e t i c s
