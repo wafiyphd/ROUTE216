@@ -222,7 +222,7 @@
 								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo $userRow['fullname']?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
 							</a>
 								<ul class="dropdown-menu">
-									<li><a href="#">Profile</a></li>
+									<li><a href="profile.php">Profile</a></li>
 									<li class="divider"></li>
 									<li><a href="logout.php?logout"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span>&nbsp;Log Out</a></li>
 								</ul>
