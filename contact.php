@@ -92,7 +92,9 @@ if( isset($_POST['submit']) ) {
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
-
+	<link href="https://fonts.googleapis.com/css?family=Palanquin" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+	
 	<link rel="stylesheet" href="css/contact.css">
 	<link rel="stylesheet" href="css/login.css">
 
@@ -219,22 +221,22 @@ if( isset($_POST['submit']) ) {
 								
 									
 									<div class="group">
-										<label for="name" class="label">Full Name</label>
+										<label for="name" class="label">NAME</label>
 										<input id="name"  type="text" name="name" class="input" value="<?php echo $name ?>" required></input>
 									</div>
 									
 									<div class="group">
-										<label for="email" class="label">Email address</label>
+										<label for="email" class="label">E-MAIL</label>
 										<input id="email" type="email" name="email" class="input" value="<?php echo $email ?>" required></input>
 									</div>
 									
 									<div class="group">
-										<label for="comments" class="label">Comments</label>
+										<label for="comments" class="label">COMMENTS</label>
 										<textarea id="comments"  type="text" name="comments" rows="8" class="input" value="<?php echo $name ?>" required></textarea>
 									</div>
 									
 									<div class="group">
-										<input type="submit" name="submit" class="button" value="Submit"></input>
+										<input type="submit" name="submit" class="button" value="SUBMIT"></input>
 									</div>
 									
 									<?php

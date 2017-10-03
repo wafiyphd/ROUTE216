@@ -35,21 +35,23 @@ body {font-family: "Catamaran";}
 .contact-fluid {background-image: url(../images/table.jpg); background-size: cover; min-height: 65vh; }
 
 .contact-wrap {box-shadow:0 12px 15px 0 rgba(0,0,0,.24); margin: auto; margin-top: 30px; margin-bottom: 20px; }
-.contact-form {padding:40px 40px 40px; background: rgba(59,55,55,.9); }
+.contact-form {padding:40px 40px 40px; background: rgba(66,61,61,.8); }
 .contact-form .group{margin-top: 10px; margin-bottom:20px;}
 
-.contact-form .label, .contact-form .input {width:100%; color:#aaa; display:block; outline: none; font-size: 100%; }
-.contact-form .input {border:none; padding:10px 20px; border-radius:5px; background:rgba(255,255,255,.5); color:#fff; }
-.contact-form .button{width:100%; color:#fff; display:block; outline: none; font-size: 100%; border:none; padding:10px 20px; border-radius:25px; background: rgba(205, 97, 85, 1); }
+.contact-form .label {font-size: 90%; text-align: left; width:100%; color:#9fbfdf; display:block; outline: none; font-family: "Quicksand"; }
+.contact-form .input {width:100%; color:#aaa; display:block; outline: none; font-size: 100%; font-family: "Palanquin"; }
+.contact-form .input {border:0.5px solid #666; padding:10px 20px; border-radius:5px; background:rgba(64,64,64,.5); color:#fff; }
+.contact-form .button{width:100%; color:#fff; display:block; outline: none; font-size: 100%; border:none; padding:10px 20px; font-size: 95%;
+					  border-radius:7.5px; background: rgba(205, 97, 85, 1); font-family: "Quicksand"; box-shadow: 0 1px 4px rgba(0, 0, 0, .5); }
 .contact-form .button:hover{background: rgba(250, 97, 85, 1); }
 
 .contact-form .input-text {width:100%; color:#aaa; display:block; outline: none; font-size: 100%; border:none; padding:50px 20px; border-radius:5px; background:rgba(255,255,255,.5); color:#fff;}
-.contact-form p {font-weight: bold; color:white; font-size: 120%; }
-.contact-form h3 {font-weight: bold; color:white;}
+.contact-form p {color:white; font-size: 120%; font-family: "Palanquin"; }
+.contact-form h3 {color:white; font-family: "Palanquin"; }
 
 .contact-form .social-list ul{ list-style-type: none; }
 .contact-form .social-list li { list-style: none; padding-bottom: 10px; font-size: 110%;  }
-.contact-form .social-list li a { color:white; text-decoration: none; font-weight: bold;  }
+.contact-form .social-list li a { color:white; text-decoration: none; font-family: "Palanquin"; }
 .fa-3x { vertical-align: middle;}
 
 .footer-container {background-color: #212121; color: white;}
