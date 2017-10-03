@@ -25,14 +25,14 @@
 		// date validation --
 		if ($day < 1 or $day > 31) {
 			$error = true;
-			$errTyp = "danger";
+			$errType = "danger";
 			$errMsg = "Please enter a valid date.";
 		}
 			
 		if ($month == 4 or $month == 6 or $month == 9 or $month == 11) {
 			if ($day > 30) {
 				$error = true;
-				$errTyp = "danger";
+				$errType = "danger";
 				$errMsg = "Please enter a valid date.";
 			}
 		}
@@ -40,34 +40,34 @@
 		if ($month == 2) {
 			if ($day > 29) {
 				$error = true;
-				$errTyp = "danger";
+				$errType = "danger";
 				$errMsg = "Please enter a valid date.";
 			}
 		}
 			
 		if ($year < 2017) {
 			$error = true;
-			$errTyp = "danger";
+			$errType = "danger";
 			$errMsg = "Please enter a valid date.";
 		}
 		// -- ends here 
 			
 		if (!isset($_POST['timeperiod'])) {
 			$error = true;
-			$errTyp = "danger";
+			$errType = "danger";
 			$errMsg = "Please select AM or PM.";
 		}
 				
 		if ($category == "group") {
 			if (!isset($_POST['type'])) {
 				$error = true;
-				$errTyp = "danger";
+				$errType = "danger";
 				$errMsg = "Please pick a session type.";
 			}
 				
 			if (empty(($_POST['maxpax']))) {
 				$error = true;
-				$errTyp = "danger";
+				$errType = "danger";
 				$errMsg = "Please enter a maximum number of participants.";
 			}
 		}
@@ -353,7 +353,7 @@
 										?>
 										
 										<div class="form-group">
-											<div class="alert alert-<?php echo $errType; ?>" role="alert">
+											<div class="alert alert-<?php echo ($errType=="success") ? "success" : $errType; ?>">
 												<span class="glyphicon glyphicon-info-sign"></span> <?php echo $errMsg; ?>
 											</div>
 										</div>

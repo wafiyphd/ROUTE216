@@ -31,15 +31,18 @@ body {font-family: "Catamaran";}
 .main-header .title {font-weight: normal; font-size: 50%; }
 .main-header .header {font-size: 200%; font-weight: bold;}
 
-.info-container .background h2 {color: #57585b; }
+.info-container .background {padding-top: 10px; }
+.info-container .background h2 {color: #4da6ff; font-family: "Quicksand"; }
 .info-container .background blockquote {padding-bottom: 1px; }
-.info-container .background h5 {color: #8a8b8f; font-size: 85%; }
-.info-container .background p {text-align: justified; }
+.info-container .background h5 {color: #3399ff; font-size: 85%; font-family: "Quicksand"; }
+.info-container .background p {text-align: justified; color: #808080; font-size: 93%; font-family: "Palanquin"; }
 
-.info-container .features-wrap h2 {color: #57585b; }
-.info-container .features h3 {color: #7d7e82; }
+.info-container .features-wrap {padding-bottom: 20px; }
+.info-container .features-wrap h2 {color: #4da6ff; font-family: "Quicksand"; }
+.info-container .features h3 {color: #ff6666; font-size: 145%; font-family: "Quicksand"; }
 .info-container .features blockquote {padding-bottom: 1px; }
-.info-container .features h5 {color: #97989b; font-size: 85%; }
+.info-container .features h5 {color: #3399ff; font-size: 85%; font-family: "Quicksand"; }
+.info-container .features h4 {text-align: justified; color: #808080; font-size: 93%; font-family: "Palanquin"; }
 
 .footer-container {background-color: #212121; color: white;}
 .footer-container a {color:#dcdcdc; font-weight: bold;}	

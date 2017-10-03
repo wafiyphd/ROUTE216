@@ -10,6 +10,8 @@
 	if ( isset($_SESSION['user'])!="" ) { 
 		$res= mysqli_query($mysqli, "SELECT * FROM user WHERE user_id=".$_SESSION['user']);
 		$userRow= mysqli_fetch_array($res);
+	} else {
+		header("Location: index.php");	
 	}
 	
 	if( isset($_POST['update']) ) {
@@ -141,8 +143,8 @@
 											<div class="col-lg-6">	
 												<div class="group">
 													<label for = "date" class = "label">DATE CREATED</label>
-													<p class="info"><?php $date = explode(' ', $row[6]);
-													echo $date[0]?></p>
+													<p class="info"><?php  $date = date('j F Y',strtotime($row[6]));
+													echo $date; ?></p>
 												</div>
 											</div>
 											<div class="col-lg-6">											
@@ -156,8 +158,8 @@
 											<div class="col-lg-6">
 												<div class="group">
 													<label for = "time" class = "label">TIME CREATED</label>
-													<p class="info"><?php $time = explode(' ', $row[6]);
-													echo $time[1]?></p>
+													<p class="info"><?php $time = date('g:i A',strtotime($row[6]));
+													echo $time; ?></p>
 												</div>
 											</div>
 											<div class="col-lg-6">											
@@ -197,7 +199,7 @@
 											if ( isset($errMsg) ) {
 											?>
 											<div class="form-group">
-													 <div class="alert alert-<?php echo ($errTyp=="success") ? "success" : $errTyp; ?>">
+													 <div class="alert alert-<?php echo ($errType=="success") ? "success" : $errType; ?>">
 														<span class="glyphicon glyphicon-info-sign"></span> <?php echo $errMsg; ?>
 													</div>
 											</div>

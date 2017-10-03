@@ -67,7 +67,9 @@ if( isset($_POST['login']) ) {
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
-
+	<link href="https://fonts.googleapis.com/css?family=Palanquin" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+	
 	<link rel="stylesheet" href="css/about.css">
 	<link rel="stylesheet" href="css/login.css">
 
@@ -254,7 +256,7 @@ if( isset($_POST['login']) ) {
 							</blockquote>
 							<blockquote class="blockquote-reverse">
 								<h5>Manage training sessions</h5>
-								<h4>Seamlessly update your training sessions with the latest information.</h4>
+								<h4>Seamlessly update your sessions with the latest information.</h4>
 							</blockquote>
 							<blockquote class="blockquote-reverse">
 								<h5>Read reviews</h5>
