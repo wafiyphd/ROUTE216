@@ -1,66 +1,22 @@
-@media only screen and (max-width: 759px) {
-	.desktop {display: none}
-	.mobile {display: block}
-	.navbar-right li button, .navbar-right li button:focus {font-weight: strong; padding-top: 10px; color:white; background: none; letter-spacing: 2px; outline: none; border-bottom: 2px solid rgba(0,0,0,0); }
-	.navbar-right li button:active, .navbar-right li button:active { color: white; outline:none; background: rgba(0,0,0,0.2) }
-}
+.contact-fluid {background-image: url(../images/abstract2.jpg); background-size: cover; min-height: 65vh; }
 
-@media only screen and (min-width: 760px) {
-	.navbar-right li button, .navbar-right li button:focus {margin-top: 15px; color: white; background: none; border-radius: 3px;outline: none; letter-spacing: 2px; border: 2px solid white; }
-	.navbar-right li button:hover, .navbar-right li button:active {color: rgba(0,0,0,0.7); background: white; outline: none; }
-	.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover { background-color:transparent }
-	.desktop {display: block}
-	.mobile {display: none}
-}
-
-body {font-family: "Catamaran";}
-
-.container-jumbo {background-color: #212121;}
-.nav {background: transparent;}
-.nav img {width: auto; max-height: 200%}
-
-.fail-login .alert{margin-top: 20px; font-size: 110%}	
-
-.navbar-left li button, .navbar-left li button:focus {padding-top: 10px; color:white; background: none; letter-spacing: 2px; outline: none; border-bottom: 2px solid rgba(0,0,0,0); } 
-.navbar-left li button:hover { color:white; border-bottom: 2px solid white; border-radius: 0px; outline:none; } 
-.navbar-left li button:focus:active, .navbar-left li button:active { color: white; outline:none; background: rgba(0,0,0,0.2) }
-
-.navbar-nav > li > a { padding-top:5px !important;  padding-bottom:10px !important; height:60px;}
-
-.header-container {padding-bottom: 20px; }
-.header-container .main-header {color: white; margin-top: 20px;}
-.main-header .title {font-weight: normal; font-size: 50%; }
-.main-header .header {font-size: 200%; font-weight: bold;}
-
-.contact-fluid {background-image: url(../images/table.jpg); background-size: cover; min-height: 65vh; }
-
-.contact-wrap {box-shadow:0 12px 15px 0 rgba(0,0,0,.24); margin: auto; margin-top: 30px; margin-bottom: 20px; }
-.contact-form {padding:40px 40px 40px; background: rgba(66,61,61,.8); }
+.contact-wrap {box-shadow:0 12px 15px 0 rgba(0,0,0,.24); margin: auto; margin-top: 30px; margin-bottom: 50px; }
+.contact-form {padding:40px 40px 40px; background: #FDFEFE }
 .contact-form .group{margin-top: 10px; margin-bottom:20px;}
 
-.contact-form .label {font-size: 90%; text-align: left; width:100%; color:#9fbfdf; display:block; outline: none; font-family: "Quicksand"; }
+.contact-form .label {font-size: 90%; text-align: left; width:100%; color:#f66565; display:block; outline: none; font-family: "Quicksand"; }
 .contact-form .input {width:100%; color:#aaa; display:block; outline: none; font-size: 100%; font-family: "Palanquin"; }
-.contact-form .input {border:0.5px solid #666; padding:10px 20px; border-radius:5px; background:rgba(64,64,64,.5); color:#fff; }
+.contact-form .input {border:0.5px solid #fccfcf; padding:10px 20px; border-radius:5px; background:#E5E7E9; color:black; }
+.contact-form .input:focus {border:0.5px solid #FF5733; }
 .contact-form .button{width:100%; color:#fff; display:block; outline: none; font-size: 100%; border:none; padding:10px 20px; font-size: 95%;
-					  border-radius:7.5px; background: rgba(205, 97, 85, 1); font-family: "Quicksand"; box-shadow: 0 1px 4px rgba(0, 0, 0, .5); }
+					  border-radius:7.5px; background: rgba(205, 97, 85, 0.9); font-family: "Quicksand"; box-shadow: 0 1px 4px rgba(0, 0, 0, .5); }
 .contact-form .button:hover{background: rgba(250, 97, 85, 1); }
 
-.contact-form .input-text {width:100%; color:#aaa; display:block; outline: none; font-size: 100%; border:none; padding:50px 20px; border-radius:5px; background:rgba(255,255,255,.5); color:#fff;}
-.contact-form p {color:white; font-size: 120%; font-family: "Palanquin"; }
-.contact-form h3 {color:white; font-family: "Palanquin"; }
+.contact-form .input-text {width:100%; color:#6C7181; display:block; outline: none; font-size: 100%; border:none; padding:50px 20px; border-radius:5px; background:rgba(255,255,255,.5); color:#fff;}
+.contact-form p {color: #6C7181; font-size: 120%; font-family: "Palanquin"; }
+.contact-form h3 {color: #6C7181; font-family: "Palanquin"; }
 
 .contact-form .social-list ul{ list-style-type: none; }
 .contact-form .social-list li { list-style: none; padding-bottom: 10px; font-size: 110%;  }
-.contact-form .social-list li a { color:white; text-decoration: none; font-family: "Palanquin"; }
+.contact-form .social-list li a { color: #6C7181; text-decoration: none; font-family: "Palanquin"; }
 .fa-3x { vertical-align: middle;}
-
-.footer-container {background-color: #212121; color: white;}
-.footer-container a {color:#dcdcdc; font-weight: bold;}	
-.footer-container img {height: 30%; width: 30%; }
-
-.footer-container .footer-col {margin-top: 15px; margin-bottom: 20px; }
-.footer-container .footer-col ul { margin: 0; padding: 0; }
-.footer-container .footer-col .social-icons ul{ display: inline; list-style-type: none; }
-.footer-container .footer-col .social-icons li { list-style: none;  float: left; margin-right: 20px; }
-
-.footer-container .sub-footer {color: white; background: #000000; padding: 10px; }

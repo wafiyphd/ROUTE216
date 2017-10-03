@@ -10,18 +10,6 @@ $userRow=mysqli_fetch_array($res);
 	header("Location: index.php");	
 }
  
-$offset = 0;
-$page_result = 5; 
-	
-if($_GET['pageno'])
-{
- $page_value = $_GET['pageno'];
- if($page_value > 1)
- {	
-  $offset = ($page_value - 1) * $page_result;
- }
-}
-
 $error = false;
 
 if( isset($_POST['join-personal']) ) {
@@ -32,8 +20,8 @@ if( isset($_POST['join-personal']) ) {
 	
 	$status = mysqli_query($mysqli, "UPDATE session SET status = 'Unavailable' WHERE session_id = '$sessionid' ");
 	$join = mysqli_query($mysqli, "	UPDATE personal_session SET member_id = '$userid', member_name = '$userfullname' WHERE session_id ='$sessionid' ");
-	
-	if ($join && $status){
+	$count = mysqli_query ($mysqli, "UPDATE member SET joined=joined+1 WHERE user_id = '$userid'");
+	if ($join && $status && $count){
 		$alertType = "success";
 		$errMSG = "Successfully joined.";
 	}
@@ -51,8 +39,8 @@ if( isset($_POST['unjoin-personal']) ) {
 	
 	$status = mysqli_query($mysqli, "UPDATE session SET status = 'Available' WHERE session_id = '$sessionid' ");
 	$unjoin = mysqli_query($mysqli, "	UPDATE personal_session SET member_id = NULL, member_name = NULL WHERE session_id ='$sessionid' ");
-	
-	if ($unjoin && $status){
+	$count = mysqli_query ($mysqli, "UPDATE member SET joined=joined-1 WHERE user_id = '$userid'");
+	if ($unjoin && $status && $count){
 		$alertType = "success";
 		$errMSG = "Successfully unjoined.";
 	}
@@ -70,8 +58,8 @@ if( isset($_POST['join-group']) ) {
 	
 	$join = mysqli_query($mysqli, "	INSERT INTO joined_group(session_id, member_id, member_name) values ('$sessionid','$userid','$userfullname')");
 	$update = mysqli_query($mysqli, "UPDATE group_session SET count = count + 1 WHERE session_id = $sessionid");
-	
-	if ($join && update){
+	$count = mysqli_query ($mysqli, "UPDATE member SET joined=joined+1 WHERE user_id = '$userid'");
+	if ($join && update && $count){
 		$alertType = "success";
 		$errMSG = "Successfully joined.";
 	}
@@ -88,8 +76,8 @@ if( isset($_POST['unjoin-group']) ) {
 	
 	$join = mysqli_query($mysqli, "	DELETE FROM joined_group WHERE member_id = '$userid' AND session_id ='$sessionid' ");
 	$update = mysqli_query($mysqli, "UPDATE group_session SET count = count - 1 WHERE session_id = $sessionid");
-	
-	if ($join && update){
+	$count = mysqli_query ($mysqli, "UPDATE member SET joined=joined-1 WHERE user_id = '$userid'");
+	if ($join && update && $count){
 		$alertType = "success";
 		$errMSG = "Successfully unjoined.";
 	}
@@ -99,58 +87,6 @@ if( isset($_POST['unjoin-group']) ) {
 	}	
 }
 
-if( isset($_POST['login']) ) { 
-  
-  $username = trim($_POST['username']);
-  $username = strip_tags($username);
-  $username = htmlspecialchars($username);
-  
-  $pass = trim($_POST['password']);
-  $pass = strip_tags($pass);
-  $pass = htmlspecialchars($pass);  
-  
-  // if there's no error, continue to login
-  if (!$error) {
-	  
-	   $password = hash('sha256', $pass); // password hashing using SHA256
-		
-	   $query = "SELECT user_id, username, password FROM user WHERE username='$username'";
-	   $res=mysqli_query($mysqli,$query);
-	   
-	   // check whether user exists in the database
-	   $row=mysqli_fetch_array($res);
-	   $count = mysqli_num_rows($res);
-	   
-	   // check whether user is a member
-	   $querymember = "SELECT user_id FROM member WHERE username='$username'";
-	   $qm = mysqli_query($mysqli,$querymember);
-	   $cm = mysqli_num_rows($qm);
-	   
-	   // check whether user is a trainer
-	   $querytrainer = "SELECT user_id FROM trainer WHERE username='$username'";
-	   $qt = mysqli_query($mysqli, $querytrainer);
-	   $cq = mysqli_num_rows($qt);
-	   
-	   if( $count == 1 && $row['password']==$password ) {
-		   if ($cm == 1) {
-			   $_SESSION['user'] = $row['user_id'];
-			   $errMSG = "Successful Login";
-		       header("Location: member.php");	
-		   }
-		   
-		   else {
-			   $_SESSION['user'] = $row['user_id'];
-			   $errMSG = "Successful Login";
-		       header("Location: trainer.php");	
-		   }   
-	   } 
-	   
-	   else {
-		   $alertType = "danger";
-		   $errMSG = "Incorrect Credentials for logging in, please try again...";
-	   }
-	}
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -166,8 +102,13 @@ if( isset($_POST['login']) ) {
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Palanquin" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Droid+Sans+Mono" rel="stylesheet">
 
-	<link rel="stylesheet" href="css/joinsessionslist.css">
+	<link rel="stylesheet" href="css/sessions.css">
+	<link rel="stylesheet" href="css/alert.css">
+	<link rel="stylesheet" href="css/navfooter.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -185,30 +126,31 @@ if( isset($_POST['login']) ) {
 </head>
 
 <body>
-	<div class="container-jumbo">
-	
-		<div class="container">
-			<nav class="nav navbar-default"><!-- Navigation bar -->
+
+	<div class="container-fluid nav-fluid">
+		<div class="navbar navbar-default"><!-- Navigation bar -->
+			<div class="container">
 				<div class="navbar-header">
 				  <button class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span> 
 				  </button>
-				  <a class="navbar-brand" href="index.php"><img class="img-responsive" src="images/routeW.png"></a>
+				  <a class="navbar-brand" href="index.php"><img class="img-responsive" src="images/routeb.png"></a>
 				</div>
 				
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-left"> 
-						<li><a href="index.php"><button class="btn navbar-btn"><strong>Home</strong></button></a></li>
+						<li><a href="index.php"><button class="btn navbar-btn" ><strong>Home</strong></button></a></li>
 						<li><a href="about.php"><button class="btn navbar-btn"><strong>About</strong></button></a></li>		
 						<li><a href="contact.php"><button class="btn navbar-btn"><strong>Contact</strong></button></a></li>		
 					</ul>
-				
+
+					<?php if ( isset($_SESSION['user'])!="" ) { ?>
 					<ul class="nav navbar-nav navbar-right desktop">
 						<li class="dropdown ">
 							<a href="#" data-toggle="dropdown" class="dropdown-toggle">
-								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo ucwords($userRow['fullname'])?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
+								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo ucwords($userRow['fullname']); ?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
 							</a>
 								<ul class="dropdown-menu">
 									<li><a href="profile.php">Profile</a></li>
@@ -221,26 +163,35 @@ if( isset($_POST['login']) ) {
 						<li><a href="#"><button class="btn navbar-btn">Profile</button></a></li>
 						<li><a href="logout.php?logout"><button class="btn navbar-btn"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span>&nbsp;Log Out</button></a></li>
 					</ul>
+					<?php } else { ?>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="signup.php"><button class="btn navbar-btn" ><strong>Sign Up</strong></button></a></li>
+						<li><a><button class="btn navbar-btn" data-toggle="modal" data-target="#loginModal"><strong>Log In</strong></button></a></li>
+					</ul>
+					<?php }?>
 				</div>
-			</nav>
-		</div>
-		
-		<div class="container header-container">
-			<div class="container main-header">
-				<p class="header">Join a session. &nbsp;<span class="title">Pick from the many available sessions the trainers have provided.</span></p>
 			</div>
-		</div>
-		
+			
+		</div><!-- End of nav bar -->
+
 	</div>
 	
 	<div class="container-fluid info">
-		<div class="container info-container">
-			<?php if (isset($errMSG)) { ?>
-					<div class="container fail-login">
-						<div class="alert alert-<?php echo $alertType; ?> text-center">
-							<p><i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp;<?php echo $errMSG; ?></p>
+	
+		<div class="container page-info">
+			<div class="row">
+				<a href="joinsessionslist.php"><div class="col-lg-3 info-box ">
+					<strong>JOINING SESSIONS</strong>
+				</div></a>
+				<?php if (isset($alertType)) { ?>
+					<div class="col-lg-6">
+						<div class="alert alert-box-s type-<?php echo $alertType; ?> alert-dismissable text-center">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							&nbsp;<?php echo $errMSG; ?>
 						</div>
-					</div> <?php } ?>
+					</div>
+				<?php } ?>
+			</div>
 		</div>
 
 		<div class="container sessions-container text-center">
@@ -278,9 +229,31 @@ if( isset($_POST['login']) ) {
 										</ul>
 									</div>
 									<div class="col-lg-6">
+									<?php $trainerid = $row[7];
+									
+										$reviewcount = mysqli_query($mysqli, "SELECT COUNT(*) as count FROM review WHERE trainer_id = '$trainerid'");
+										$rcount = mysqli_fetch_array($reviewcount);
+										$rcount = $rcount['count']; 
+										
+										if ($rcount == 0) {
+											$traineraverage = "N/A";
+										}
+										
+										else {
+											$traineraverage = mysqli_query($mysqli, "SELECT AVG(totalrating) AS average FROM review WHERE trainer_id='$trainerid'");
+											$traineraverage = mysqli_fetch_array($traineraverage);
+											$traineraverage = $traineraverage['average'];
+											$traineraverage = number_format((float)$traineraverage, 2, '.', ''); 
+										}
+										
+									?>
 										<ul>
 											<li><strong>Trainer Name: </strong><?php echo ucwords($row[8]); ?> </li>
-											<li><strong>Average Rating: </strong>Not Yet</li>		
+											<li><strong>Average Rating: </strong><small><?php echo '<button class="btn btn-static btn-xs '; 
+																						if ($traineraverage >= 3.5) { echo ' btn-green'; }
+																						elseif ($traineraverage >=2.5) { echo ' btn-yellow'; }
+																						elseif ($traineraverage >= 0) { echo ' btn-red'; }
+																						echo ' num">'; echo $traineraverage; echo '</button>' ?></small></li>		
 										</ul>
 										<form id="join-personal" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
 											<input name="id" value="<?php echo $row[0]; ?>" class="hidden"/>
@@ -327,9 +300,31 @@ if( isset($_POST['login']) ) {
 										</ul>
 									</div>
 									<div class="col-lg-6">
+									<?php $trainerid = $row[7];
+									
+										$reviewcount = mysqli_query($mysqli, "SELECT COUNT(*) as count FROM review WHERE trainer_id = '$trainerid'");
+										$rcount = mysqli_fetch_array($reviewcount);
+										$rcount = $rcount['count']; 
+										
+										if ($rcount == 0) {
+											$traineraverage = "N/A";
+										}
+										
+										else {
+											$traineraverage = mysqli_query($mysqli, "SELECT AVG(totalrating) AS average FROM review WHERE trainer_id='$trainerid'");
+											$traineraverage = mysqli_fetch_array($traineraverage);
+											$traineraverage = $traineraverage['average'];
+											$traineraverage = number_format((float)$traineraverage, 2, '.', ''); 
+										}
+										
+									?>
 										<ul>
 											<li><strong>Trainer Name: </strong><?php echo ucwords($row[8]); ?> </li>
-											<li><strong>Average Rating: </strong>Not Yet</li>
+											<li><strong>Average Rating: </strong><small><?php echo '<button class="btn btn-static btn-xs '; 
+																						if ($traineraverage >= 3.5) { echo ' btn-green'; }
+																						elseif ($traineraverage >=2.5) { echo ' btn-yellow'; }
+																						elseif ($traineraverage >= 0) { echo ' btn-red'; }
+																						echo ' num">'; echo $traineraverage; echo '</button>' ?></small></li>
 										</ul>
 										<form id="join-group" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
 											<input name="id" value="<?php echo $row[0]; ?>" class="hidden"/>

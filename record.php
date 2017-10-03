@@ -177,6 +177,8 @@
 	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 	
 	<link rel="stylesheet" href="css/record.css">
+	<link rel="stylesheet" href="css/alert.css">
+	<link rel="stylesheet" href="css/navfooter.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -196,30 +198,30 @@
 
 <body>
 
-	<div class="container-jumbo">
-	
-		<div class="container">
-			<nav class="nav navbar-default"><!-- Navigation bar -->
+	<div class="container-fluid nav-fluid">
+		<div class="navbar navbar-default"><!-- Navigation bar -->
+			<div class="container">
 				<div class="navbar-header">
 				  <button class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span> 
 				  </button>
-				  <a class="navbar-brand" href="index.php"><img class="img-responsive" src="images/routeW.png"></a>
+				  <a class="navbar-brand" href="index.php"><img class="img-responsive" src="images/routeb.png"></a>
 				</div>
 				
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-left"> 
-						<li><a href="index.php"><button class="btn navbar-btn"><strong>Home</strong></button></a></li>
+						<li><a href="index.php"><button class="btn navbar-btn" ><strong>Home</strong></button></a></li>
 						<li><a href="about.php"><button class="btn navbar-btn"><strong>About</strong></button></a></li>		
 						<li><a href="contact.php"><button class="btn navbar-btn"><strong>Contact</strong></button></a></li>		
 					</ul>
-				
+
+					<?php if ( isset($_SESSION['user'])!="" ) { ?>
 					<ul class="nav navbar-nav navbar-right desktop">
 						<li class="dropdown ">
 							<a href="#" data-toggle="dropdown" class="dropdown-toggle">
-								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo $userRow['fullname']?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
+								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo ucwords($userRow['fullname']); ?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
 							</a>
 								<ul class="dropdown-menu">
 									<li><a href="profile.php">Profile</a></li>
@@ -232,20 +234,37 @@
 						<li><a href="#"><button class="btn navbar-btn">Profile</button></a></li>
 						<li><a href="logout.php?logout"><button class="btn navbar-btn"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span>&nbsp;Log Out</button></a></li>
 					</ul>
+					<?php } else { ?>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="signup.php"><button class="btn navbar-btn" ><strong>Sign Up</strong></button></a></li>
+						<li><a><button class="btn navbar-btn" data-toggle="modal" data-target="#loginModal"><strong>Log In</strong></button></a></li>
+					</ul>
+					<?php }?>
 				</div>
-			</nav>
-		</div>
-		
-		<div class="container header-container">
-			<div class="container main-header">
-				<p class="header">Recording a new training session.</p>
-				<p class="title">Reminder: Please enter a meaningful and helpful name for session name for the members.</p>
 			</div>
-		</div>
-		
+			
+		</div><!-- End of nav bar -->
+
 	</div>
 	
 	<div class="container-fluid main-container">
+		
+		<div class="container page-info">
+			<div class="row">
+				<a href="record.php"><div class="col-lg-3 info-box ">
+					<strong>CREATING NEW SESSION</strong>
+				</div></a>
+				<?php if (isset($alertType)) { ?>
+					<div class="col-lg-6">
+						<div class="alert alert-box-s type-<?php echo $alertType; ?> alert-dismissable text-center">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							&nbsp;<?php echo $errMSG; ?>
+						</div>
+					</div>
+				<?php } ?>
+			</div>
+		</div>
+		
 		<div class="container record-container">			
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-sm-offset-0 col-lg-6 col-lg-offset-3">
@@ -366,18 +385,17 @@
 						</div>
 						
 						<?php
-							if ( isset($errMsg) ) {
+						if ( isset($errTyp) ) {
 						?>
-						
 						<div class="form-group">
-							<div class="alert alert-<?php echo ($errTyp=="success") ? "success" : $errTyp; ?>">
-								<span class="glyphicon glyphicon-info-sign"></span> <?php echo $errMsg; ?>
-							</div>
+								 <div class="alert alert-box type-<?php echo $errTyp; ?> alert-dismissable">
+								  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+									 <?php echo $errMsg; ?>
+								</div>
 						</div>
-						
-						<?php
-							}
-						?>
+									<?php
+					   }
+					   ?>
 						</div>
 					</form>
 				</div>

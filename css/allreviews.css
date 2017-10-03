@@ -1,55 +1,9 @@
-@media only screen and (max-width: 759px) {
-	.desktop {display: none}
-	.mobile {display: block}
-	.navbar-right li button, .navbar-right li button:focus {font-weight: strong; padding-top: 10px; color:white; background: none; letter-spacing: 2px; outline: none; border-bottom: 2px solid rgba(0,0,0,0); }
-	.navbar-right li button:active, .navbar-right li button:active { color: white; outline:none; background: rgba(0,0,0,0.2) }
-}
+.main-fluid {background-image: url(../images/abstract3.jpg); background-size: cover; min-height: 70vh;}
+.review-container {margin-top: 20px; }
 
-@media only screen and (min-width: 760px) {
-	.navbar-right li button, .navbar-right li button:focus {margin-top: 15px; color: white; background: none; border-radius: 3px;outline: none; letter-spacing: 2px; border: 2px solid white; }
-	.navbar-right li button:hover, .navbar-right li button:active {color: rgba(0,0,0,0.7); background: white; outline: none; }
-	.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover { background-color:transparent }
-	.desktop {display: block}
-	.mobile {display: none}
-}
-
-body {font-family: "Catamaran";}
-
-.container-jumbo {background-color: #212121;}
-.nav {background: transparent;}
-.nav img {width: auto; max-height: 200%}
-
-.navbar-left li button, .navbar-left li button:focus {padding-top: 10px; color:white; background: none; letter-spacing: 2px; outline: none; border-bottom: 2px solid rgba(0,0,0,0); } 
-.navbar-left li button:hover { color:white; border-bottom: 2px solid white; border-radius: 0px; outline:none; } 
-.navbar-left li button:focus:active, .navbar-left li button:active { color: white; outline:none; background: rgba(0,0,0,0.2) }
-
-.navbar-nav > li > a { padding-top:5px !important;  padding-bottom:10px !important; height:60px;}
-
-.header-container {padding-bottom: 20px; }
-.header-container .main-header {color: white; margin-top: 20px;}
-.main-header .title {font-weight: normal; font-size: 50%; }
-.main-header .header {font-size: 200%; font-weight: bold;}
-
-.content-fluid {background-image: url(../images/keyboard.jpg); background-size: cover; min-height: 70vh;}
-.review-container {padding-top: 20px; }
-
+.panel {border:none; box-shadow:0 10px 10px 0 rgba(0,0,0,.25);}
 .review {list-style-type: none; padding: 0; margin: 0;}
 .comments {padding-top: 35px}
-.title {font-size: 125%; }
+.title {font-size: 125%; font-family: "Quicksand" }
 
-.btn-green { background-color: #81C784; color: white; font-weight: bold; font-size: 125%; }
-.btn-yellow { background-color: #CDDC39; color: white; font-weight: bold; font-size: 125%; }
-.btn-red { background-color: #EF5350; color: white; font-weight: bold; font-size: 125%; }
-.btn-static { cursor: default; }
 .border-right {border-right: 1px solid #CCD1D1 ;}
-
-.footer-container {background-color: #212121; color: white;}
-.footer-container a {color:#dcdcdc; font-weight: bold;}	
-.footer-container img {height: 30%; width: 30%; }
-
-.footer-container .footer-col {margin-top: 15px; margin-bottom: 20px; }
-.footer-container .footer-col ul { margin: 0; padding: 0; }
-.footer-container .footer-col .social-icons ul{ display: inline; list-style-type: none; }
-.footer-container .footer-col .social-icons li { list-style: none;  float: left; margin-right: 20px; }
-
-.footer-container .sub-footer {color: white; background: #000000; padding: 10px; }

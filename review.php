@@ -15,6 +15,7 @@
 		if (!isset($_POST['prating']) || !isset($_POST['erating']) || !isset($_POST['srating'])) {
 			 $errType = "danger";
 			 $errMSG = "Please pick a rating for all the criterias.";
+			 header("Location: member.php?success=1");
 		}
 		
 		else {
@@ -72,8 +73,13 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Palanquin" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Droid+Sans+Mono" rel="stylesheet">
 
 	<link rel="stylesheet" href="css/review.css">
+	<link rel="stylesheet" href="css/alert.css">
+	<link rel="stylesheet" href="css/navfooter.css">
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -82,30 +88,30 @@
 
 <body>
 	
-	<div class="container-jumbo">
-	
-		<div class="container">
-			<nav class="nav navbar-default"><!-- Navigation bar -->
+	<div class="container-fluid nav-fluid">
+		<div class="navbar navbar-default"><!-- Navigation bar -->
+			<div class="container">
 				<div class="navbar-header">
 				  <button class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span> 
 				  </button>
-				  <a class="navbar-brand" href="index.php"><img class="img-responsive" src="images/routeW.png"></a>
+				  <a class="navbar-brand" href="index.php"><img class="img-responsive" src="images/routeb.png"></a>
 				</div>
 				
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-left"> 
-						<li><a href="index.php"><button class="btn navbar-btn"><strong>Home</strong></button></a></li>
+						<li><a href="index.php"><button class="btn navbar-btn" ><strong>Home</strong></button></a></li>
 						<li><a href="about.php"><button class="btn navbar-btn"><strong>About</strong></button></a></li>		
 						<li><a href="contact.php"><button class="btn navbar-btn"><strong>Contact</strong></button></a></li>		
 					</ul>
-				
+
+					<?php if ( isset($_SESSION['user'])!="" ) { ?>
 					<ul class="nav navbar-nav navbar-right desktop">
-						<li class="dropdown">
+						<li class="dropdown ">
 							<a href="#" data-toggle="dropdown" class="dropdown-toggle">
-								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo $userRow['fullname']?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
+								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo ucwords($userRow['fullname']); ?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
 							</a>
 								<ul class="dropdown-menu">
 									<li><a href="profile.php">Profile</a></li>
@@ -118,22 +124,40 @@
 						<li><a href="#"><button class="btn navbar-btn">Profile</button></a></li>
 						<li><a href="logout.php?logout"><button class="btn navbar-btn"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span>&nbsp;Log Out</button></a></li>
 					</ul>
+					<?php } else { ?>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="signup.php"><button class="btn navbar-btn" ><strong>Sign Up</strong></button></a></li>
+						<li><a><button class="btn navbar-btn" data-toggle="modal" data-target="#loginModal"><strong>Log In</strong></button></a></li>
+					</ul>
+					<?php }?>
 				</div>
-			</nav>
-		</div>
+			</div>
+			
+		</div><!-- End of nav bar -->
+
+	</div>
 		
-		<div class="container header-container">
-			<div class="container main-header">
-				<p class="header">Reviewing Session & Trainer. &nbsp;<span class="title">Provide constructive feedback for the trainers.</span></p>
+	<div class="container-fluid content-container">
+		
+		<div class="container page-info">
+			<div class="row">
+				<a href="review.php"><div class="col-lg-3 info-box ">
+					<strong>REVIEWING TRAINER</strong>
+				</div></a>
+				<?php if (isset($alertType)) { ?>
+					<div class="col-lg-6">
+						<div class="alert alert-box-s type-<?php echo $alertType; ?> alert-dismissable text-center">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							&nbsp;<?php echo $errMSG; ?>
+						</div>
+					</div>
+				<?php } ?>
 			</div>
 		</div>
 		
-	</div>
-	<?php $session = mysqli_query($mysqli, "SELECT * from session WHERE session_id = '$sessionid'");
-	$row = mysqli_fetch_row($session); ?>
-		
-	<div class="container-fluid content-container">
-		<div class="container">
+		<div class="container review-container">
+		<?php $session = mysqli_query($mysqli, "SELECT * from session WHERE session_id = '$sessionid'");
+		$row = mysqli_fetch_row($session); ?>
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="review-wrap text-center">
@@ -198,7 +222,7 @@
 									
 									<div class="group">
 										<label for="comments" class="label">Comments</label>
-										<textarea id="comments"  type="text" name="comments" rows="8" class="input" required></textarea>
+										<textarea id="comments"  type="text" name="comments" rows="8" class="input-text" required></textarea>
 									</div>
 									
 									<div class="group">
@@ -248,7 +272,6 @@
 										<div class="col-lg-6">
 											<ul class="session">
 												<li><strong>Category: </strong><?php echo ucfirst($row[1]); ?></li>
-												<li><strong>Some Info: </strong>Bla</li>
 											</ul>
 										</div>
 									</div>
@@ -263,21 +286,76 @@
 									<p class="big">Trainer Info </p>
 									<hr>
 									<div class="row">
-										<div class="col-lg-6">
+										<div class="col-lg-12">
+										<?php $trainerid = $row[7];
+										$reviewcount = mysqli_query($mysqli, "SELECT COUNT(*) as count FROM review WHERE trainer_id = '$trainerid'");
+										$rcount = mysqli_fetch_array($reviewcount);
+										$rcount = $rcount['count']; 
+										
+										$reviewquery = mysqli_query($mysqli, "SELECT trainer_id, profrat, engrat, sesrat, totalrating from review WHERE trainer_id='$trainerid'");
+										if ($rcount == 0) {
+											$selfaverage = "N/A";
+											$paverage = "N/A";
+											$eaverage = "N/A";
+											$saverage = "N/A";
+										}
+
+										else {
+											
+										$paverage = mysqli_query($mysqli, "SELECT AVG(profrat) AS average FROM review WHERE trainer_id='$trainerid'");
+										$paverage = mysqli_fetch_array($paverage);
+										$paverage = $paverage['average'];
+										$paverage = number_format((float)$paverage, 2, '.', '');
+										
+										$eaverage = mysqli_query($mysqli, "SELECT AVG(engrat) AS average FROM review WHERE trainer_id='$trainerid'");
+										$eaverage = mysqli_fetch_array($eaverage);
+										$eaverage = $eaverage['average'];
+										$eaverage = number_format((float)$eaverage, 2, '.', '');
+										
+										$saverage = mysqli_query($mysqli, "SELECT AVG(sesrat) AS average FROM review WHERE trainer_id='$trainerid'");
+										$saverage = mysqli_fetch_array($saverage);
+										$saverage = $saverage['average'];
+										$saverage = number_format((float)$saverage, 2, '.', '');
+										
+										$selfaverage = mysqli_query($mysqli, "SELECT AVG(totalrating) AS average FROM review WHERE trainer_id='$trainerid'");
+										$selfaverage = mysqli_fetch_array($selfaverage);
+										$selfaverage = $selfaverage['average'];
+										$selfaverage = number_format((float)$selfaverage, 2, '.', ''); }
+										
+										$sessioncount = mysqli_query($mysqli, "SELECT COUNT(*) as count FROM session WHERE trainer_id = '$trainerid'");
+										$scount = mysqli_fetch_array($sessioncount);
+										$scount = $scount['count'];
+										?>
+										
 											<ul class="trainer">
 												<li><strong>Trainer Name: </strong><?php echo ucfirst($row[8]); ?></li>
-												<li><strong>Specialty: </strong>Not Implemented Yet</li>
-												<li><strong>Total Sessions Managed: </strong>Not Yet Too</li>
+												<li><strong>Total Sessions Managed: </strong><?php echo $scount; ?></li>
+												<li>&nbsp;</li>
+												<li><strong>Overall Average Rating: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																					</strong><small><?php echo '<button class="btn btn-static btn-xs '; 
+																						if ($selfaverage >= 3.5) { echo ' btn-green'; }
+																						elseif ($selfaverage >=2.5) { echo ' btn-yellow'; }
+																						elseif ($selfaverage >= 0) { echo ' btn-red'; }
+																						echo ' num">'; echo $selfaverage; echo '</button>' ?></small></li>
+												<li><strong>Average Professionalism Rating: &nbsp;&nbsp;</strong><small><?php echo '<button class="btn btn-static btn-xs '; 
+																						if ($paverage >= 3.5) { echo ' btn-green'; }
+																						elseif ($paverage >=2.5) { echo ' btn-yellow'; }
+																						elseif ($paverage >= 0) { echo ' btn-red'; }
+																						echo ' num">'; echo $paverage; echo '</button>' ?></small></li>
+												<li><strong>Average Engagement Rating: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																				</strong><small><?php echo '<button class="btn btn-static btn-xs '; 
+																						if ($saverage >= 3.5) { echo ' btn-green'; }
+																						elseif ($saverage >=2.5) { echo ' btn-yellow'; }
+																						elseif ($saverage >= 0) { echo ' btn-red'; }
+																						echo ' num">'; echo $saverage; echo '</button>' ?></small></li>
+												<li><strong>Average Session Rating: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																				</strong><small><?php echo '<button class="btn btn-static btn-xs '; 
+																						if ($eaverage >= 3.5) { echo ' btn-green'; }
+																						elseif ($eaverage >=2.5) { echo ' btn-yellow'; }
+																						elseif ($eaverage >= 0) { echo ' btn-red'; }
+																						echo ' num">'; echo $eaverage; echo '</button>' ?></small></li>
 											</ul>
 										</div>
-										<div class="col-lg-6">
-											<ul>
-												<li><strong>Overall Average Rating:</strong></li>
-												<li>Professionalism Rating: </strong></li>
-												<li>Engagement Rating: </li>
-												<li>Session Rating: </li>
-											</ul>
-										</div>	
 									</div>
 								</div>
 							</div>

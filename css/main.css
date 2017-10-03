@@ -1,36 +1,17 @@
 @media only screen and (max-width: 759px) {
-	.navbar-right li button, .navbar-right li button:focus {padding-top: 10px; color:white; background: none; letter-spacing: 2px; outline: none; border-bottom: 2px solid rgba(0,0,0,0); }
-	.navbar-right li button:focus:active, .navbar-right li button:active { color: white; outline:none; background: rgba(0,0,0,0.2) }
 	.info-container .pic-container .moreinfo {font-size: 100%; opacity: 1; color: white; transition: opacity .50s ease-in-out; position: absolute; font-weight: bold; top: 60%; left: 5%; width: 90%;}
 }
 
 @media only screen and (min-width: 760px) {
-	.navbar-right li button, .navbar-right li button:focus {margin-top: 15px; color: white; font-weight; background: none; border-radius: 4px;outline: none; letter-spacing: 2px; border: 2px solid white; }
-	.navbar-right li button:hover, .navbar-right li button:active {color: rgba(0,0,0,0.7); background: white; outline: none; }
-	
 	.info-container .pic-container .moreinfo {font-size: 100%; opacity: 0; color: white; transition: opacity .50s ease-in-out; position: absolute; font-weight: bold; top: 60%; left: 5%; width: 90%;}
 	.info-container .pic-container .overlay:hover .moreinfo  {opacity: 1; color: white;  font-size: 100%; position: absolute; font-weight: bold; top: 60%; left: 5%; width: 90%;}
 }
 
-body {font-family: "Catamaran";}
-
-.container-jumbo {background-image: url(../images/jumbo.jpg); background-position: center; background-size: cover; }
-.fail-login .alert{margin-top: 20px; font-size: 110%}	
-.nav {background: transparent;}
-.nav img {width: auto; max-height: 200%}
-
-.navbar-left li button, .navbar-left li button:focus {padding-top: 10px; color:white; background: none; letter-spacing: 2px; outline: none; border-bottom: 2px solid rgba(0,0,0,0); } 
-.navbar-left li button:hover { color:white; border-bottom: 2px solid white; border-radius: 0px; outline:none; } 
-.navbar-left li button:focus:active, .navbar-left li button:active { color: white; outline:none; background: rgba(0,0,0,0.2) }
-
-.navbar-nav > li > a { padding-top:5px !important;  padding-bottom:10px !important; height:60px;}
+.main-fluid {background-image: url(../images/abstract2.jpg); background-size: cover; padding-left: 0 !important; padding-right: 0 !important; box-shadow: 0 5px 3px rgba(0,0,0,0.30), 0 5px 3px rgba(0,0,0,0.15); }
 	
-.main-container {background: transparent; color: white; }
-.main-container img {height: 50%; width: 50%; padding: 20px; filter: drop-shadow(2px 2px 2px #222); transition: all .2s ease-in-out; }
-.main-container .img-responsive { margin: 0 auto;}
-.main-container img:hover {transform: scale(1.1); filter: drop-shadow(2px 2px 2px #222); }
-.main-container .main-header {font-size: 300%; font-weight: bold;}
-.main-container .main-header hr{margin-left: 0; margin-top: 20px; width: 40%;}
+.main-container .main-header {margin-top: 40px; font-size: 320%; font-weight: bold; color: white;}
+.main-container .main-header hr{margin-left: 0; margin-top: 20px; width:50%;}
+.main-container hr { width: 50%;}
 
 .info-fluid {background-image: url(../images/info.jpg);}
 .info-fluid > .container >.container {padding-top: 10px }
@@ -47,8 +28,7 @@ body {font-family: "Catamaran";}
 .info-container .pull-right {color: white; font-size: 110%; font-weight: bold}
 .info-container .padding-0 {padding: 0; margin: 0}
 
-
-.features-container {color: white; background-image: url(../images/features.jpg); padding-top: 15px; padding-bottom: 25px;}
+.features-container {color: white; background-image: url(../images/comp.jpg); background-size: cover; padding-top: 15px; padding-bottom: 25px;}
 .features-container hr { width: 50%; padding-bottom: 15px;}
 .features-container h3 {font-size: 300%; font-weight: bold;}
 .features-container p {font-size: 120% }
@@ -57,7 +37,7 @@ body {font-family: "Catamaran";}
 .features-container .big {font-weight: bold; font-size: 200%;}
 .features-container .images {padding-top: 20px; padding-bottom: 25px; }
 
-.combine {background-image: url(../images/comp.jpg); background-size: cover; }
+.combine {background-image: url(../images/wood.jpg); background-size: cover; }
 .combine hr {width: 70%}
 
 .signup-container .header {text-align: left; }
@@ -67,16 +47,6 @@ body {font-family: "Catamaran";}
 .signup-container .main-header .big, .contact-container .main-header .big{font-size: 250%; font-weight: bold; }
 .signup-container .main-header p, .contact-container .main-header p{font-size: 200%;}
 
-.signup-container .btn, .contact-container .btn {font-size: 120%; width:100%; color: white; font-weight; background: none; border-radius: 4px;outline: none; border: 2px solid white; margin-top: 20px; }
-.signup-container .btn:hover, .contact-container .btn:hover  {color: rgba(0,0,0,0.7); background: white; outline: none; }
-
-.footer-container {background-color: #212121; color: white;}
-.footer-container a {color:#dcdcdc; font-weight: bold;}	
-.footer-container img {height: 30%; width: 30%; }
-.footer-container .footer-col {margin-top: 15px; margin-bottom: 20px; }
-.footer-container .footer-col ul { margin: 0; padding: 0; }
-.footer-container .social-icons ul{ display: inline; list-style-type: none; }
-
-.footer-container .social-icons li { list-style: none;  float: left; margin-right: 20px; }	
-
-.footer-container .sub-footer {color: white; background: #000000; padding: 10px; }
+.signup-container .btn, .contact-container .btn {padding: 10px; font-size: 120%; width:100%; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); border-radius:3px; font-weight: bold; background: rgba(246, 101, 101, 0.9); margin-top: 20px; }
+.signup-container .btn:hover, .contact-container .btn:hover {color: white; background: rgba(250, 97, 85, 1) }
+.signup-container a, .contact-container a {text-decoration: none; color: white; }

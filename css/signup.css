@@ -1,64 +1,26 @@
-@media only screen and (max-width: 759px) {
-	.navbar-right li button, .navbar-right li button:focus {font-weight: strong; padding-top: 10px; color:white; background: none; letter-spacing: 2px; outline: none; border-bottom: 2px solid rgba(0,0,0,0); }
-	.navbar-right li button:active, .navbar-right li button:active { color: white; outline:none; background: rgba(0,0,0,0.2) }
-}
-
-@media only screen and (min-width: 760px) {
-	.navbar-right li button, .navbar-right li button:focus {margin-top: 15px; color: white; background: none; border-radius: 3px;outline: none; letter-spacing: 2px; border: 2px solid white; }
-	.navbar-right li button:hover, .navbar-right li button:active {color: rgba(0,0,0,0.7); background: white; outline: none; }
-	.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover { background-color:transparent }
-}
-
-body {font-family: "Catamaran";}
-
-.container-jumbo {background-color: #212121;}
-.nav {background: transparent;}
-.nav img {width: auto; max-height: 200%}
-
-.navbar-left li button, .navbar-left li button:focus {padding-top: 10px; color:white; background: none; letter-spacing: 2px; outline: none; border-bottom: 2px solid rgba(0,0,0,0); } 
-.navbar-left li button:hover { color:white; border-bottom: 2px solid white; border-radius: 0px; outline:none; } 
-.navbar-left li button:focus:active, .navbar-left li button:active { color: white; outline:none; background: rgba(0,0,0,0.2) }
-
-.navbar-nav > li > a { padding-top:5px !important;  padding-bottom:10px !important; height:60px;}
-
-.header-container {padding-bottom: 20px; }
-.header-container .main-header {color: white; margin-top: 20px;}
-.main-header .title {font-weight: normal; font-size: 50%; }
-.main-header .header {font-size: 200%; font-weight: bold;}
-
-.main-container {background-image: url(../images/keyboard.jpg); background-size: cover;}
+.main-container {background-image: url(../images/abstract2.jpg); background-size: cover;}
 
 .signup-container {padding-top: 40px; }
 .signup-container h3 {font-weight: bold; text-align: center;  color: white;}
 .signup-container h4 {text-align: center;  color: white;}
 
-.signup-wrap {box-shadow:0 12px 15px 0 rgba(0,0,0,.24); margin: auto; margin-top: 20px; margin-bottom: 50px; }
-.signup-form {padding:40px 40px 70px 40px; background: rgba(59,55,55,1); }
-.signup-form .group{margin-top: 10px; margin-bottom:20px;}
+.signup-wrap {margin: auto; margin-top: 20px; margin-bottom: 50px; box-shadow: 0 1px 4px rgba(0, 0, 0, .5);}
+.signup-form {padding:40px 40px 40px 40px; background: #FDFEFE; }
 
-.signup-form .label, .signup-form .input {width:100%; color:#aaa; display:block; outline: none; font-size: 100%; }
-.signup-form .input {border:none; padding:10px 20px; border-radius:5px; background:rgba(255,255,255,.5); color:#fff; }
-.signup-form .button{width:100%; color:#fff; display:block; outline: none; font-size: 100%; border:none; padding:10px 20px; border-radius:25px; }
+.signup-form .group{margin-top: 10px; margin-bottom:20px;}
+.signup-form .label, .signup-form .input {width:100%; color:#f66565; display:block; outline: none; font-size: 85%; text-align: left; font-family: "Quicksand"; }
+.signup-form .input {border:0.5px solid #fccfcf; padding:10px 20px; border-radius:5px; background: #E5E7E9; color: black }
+.signup-form .input:focus {border:0.5px solid #FF5733; }
 .signup-form p {color:#aaa; font-size: 80%; padding-top: 20px;}
 .member {display: none}
 .trainer {display:none}
 
-.signup-form .button{background: rgba(205, 97, 85, 1);}
+.signup-form .button{width:100%; font-family: "Quicksand"; color:#fff;  font-weight:bold; font-size: 95%; background: rgba(246, 101, 101, 0.9); box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); border-radius:7px;
+						border:none; padding:10px 20px; display:block; outline: none;}
 .signup-form .button:hover{background: rgba(250, 97, 85, 1); }
 
 .signup-form .radio {cursor: pointer; }
 .signup-form .radio input { visibility: hidden; }
-.signup-form .radio .choice { width:100%; padding: 10px; border: 2px solid #EEE; display: inline-block; color: #fff; border-radius: 5px; }
+.signup-form .radio .choice { font-family: "Quicksand"; font-size: 90%; width:100%; padding: 10px; border: 0.6px solid #d9d9d9; display: inline-block; color: #aaa; border-radius: 5px; }
+.signup-form .radio input:checked + .choice { border-color: #64B5F6; background-color: rgba(101, 173, 246, 0.85); color: white; }
 
-.signup-form .radio input:checked + .choice { border-color: #64B5F6; background-color: rgba(100, 181, 246, 0.9); }
-
-.footer-container {background-color: #212121; color: white;}
-.footer-container a {color:#dcdcdc; font-weight: bold;}	
-.footer-container img {height: 30%; width: 30%; }
-.footer-container .footer-col {margin-top: 15px; margin-bottom: 20px; }
-.footer-container .footer-col ul { margin: 0; padding: 0; }
-.footer-container .social-icons ul{ display: inline; list-style-type: none; }
-
-.footer-container .social-icons li { list-style: none;  float: left; margin-right: 20px; }	
-
-.footer-container .sub-footer {color: white; background: #000000; padding: 10px; }

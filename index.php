@@ -59,6 +59,7 @@ if( isset($_POST['login']) ) {
 	   } 
 	   
 	   else {
+		   $errTyp = "danger";
 		   $errMSG = "Incorrect Credentials for logging in, please try again...";
 	   }
   }
@@ -78,9 +79,13 @@ if( isset($_POST['login']) ) {
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Palanquin" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 
 	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" href="css/login.css">
+	<link rel="stylesheet" href="css/alert.css">
+	<link rel="stylesheet" href="css/navfooter.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -90,86 +95,48 @@ if( isset($_POST['login']) ) {
 
 <body>
 
-	<div id="#top" class="container-jumbo">
+	<div id="#top" class="container-fluid main-fluid">
+
 	
-		<div class="container">	
-			<nav class="nav navbar-default"><!-- Navigation bar -->
-		
+		<div class="navbar navbar-default"><!-- Navigation bar -->
+			<div class="container">
 				<div class="navbar-header">
 				  <button class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span> 
 				  </button>
-				  <a class="navbar-brand" href="index.php"><img class="img-responsive" src="images/routeW.png"></a>
+				  <a class="navbar-brand" href="index.php"><img class="img-responsive" src="images/routeb.png"></a>
 				</div>
 				
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-left"> 
-						<li><a href="index.php"><button class="btn navbar-btn"><strong>Home</strong></button></a></li>
+						<li><a href="index.php"><button class="btn navbar-btn" ><strong>Home</strong></button></a></li>
 						<li><a href="about.php"><button class="btn navbar-btn"><strong>About</strong></button></a></li>		
 						<li><a href="contact.php"><button class="btn navbar-btn"><strong>Contact</strong></button></a></li>		
 					</ul>
-	
+					
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="signup.php"><button class="btn navbar-btn" ><strong>Sign Up</strong></button></a></li>
 						<li><a><button class="btn navbar-btn" data-toggle="modal" data-target="#loginModal"><strong>Log In</strong></button></a></li>
 					</ul>
 				</div>
-			</nav><!-- End of nav bar -->
+			</div>
 		</div>
 		
-		<?php if (isset($errMSG)) { ?>
-				<div class="container fail-login">
-					<div class="alert alert-danger text-center">
-						<p><i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp;<?php echo $errMSG; ?></p>
-					</div>
-				</div> <?php } ?>
-		
-		<div class="modal fade" id="loginModal"><!-- Start of login modal -->
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="login-wrap">
-						<div class="login-container">
-							<h3><strong>Log In</strong></h3>
-							<hr>
-							<div class="login-form">
-							
-								<form id="login" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" autocomplete="off">
-							
-									<div class="group">
-										<label for="username" class="label">Username</label>
-										<input id="username" type="text" name="username" class="input" required>
-									</div>
-									<div class="group">
-										<label for="pass" class="label">Password</label>
-										<input id="pass" type="password" name="password" class="input" data-type="password" required>
-									</div>
-									
-									<div class="group">
-										<button type="submit" name="login" class="button">Log In</button>
-									</div>
-								</form>
-								
-								<div class="forgot">
-									<a href="#forgot">Forgot Password?</a>
-								</div>
-								<hr>
-							
-								
-								<div class="sign-up">
-									<p>Not a member yet?</p>
-									<a href="signup.php"><input type="submit" class="button" value="Sign Up"></a>
-								</div>
-							</div>
-						
+		<div class="container page-info">
+			<div class="row">
+				<?php if (isset($errTyp)) { ?>
+					<div class="col-lg-6">
+						<div class="alert alert-box-s type-<?php echo $errTyp; ?> alert-dismissable text-center">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							&nbsp;<?php echo $errMSG; ?>
 						</div>
 					</div>
-				</div>
-		
+				<?php } ?>
 			</div>
-		</div><!-- End of Login modal -->
-		
+		</div>
+
 		<div class="container main-container">
 
 			<div class = "main-header">
@@ -182,7 +149,53 @@ if( isset($_POST['login']) ) {
 		
 	</div><!-- Jumbotron ends here -->
 	
+	<div class="modal fade" id="loginModal"><!-- Start of login modal -->
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="login-wrap">
+					<div class="login-container">
+						<h3><strong>Log In</strong></h3>
+						<hr>
+						<div class="login-form">
+						
+							<form id="login" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" autocomplete="off">
+						
+								<div class="group">
+									<label for="username" class="label">Username</label>
+									<input id="username" type="text" name="username" class="input" required>
+								</div>
+								<div class="group">
+									<label for="pass" class="label">Password</label>
+									<input id="pass" type="password" name="password" class="input" data-type="password" required>
+								</div>
+								
+								<div class="group">
+									<button type="submit" name="login" class="button">Log In</button>
+								</div>
+							</form>
+							
+							<div class="forgot">
+								<a href="#forgot">Forgot Password?</a>
+							</div>
+							<hr>
+						
+							
+							<div class="sign-up">
+								<p>Not a member yet?</p>
+								<a href="signup.php"><input type="submit" class="button" value="Sign Up"></a>
+							</div>
+						</div>
+					
+					</div>
+				</div>
+			</div>
+	
+		</div>
+	</div><!-- End of Login modal -->
+		
 	<div class="container-fluid info-fluid text-center">
+		
+		
 		
 		<div class="container info-container">
 			

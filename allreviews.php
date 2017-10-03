@@ -17,26 +17,35 @@
 	$count = mysqli_fetch_array($count);
 	$count = $count['count'];
 	
-	//get average ratings of all criteria for the trainer
-	$paverage = mysqli_query($mysqli, "SELECT AVG(profrat) AS average FROM review WHERE trainer_id='$id'");
-	$paverage = mysqli_fetch_array($paverage);
-	$paverage = $paverage['average'];
-	$paverage = number_format((float)$paverage, 2, '.', '');
+	if ($count == 0) {
+		$paverage = "N/A";
+		$eaverage = "N/A";
+		$saverage = "N/A";
+		$selfaverage = "N/A";
+	}
 	
-	$eaverage = mysqli_query($mysqli, "SELECT AVG(engrat) AS average FROM review WHERE trainer_id='$id'");
-	$eaverage = mysqli_fetch_array($eaverage);
-	$eaverage = $eaverage['average'];
-	$eaverage = number_format((float)$eaverage, 2, '.', '');
-	
-	$saverage = mysqli_query($mysqli, "SELECT AVG(sesrat) AS average FROM review WHERE trainer_id='$id'");
-	$saverage = mysqli_fetch_array($saverage);
-	$saverage = $saverage['average'];
-	$saverage = number_format((float)$saverage, 2, '.', '');
-	
-	$selfaverage = mysqli_query($mysqli, "SELECT AVG(totalrating) AS average FROM review WHERE trainer_id='$id'");
-	$selfaverage = mysqli_fetch_array($selfaverage);
-	$selfaverage = $selfaverage['average'];
-	$selfaverage = number_format((float)$selfaverage, 2, '.', '');
+	else {
+		//get average ratings of all criteria for the trainer
+		$paverage = mysqli_query($mysqli, "SELECT AVG(profrat) AS average FROM review WHERE trainer_id='$id'");
+		$paverage = mysqli_fetch_array($paverage);
+		$paverage = $paverage['average'];
+		$paverage = number_format((float)$paverage, 2, '.', '');
+		
+		$eaverage = mysqli_query($mysqli, "SELECT AVG(engrat) AS average FROM review WHERE trainer_id='$id'");
+		$eaverage = mysqli_fetch_array($eaverage);
+		$eaverage = $eaverage['average'];
+		$eaverage = number_format((float)$eaverage, 2, '.', '');
+		
+		$saverage = mysqli_query($mysqli, "SELECT AVG(sesrat) AS average FROM review WHERE trainer_id='$id'");
+		$saverage = mysqli_fetch_array($saverage);
+		$saverage = $saverage['average'];
+		$saverage = number_format((float)$saverage, 2, '.', '');
+		
+		$selfaverage = mysqli_query($mysqli, "SELECT AVG(totalrating) AS average FROM review WHERE trainer_id='$id'");
+		$selfaverage = mysqli_fetch_array($selfaverage);
+		$selfaverage = $selfaverage['average'];
+		$selfaverage = number_format((float)$selfaverage, 2, '.', '');
+	}
 	
 	// how long ago function
 	function time_elapsed_string($datetime, $full = false) {
@@ -86,8 +95,13 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Palanquin" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Droid+Sans+Mono" rel="stylesheet">
 
 	<link rel="stylesheet" href="css/allreviews.css">
+	<link rel="stylesheet" href="css/alert.css">
+	<link rel="stylesheet" href="css/navfooter.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -97,30 +111,30 @@
 
 <body>
 
-	<div class="container-jumbo">
-	
-		<div class="container">
-			<nav class="nav navbar-default"><!-- Navigation bar -->
+	<div class="container-fluid nav-fluid">
+		<div class="navbar navbar-default"><!-- Navigation bar -->
+			<div class="container">
 				<div class="navbar-header">
 				  <button class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span> 
 				  </button>
-				  <a class="navbar-brand" href="index.php"><img class="img-responsive" src="images/routeW.png"></a>
+				  <a class="navbar-brand" href="index.php"><img class="img-responsive" src="images/routeb.png"></a>
 				</div>
 				
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-left"> 
-						<li><a href="index.php"><button class="btn navbar-btn"><strong>Home</strong></button></a></li>
+						<li><a href="index.php"><button class="btn navbar-btn" ><strong>Home</strong></button></a></li>
 						<li><a href="about.php"><button class="btn navbar-btn"><strong>About</strong></button></a></li>		
 						<li><a href="contact.php"><button class="btn navbar-btn"><strong>Contact</strong></button></a></li>		
 					</ul>
-				
+
+					<?php if ( isset($_SESSION['user'])!="" ) { ?>
 					<ul class="nav navbar-nav navbar-right desktop">
 						<li class="dropdown ">
 							<a href="#" data-toggle="dropdown" class="dropdown-toggle">
-								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo ucwords($userRow['fullname'])?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
+								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo ucwords($userRow['fullname']); ?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
 							</a>
 								<ul class="dropdown-menu">
 									<li><a href="profile.php">Profile</a></li>
@@ -133,25 +147,44 @@
 						<li><a href="#"><button class="btn navbar-btn">Profile</button></a></li>
 						<li><a href="logout.php?logout"><button class="btn navbar-btn"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span>&nbsp;Log Out</button></a></li>
 					</ul>
+					<?php } else { ?>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="signup.php"><button class="btn navbar-btn" ><strong>Sign Up</strong></button></a></li>
+						<li><a><button class="btn navbar-btn" data-toggle="modal" data-target="#loginModal"><strong>Log In</strong></button></a></li>
+					</ul>
+					<?php }?>
 				</div>
-			</nav>
-		</div>
+			</div>
+			
+		</div><!-- End of nav bar -->
+
+	</div>
+	
+	<div class="container-fluid main-fluid">
 		
-		<div class="container header-container">
-			<div class="container main-header">
-				<p class="header">All Reviews Received. &nbsp;<span class="title">Read all the reviews the members have written regarging you & your sessions.</span></p>
+		<div class="container page-info">
+			<div class="row">
+				<a href="allreviews.php"><div class="col-lg-3 info-box ">
+					<strong>VIEWING ALL REVIEWS</strong>
+				</div></a>
+				<?php if (isset($alertType)) { ?>
+					<div class="col-lg-6">
+						<div class="alert alert-box-s type-<?php echo $alertType; ?> alert-dismissable text-center">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							&nbsp;<?php echo $errMSG; ?>
+						</div>
+					</div>
+				<?php } ?>
 			</div>
 		</div>
 		
-	</div>
-	
-	<div class= "container-fluid content-fluid">
 		<div class="container review-container">
 			<div class="row">
 			<div class="col-lg-3" >
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<ul class="review">
+								
 								<li><p><strong>Overall Review Information</strong></p></li>
 								<li><strong>Total reviews received: </strong><?php echo $count; ?></li>
 								<li>&nbsp;</li>
@@ -160,31 +193,31 @@
 																						if ($selfaverage >= 3.5) { echo ' btn-green'; }
 																						elseif ($selfaverage >=2.5) { echo ' btn-yellow'; }
 																						elseif ($selfaverage >= 0) { echo ' btn-red'; }
-																						echo '">'; echo $selfaverage; echo '</button>' ?></small></li>
+																						echo ' num">'; echo $selfaverage; echo '</button>' ?></small></li>
 								<li><strong>Average Professionalism: &nbsp;&nbsp;</strong><small><?php echo '<button class="btn btn-static btn-xs '; 
 																						if ($paverage >= 3.5) { echo ' btn-green'; }
 																						elseif ($paverage >=2.5) { echo ' btn-yellow'; }
 																						elseif ($paverage >= 0) { echo ' btn-red'; }
-																						echo '">'; echo $paverage; echo '</button>' ?></small></li>
+																						echo ' num">'; echo $paverage; echo '</button>' ?></small></li>
 								<li><strong>Average Engagement: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 																				</strong><small><?php echo '<button class="btn btn-static btn-xs '; 
 																						if ($saverage >= 3.5) { echo ' btn-green'; }
 																						elseif ($saverage >=2.5) { echo ' btn-yellow'; }
 																						elseif ($saverage >= 0) { echo ' btn-red'; }
-																						echo '">'; echo $saverage; echo '</button>' ?></small></li>
+																						echo ' num">'; echo $saverage; echo '</button>' ?></small></li>
 								<li><strong>Average Session: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 																				</strong><small><?php echo '<button class="btn btn-static btn-xs '; 
 																						if ($eaverage >= 3.5) { echo ' btn-green'; }
 																						elseif ($eaverage >=2.5) { echo ' btn-yellow'; }
 																						elseif ($eaverage >= 0) { echo ' btn-red'; }
-																						echo '">'; echo $eaverage; echo '</button>' ?></small></li>
+																						echo ' num">'; echo $eaverage; echo '</button>' ?></small></li>
 								
 							</ul>
 						</div>
 					</div>
 				</div>
 			<?php $reviews = "SELECT reviewer_name, r.trainer_id, r.session_id, title, timestamp, profrat, engrat, sesrat, totalrating, comments, date, category from review r, session s
-								WHERE r.session_id = s.session_id AND r.trainer_id = '$id' ORDER BY timestamp";
+								WHERE r.session_id = s.session_id AND r.trainer_id = '$id' ORDER BY timestamp DESC";
 				if ($result = mysqli_query($mysqli, $reviews)) {
 					while ($row = mysqli_fetch_row($result)){ ?>
 						<div class="col-lg-9 pull-right">
@@ -198,27 +231,33 @@
 													if ($row[8] >= 3.5) { echo ' btn-green'; }
 													elseif ($row[8] >=2.5) { echo ' btn-yellow'; }
 													elseif ($row[8] >= 0) { echo ' btn-red'; }
-													echo '">'; echo $row[8]; echo '</button></small>'; ?>
+													echo ' num">'; echo $row[8]; echo '</button></small>'; ?>
 												<strong><?php echo time_elapsed_string($row[4]) ?></strong></p></li>	
 												<li><strong>Session Name: </strong><?php echo $row[3]; ?></li>
 												<li><strong>Session Date: </strong><?php echo $row[10]; ?></li>
 												<li><strong>Category: </strong><?php echo ucfirst($row[11]); ?></li>
 												<li>&nbsp;</li>
+												<?php $prating = $row[5];
+												$prating = number_format((float)$prating, 1, '.', '');
+												$erating = $row[6];
+												$erating = number_format((float)$erating, 1, '.', '');
+												$srating = $row[7];
+												$srating = number_format((float)$prating, 1, '.', ''); ?>
 												<li><strong>Professional Rating: &nbsp;&nbsp;&nbsp;</strong><small><?php echo '<button class="btn btn-static btn-xs '; 
 																						if ($row[5] >= 3.5) { echo ' btn-green'; }
 																						elseif ($row[5] >=2.5) { echo ' btn-yellow'; }
 																						elseif ($row[5] >= 0) { echo ' btn-red'; }
-																						echo '">'; echo $row[5]; echo '</button>' ?></small></li>
+																						echo ' num">'; echo $prating; echo '</button>' ?></small></li>
 												<li><strong>Engagement Rating: &nbsp;&nbsp;</strong><small><?php echo '<button class="btn btn-static btn-xs '; 
 																						if ($row[6] >= 3.5) { echo ' btn-green'; }
 																						elseif ($row[6] >=2.5) { echo ' btn-yellow'; }
 																						elseif ($row[6] >= 0) { echo ' btn-red'; }
-																						echo '">'; echo $row[6]; echo '</button>' ?></small></li>
+																						echo ' num">'; echo $erating; echo '</button>' ?></small></li>
 												<li><strong>Session Rating: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong><small><?php echo '<button class="btn btn-static btn-xs '; 
 																						if ($row[7] >= 3.5) { echo ' btn-green'; }
 																						elseif ($row[7] >=2.5) { echo ' btn-yellow'; }
 																						elseif ($row[7] >= 0) { echo ' btn-red'; }
-																						echo '">'; echo $row[7]; echo '</button>' ?></small></li>
+																						echo ' num">'; echo $srating; echo '</button>' ?></small></li>
 											</ul>
 										</div>
 										<div class="col-lg-6 ">
@@ -228,13 +267,21 @@
 										</div>
 									</div>
 								</div>
+
 							</div>
 						</div>
 						
 						
 				<?php }}
 				 ?>
-				 
+				<?php if ($count == 0) { ?>
+				<div class="col-lg-9">
+					<div class="alert alert-box type-primary alert-dismissable">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<p>You have not received any reviews yet.</p> 
+					</div>
+				</div>
+				<?php } ?>
 				
 			</div>
 		</div>

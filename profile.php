@@ -32,11 +32,11 @@
 
 			
 		    if ($res) {
-			 $errType = "success";
-			 $errMsg = "Successfully updated profile.";
+			 $alertType = "success";
+			 $errMSG = "Successfully updated profile.";
 		    } else {
 			 $errType = "danger";
-			 $errMsg = "Something went wrong, try again later..."; 
+			 $errMSG = "Something went wrong, try again later..."; 
 		    } 
 		}
 ?>
@@ -59,6 +59,8 @@
 	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 	
 	<link rel="stylesheet" href="css/profile.css">
+	<link rel="stylesheet" href="css/alert.css">
+	<link rel="stylesheet" href="css/navfooter.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -68,48 +70,82 @@
 
 <body>
 
-	<div class="container-jumbo">
-	
-		<nav class="nav navbar-default"><!-- Navigation bar -->
+	<div class="container-fluid nav-fluid">
+		<div class="navbar navbar-default"><!-- Navigation bar -->
 			<div class="container">
-				<ul class="nav navbar-nav navbar-left"> 
-					<li><a href="trainer.php" class="navbar-brand" id="#top"><img class="img-responsive" src="images/routeW.png"></a></li>
-					<li><a href="trainer.php"><button class="btn navbar-btn"><strong>Home</strong></button></a></li>
-					<li><a href="about.php"><button class="btn navbar-btn"><strong>About</strong></button></a></li>		
-				</ul>
+				<div class="navbar-header">
+				  <button class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span> 
+				  </button>
+				  <a class="navbar-brand" href="index.php"><img class="img-responsive" src="images/routeb.png"></a>
+				</div>
 				
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-						<a href="#" data-toggle="dropdown" class="dropdown-toggle">
-							<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo $userRow['fullname']?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
-						</a>
-							<ul class="dropdown-menu">
-								<li><a href="profile.php">Profile</a></li>
-								<li class="divider"></li>
-								<li><a href="logout.php?logout"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span>&nbsp;Log Out</a></li>
-							</ul>
-					</li>
-				</ul>
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav navbar-left"> 
+						<li><a href="index.php"><button class="btn navbar-btn" ><strong>Home</strong></button></a></li>
+						<li><a href="about.php"><button class="btn navbar-btn"><strong>About</strong></button></a></li>		
+						<li><a href="contact.php"><button class="btn navbar-btn"><strong>Contact</strong></button></a></li>		
+					</ul>
+
+					<?php if ( isset($_SESSION['user'])!="" ) { ?>
+					<ul class="nav navbar-nav navbar-right desktop">
+						<li class="dropdown ">
+							<a href="#" data-toggle="dropdown" class="dropdown-toggle">
+								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo ucwords($userRow['fullname']); ?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
+							</a>
+								<ul class="dropdown-menu">
+									<li><a href="profile.php">Profile</a></li>
+									<li class="divider"></li>
+									<li><a href="logout.php?logout"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span>&nbsp;Log Out</a></li>
+								</ul>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right mobile">
+						<li><a href="#"><button class="btn navbar-btn">Profile</button></a></li>
+						<li><a href="logout.php?logout"><button class="btn navbar-btn"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span>&nbsp;Log Out</button></a></li>
+					</ul>
+					<?php } else { ?>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="signup.php"><button class="btn navbar-btn" ><strong>Sign Up</strong></button></a></li>
+						<li><a><button class="btn navbar-btn" data-toggle="modal" data-target="#loginModal"><strong>Log In</strong></button></a></li>
+					</ul>
+					<?php }?>
+				</div>
 			</div>
-		</nav>
-	
-	<div class="container container-header">
-			<h2><strong>Welcome, <?php echo $userRow['fullname']?>!</strong></h2>
-			<h3>You may view your profile here.</h3>
-			<hr>
-		</div>
+			
+		</div><!-- End of nav bar -->
+
 	</div>
 	
-	<?php $user = mysqli_query($mysqli, "SELECT * from user WHERE user_id =".$_SESSION['user']);
-	$row = mysqli_fetch_row($user);
-	
-	$member = mysqli_query($mysqli, "SELECT * from member WHERE user_id =".$_SESSION['user']);
-	$mrow = mysqli_fetch_row($member);
-	
-	$trainer = mysqli_query($mysqli, "SELECT * from trainer WHERE user_id =".$_SESSION['user']);
-	$trow = mysqli_fetch_row($trainer); ?>
+	<div class="container-fluid profile-fluid">
 
-	<div class="container-fluid main-container">
+		<div class="container page-info">
+			<div class="row">
+				<a href="profile.php"><div class="col-lg-3 info-box ">
+					<strong>UPDATING PROFILE</strong>
+				</div></a>
+				<?php if (isset($alertType)) { ?>
+					<div class="col-lg-6">
+						<div class="alert alert-box-s type-<?php echo $alertType; ?> alert-dismissable text-center">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							&nbsp;<?php echo $errMSG; ?>
+						</div>
+					</div>
+				<?php } ?>
+			</div>
+		</div>
+		
+		<?php $user = mysqli_query($mysqli, "SELECT * from user WHERE user_id =".$_SESSION['user']);
+		$row = mysqli_fetch_row($user);
+		
+		$member = mysqli_query($mysqli, "SELECT * from member WHERE user_id =".$_SESSION['user']);
+		$mrow = mysqli_fetch_row($member);
+		
+		$trainer = mysqli_query($mysqli, "SELECT * from trainer WHERE user_id =".$_SESSION['user']);
+		$trow = mysqli_fetch_row($trainer); ?>
+		
 		<div class="container profile-container">
 			<div class="row">
 			
@@ -196,11 +232,12 @@
 												</div>											
 											</div>
 										<?php
-											if ( isset($errMsg) ) {
+											if ( isset($errType) ) {
 											?>
 											<div class="form-group">
-													 <div class="alert alert-<?php echo ($errType=="success") ? "success" : $errType; ?>">
-														<span class="glyphicon glyphicon-info-sign"></span> <?php echo $errMsg; ?>
+													 <div class="alert alert-boxalert-<?php echo $errType; ?> alert-dismissable">
+													 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+														<?php echo $errMSG; ?>
 													</div>
 											</div>
 														<?php
@@ -247,7 +284,8 @@
 			<div class="col-sm-12 col-lg-6">
 				<span style="float:right">
 					<a href="trainer.php">Home</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-					<a href="#">About</a>
+					<a href="#">About</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+					<a href="contact.php">Contact</a>
 				</span>
 			</div>	
 		</div><!-- End Sub Footer -->
