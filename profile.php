@@ -75,7 +75,7 @@
 				<ul class="nav navbar-nav navbar-left"> 
 					<li><a href="trainer.php" class="navbar-brand" id="#top"><img class="img-responsive" src="images/routeW.png"></a></li>
 					<li><a href="trainer.php"><button class="btn navbar-btn"><strong>Home</strong></button></a></li>
-					<li><a href="#"><button class="btn navbar-btn"><strong>About</strong></button></a></li>		
+					<li><a href="about.php"><button class="btn navbar-btn"><strong>About</strong></button></a></li>		
 				</ul>
 				
 				<ul class="nav navbar-nav navbar-right">
