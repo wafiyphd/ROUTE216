@@ -11,9 +11,26 @@
 	} else {
 		header("Location: index.php");	
 	}
-	
+
 	if ( isset($_GET['id']) ) {
 		$sessionid = $_GET['id'];
+	}
+	
+	if ( isset($_GET['danger']) && $_GET['danger'] == 0) {
+		$alertType = "danger";
+		$errMsg = "Please enter a valid date.";
+	} elseif ( isset($_GET['danger']) && $_GET['danger'] == 1) {
+		$alertType = "danger";
+		$errMsg = "Please enter a valid year.";	
+	} elseif ( isset($_GET['danger']) && $_GET['danger'] == 2) {
+		$alertType = "danger";
+		$errMsg = "Please select AM or PM.";	
+	} elseif ( isset($_GET['danger']) && $_GET['danger'] == 3) {
+		$alertType = "danger";
+		$errMsg = "Please pick a session type.";
+	} elseif ( isset($_GET['danger']) && $_GET['danger'] == 4) {
+		$alertType = "danger";
+		$errMsg = "Please enter a maximum number of participants.";
 	}
 	
 	$trquery = "SELECT trainer_id from session WHERE trainer_id='$sessionid'";
@@ -59,12 +76,15 @@
 		$maxpax = trim($_POST["maxpax"]);
 		$maxpax = strip_tags($maxpax);
 		$maxpax = htmlspecialchars($maxpax);  
-	
+		
+		$id = $_POST['id'];
+		
 		// date validation --
 		if ($day < 1 or $day > 31) {
 			$error = true;
 			$errType = "danger";
 			$errMsg = "Please enter a valid date.";
+			header('Location: updatesession.php?danger=0&id='.$id);
 		}
 			
 		if ($month == 4 or $month == 6 or $month == 9 or $month == 11) {
@@ -72,6 +92,7 @@
 				$error = true;
 				$errType = "danger";
 				$errMsg = "Please enter a valid date.";
+				header('Location: updatesession.php?danger=0&id='.$id);
 			}
 		}
 			
@@ -80,13 +101,15 @@
 				$error = true;
 				$errType = "danger";
 				$errMsg = "Please enter a valid date.";
+				header('Location: updatesession.php?danger=0&id='.$id);
 			}
 		}
 			
 		if ($year < 2017) {
 			$error = true;
 			$errType = "danger";
-			$errMsg = "Please enter a valid date.";
+			$errMsg = "Please enter a valid year.";
+			header('Location: updatesession.php?danger=1&id='.$id);
 		}
 		// -- ends here 
 			
@@ -94,20 +117,21 @@
 			$error = true;
 			$errType = "danger";
 			$errMsg = "Please select AM or PM.";
+			header('Refresh: 3, URL=updatesession.php?danger=2&id='.$id);
+		}
+					
+		if (!isset($_POST['type'])) {
+			$error = true;
+			$errType = "danger";
+			$errMsg = "Please pick a session type.";
+			header('Location: updatesession.php?danger=3&id='.$id);
 		}
 				
-		if ($category == "group") {
-			if (!isset($_POST['type'])) {
-				$error = true;
-				$errType = "danger";
-				$errMsg = "Please pick a session type.";
-			}
-				
-			if (empty(($_POST['maxpax']))) {
-				$error = true;
-				$errType = "danger";
-				$errMsg = "Please enter a maximum number of participants.";
-			}
+		if (($_POST['maxpax']) == NULL) {
+			$error = true;
+			$errType = "danger";
+			$errMsg = "Please enter a maximum number of participants.";
+			header('Location: updatesession.php?danger=4&id='.$id);
 		}
 		
 		if (!$error) {
@@ -125,10 +149,8 @@
 			$notes = $_POST['notes'];
 			$type = $_POST['type'];
 			$maxpax = $_POST['maxpax'];
-			
 			$category = $sessionRow['category'];
 			
-
 			$query = "UPDATE session SET title='$title', date='$date', time='$time', fee='$fee', status='$status' WHERE session_id = '$sessionid'";
 			$res = mysqli_query($mysqli, $query);
 				
@@ -239,7 +261,7 @@
 					<div class="col-lg-6">
 						<div class="alert alert-box-s type-<?php echo $alertType; ?> alert-dismissable text-center">
 						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-							&nbsp;<?php echo $errMSG; ?>
+							&nbsp;<?php echo $errMsg; ?>
 						</div>
 					</div>
 				<?php } ?>
@@ -264,6 +286,8 @@
 							<div class="row text-center">
 								
 								<form class="col-lg-12" action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" autocomplete="off">
+									<input name="id" value="<?php echo $row[0]; ?>" class="hidden"/>
+									
 									<div class = "group">
 										<label for="title" class="label">TITLE</label>
 										<input id="title" type="text" name="title" class="input"  value="<?php echo $row[2]; ?>"required>
