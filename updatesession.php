@@ -18,10 +18,48 @@
 	
 	$trquery = "SELECT trainer_id from session WHERE trainer_id='$sessionid'";
 	if (!$res = mysqli_query($mysqli, $trquery)) {
-		header("Location: index: php");
+		header("Location: index.php");
 	}
 	
 	if( isset($_POST['update']) ) {
+		$title = trim($_POST["title"]);
+		$title = strip_tags($title);
+		$title = htmlspecialchars($title);
+	  
+		$day = trim($_POST["day"]);
+		$day = strip_tags($day);
+		$day = htmlspecialchars($day);
+		
+		$month = trim($_POST["month"]);
+		$month = strip_tags($month);
+		$month = htmlspecialchars($month);
+		
+		$year = trim($_POST["year"]);
+		$year = strip_tags($year);
+		$year = htmlspecialchars($year);
+		
+		$clock = trim($_POST["clock"]);
+		$clock = strip_tags($clock);
+		$clock = htmlspecialchars($clock);
+	  
+		$period = $_POST["timeperiod"];
+	  
+		$fee = trim($_POST["fee"]);
+		$fee = strip_tags($fee);
+		$fee = htmlspecialchars($fee);
+	  
+		$status = trim($_POST["status"]);
+		$status = strip_tags($status);
+		$status = htmlspecialchars($status);
+	  
+		$notes = trim($_POST["notes"]);
+		$notes = strip_tags($notes);
+		$notes = htmlspecialchars($notes);
+	  
+		$maxpax = trim($_POST["maxpax"]);
+		$maxpax = strip_tags($maxpax);
+		$maxpax = htmlspecialchars($maxpax);  
+	
 		// date validation --
 		if ($day < 1 or $day > 31) {
 			$error = true;
@@ -97,8 +135,8 @@
 			$pquery = "UPDATE personal_session SET notes='$notes' WHERE session_id = '$sessionid'";
 			$res = mysqli_query($mysqli, $pquery);			
 				
-			$newquery = "UPDATE group_session SET type='$type', maxpax='$maxpax' WHERE session_id = '$sessionid'";
-			$res = mysqli_query($mysqli, $newquery);				
+			$gquery = "UPDATE group_session SET type='$type', maxpax='$maxpax' WHERE session_id = '$sessionid'";
+			$res = mysqli_query($mysqli, $gquery);				
 
 			
 		    if ($res) {
