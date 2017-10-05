@@ -13,8 +13,30 @@
 	} else {
 		header("Location: index.php");	
 	}
+
+	if ( isset($_GET['success']) && $_GET['success'] == 0) {
+		$alertType = "success";
+		$errMsg = "Successfully changed your password.";
+	}
 	
 	if( isset($_POST['update']) ) {
+		$fullname = trim($_POST['fullname']);
+		$fullname = strip_tags($fullname);
+		$fullname = htmlspecialchars($fullname);
+		  
+		$email = trim($_POST['email']);
+		$email = strip_tags($email);
+		$email = htmlspecialchars($email);		
+
+		$level = trim($_POST['level']);
+		$level = strip_tags($level);
+		$level = htmlspecialchars($level);
+
+		$specialty = trim($_POST['specialty']);
+		$specialty = strip_tags($specialty);
+		$specialty = htmlspecialchars($specialty);
+		
+		if (!$error) {
 
 			$fullname = $_POST['fullname'];
 			$email = $_POST['email'];
@@ -39,6 +61,7 @@
 			 $errMSG = "Something went wrong, try again later..."; 
 		    } 
 		}
+	}
 ?>
 
 <!DOCTYPE html>
@@ -130,7 +153,7 @@
 					<div class="col-lg-6">
 						<div class="alert alert-box-s type-<?php echo $alertType; ?> alert-dismissable text-center">
 						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-							&nbsp;<?php echo $errMSG; ?>
+							&nbsp;<?php echo $errMsg; ?>
 						</div>
 					</div>
 				<?php } ?>
@@ -158,6 +181,8 @@
 									<div class = "group">
 										<img src="images/man.png" class="photo"><hr>
 										<label for = "type" class = "photolabel"><?php echo $row[1]?></label>
+										<br>
+										<a href="passwordchange.php"><p class="change">CHANGE PASSWORD</p></a>
 									</div>
 
 									<div class = "group">
@@ -208,52 +233,51 @@
 															<option value="intermediate" <?php if ($mrow[3] == "intermediate") echo "selected"; ?>>Intermediate</option>
 															<option value="expert" <?php if ($mrow[3] == "expert") echo "selected"; ?>>Expert</option>
 														</select>
+													</div>
 												</div>
-												</div>					
+												
 												<div class="form" id="trainer" style="display: none;">
+												
 												<div class="group">
 													<label for="session" class="label">SPECIALTY</label>
 													<input id="specialty" type="text" name="specialty" class = "input" value="<?php echo $trow[3]; ?>"></div>
 												</div>
-														<?php 
-															if ($row[1] == 'member') {
-																$showdiv = 'member';
-															}
-															else if ($row[1] == 'trainer') {
-																$showdiv = 'trainer';
-															}
-															echo "<script type=\"text/javascript\">document.getElementById('".$showdiv."').style.display = 'block';</script>";
-														?>
+												
+												<?php 
+													if ($row[1] == 'member') {
+														$showdiv = 'member';
+													}
+													else if ($row[1] == 'trainer') {
+														$showdiv = 'trainer';
+													}
+													echo "<script type=\"text/javascript\">document.getElementById('".$showdiv."').style.display = 'block';</script>";
+												?>
 												<div class = "group">
-													<button type="update" name="update" class="button" value="Update Profile">UPDATE</button>
-													</div>
+													<button type="submit" name="update" class="button" value="Update Profile">UPDATE</button>
 												</div>
-											</div>		
-												</div>											
 											</div>
-										<?php
-											if ( isset($errType) ) {
-											?>
-											<div class="form-group">
-													 <div class="alert alert-boxalert-<?php echo $errType; ?> alert-dismissable">
-													 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-														<?php echo $errMSG; ?>
-													</div>
-											</div>
-														<?php
-										   }
-										   ?>											
-										</div>
-
-									</form>	
-									</div>									
+										</div>		
+									</div>											
 								</div>
-							</div>	
+							<?php
+								if ( isset($errType) ) {
+							?>
+								<div class="form-group">
+									<div class="alert alert-boxalert type-<?php echo $errType; ?> alert-dismissable">
+										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							<?php echo $errMSG; ?>
+									</div>
+								</div>
+							<?php
+								}
+							?>											
 						</div>
-					</div>
-				</div>
+					</form>	
+				</div>									
 			</div>
-		</div>
+		</div>	
+	</div>
+
 
 	<div class="container-fluid footer-container">
 		

@@ -1,4 +1,4 @@
-.profile-fluid {background: #eaeaea}
+.profile-fluid {background: #eaeaea; }
 
 .profile-container h3 {font-weight: bold; text-align: center;  color: black;}
 .profile-container h4 {text-align: center;  color: white;}
@@ -10,6 +10,7 @@
 .profile-form .group{margin-top: 10px; margin-bottom:20px;}
 
 .profile-form .photolabel {text-transform: uppercase; color: #80bfff; }
+.profile-form .change {font-family: "Quicksand"; font-size: 75%; font-weight: bold; color: #66b3ff; }
 .profile-form .label {width:100%; color:#ff9999; display:block; outline: none; font-size: 85%; text-align: left; font-family: "Quicksand"; }
 .profile-form .info {font-size: 100%; color: #595959; font-family: "Palanquin"; text-align: left; padding: 5px 0 20px 7.5px;}
 .profile-form .input {width:100%; color:#d9d9d9; display:block; outline: none; font-size: 95%; font-family: "Quicksand"; }

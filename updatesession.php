@@ -25,12 +25,6 @@
 	} elseif ( isset($_GET['danger']) && $_GET['danger'] == 2) {
 		$alertType = "danger";
 		$errMsg = "Please select AM or PM.";	
-	} elseif ( isset($_GET['danger']) && $_GET['danger'] == 3) {
-		$alertType = "danger";
-		$errMsg = "Please pick a session type.";
-	} elseif ( isset($_GET['danger']) && $_GET['danger'] == 4) {
-		$alertType = "danger";
-		$errMsg = "Please enter a maximum number of participants.";
 	}
 	
 	$trquery = "SELECT trainer_id from session WHERE trainer_id='$sessionid'";
@@ -90,8 +84,6 @@
 		if ($month == 4 or $month == 6 or $month == 9 or $month == 11) {
 			if ($day > 30) {
 				$error = true;
-				$errType = "danger";
-				$errMsg = "Please enter a valid date.";
 				header('Location: updatesession.php?danger=0&id='.$id);
 			}
 		}
@@ -99,39 +91,19 @@
 		if ($month == 2) {
 			if ($day > 29) {
 				$error = true;
-				$errType = "danger";
-				$errMsg = "Please enter a valid date.";
 				header('Location: updatesession.php?danger=0&id='.$id);
 			}
 		}
 			
 		if ($year < 2017) {
 			$error = true;
-			$errType = "danger";
-			$errMsg = "Please enter a valid year.";
 			header('Location: updatesession.php?danger=1&id='.$id);
 		}
 		// -- ends here 
 			
 		if (!isset($_POST['timeperiod'])) {
 			$error = true;
-			$errType = "danger";
-			$errMsg = "Please select AM or PM.";
 			header('Refresh: 3, URL=updatesession.php?danger=2&id='.$id);
-		}
-					
-		if (!isset($_POST['type'])) {
-			$error = true;
-			$errType = "danger";
-			$errMsg = "Please pick a session type.";
-			header('Location: updatesession.php?danger=3&id='.$id);
-		}
-				
-		if (($_POST['maxpax']) == NULL) {
-			$error = true;
-			$errType = "danger";
-			$errMsg = "Please enter a maximum number of participants.";
-			header('Location: updatesession.php?danger=4&id='.$id);
 		}
 		
 		if (!$error) {
@@ -163,11 +135,11 @@
 			
 		    if ($res) {
 				$errType = "success";
-				$errMSG = "Successfully updated training session.";
+				$errMsg = "Successfully updated training session.";
 				header("Location: trainer.php?success=1");
 		    } else {
 				$errType = "danger";
-				$errMSG = "Something went wrong, try again later..."; 
+				$errMsg = "Something went wrong, try again later..."; 
 		    } 
 		}
 	}
@@ -197,6 +169,23 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+	<script>
+	$(function () {
+		$( "#maxpax" ).change(function() {
+		  var max = parseInt($(this).attr('max'));
+		  var min = parseInt($(this).attr('min'));
+		  if ($(this).val() > max)
+		  {
+			  $(this).val(max);
+		  }
+		  else if ($(this).val() < min)
+		  {
+			  $(this).val(min);
+		  }       
+		}); 
+	});
+	</script>
+	
 </head>
 
 <body>
