@@ -216,7 +216,7 @@ if( isset($_POST['login']) ) {
 					
 					<div class="pic-container col-sm-4 col-lg-4 padding-0">
 						<img src="images/winner.jpg"></img><div class="overlay"></img><div class="caption">TIME-SAVING<hr></div><div class="moreinfo">Book a session without having to 
-						physically be at a gym or a studio. No more lines and no more appointments. Just show up.</div></div>
+						physically be at a gym or a studio. No more lines and no more waiting. Just show up.</div></div>
 					</div>
 					
 				</div>
