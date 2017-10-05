@@ -205,7 +205,7 @@ if( isset($_POST['login']) ) {
 				<div class="row">
 					
 					<div class="pic-container col-sm-4 col-lg-4 padding-0">
-						<img src="images/phone.jpg"></img><div class="overlay"><div class="caption">CONVENIENT<hr></div><div class="moreinfo">Despite a busy schedule, 
+						<img src="images/phone.jpg"></img><div class="overlay"><div class="caption">CONVENIENCE<hr></div><div class="moreinfo">Despite a busy schedule, 
 														both parties can simply book sessions online, review a trainer, etc. from anywhere.</div></div>
 					</div>
 					
@@ -221,7 +221,7 @@ if( isset($_POST['login']) ) {
 					
 				</div>
 				<hr>
-				<a href="about.php"><p class="pull-right">Learn More&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></p></a>
+				<a href="about.php"><button class="btn btn-more pull-right">Learn More&nbsp;</button></a>
 			</div>
 		</div>
 	</div>

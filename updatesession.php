@@ -4,7 +4,7 @@
 	require_once 'dbconnect.php';
 	
 	$error = false;
-	
+
 	if (isset($_SESSION['user'])!="" ) { 
 		$res= mysqli_query($mysqli, "SELECT * FROM user WHERE user_id=".$_SESSION['user']);
 		$userRow= mysqli_fetch_array($res);
@@ -25,6 +25,9 @@
 	} elseif ( isset($_GET['danger']) && $_GET['danger'] == 2) {
 		$alertType = "danger";
 		$errMsg = "Please select AM or PM.";	
+	} elseif ( isset($_GET['danger']) && $_GET['danger'] == 3) {
+		$alertType = "danger";
+		$errMsg = "Please enter a valid no. of max participants.";	
 	}
 	
 	$trquery = "SELECT trainer_id from session WHERE trainer_id='$sessionid'";
@@ -33,6 +36,13 @@
 	}
 	
 	if( isset($_POST['update']) ) {
+		
+		$id = $_POST['sessionid'];
+		
+		$query = mysqli_query($mysqli, "SELECT * from session where session_id = '$id'");
+		$sessionRow = mysqli_fetch_row($query);
+		$category = $sessionRow[1];
+			
 		$title = trim($_POST["title"]);
 		$title = strip_tags($title);
 		$title = htmlspecialchars($title);
@@ -71,7 +81,12 @@
 		$maxpax = strip_tags($maxpax);
 		$maxpax = htmlspecialchars($maxpax);  
 		
-		$id = $_POST['id'];
+		if ($category == "group") {
+			if ($maxpax < 2 or $maxpax > 30) {
+				$error = true;
+				header('Location: updatesession.php?danger=3&id='.$id);
+			}
+		}
 		
 		// date validation --
 		if ($day < 1 or $day > 31) {
@@ -136,7 +151,7 @@
 		    if ($res) {
 				$errType = "success";
 				$errMsg = "Successfully updated training session.";
-				header("Location: trainer.php?success=1");
+				header("Location: viewhistory.php?success=1");
 		    } else {
 				$errType = "danger";
 				$errMsg = "Something went wrong, try again later..."; 
@@ -168,23 +183,6 @@
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-	<script>
-	$(function () {
-		$( "#maxpax" ).change(function() {
-		  var max = parseInt($(this).attr('max'));
-		  var min = parseInt($(this).attr('min'));
-		  if ($(this).val() > max)
-		  {
-			  $(this).val(max);
-		  }
-		  else if ($(this).val() < min)
-		  {
-			  $(this).val(min);
-		  }       
-		}); 
-	});
-	</script>
 	
 </head>
 
@@ -257,16 +255,17 @@
 			</div>
 		</div>
 		
-		<?php $session = mysqli_query($mysqli, "SELECT * from session WHERE session_id = '$sessionid'");
+		<div class="container update-container">
+		<?php 
+		$session = mysqli_query($mysqli, "SELECT * from session WHERE session_id = '$sessionid'");
 		$row = mysqli_fetch_row($session);
 		
 		$psession = mysqli_query($mysqli, "SELECT * from personal_session WHERE session_id = '$sessionid'");
 		$prow = mysqli_fetch_row($psession);
 		
 		$gsession = mysqli_query($mysqli, "SELECT * from group_session WHERE session_id = '$sessionid'");
-		$grow = mysqli_fetch_row($gsession); ?>
-		
-		<div class="container update-container">
+		$grow = mysqli_fetch_row($gsession);
+		?>
 			<div class="row">
 			
 				<div class="col-xs-12 col-sm-12 col-sm-offset-0 col-lg-6 col-lg-offset-3">
@@ -399,7 +398,7 @@
 											</label>
 														
 											<label for = "participants" class = "label">NO. OF PARTICIPANTS</label>
-											<input id = "maxpax" type = "number" name = "maxpax" class = "input" min="2" max= "30" value="<?php echo $grow[1]; ?>">								
+											<input id = "maxpax" type = "number" name = "maxpax" class = "input" value="<?php echo $grow[1]; ?>">								
 										</div>
 										<?php 
 											if ($row[1] == 'personal') {
@@ -418,19 +417,6 @@
 										<div class="group">
 											<input type="submit" name="update" class="button" value="UPDATE"></input>
 										</div>
-											
-										<?php
-										if ( isset($errType) ) {
-										?>
-										<div class="form-group">
-												 <div class="alert alert-box type-<?php echo $errType; ?> alert-dismissable">
-												  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-													 <?php echo $errMsg; ?>
-												</div>
-										</div>
-													<?php
-									   }
-									   ?>
 											
 									</form>		
 								</div>

@@ -8,6 +8,11 @@ $userRow=mysqli_fetch_array($res);
 } else {
 	header("Location: index.php");	
 }
+
+if ( isset($_GET['success']) && $_GET['success'] == 1) {
+		$alertType = "success";
+		$errMSG = "Successfully updated session info.";
+	}
  
 $error = false;
 ?>

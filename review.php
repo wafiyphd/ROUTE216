@@ -10,12 +10,21 @@
 		header("Location: index.php");	
 	}
 	
+	if ( isset($_GET['id']) ) {
+		$sessionid = $_GET['id'];
+	}
+	
+	if ( isset($_GET['danger']) && $_GET['danger'] == 1) {
+		$alertType = "danger";
+		$errMSG = "Please enter a rating for all criterias."; 
+	}
+	
 	if( isset($_POST['review']) ) {
+		
+		$sessionid = $_POST['sessionid'];
 	 
 		if (!isset($_POST['prating']) || !isset($_POST['erating']) || !isset($_POST['srating'])) {
-			 $errType = "danger";
-			 $errMSG = "Please pick a rating for all the criterias.";
-			 header("Location: member.php?success=1");
+			 header('Location: review.php?danger=1&id='.$sessionid);
 		}
 		
 		else {
@@ -54,9 +63,7 @@
 	 
 	}
 	
-	if ( isset($_GET['id']) ) {
-		$sessionid = $_GET['id'];
-	}
+	
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -216,13 +223,9 @@
 										
 									</div>
 									
-									<div id="#group" class="group">
-										
-									</div>
-									
 									<div class="group">
 										<label for="comments" class="label">Comments</label>
-										<textarea id="comments"  type="text" name="comments" rows="8" class="input-text" required></textarea>
+										<textarea id="comments"  type="text" name="comments" rows="8" class="input-text"></textarea>
 									</div>
 									
 									<div class="group">
@@ -232,18 +235,6 @@
 									<div class="group">
 										<input type="submit" name="review" class="button" value="Submit"></input>
 									</div>
-									
-									<?php
-									if ( isset($errMSG) ) {
-									?>
-									<div class="form-group">
-											 <div class="alert alert-<?php echo $errType; ?>">
-												<span class="glyphicon glyphicon-info-sign"></span> <?php echo $errMSG; ?>
-											</div>
-									</div>
-												<?php
-								   }
-								   ?>
 									
 								</form>		
 							</div>
