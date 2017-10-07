@@ -255,7 +255,7 @@
 						  <tbody>
 							<?php $userid = $userRow['user_id'];
 							$sessions = "SELECT category, title, date, status, member_name from session s, personal_session p 
-							WHERE s.session_id = p.session_id AND category='personal' AND trainer_id = '$userid' AND NOT status = 'Completed' ORDER BY date LIMIT 5";
+							WHERE s.session_id = p.session_id AND category='personal' AND trainer_id = '$userid' AND NOT status = 'Completed' AND NOT status='Cancelled' ORDER BY date LIMIT 5";
 							if ($result = mysqli_query($mysqli, $sessions)) {
 								if ((mysqli_num_rows($result)) == 0) { ?>
 							<div class="alert alert-box type-danger">
@@ -294,7 +294,7 @@
 						  <tbody>
 							<?php $userid = $userRow['user_id'];
 							$sessions = "SELECT category, title, date, status, count from session s, group_session g 
-							WHERE s.session_id = g.session_id AND trainer_id = '$userid' AND NOT status = 'Completed' AND category='group' ORDER BY count DESC LIMIT 5";
+							WHERE s.session_id = g.session_id AND trainer_id = '$userid' AND NOT status = 'Completed' AND NOT status='Cancelled' AND category='group' ORDER BY date LIMIT 5";
 							if ($result = mysqli_query($mysqli, $sessions)) {
 								if ((mysqli_num_rows($result)) == 0) { ?>
 							<div class="alert alert-box type-danger">

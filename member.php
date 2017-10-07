@@ -237,6 +237,87 @@
 				</div>
 			</div>
 			
+			<div class="row">
+				<div class="col-lg-6">
+					<p class="title">UPCOMING PERSONAL SESSIONS JOINED</p>
+					<div class="tbl-header">
+						<table cellpadding="0" cellspacing="0" border="0">
+						  <thead>
+							<tr>
+							  <th>Sesssion Name</th>
+							  <th>Trainer Name</th>
+							  <th>Date</th>
+							</tr>
+						  </thead>
+						</table>
+					  </div>
+					  <div class="tbl-content">
+						<table class="table-hover" cellpadding="0" cellspacing="0" border="0">
+						  <tbody>
+							<?php $userid = $userRow['user_id'];
+							$sessions = "SELECT category, title, date, status, member_id, trainer_name from session s, personal_session p 
+							WHERE p.session_id = s.session_id  AND category='personal' AND member_id = '$userid' AND NOT status = 'Completed' AND NOT status='Cancelled' ORDER BY date LIMIT 5";
+							if ($result = mysqli_query($mysqli, $sessions)) {
+								if ((mysqli_num_rows($result)) == 0) { ?>
+							<div class="alert alert-box type-danger">
+							<p><strong>You have not joined any personal sessions.</strong></p>
+							<a href="joinsessionslist.php"><button class="btn btn-alert" style="padding-top: 10px;">Join a session</button></a>
+							</div>
+							<?php }
+							else {
+								while ($row = mysqli_fetch_row($result)){ ?>
+							<tr>
+								<td><?php echo $row[1]; ?></td>
+								<td><?php echo ucwords($row[5]);?></td>
+								<td><?php $date = date('j F Y',strtotime($row[2])); echo $date; ?></td>
+							</tr>
+							<?php }}} ?>
+						  </tbody>
+						</table>
+					</div>
+				</div>
+				
+				<div class="col-lg-6">
+					<p class="title">UPCOMING GROUP SESSIONS JOINED</p>
+					<div class="tbl-header">
+						<table cellpadding="0" cellspacing="0" border="0">
+						  <thead>
+							<tr>
+							  <th>Session Name</th>
+							  <th>Trainer Name</th>
+							  <th>Date</th>
+							</tr>
+						  </thead>
+						</table>
+					  </div>
+					  <div class="tbl-content">
+						<table class="table-hover" cellpadding="0" cellspacing="0" border="0">
+						  <tbody>
+							<?php $userid = $userRow['user_id'];
+							$sessions = "SELECT category, title, date, status, trainer_name, member_id
+							from session s, group_session g, joined_group j WHERE category='group' AND g.session_id = s.session_id AND g.session_id = j.session_id AND 
+							j.member_id = '$userid' AND NOT status = 'Completed' AND NOT status='Cancelled' ORDER BY date LIMIT 5";
+							if ($result = mysqli_query($mysqli, $sessions)) {
+								if ((mysqli_num_rows($result)) == 0) { ?>
+							<div class="alert alert-box type-danger">
+							<p><strong>You have not joined any group sessions.</strong></p>
+							<a href="joinsessionslist.php"><button class="btn btn-alert" style="padding-top: 10px;">Join a session</button></a>
+							</div>
+							<?php }
+							else {
+								while ($row = mysqli_fetch_row($result)){ ?>
+							<tr>
+								<td><?php echo $row[1]; ?></td>
+								<td><?php echo $row[4]; ?></td>
+								<td><?php $date = date('j F Y',strtotime($row[2])); echo $date; ?></td>
+							</tr>
+							
+							<?php }}} ?>
+						  </tbody>
+						</table>
+					</div>
+				</div>
+			</div>
 
 		</div>
 	</div>
