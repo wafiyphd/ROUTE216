@@ -55,10 +55,10 @@
 			
 		    if ($res) {
 			 $alertType = "success";
-			 $errMSG = "Successfully updated profile.";
+			 $errMsg = "Successfully updated profile.";
 		    } else {
 			 $errType = "danger";
-			 $errMSG = "Something went wrong, try again later..."; 
+			 $errMsg = "Something went wrong, try again later..."; 
 		    } 
 		}
 	}

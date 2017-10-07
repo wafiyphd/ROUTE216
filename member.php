@@ -180,10 +180,13 @@
 					<div class="tbl-header">
 						<table cellpadding="0" cellspacing="0" border="0">
 						  <thead>
+							<col width="150">
+							<col width="80">
+							<col width="50">
 							<tr>
 							  <th>Sesssion Name</th>
-							  <th>Category</th>
 							  <th>Date</th>
+							  <th>Category</th>
 							</tr>
 						  </thead>
 						</table>
@@ -191,13 +194,18 @@
 					  <div class="tbl-content">
 						<table class="table-hover" cellpadding="0" cellspacing="0" border="0">
 						  <tbody>
-							<?php $sessions = "SELECT category, title, date, status from session WHERE NOT status = 'Completed' ORDER BY date LIMIT 5";
+							<col width="150">
+							<col width="90">
+							<col width="50">
+							<?php $sessions = "SELECT category, title, date, status from session WHERE NOT status = 'Completed' AND NOT status = 'Cancelled' ORDER BY date LIMIT 5";
 							if ($result = mysqli_query($mysqli, $sessions)) {
 								while ($row = mysqli_fetch_row($result)){ ?>
 							<tr>
-								<td><?php echo $row[1]; ?></td>
-								<td><?php echo ucfirst($row[0]); ?></td>
+								<td><?php echo $row[1]; if ($row[3] == "Available"){ echo '&nbsp;<small><button class="btn btn-static btn-green btn-xs">Available</button></small>';}
+													elseif ($row[3] == "Unavailable") {echo '&nbsp;<small><button class="btn btn-static btn-red btn-xs">Taken</button></small>'; } ?>
+								</td>
 								<td><?php $date = date('j F Y',strtotime($row[2])); echo $date; ?></td>
+								<td><?php echo ucfirst($row[0]); ?></td>
 							</tr>
 							<?php }} ?>
 						  </tbody>
@@ -210,6 +218,9 @@
 					<div class="tbl-header">
 						<table cellpadding="0" cellspacing="0" border="0">
 						  <thead>
+							<col width="150">
+							<col width="80">
+							<col width="40">
 							<tr>
 							  <th>Session Name</th>
 							  <th>Date</th>
@@ -221,12 +232,17 @@
 					  <div class="tbl-content">
 						<table class="table-hover" cellpadding="0" cellspacing="0" border="0">
 						  <tbody>
-							<?php $sessions = "SELECT category, title, date, status, count from session s, group_session g WHERE 
-							s.session_id = g.session_id AND NOT status = 'Completed' AND category='group' ORDER BY count DESC LIMIT 5";
+							<col width="150">
+							<col width="90">
+							<col width="30">
+							<?php $sessions = "SELECT category, title, date, status, count, maxpax, count from session s, group_session g WHERE 
+							s.session_id = g.session_id AND NOT status = 'Completed' AND NOT status = 'Cancelled' AND category='group' ORDER BY count DESC LIMIT 5";
 							if ($result = mysqli_query($mysqli, $sessions)) {
 								while ($row = mysqli_fetch_row($result)){ ?>
 							<tr>
-								<td><?php echo $row[1]; ?></td>
+								<td><?php echo $row[1]; if ($row[4] < $row[5]){ echo '&nbsp;<small><button class="btn btn-static btn-green btn-xs">Available</button></small>';}
+													elseif ($row[3] == $row[5]) {echo '&nbsp;<small><button class="btn btn-static btn-red btn-xs">Full</button></small>'; } ?>
+								</td>
 								<td><?php $date = date('j F Y',strtotime($row[2])); echo $date; ?></td>
 								<td><?php echo $row[4]; ?></td>
 							</tr>
@@ -245,6 +261,9 @@
 						<table cellpadding="0" cellspacing="0" border="0">
 						  <thead>
 							<tr>
+							<col width="150">
+							<col width="100">
+							<col width="80">
 							  <th>Sesssion Name</th>
 							  <th>Trainer Name</th>
 							  <th>Date</th>
@@ -255,6 +274,9 @@
 					  <div class="tbl-content">
 						<table class="table-hover" cellpadding="0" cellspacing="0" border="0">
 						  <tbody>
+							<col width="150">
+							<col width="100">
+							<col width="90">
 							<?php $userid = $userRow['user_id'];
 							$sessions = "SELECT category, title, date, status, member_id, trainer_name from session s, personal_session p 
 							WHERE p.session_id = s.session_id  AND category='personal' AND member_id = '$userid' AND NOT status = 'Completed' AND NOT status='Cancelled' ORDER BY date LIMIT 5";
@@ -283,6 +305,9 @@
 					<div class="tbl-header">
 						<table cellpadding="0" cellspacing="0" border="0">
 						  <thead>
+							<col width="150">
+							<col width="100">
+							<col width="80">
 							<tr>
 							  <th>Session Name</th>
 							  <th>Trainer Name</th>
@@ -294,6 +319,9 @@
 					  <div class="tbl-content">
 						<table class="table-hover" cellpadding="0" cellspacing="0" border="0">
 						  <tbody>
+							<col width="150">
+							<col width="100">
+							<col width="90">
 							<?php $userid = $userRow['user_id'];
 							$sessions = "SELECT category, title, date, status, trainer_name, member_id
 							from session s, group_session g, joined_group j WHERE category='group' AND g.session_id = s.session_id AND g.session_id = j.session_id AND 

@@ -7,3 +7,5 @@
 .title {font-size: 125%; font-family: "Quicksand" }
 
 .border-right {border-right: 1px solid #CCD1D1 ;}
+
+.noborder { border: 0px; padding:0;  margin:0; border-collapse: collapse; }

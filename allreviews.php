@@ -188,29 +188,33 @@
 								<li><p><strong>Overall Review Information</strong></p></li>
 								<li><strong>Total reviews received: </strong><?php echo $count; ?></li>
 								<li>&nbsp;</li>
-								<li><strong>Total average rating: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																					</strong><small><?php echo '<button class="btn btn-static btn-xs '; 
+								<table class="noborder">
+									 <col width="150">
+									<col width="80">
+									<tr><td><strong>Overall average rating:</strong></td><td>
+																					<small><?php echo '<button class="btn btn-static btn-xs '; 
 																						if ($selfaverage >= 3.5) { echo ' btn-green'; }
 																						elseif ($selfaverage >=2.5) { echo ' btn-yellow'; }
 																						elseif ($selfaverage >= 0) { echo ' btn-red'; }
-																						echo ' num">'; echo $selfaverage; echo '</button>' ?></small></li>
-								<li><strong>Average Professionalism: &nbsp;&nbsp;</strong><small><?php echo '<button class="btn btn-static btn-xs '; 
+																						echo ' num">'; echo $selfaverage; echo '</button>' ?></small></td></tr>
+								<tr><td><strong>Average Professionalism:</strong></td><td> <small><?php echo '<button class="btn btn-static btn-xs '; 
 																						if ($paverage >= 3.5) { echo ' btn-green'; }
 																						elseif ($paverage >=2.5) { echo ' btn-yellow'; }
 																						elseif ($paverage >= 0) { echo ' btn-red'; }
-																						echo ' num">'; echo $paverage; echo '</button>' ?></small></li>
-								<li><strong>Average Engagement: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																				</strong><small><?php echo '<button class="btn btn-static btn-xs '; 
+																						echo ' num">'; echo $paverage; echo '</button>' ?></small></td></tr>
+								<tr><td><strong>Average Engagement:</strong></td><td>
+																				<small><?php echo '<button class="btn btn-static btn-xs '; 
 																						if ($saverage >= 3.5) { echo ' btn-green'; }
 																						elseif ($saverage >=2.5) { echo ' btn-yellow'; }
 																						elseif ($saverage >= 0) { echo ' btn-red'; }
-																						echo ' num">'; echo $saverage; echo '</button>' ?></small></li>
-								<li><strong>Average Session: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																				</strong><small><?php echo '<button class="btn btn-static btn-xs '; 
+																						echo ' num">'; echo $saverage; echo '</button>' ?></small></td></tr>
+								<tr><td><strong>Average Session:</strong></td><td>
+																				<small><?php echo '<button class="btn btn-static btn-xs '; 
 																						if ($eaverage >= 3.5) { echo ' btn-green'; }
 																						elseif ($eaverage >=2.5) { echo ' btn-yellow'; }
 																						elseif ($eaverage >= 0) { echo ' btn-red'; }
-																						echo ' num">'; echo $eaverage; echo '</button>' ?></small></li>
+																						echo ' num">'; echo $eaverage; echo '</button>' ?></small></td></tr>
+								</table>
 								
 							</ul>
 						</div>
@@ -243,21 +247,28 @@
 												$erating = number_format((float)$erating, 1, '.', '');
 												$srating = $row[7];
 												$srating = number_format((float)$prating, 1, '.', ''); ?>
-												<li><strong>Professional Rating: &nbsp;&nbsp;&nbsp;</strong><small><?php echo '<button class="btn btn-static btn-xs '; 
+												<table class="noborder">
+												<col width="125">
+												<col width="80">
+												<tr><td><strong>Professional Rating:</td><td> </strong><small><?php echo '<button class="btn btn-static btn-xs '; 
 																						if ($row[5] >= 3.5) { echo ' btn-green'; }
 																						elseif ($row[5] >=2.5) { echo ' btn-yellow'; }
 																						elseif ($row[5] >= 0) { echo ' btn-red'; }
-																						echo ' num">'; echo $prating; echo '</button>' ?></small></li>
-												<li><strong>Engagement Rating: &nbsp;&nbsp;</strong><small><?php echo '<button class="btn btn-static btn-xs '; 
+																						echo ' num">'; echo $prating; echo '</button>' ?></small></td>
+												</tr>
+												<tr><td><strong>Engagement Rating:</td><td> </strong><small><?php echo '<button class="btn btn-static btn-xs '; 
 																						if ($row[6] >= 3.5) { echo ' btn-green'; }
 																						elseif ($row[6] >=2.5) { echo ' btn-yellow'; }
 																						elseif ($row[6] >= 0) { echo ' btn-red'; }
-																						echo ' num">'; echo $erating; echo '</button>' ?></small></li>
-												<li><strong>Session Rating: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong><small><?php echo '<button class="btn btn-static btn-xs '; 
+																						echo ' num">'; echo $erating; echo '</button>' ?></small></td>
+												</tr>										
+												<tr><td><strong>Session Rating:</td><td> </strong><small><?php echo '<button class="btn btn-static btn-xs '; 
 																						if ($row[7] >= 3.5) { echo ' btn-green'; }
 																						elseif ($row[7] >=2.5) { echo ' btn-yellow'; }
 																						elseif ($row[7] >= 0) { echo ' btn-red'; }
-																						echo ' num">'; echo $srating; echo '</button>' ?></small></li>
+																						echo ' num">'; echo $srating; echo '</button>' ?></small></td>
+												</tr>										
+												</table>										
 											</ul>
 										</div>
 										<div class="col-lg-6 ">

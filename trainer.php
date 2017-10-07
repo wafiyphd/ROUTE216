@@ -185,31 +185,33 @@
 								$selfaverage = $selfaverage['average'];
 								$selfaverage = number_format((float)$selfaverage, 2, '.', ''); }?>
 								<p>&nbsp;</p>
-								<ul>
-									<li><strong>Overall average rating: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																					</strong><small><?php echo '<button class="btn btn-static btn-xs '; 
+								<table class="noborder">
+								<col width="150">
+								<col width="80">
+								<tr><td><strong>Overall average rating:</strong></td><td>
+																					<small><?php echo '<button class="btn btn-static btn-xs '; 
 																						if ($selfaverage >= 3.5) { echo ' btn-green'; }
 																						elseif ($selfaverage >=2.5) { echo ' btn-yellow'; }
 																						elseif ($selfaverage >= 0) { echo ' btn-red'; }
-																						echo ' num">'; echo $selfaverage; echo '</button>' ?></small></li>
-								<li><strong>Average Professionalism: &nbsp;&nbsp;</strong><small><?php echo '<button class="btn btn-static btn-xs '; 
+																						echo ' num">'; echo $selfaverage; echo '</button>' ?></small></td></tr>
+								<tr><td><strong>Average Professionalism:</strong></td><td> <small><?php echo '<button class="btn btn-static btn-xs '; 
 																						if ($paverage >= 3.5) { echo ' btn-green'; }
 																						elseif ($paverage >=2.5) { echo ' btn-yellow'; }
 																						elseif ($paverage >= 0) { echo ' btn-red'; }
-																						echo ' num">'; echo $paverage; echo '</button>' ?></small></li>
-								<li><strong>Average Engagement: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																				</strong><small><?php echo '<button class="btn btn-static btn-xs '; 
+																						echo ' num">'; echo $paverage; echo '</button>' ?></small></td></tr>
+								<tr><td><strong>Average Engagement:</strong></td><td>
+																				<small><?php echo '<button class="btn btn-static btn-xs '; 
 																						if ($saverage >= 3.5) { echo ' btn-green'; }
 																						elseif ($saverage >=2.5) { echo ' btn-yellow'; }
 																						elseif ($saverage >= 0) { echo ' btn-red'; }
-																						echo ' num">'; echo $saverage; echo '</button>' ?></small></li>
-								<li><strong>Average Session: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																				</strong><small><?php echo '<button class="btn btn-static btn-xs '; 
+																						echo ' num">'; echo $saverage; echo '</button>' ?></small></td></tr>
+								<tr><td><strong>Average Session:</strong></td><td>
+																				<small><?php echo '<button class="btn btn-static btn-xs '; 
 																						if ($eaverage >= 3.5) { echo ' btn-green'; }
 																						elseif ($eaverage >=2.5) { echo ' btn-yellow'; }
 																						elseif ($eaverage >= 0) { echo ' btn-red'; }
-																						echo ' num">'; echo $eaverage; echo '</button>' ?></small></li>
-								</ul>
+																						echo ' num">'; echo $eaverage; echo '</button>' ?></small></td></tr>
+								</table>
 							</div>
 						</div>
 					</div>
@@ -242,10 +244,13 @@
 					<div class="tbl-header">
 						<table cellpadding="0" cellspacing="0" border="0">
 						  <thead>
+							<col width="150">
+							<col width="90">
+							<col width="100">
 							<tr>
 							  <th>Sesssion Name</th>
-							  <th>Member Joined</th>
 							  <th>Date</th>
+							  <th>Member Joined</th>
 							</tr>
 						  </thead>
 						</table>
@@ -253,6 +258,9 @@
 					  <div class="tbl-content">
 						<table class="table-hover" cellpadding="0" cellspacing="0" border="0">
 						  <tbody>
+							<col width="150">
+							<col width="90">
+							<col width="100">
 							<?php $userid = $userRow['user_id'];
 							$sessions = "SELECT category, title, date, status, member_name from session s, personal_session p 
 							WHERE s.session_id = p.session_id AND category='personal' AND trainer_id = '$userid' AND NOT status = 'Completed' AND NOT status='Cancelled' ORDER BY date LIMIT 5";
@@ -267,8 +275,8 @@
 								while ($row = mysqli_fetch_row($result)){ ?>
 							<tr>
 								<td><?php echo $row[1]; ?></td>
-								<td><?php if (is_null($row[4])) {echo 'No member joined.';} else {echo ucwords($row[4]);}?></td>
 								<td><?php $date = date('j F Y',strtotime($row[2])); echo $date; ?></td>
+								<td><?php if (is_null($row[4])) {echo 'No member joined.';} else {echo ucwords($row[4]);}?></td>
 							</tr>
 							<?php }}} ?>
 						  </tbody>
@@ -281,10 +289,14 @@
 					<div class="tbl-header">
 						<table cellpadding="0" cellspacing="0" border="0">
 						  <thead>
+							<col width="150">
+							<col width="80">
+							<col width="40">
 							<tr>
 							  <th>Session Name</th>
-							  <th>Joined</th>
 							  <th>Date</th>
+							  <th>Joined</th>
+							 
 							</tr>
 						  </thead>
 						</table>
@@ -292,6 +304,9 @@
 					  <div class="tbl-content">
 						<table class="table-hover" cellpadding="0" cellspacing="0" border="0">
 						  <tbody>
+							<col width="150">
+							<col width="90">
+							<col width="30">
 							<?php $userid = $userRow['user_id'];
 							$sessions = "SELECT category, title, date, status, count from session s, group_session g 
 							WHERE s.session_id = g.session_id AND trainer_id = '$userid' AND NOT status = 'Completed' AND NOT status='Cancelled' AND category='group' ORDER BY date LIMIT 5";
@@ -306,8 +321,8 @@
 								while ($row = mysqli_fetch_row($result)){ ?>
 							<tr>
 								<td><?php echo $row[1]; ?></td>
-								<td><?php echo $row[4]; ?></td>
 								<td><?php $date = date('j F Y',strtotime($row[2])); echo $date; ?></td>
+								<td><?php echo $row[4]; ?></td>
 							</tr>
 							
 							<?php }}} ?>
