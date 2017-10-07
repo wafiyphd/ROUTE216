@@ -179,7 +179,7 @@ if( isset($_POST['unjoin-group']) ) {
 				<hr>
 				<?php $userid = $userRow['user_id'];
 				$personal_query = "SELECT p.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, notes, member_id 
-				from session s, personal_session p where category='personal' AND p.session_id = s.session_id AND member_id = '$userid' AND status = 'Unavailable' ORDER BY date";
+				from session s, personal_session p where category='personal' AND p.session_id = s.session_id AND member_id = '$userid' AND status = 'Unavailable' AND NOT status = 'Completed' ORDER BY date";
 				if ($result = mysqli_query($mysqli, $personal_query)) {
 					while ($row = mysqli_fetch_row($result)){ ?>
 						<div class="col-lg-6">
@@ -246,7 +246,8 @@ if( isset($_POST['unjoin-group']) ) {
 				<hr>
 				<?php $userid = $userRow['user_id'];
 				$group_query = "SELECT g.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, type, maxpax, count, member_id
-				from session s, group_session g, joined_group j WHERE category='group' AND g.session_id = s.session_id AND g.session_id = j.session_id AND j.member_id = '$userid' ORDER BY date";
+				from session s, group_session g, joined_group j WHERE category='group' AND g.session_id = s.session_id AND g.session_id = j.session_id AND j.member_id = '$userid' 
+				AND NOT status = 'Completed' ORDER BY date";
 				if ($result = mysqli_query($mysqli, $group_query)) {
 					while ($row = mysqli_fetch_row($result)){ 
 						?>
