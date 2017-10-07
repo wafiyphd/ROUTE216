@@ -221,7 +221,8 @@
 					  <div class="tbl-content">
 						<table class="table-hover" cellpadding="0" cellspacing="0" border="0">
 						  <tbody>
-							<?php $sessions = "SELECT category, title, date, status, count from session, group_session g WHERE NOT status = 'Completed' AND category='group' ORDER BY count DESC LIMIT 5";
+							<?php $sessions = "SELECT category, title, date, status, count from session s, group_session g WHERE 
+							s.session_id = g.session_id AND NOT status = 'Completed' AND category='group' ORDER BY count DESC LIMIT 5";
 							if ($result = mysqli_query($mysqli, $sessions)) {
 								while ($row = mysqli_fetch_row($result)){ ?>
 							<tr>
