@@ -23,30 +23,11 @@ if( isset($_POST['join-personal']) ) {
 	$count = mysqli_query ($mysqli, "UPDATE member SET joined=joined+1 WHERE user_id = '$userid'");
 	if ($join && $status && $count){
 		$alertType = "success";
-		$errMSG = "Successfully joined.";
+		$errMSG = "Successfully joined.&nbsp;&nbsp; <a href=\"managemember.php\"><button class=\"btn btn-view\">View joined sessions.</button></a>";
 	}
 	else {
 		$alertType = "danger";
 		$errMSG = "Failed to join this session.";
-	}	
-}
-
-if( isset($_POST['unjoin-personal']) ) {
-	
-	$userid = $userRow['user_id'];
-	$userfullname =$userRow['fullname'];
-	$sessionid = $_POST['id'];
-	
-	$status = mysqli_query($mysqli, "UPDATE session SET status = 'Available' WHERE session_id = '$sessionid' ");
-	$unjoin = mysqli_query($mysqli, "	UPDATE personal_session SET member_id = NULL, member_name = NULL WHERE session_id ='$sessionid' ");
-	$count = mysqli_query ($mysqli, "UPDATE member SET joined=joined-1 WHERE user_id = '$userid'");
-	if ($unjoin && $status && $count){
-		$alertType = "success";
-		$errMSG = "Successfully unjoined.";
-	}
-	else {
-		$alertType = "danger";
-		$errMSG = "Failed to unjoin this session.";
 	}	
 }
 
@@ -55,13 +36,15 @@ if( isset($_POST['join-group']) ) {
 	$userid = $userRow['user_id'];
 	$userfullname =$userRow['fullname'];
 	$sessionid = $_POST['id'];
+	$group_query = "SELECT g.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, type, maxpax, count 
+				from session s, group_session g WHERE category='group' AND g.session_id = s.session_id AND status = 'Available' ORDER BY date";
 	
 	$join = mysqli_query($mysqli, "	INSERT INTO joined_group(session_id, member_id, member_name) values ('$sessionid','$userid','$userfullname')");
 	$update = mysqli_query($mysqli, "UPDATE group_session SET count = count + 1 WHERE session_id = $sessionid");
 	$count = mysqli_query ($mysqli, "UPDATE member SET joined=joined+1 WHERE user_id = '$userid'");
 	if ($join && update && $count){
 		$alertType = "success";
-		$errMSG = "Successfully joined.";
+		$errMSG = "Successfully joined.&nbsp;&nbsp; <a href=\"managemember.php\"><button class=\"btn btn-view\">View joined sessions.</button></a>";
 	}
 	else {
 		$alertType = "danger";
@@ -69,23 +52,6 @@ if( isset($_POST['join-group']) ) {
 	}	
 }
 
-if( isset($_POST['unjoin-group']) ) {
-	
-	$userid = $userRow['user_id'];
-	$sessionid = $_POST['id'];
-	
-	$join = mysqli_query($mysqli, "	DELETE FROM joined_group WHERE member_id = '$userid' AND session_id ='$sessionid' ");
-	$update = mysqli_query($mysqli, "UPDATE group_session SET count = count - 1 WHERE session_id = $sessionid");
-	$count = mysqli_query ($mysqli, "UPDATE member SET joined=joined-1 WHERE user_id = '$userid'");
-	if ($join && update && $count){
-		$alertType = "success";
-		$errMSG = "Successfully unjoined.";
-	}
-	else {
-		$alertType = "danger";
-		$errMSG = "Failed to unjoin this session.";
-	}	
-}
 
 ?>
 <!DOCTYPE html>
@@ -212,7 +178,7 @@ if( isset($_POST['unjoin-group']) ) {
 				<hr>
 				<p class="big">Choose which personal session to join</p>
 				<?php $personal_query = "SELECT p.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, notes, member_id 
-				from session s, personal_session p where category='personal' AND p.session_id = s.session_id AND NOT status = 'Completed' ORDER BY date";
+				from session s, personal_session p where category='personal' AND p.session_id = s.session_id AND status = 'Available' ORDER BY date";
 				if ($result = mysqli_query($mysqli, $personal_query)) {
 					while ($row = mysqli_fetch_row($result)){ ?>
 						<div class="col-lg-6">
@@ -221,8 +187,7 @@ if( isset($_POST['unjoin-group']) ) {
 									<div class="col-lg-6 border-right">
 										<ul>
 											<li><strong><p class="title"><?php echo ucfirst($row[2]); ?></p></strong> </li>
-											<li><strong>Status: </strong><?php echo $row[6]; ?></li>
-											<li><strong>Date: </strong><?php echo $row[3]; ?></li>
+											<li><strong>Date: </strong><?php $date = date('j F Y',strtotime($row[3])); echo $date; ?></li>
 											<li><strong>Time: </strong><?php echo $row[4]; ?></li>
 											<li><strong>Fee: </strong>RM <?php echo $row[5]; ?></li>
 											<li><strong>Notes: </strong><?php echo $row[9]; ?></li>
@@ -281,19 +246,22 @@ if( isset($_POST['unjoin-group']) ) {
 				<hr>
 				<p class="big">Choose which group session to join</p>
 				<?php $group_query = "SELECT g.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, type, maxpax, count 
-				from session s, group_session g WHERE category='group' AND g.session_id = s.session_id AND NOT status = 'Completed' ORDER BY date";
+				from session s, group_session g WHERE category='group' AND g.session_id = s.session_id AND status = 'Available' ORDER BY date";
 				if ($result = mysqli_query($mysqli, $group_query)) {
 					while ($row = mysqli_fetch_row($result)){ 
-						?>
+						$userid = $userRow['user_id'];
+						$checkjoin = mysqli_query($mysqli, "SELECT j.session_id, member_id FROM joined_group j, group_session g WHERE j.session_id = '$row[0]' AND member_id = '$userid'");
+						$checkjoin = mysqli_fetch_row($checkjoin);
+						if ($checkjoin == 0) {?>
 						<div class="col-lg-6">
 							<div class="panel panel-default">
 								<div class="panel-body">
 									<div class="col-lg-6 border-right">
 										<ul>
 											<li><strong><p class="title"><?php echo ucfirst($row[2]); ?></p></strong> </li>
+											<li><strong>Date: </strong><?php $date = date('j F Y',strtotime($row[3])); echo $date; ?></li>
 											<li><strong>Joined (current/max): </strong><?php echo $row[11]; ?> / <?php echo$row[10]; ?></li>
 											<li><strong>Type: </strong><?php echo $row[9]; ?></li>
-											<li><strong>Date: </strong><?php echo $row[3]; ?></li>
 											<li><strong>Time: </strong><?php echo $row[4]; ?></li>
 											<li><strong>Fee: </strong>RM <?php echo $row[5]; ?></li>
 											
@@ -327,26 +295,16 @@ if( isset($_POST['unjoin-group']) ) {
 																						echo ' num">'; echo $traineraverage; echo '</button>' ?></small></li>
 										</ul>
 										<form id="join-group" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
-											<input name="id" value="<?php echo $row[0]; ?>" class="hidden"/>
-											<?php $userid = $userRow['user_id'];
-											$checkjoin = mysqli_query($mysqli, "SELECT j.session_id, member_id FROM joined_group j, group_session g WHERE j.session_id = '$row[0]' AND member_id = '$userid'");
-											$checkjoin = mysqli_fetch_row($checkjoin);	
-												if ($row[11] < $row[10]) {
-													if ($checkjoin > 0 ) {?>
-														<button type="submit" name="unjoin-group" id="unjoin-group" class="btn btn-un pull-right">Unjoin</button> 
-													<?php } else { ?>
+											<input name="id" value="<?php echo $row[0]; ?>" class="hidden">
 														<button type="submit" name="join-group" id="join-group" class="btn btn-join pull-right">Join</button> 		
-										<?php }}elseif ($row[11] == $row[10] && $checkjoin > 0) { ?>
-														<button type="submit" name="unjoin-group" id="unjoin-group" class="btn btn-un pull-right">Unjoin</button> 
-										<?php } else { ?>
-													<button type="submit" name="join-group" id="join-group" class="btn btn-un pull-right" disabled>Unavailable</button> 
-											<?php } ?>
 										</form>
 									</div>
 								</div>
 							</div>
 						</div>
-				<?php }}
+					<?php }
+						else { }
+					}}
 				 ?>
 			</div>
 			

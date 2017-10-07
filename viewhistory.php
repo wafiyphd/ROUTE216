@@ -158,11 +158,12 @@ $error = false;
 						<div class="col-lg-6">
 							<div class="panel panel-default">
 								<div class="panel-body">
-									<div class="col-lg-6 border-right">
+									
+									<div class="col-lg-6 <?php if ($userkind == "member")  { ?> border-right <?php } else {} ?>">
 										<ul>
 											<li><strong><p><?php echo ucfirst($row[2]); ?></p></strong> </li>
 											<li><strong>Status: </strong><?php echo $row[6]; ?></li>
-											<li><strong>Date: </strong><?php echo $row[3]; ?></li>
+											<li><strong>Date: </strong><?php $date = date('j F Y',strtotime($row[3])); echo $date; ?></li>
 											<li><strong>Time: </strong><?php echo $row[4]; ?></li>
 											<li><strong>Fee: </strong>RM <?php echo $row[5]; ?></li>
 											<li><strong>Notes: </strong><?php echo $row[9]; ?></li>
@@ -186,7 +187,7 @@ $error = false;
 											$traineraverage = number_format((float)$traineraverage, 2, '.', ''); 
 										}
 										
-										?>
+										if ($userkind == "member") {?>
 										<ul>
 											<li><strong>Trainer Name: </strong><?php echo ucwords($row[8]); ?> </li>
 											<li><strong>Average Rating: </strong><small><?php echo '<button class="btn btn-static btn-xs '; 
@@ -195,6 +196,13 @@ $error = false;
 																						elseif ($traineraverage >= 0) { echo ' btn-red'; }
 																						echo ' num">'; echo $traineraverage; echo '</button>' ?></small></li>		
 										</ul>
+										<?php } else { ?>
+										<ul>
+											<li>&nbsp;</li>
+											<li>&nbsp;</li>
+										</ul>
+										<?php } ?>
+										
 										<form id="join-personal" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
 											<input name="id" value="<?php echo $row[0]; ?>" class="hidden"/>
 											
@@ -246,13 +254,13 @@ $error = false;
 						<div class="col-lg-6">
 							<div class="panel panel-default">
 								<div class="panel-body">
-									<div class="col-lg-6 border-right">
+									<div class="col-lg-6 <?php if ($userkind == "member")  { ?> border-right <?php } else {} ?>">
 										<ul>
 											<li><strong><p class="title"><?php echo ucfirst($row[2]); ?></p></strong> </li>
 											<li><strong>Status: </strong><?php echo $row[6]; ?></li>
+											<li><strong>Date: </strong><?php $date = date('j F Y',strtotime($row[3])); echo $date; ?></li>
 											<li><strong>Joined (current/max): </strong><?php echo $row[11]; ?> / <?php echo$row[10]; ?></li>
 											<li><strong>Type: </strong><?php echo $row[9]; ?></li>
-											<li><strong>Date: </strong><?php echo $row[3]; ?></li>
 											<li><strong>Time: </strong><?php echo $row[4]; ?></li>
 											<li><strong>Fee: </strong>RM <?php echo $row[5]; ?></li>
 											
@@ -276,7 +284,7 @@ $error = false;
 											$traineraverage = number_format((float)$traineraverage, 2, '.', ''); 
 										}
 										
-										?>
+										if ($userkind == "member") {?>
 										<ul>
 											<li><strong>Trainer Name: </strong><?php echo ucwords($row[8]); ?> </li>
 											<li><strong>Average Rating: </strong><small><?php echo '<button class="btn btn-static btn-xs '; 
@@ -285,6 +293,14 @@ $error = false;
 																						elseif ($traineraverage >= 0) { echo ' btn-red'; }
 																						echo ' num">'; echo $traineraverage; echo '</button>' ?></small></li>
 										</ul>
+										<?php } else { ?>
+										<ul>
+											<li>&nbsp;</li>
+											<li>&nbsp;</li>
+											<li>&nbsp;</li>
+										</ul>
+										<?php } ?>
+										
 										<form id="join-group" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
 											<input name="id" value="<?php echo $row[0]; ?>" class="hidden"/>
 											<?php $userid = $userRow['user_id'];

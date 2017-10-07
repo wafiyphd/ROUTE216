@@ -197,7 +197,7 @@
 							<tr>
 								<td><?php echo $row[1]; ?></td>
 								<td><?php echo ucfirst($row[0]); ?></td>
-								<td><?php echo $row[2]; ?></td>
+								<td><?php $date = date('j F Y',strtotime($row[2])); echo $date; ?></td>
 							</tr>
 							<?php }} ?>
 						  </tbody>
@@ -226,7 +226,7 @@
 								while ($row = mysqli_fetch_row($result)){ ?>
 							<tr>
 								<td><?php echo $row[1]; ?></td>
-								<td><?php echo $row[2]; ?></td>
+								<td><?php $date = date('j F Y',strtotime($row[2])); echo $date; ?></td>
 								<td><?php echo $row[4]; ?></td>
 							</tr>
 							

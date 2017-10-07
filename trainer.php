@@ -224,7 +224,7 @@
 				<a href="viewhistory.php"><div class="pic-container col-sm-4 col-lg-3">
 					<img src="images/22.png"></img><div class="overlay"><div class="moreinfo">View and manage a list of all the training sessions you've created.</div></div>
 				</div></a>
-
+			
 				<a href="allreviews.php"><div class="pic-container col-sm-4 col-lg-3">
 					<img src="images/32.png"></img><div class="overlay"></img><div class="moreinfo">View and read all the reviews you've received from the members.</div></div>
 				</div></a>
@@ -233,6 +233,88 @@
 					<img src="images/41.png"></img><div class="overlay"></img><div class="moreinfo">Edit your profile.</div></div>
 				</div></a>
 				
+			</div>
+			
+			<div class ="row">
+			
+				<div class="col-lg-6">
+					<p class="title">YOUR UPCOMING PERSONAL SESSIONS</p>
+					<div class="tbl-header">
+						<table cellpadding="0" cellspacing="0" border="0">
+						  <thead>
+							<tr>
+							  <th>Sesssion Name</th>
+							  <th>Member Joined</th>
+							  <th>Date</th>
+							</tr>
+						  </thead>
+						</table>
+					  </div>
+					  <div class="tbl-content">
+						<table class="table-hover" cellpadding="0" cellspacing="0" border="0">
+						  <tbody>
+							<?php $userid = $userRow['user_id'];
+							$sessions = "SELECT category, title, date, status, member_name from session s, personal_session p 
+							WHERE s.session_id = p.session_id AND category='personal' AND trainer_id = '$userid' AND NOT status = 'Completed' ORDER BY date LIMIT 5";
+							if ($result = mysqli_query($mysqli, $sessions)) {
+								if ((mysqli_num_rows($result)) == 0) { ?>
+							<div class="alert alert-box type-danger">
+							<p><strong>You have no upcoming personal sessions.</strong></p>
+							<a href="record.php"><button class="btn btn-alert" style="padding-top: 10px;">Create a session</button></a>
+							</div>
+							<?php }
+							else {
+								while ($row = mysqli_fetch_row($result)){ ?>
+							<tr>
+								<td><?php echo $row[1]; ?></td>
+								<td><?php if (is_null($row[4])) {echo 'No member joined.';} else {echo ucwords($row[4]);}?></td>
+								<td><?php $date = date('j F Y',strtotime($row[2])); echo $date; ?></td>
+							</tr>
+							<?php }}} ?>
+						  </tbody>
+						</table>
+					</div>
+				</div>
+				
+				<div class="col-lg-6">
+					<p class="title">YOUR UPCOMING GROUP SESSIONS</p>
+					<div class="tbl-header">
+						<table cellpadding="0" cellspacing="0" border="0">
+						  <thead>
+							<tr>
+							  <th>Session Name</th>
+							  <th>Joined</th>
+							  <th>Date</th>
+							</tr>
+						  </thead>
+						</table>
+					  </div>
+					  <div class="tbl-content">
+						<table class="table-hover" cellpadding="0" cellspacing="0" border="0">
+						  <tbody>
+							<?php $userid = $userRow['user_id'];
+							$sessions = "SELECT category, title, date, status, count from session s, group_session g 
+							WHERE s.session_id = g.session_id AND trainer_id = '$userid' AND NOT status = 'Completed' AND category='group' ORDER BY count DESC LIMIT 5";
+							if ($result = mysqli_query($mysqli, $sessions)) {
+								if ((mysqli_num_rows($result)) == 0) { ?>
+							<div class="alert alert-box type-danger">
+							<p><strong>You have no upcoming group sessions.</strong></p>
+							<a href="record.php"><button class="btn btn-alert" style="padding-top: 10px;">Create a session</button></a>
+							</div>
+							<?php }
+							else {
+								while ($row = mysqli_fetch_row($result)){ ?>
+							<tr>
+								<td><?php echo $row[1]; ?></td>
+								<td><?php echo $row[4]; ?></td>
+								<td><?php $date = date('j F Y',strtotime($row[2])); echo $date; ?></td>
+							</tr>
+							
+							<?php }}} ?>
+						  </tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

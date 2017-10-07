@@ -188,8 +188,7 @@ if( isset($_POST['unjoin-group']) ) {
 									<div class="col-lg-6 border-right">
 										<ul>
 											<li><strong><p class="title"><?php echo ucfirst($row[2]); ?></p></strong> </li>
-											<li><strong>Status: </strong><?php echo $row[6]; ?></li>
-											<li><strong>Date: </strong><?php echo $row[3]; ?></li>
+											<li><strong>Date: </strong><?php $date = date('j F Y',strtotime($row[3])); echo $date; ?></li>
 											<li><strong>Time: </strong><?php echo $row[4]; ?></li>
 											<li><strong>Fee: </strong>RM <?php echo $row[5]; ?></li>
 											<li><strong>Notes: </strong><?php echo $row[9]; ?></li>
@@ -257,9 +256,9 @@ if( isset($_POST['unjoin-group']) ) {
 									<div class="col-lg-6 border-right">
 										<ul>
 											<li><strong><p class="title"><?php echo ucfirst($row[2]); ?></p></strong> </li>
+											<li><strong>Date: </strong><?php $date = date('j F Y',strtotime($row[3])); echo $date; ?></li>
 											<li><strong>Joined (current/max): </strong><?php echo $row[11]; ?> / <?php echo$row[10]; ?></li>
 											<li><strong>Type: </strong><?php echo $row[9]; ?></li>
-											<li><strong>Date: </strong><?php echo $row[3]; ?></li>
 											<li><strong>Time: </strong><?php echo $row[4]; ?></li>
 											<li><strong>Fee: </strong>RM <?php echo $row[5]; ?></li>
 											

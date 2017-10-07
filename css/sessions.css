@@ -4,8 +4,8 @@
 
 .panel {border:none; box-shadow:0 10px 10px 0 rgba(0,0,0,.25);}
 .panel .border-right {border-right: 1px solid #CCD1D1 ;}
-.panel  .btn-join {color: white; font-weight: bold; border:none; background: #5499C7; margin-top: 50px; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); }
-.panel  .btn-un {color:white; border-radius: 3px;  font-weight: bold; border: none; background: rgba(205, 97, 85, 1); margin-top: 50px; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);}
+.panel  .btn-join {color: white; font-weight: bold; border:none; background: #5499C7; margin-top: 40px; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); }
+.panel  .btn-un {color:white; border-radius: 3px;  font-weight: bold; border: none; background: rgba(205, 97, 85, 1); margin-top: 40px; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);}
 .panel .btn-join a, .panel .btn-un a {text-decoration: none; color: white; }
 .panel  .btn-join:hover, .btn-un:hover {color:white}
 
