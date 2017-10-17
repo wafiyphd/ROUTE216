@@ -10,6 +10,10 @@
 		header("Location: index.php");	
 	}
 	
+	if ($userRow['user_kind'] == 'trainer') {
+		header("Location: trainer.php");
+	}
+	
 	$userid = $userRow['user_id'];
 	$query = mysqli_query($mysqli, "SELECT * from member WHERE user_id='$userid'");
 	$memberRow = mysqli_fetch_array($query);
@@ -101,7 +105,6 @@
 			</div>
 			
 		</div><!-- End of nav bar -->
-
 	</div>
 		
 	<div class="container-fluid main-fluid">

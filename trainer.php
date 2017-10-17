@@ -10,6 +10,10 @@
 		header("Location: index.php");	
 	}
 	
+	if ($userRow['user_kind'] == 'member') {
+		header("Location: member.php");
+	}
+	
 	$userid = $userRow['user_id'];
 	$query = mysqli_query($mysqli, "SELECT * from trainer WHERE user_id='$userid'");
 	$trainerRow = mysqli_fetch_array($query);

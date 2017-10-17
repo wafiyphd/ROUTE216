@@ -41,7 +41,7 @@ if( isset($_POST['join-group']) ) {
 	
 	$join = mysqli_query($mysqli, "	INSERT INTO joined_group(session_id, member_id, member_name) values ('$sessionid','$userid','$userfullname')");
 	$update = mysqli_query($mysqli, "UPDATE group_session SET count = count + 1 WHERE session_id = $sessionid");
-	$count = mysqli_query ($mysqli, "UPDATE member SET joined=joined+1 WHERE user_id = '$userid'");
+	$count = mysqli_query ($mysqli, "UPDATE member SET joined=joined+1 WHERE user_id = '$userid'");	
 	if ($join && update && $count){
 		$alertType = "success";
 		$errMSG = "Successfully joined.&nbsp;&nbsp; <a href=\"managemember.php\"><button class=\"btn btn-view\">View joined sessions.</button></a>";
