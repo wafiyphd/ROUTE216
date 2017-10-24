@@ -131,7 +131,7 @@
 				<div class="col-lg-12">
 					<div class="panel home-panel">
 						<div class="panel-body">
-							<img src="images/man.png" class="img-responsive img-circle"></img>
+							<img src="images/man.png" class="photo img-responsive" width="120" height="120">
 							<div class="col-lg-3">
 								
 								<p class="name"><?php echo ucwords($userRow['fullname']); ?></p>

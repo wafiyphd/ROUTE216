@@ -1,4 +1,4 @@
-.alert-box {text-align: center; border-radius: 0; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.298039); font-weight: 500; padding: 20px; width: 100%; box-sizing: border-box;}
+.alert-box {text-align: center; border-radius: 0; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.298039); font-weight: 500; padding: 20px; width: 100% }
 .alert-box-s {text-align: center; border-radius: 0; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.298039); margin:auto; float: none; font-weight: 600; padding: 20px; width: 100% }
 
 .type-success {background-color: #7DCEA0 !important; color: #fff; }
@@ -18,9 +18,10 @@
 .num:hover {color:white}
 
 .btn-green { background-color: #81C784; color: white; font-weight: bold; font-size: 100%; }
-.btn-yellow { background-color: #CDDC39; color: white; font-weight: bold; font-size: 100%; }
+.btn-yellow { background-color: #FBC02D; color: white; font-weight: bold; font-size: 100%; }
 .btn-red { background-color: #EF5350; color: white; font-weight: bold; font-size: 100%; }
 .btn-static { cursor: default; }
+.btn-static:active, .btn-static:focus  { color: white; outline: none }
 
 .btn-alert {margin-top: 10px; padding: 10px 40px; color:white;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); border-radius:3px; font-weight: bold; background: rgba(246, 101, 101, 0.9);}
 .btn-alert:hover {color: white; background: rgba(250, 97, 85, 1)}
