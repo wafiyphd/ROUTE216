@@ -103,7 +103,6 @@
 					<?php }?>
 				</div>
 			</div>
-			
 		</div><!-- End of nav bar -->
 	</div>
 		
@@ -131,26 +130,27 @@
 				<div class="col-lg-12">
 					<div class="panel home-panel">
 						<div class="panel-body">
-							<img src="images/man.png" class="img-responsive img-circle"></img>
-							<div class="col-lg-4">
-								
-								<p class="name"><?php echo ucwords($userRow['fullname']); ?></p>
-								<ul>
-									<li><strong>Joined As: </strong><?php echo ucwords($userRow['user_kind']); ?></li>
-									<li><strong>Training Level:  </strong><?php echo ucwords($memberRow['level']); ?></li>
-									<li><strong>Email Address: </strong><?php echo $userRow['email']; ?></li>
-								</ul>
-							</div>
-							<div class="col-lg-4">
-								<?php $reviewcount = mysqli_query($mysqli, "SELECT COUNT(*) as count FROM review WHERE reviewer_id = '$userid'");
-								$count = mysqli_fetch_array($reviewcount);
-								$count = $count['count']; ?>
-								<p>&nbsp;</p>
-								<ul>
-									<li><strong>&nbsp; </strong></li>
-									<li><strong>No. of sessions joined:  </strong><?php echo $memberRow['joined']; ?></li>
-									<li><strong>No. of reviews submitted:  </strong><?php echo $count; ?></li>
-								<ul>
+							<div class="row">
+								<img src="images/man.png" class="photo img-responsive" width="120" height="120">
+								<div class="col-lg-4">
+									<p class="name"><?php echo ucwords($userRow['fullname']); ?></p>
+									<ul>
+										<li><strong>Joined As: </strong><?php echo ucwords($userRow['user_kind']); ?></li>
+										<li><strong>Training Level:  </strong><?php echo ucwords($memberRow['level']); ?></li>
+										<li><strong>Email Address: </strong><?php echo $userRow['email']; ?></li>
+									</ul>
+								</div>
+								<div class="col-lg-4">
+									<?php $reviewcount = mysqli_query($mysqli, "SELECT COUNT(*) as count FROM review WHERE reviewer_id = '$userid'");
+									$count = mysqli_fetch_array($reviewcount);
+									$count = $count['count']; ?>
+									<p>&nbsp;</p>
+									<ul>
+										<li><strong>&nbsp; </strong></li>
+										<li><strong>No. of sessions joined:  </strong><?php echo $memberRow['joined']; ?></li>
+										<li><strong>No. of reviews submitted:  </strong><?php echo $count; ?></li>
+									<ul>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -160,19 +160,18 @@
 			<div class="row">
 			
 				<a href="joinsessionslist.php"><div class="pic-container col-sm-4 col-lg-3">
-					<img src="images/11.png"></img><div class="overlay"><div class="moreinfo">Join one or more of the many available sessions the trainers have set up.</div></div>
+					<img src="images/h1.png"></img><div class="overlay"><div class="moreinfo">Join one or more of the many available sessions the trainers have set up.</div></div>
 				</div></a>
 				
 				<a href="managemember.php"><div class="pic-container col-sm-4 col-lg-3">
-					<img src="images/21.png"></img><div class="overlay"><div class="moreinfo">View and manage a list of all the upcoming sessions you've joined.</div></div>
+					<img src="images/h2.png"></img><div class="overlay"><div class="moreinfo">View and manage a list of all the upcoming sessions you've joined.</div></div>
 				</div></a>
 							
 				<a href="viewhistory.php"><div class="pic-container col-sm-4 col-lg-3">
-					<img src="images/31.png"></img><div class="overlay"></img><div class="moreinfo">View and manage all the sessions you've completed. You may also review the 
-					sessions and its trainers.</div></div>
+					<img src="images/h3.png"></img><div class="overlay"></img><div class="moreinfo">View all the sessions you've completed and review the sessions.</div></div>
 				</div></a>
 				<a href="profile.php"><div class="pic-container col-sm-4 col-lg-3">
-					<img src="images/41.png"></img><div class="overlay"></img><div class="moreinfo">Edit your profile.</div></div>
+					<img src="images/h4.png"></img><div class="overlay"></img><div class="moreinfo">Edit your profile.</div></div>
 				</div></a>
 			
 			</div>

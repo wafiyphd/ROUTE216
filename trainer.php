@@ -224,19 +224,19 @@
 			
 			<div class="row">
 				<a href="record.php"><div class="pic-container col-sm-4 col-lg-3">
-					<img src="images/12.png"></img><div class="overlay"><div class="moreinfo">Create training sessions for the members of ROUTE to join.</div></div>
+					<img src="images/h5.png"></img><div class="overlay"><div class="moreinfo">Create training sessions for the members of ROUTE to join.</div></div>
 				</div></a>
 				
 				<a href="viewhistory.php"><div class="pic-container col-sm-4 col-lg-3">
-					<img src="images/22.png"></img><div class="overlay"><div class="moreinfo">View and manage a list of all the training sessions you've created.</div></div>
+					<img src="images/h6.png"></img><div class="overlay"><div class="moreinfo">View and manage a list of all the training sessions you've created.</div></div>
 				</div></a>
 			
 				<a href="allreviews.php"><div class="pic-container col-sm-4 col-lg-3">
-					<img src="images/32.png"></img><div class="overlay"></img><div class="moreinfo">View and read all the reviews you've received from the members.</div></div>
+					<img src="images/h7.png"></img><div class="overlay"></img><div class="moreinfo">View and read all the reviews you've received from the members.</div></div>
 				</div></a>
 				
 				<a href="profile.php"><div class="pic-container col-sm-4 col-lg-3">
-					<img src="images/41.png"></img><div class="overlay"></img><div class="moreinfo">Edit your profile.</div></div>
+					<img src="images/h4.png"></img><div class="overlay"></img><div class="moreinfo">Edit your profile.</div></div>
 				</div></a>
 				
 			</div>

@@ -1,24 +1,24 @@
 @media only screen and (max-width: 759px) {
-	.pic-container .moreinfo {text-align: center; font-size: 100%; opacity: 1; color: white; transition: opacity .50s ease-in-out; position: absolute; font-weight: bold; top: 60%; left: 5%; width: 90%;}
+	.pic-container .moreinfo {text-align: center; font-size: 100%; opacity: 1; color: black; transition: opacity .50s ease-in-out; position: absolute; font-weight: bold; top: 60%; left: 5%; width: 90%;}
 }
 
 @media only screen and (min-width: 760px) {
-	.pic-container .moreinfo {text-align: center; font-size: 100%; opacity: 0; color: white; transition: opacity .50s ease-in-out; position: absolute; font-weight: bold; top: 60%; left: 5%; width: 90%;}
-	.pic-container .overlay:hover .moreinfo  {text-align: center; opacity: 1; color: white;  font-size: 100%; position: absolute; font-weight: bold; top: 60%; left:5%; width: 90%;}
+	.pic-container .moreinfo {text-align: center; font-size: 100%; opacity: 0; color: rgba(0,0,0,0.8); transition: opacity .80s ease-in-out; position: absolute; font-weight: bold; top: 60%; left: 5%; width: 90%;}
+	.pic-container .overlay:hover .moreinfo  {text-align: center; opacity: 1; color: rgba(0,0,0,0.8);  font-size: 100%; position: absolute; font-weight: bold; top: 60%; left:5%; width: 90%;}
 }
 
 .main-fluid {background: #eaeaea }
 .content-container {margin-top: 20px; padding-bottom: 5px; min-height: 65vh;}
 .home-panel {border:none; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25); }
 .home-panel .panel-body {padding: 30px }
-.home-panel .panel-body img {float: left; height: 10%; width: 10%; padding-right: 20px;}
+.photo {border: 6px solid #eee; border-radius: 250px; float: left; margin-right: 25px;}
 .home-panel .panel-body .name {font-size: 130%; font-weight: bold; }
 .home-panel .panel-body ul {font-size: 105%; list-style-type: none; margin: 0; padding: 0}
 
-.pic-container {padding-bottom: 25px; }
-.pic-container img {margin: auto; max-height: 100%; max-width: 100%; position: relative; -webkit-transition: all 1.0s;}
-.pic-container .overlay { position: absolute; top: 0; left: 5%; width: 90%; height: 91%; overflow: hidden; -webkit-transition: all 0.5s;}
-.pic-container .overlay:hover  {background: rgba(0,0,0,0.4);}=
+.pic-container {padding-bottom: 25px;  }
+.pic-container img {margin: auto; max-height: 100%; max-width: 100%; position: relative; -webkit-transition: all 1.0s; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);}
+.pic-container .overlay {position: absolute; top: 0; left: 5%; width: 90%; height: 92%; overflow: hidden; -webkit-transition: all 0.8s; }
+.pic-container .overlay:hover  {background: rgba(0,0,0,0.2);}
 .big {font-weight: bold; font-size: 200%}
 .row > hr {margin-top: 50px; width: 50%; padding-bottom: 15px;}
 .pull-right {color: white; font-size: 110%; font-weight: bold}
