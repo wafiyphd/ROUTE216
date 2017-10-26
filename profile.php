@@ -55,7 +55,7 @@ if( isset($_POST['update']) ) {
 		
 		if ($res) {
 		 $alertType = "success";
-		 $errMsg = "Successfully updated profile.";
+		 $alertMsg = "Successfully updated profile.";
 		} else {
 		 $alertType = "danger";
 		 $alertMsg = "Something went wrong, try again later..."; 
@@ -152,7 +152,7 @@ if(isset($_POST["remove"])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>View Profile - WJ HELPFIT</title>
+	<title>View Profile - ROUTE</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="favicon.ico" type="image/x-icon"> 
