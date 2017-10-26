@@ -54,7 +54,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script>$('#loginModal').modal('show'); </script>
-
+		
+	
 </head>
 
 <body>
@@ -131,7 +132,20 @@
 					<div class="panel home-panel">
 						<div class="panel-body">
 							<div class="row">
-								<img src="images/man.png" class="photo img-responsive" width="120" height="120">
+								<?php
+								$findimage = mysqli_query($mysqli, "SELECT image_name FROM avatar WHERE user_id ='$userRow[0]'");
+								$count = mysqli_num_rows($findimage);
+								if($count > 0){
+									$findimage = mysqli_fetch_array($findimage);
+									$image = $findimage['image_name'];
+									$image_src = "images/upload/".$image;
+									
+									echo "<img class=\"photo\" src=\"$image_src\" width=\"130\" height=\"130\">";
+								}
+								else {
+									echo "<img src=\"images/man.jpg\" class=\"photo img-responsive\" width=\"130\" height=\"130\">";
+								}
+								?>
 								<div class="col-lg-4">
 									<p class="name"><?php echo ucwords($userRow['fullname']); ?></p>
 									<ul>
@@ -280,7 +294,7 @@
 							<col width="100">
 							<col width="90">
 							<?php $userid = $userRow['user_id'];
-							$sessions = "SELECT category, title, date, status, member_id, trainer_name from session s, personal_session p 
+							$sessions = "SELECT category, title, date, status, member_id, trainer_name, trainer_id from session s, personal_session p 
 							WHERE p.session_id = s.session_id  AND category='personal' AND member_id = '$userid' AND NOT status = 'Completed' AND NOT status='Cancelled' ORDER BY date LIMIT 5";
 							if ($result = mysqli_query($mysqli, $sessions)) {
 								if ((mysqli_num_rows($result)) == 0) { ?>
@@ -293,7 +307,22 @@
 								while ($row = mysqli_fetch_row($result)){ ?>
 							<tr>
 								<td><?php echo $row[1]; ?></td>
-								<td><?php echo ucwords($row[5]);?></td>
+								<td>
+									<?php 
+										$findimage = mysqli_query($mysqli, "SELECT image_name FROM avatar WHERE user_id ='$row[6]'");
+										$count = mysqli_num_rows($findimage);
+										if($count > 0){
+											$findimage = mysqli_fetch_array($findimage);
+											$image = $findimage['image_name'];
+											$image_src = "images/upload/".$image;
+											
+											echo "<img class=\"small-photo img-responsive\" src=\"$image_src\" width=\"20\" height=\"20\">";
+										}
+										else {
+											echo "<img src=\"images/man.png\" class=\"small-photo img-responsive\" width=\"20\" height=\"20\">";
+										} echo "&nbsp;"; echo ucwords($row[5]); 
+									?>
+								</td>
 								<td><?php $date = date('j F Y',strtotime($row[2])); echo $date; ?></td>
 							</tr>
 							<?php }}} ?>
@@ -325,7 +354,7 @@
 							<col width="100">
 							<col width="90">
 							<?php $userid = $userRow['user_id'];
-							$sessions = "SELECT category, title, date, status, trainer_name, member_id
+							$sessions = "SELECT category, title, date, status, trainer_name, member_id, trainer_id
 							from session s, group_session g, joined_group j WHERE category='group' AND g.session_id = s.session_id AND g.session_id = j.session_id AND 
 							j.member_id = '$userid' AND NOT status = 'Completed' AND NOT status='Cancelled' ORDER BY date LIMIT 5";
 							if ($result = mysqli_query($mysqli, $sessions)) {
@@ -339,7 +368,22 @@
 								while ($row = mysqli_fetch_row($result)){ ?>
 							<tr>
 								<td><?php echo $row[1]; ?></td>
-								<td><?php echo $row[4]; ?></td>
+								<td>
+									<?php 
+										$findimage = mysqli_query($mysqli, "SELECT image_name FROM avatar WHERE user_id ='$row[6]'");
+										$count = mysqli_num_rows($findimage);
+										if($count > 0){
+											$findimage = mysqli_fetch_array($findimage);
+											$image = $findimage['image_name'];
+											$image_src = "images/upload/".$image;
+											
+											echo "<img class=\"small-photo img-responsive\" src=\"$image_src\" width=\"20\" height=\"20\">";
+										}
+										else {
+											echo "<img src=\"images/man.png\" class=\"small-photo img-responsive\" width=\"20\" height=\"20\">";
+										} echo "&nbsp;"; echo ucwords($row[4]); 
+									?>
+								</td>
 								<td><?php $date = date('j F Y',strtotime($row[2])); echo $date; ?></td>
 							</tr>
 							

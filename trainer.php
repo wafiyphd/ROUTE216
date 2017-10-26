@@ -131,91 +131,106 @@
 				<div class="col-lg-12">
 					<div class="panel home-panel">
 						<div class="panel-body">
-							<img src="images/man.png" class="photo img-responsive" width="120" height="120">
-							<div class="col-lg-3">
-								
-								<p class="name"><?php echo ucwords($userRow['fullname']); ?></p>
-								<ul>
-									<li><strong>Joined As: </strong><?php echo ucwords($userRow['user_kind']); ?></li>
-									<li><strong>Specialty:  </strong><?php echo ucwords($trainerRow['specialty']); ?></li>
-									<li><strong>Email Address: </strong><?php echo $userRow['email']; ?></li>
-								</ul>
-							</div>
-							<div class="col-lg-3">
-								<?php $reviewcount = mysqli_query($mysqli, "SELECT COUNT(*) as count FROM review WHERE trainer_id = '$userid'");
-								$rcount = mysqli_fetch_array($reviewcount);
-								$rcount = $rcount['count']; 
-								
-								$sessioncount = mysqli_query($mysqli, "SELECT COUNT(*) as count FROM session WHERE trainer_id = '$userid'");
-								$scount = mysqli_fetch_array($sessioncount);
-								$scount = $scount['count'];
-								
-								?>
-								<p>&nbsp;</p>
-								<ul>
-									<li><strong>&nbsp; </strong></li>
-									<li><strong>No. of sessions managed:  </strong><?php echo $scount; ?></li>
-									<li><strong>No. of reviews received:  </strong><?php echo $rcount; ?></li>
-								<ul>
-							</div>
-							<div class="col-lg-3">
-								<?php $reviewquery = mysqli_query($mysqli, "SELECT trainer_id, profrat, engrat, sesrat, totalrating from review WHERE trainer_id='$userid'");
-								if ($rcount == 0) {
-									$selfaverage = "N/A";
-									$paverage = "N/A";
-									$eaverage = "N/A";
-									$saverage = "N/A";
-								}
-
-								else {
+							<div class="row">
+								<?php
+									$findimage = mysqli_query($mysqli, "SELECT image_name FROM avatar WHERE user_id ='$userRow[0]'");
+									$count = mysqli_num_rows($findimage);
+									if($count > 0){
+										$findimage = mysqli_fetch_array($findimage);
+										$image = $findimage['image_name'];
+										$image_src = "images/upload/".$image;
+										
+										echo "<img class=\"photo\" src=\"$image_src\" width=\"130\" height=\"130\">";
+									}
+									else {
+										echo "<img src=\"images/man.jpg\" class=\"photo img-responsive\" width=\"130\" height=\"130\">";
+									}
+									?>
+								<div class="col-lg-3">
 									
-								$paverage = mysqli_query($mysqli, "SELECT AVG(profrat) AS average FROM review WHERE trainer_id='$userid'");
-								$paverage = mysqli_fetch_array($paverage);
-								$paverage = $paverage['average'];
-								$paverage = number_format((float)$paverage, 2, '.', '');
-								
-								$eaverage = mysqli_query($mysqli, "SELECT AVG(engrat) AS average FROM review WHERE trainer_id='$userid'");
-								$eaverage = mysqli_fetch_array($eaverage);
-								$eaverage = $eaverage['average'];
-								$eaverage = number_format((float)$eaverage, 2, '.', '');
-								
-								$saverage = mysqli_query($mysqli, "SELECT AVG(sesrat) AS average FROM review WHERE trainer_id='$userid'");
-								$saverage = mysqli_fetch_array($saverage);
-								$saverage = $saverage['average'];
-								$saverage = number_format((float)$saverage, 2, '.', '');
-								
-								$selfaverage = mysqli_query($mysqli, "SELECT AVG(totalrating) AS average FROM review WHERE trainer_id='$userid'");
-								$selfaverage = mysqli_fetch_array($selfaverage);
-								$selfaverage = $selfaverage['average'];
-								$selfaverage = number_format((float)$selfaverage, 2, '.', ''); }?>
-								<p>&nbsp;</p>
-								<table class="noborder">
-								<col width="150">
-								<col width="80">
-								<tr><td><strong>Overall average rating:</strong></td><td>
+									<p class="name"><?php echo ucwords($userRow['fullname']); ?></p>
+									<ul>
+										<li><strong>Joined As: </strong><?php echo ucwords($userRow['user_kind']); ?></li>
+										<li><strong>Specialty:  </strong><?php echo ucwords($trainerRow['specialty']); ?></li>
+										<li><strong>Email Address: </strong><?php echo $userRow['email']; ?></li>
+									</ul>
+								</div>
+								<div class="col-lg-3">
+									<?php $reviewcount = mysqli_query($mysqli, "SELECT COUNT(*) as count FROM review WHERE trainer_id = '$userid'");
+									$rcount = mysqli_fetch_array($reviewcount);
+									$rcount = $rcount['count']; 
+									
+									$sessioncount = mysqli_query($mysqli, "SELECT COUNT(*) as count FROM session WHERE trainer_id = '$userid'");
+									$scount = mysqli_fetch_array($sessioncount);
+									$scount = $scount['count'];
+									
+									?>
+									<p>&nbsp;</p>
+									<ul>
+										<li><strong>&nbsp; </strong></li>
+										<li><strong>No. of sessions managed:  </strong><?php echo $scount; ?></li>
+										<li><strong>No. of reviews received:  </strong><?php echo $rcount; ?></li>
+									<ul>
+								</div>
+								<div class="col-lg-3">
+									<?php $reviewquery = mysqli_query($mysqli, "SELECT trainer_id, profrat, engrat, sesrat, totalrating from review WHERE trainer_id='$userid'");
+									if ($rcount == 0) {
+										$selfaverage = "N/A";
+										$paverage = "N/A";
+										$eaverage = "N/A";
+										$saverage = "N/A";
+									}
+
+									else {
+										
+									$paverage = mysqli_query($mysqli, "SELECT AVG(profrat) AS average FROM review WHERE trainer_id='$userid'");
+									$paverage = mysqli_fetch_array($paverage);
+									$paverage = $paverage['average'];
+									$paverage = number_format((float)$paverage, 2, '.', '');
+									
+									$eaverage = mysqli_query($mysqli, "SELECT AVG(engrat) AS average FROM review WHERE trainer_id='$userid'");
+									$eaverage = mysqli_fetch_array($eaverage);
+									$eaverage = $eaverage['average'];
+									$eaverage = number_format((float)$eaverage, 2, '.', '');
+									
+									$saverage = mysqli_query($mysqli, "SELECT AVG(sesrat) AS average FROM review WHERE trainer_id='$userid'");
+									$saverage = mysqli_fetch_array($saverage);
+									$saverage = $saverage['average'];
+									$saverage = number_format((float)$saverage, 2, '.', '');
+									
+									$selfaverage = mysqli_query($mysqli, "SELECT AVG(totalrating) AS average FROM review WHERE trainer_id='$userid'");
+									$selfaverage = mysqli_fetch_array($selfaverage);
+									$selfaverage = $selfaverage['average'];
+									$selfaverage = number_format((float)$selfaverage, 2, '.', ''); }?>
+									<p>&nbsp;</p>
+									<table class="noborder">
+									<col width="150">
+									<col width="80">
+									<tr><td><strong>Overall average rating:</strong></td><td>
+																						<small><?php echo '<button class="btn btn-static btn-xs '; 
+																							if ($selfaverage >= 3.5) { echo ' btn-green'; }
+																							elseif ($selfaverage >=2.5) { echo ' btn-yellow'; }
+																							elseif ($selfaverage >= 0) { echo ' btn-red'; }
+																							echo ' num">'; echo $selfaverage; echo '</button>' ?></small></td></tr>
+									<tr><td><strong>Average Professionalism:</strong></td><td> <small><?php echo '<button class="btn btn-static btn-xs '; 
+																							if ($paverage >= 3.5) { echo ' btn-green'; }
+																							elseif ($paverage >=2.5) { echo ' btn-yellow'; }
+																							elseif ($paverage >= 0) { echo ' btn-red'; }
+																							echo ' num">'; echo $paverage; echo '</button>' ?></small></td></tr>
+									<tr><td><strong>Average Engagement:</strong></td><td>
 																					<small><?php echo '<button class="btn btn-static btn-xs '; 
-																						if ($selfaverage >= 3.5) { echo ' btn-green'; }
-																						elseif ($selfaverage >=2.5) { echo ' btn-yellow'; }
-																						elseif ($selfaverage >= 0) { echo ' btn-red'; }
-																						echo ' num">'; echo $selfaverage; echo '</button>' ?></small></td></tr>
-								<tr><td><strong>Average Professionalism:</strong></td><td> <small><?php echo '<button class="btn btn-static btn-xs '; 
-																						if ($paverage >= 3.5) { echo ' btn-green'; }
-																						elseif ($paverage >=2.5) { echo ' btn-yellow'; }
-																						elseif ($paverage >= 0) { echo ' btn-red'; }
-																						echo ' num">'; echo $paverage; echo '</button>' ?></small></td></tr>
-								<tr><td><strong>Average Engagement:</strong></td><td>
-																				<small><?php echo '<button class="btn btn-static btn-xs '; 
-																						if ($saverage >= 3.5) { echo ' btn-green'; }
-																						elseif ($saverage >=2.5) { echo ' btn-yellow'; }
-																						elseif ($saverage >= 0) { echo ' btn-red'; }
-																						echo ' num">'; echo $saverage; echo '</button>' ?></small></td></tr>
-								<tr><td><strong>Average Session:</strong></td><td>
-																				<small><?php echo '<button class="btn btn-static btn-xs '; 
-																						if ($eaverage >= 3.5) { echo ' btn-green'; }
-																						elseif ($eaverage >=2.5) { echo ' btn-yellow'; }
-																						elseif ($eaverage >= 0) { echo ' btn-red'; }
-																						echo ' num">'; echo $eaverage; echo '</button>' ?></small></td></tr>
-								</table>
+																							if ($saverage >= 3.5) { echo ' btn-green'; }
+																							elseif ($saverage >=2.5) { echo ' btn-yellow'; }
+																							elseif ($saverage >= 0) { echo ' btn-red'; }
+																							echo ' num">'; echo $saverage; echo '</button>' ?></small></td></tr>
+									<tr><td><strong>Average Session:</strong></td><td>
+																					<small><?php echo '<button class="btn btn-static btn-xs '; 
+																							if ($eaverage >= 3.5) { echo ' btn-green'; }
+																							elseif ($eaverage >=2.5) { echo ' btn-yellow'; }
+																							elseif ($eaverage >= 0) { echo ' btn-red'; }
+																							echo ' num">'; echo $eaverage; echo '</button>' ?></small></td></tr>
+									</table>
+								</div>
 							</div>
 						</div>
 					</div>

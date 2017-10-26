@@ -21,6 +21,7 @@
 .btn-yellow { background-color: #FBC02D; color: white; font-weight: bold; font-size: 100%; }
 .btn-red { background-color: #EF5350; color: white; font-weight: bold; font-size: 100%; }
 .btn-static { cursor: default; }
+.btn-static:hover { color: white; }
 .btn-static:active, .btn-static:focus  { color: white; outline: none }
 
 .btn-alert {margin-top: 10px; padding: 10px 40px; color:white;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); border-radius:3px; font-weight: bold; background: rgba(246, 101, 101, 0.9);}

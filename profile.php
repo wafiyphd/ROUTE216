@@ -1,73 +1,158 @@
 <?php
 
-	ob_start();
-	session_start();
-	include_once 'dbconnect.php';
-	date_default_timezone_set('Asia/Singapore');
-	
-	$error = false;
-	
-	if ( isset($_SESSION['user'])!="" ) { 
-		$res= mysqli_query($mysqli, "SELECT * FROM user WHERE user_id=".$_SESSION['user']);
-		$userRow= mysqli_fetch_array($res);
-	} else {
-		header("Location: index.php");	
-	}
+ob_start();
+session_start();
+include_once 'dbconnect.php';
+date_default_timezone_set('Asia/Singapore');
 
-	if ( isset($_GET['success']) && $_GET['success'] == 0) {
-		$alertType = "success";
-		$errMsg = "Successfully changed your password.";
-	}
+$error = false;
+
+if ( isset($_SESSION['user'])!="" ) { 
+	$res= mysqli_query($mysqli, "SELECT * FROM user WHERE user_id=".$_SESSION['user']);
+	$userRow= mysqli_fetch_array($res);
+} else {
+	header("Location: index.php");	
+}
+
+if ( isset($_GET['success']) && $_GET['success'] == 0) {
+	$alertType = "success";
+	$alertMsg = "Successfully changed your password.";
+}
 	
-	if( isset($_POST['update']) ) {
-		$fullname = trim($_POST['fullname']);
-		$fullname = strip_tags($fullname);
-		$fullname = htmlspecialchars($fullname);
-		  
-		$email = trim($_POST['email']);
-		$email = strip_tags($email);
-		$email = htmlspecialchars($email);		
+if( isset($_POST['update']) ) {
+	$fullname = trim($_POST['fullname']);
+	$fullname = strip_tags($fullname);
+	$fullname = htmlspecialchars($fullname);
+	  
+	$email = trim($_POST['email']);
+	$email = strip_tags($email);
+	$email = htmlspecialchars($email);		
 
-		$level = trim($_POST['level']);
-		$level = strip_tags($level);
-		$level = htmlspecialchars($level);
+	$level = trim($_POST['level']);
+	$level = strip_tags($level);
+	$level = htmlspecialchars($level);
 
-		$specialty = trim($_POST['specialty']);
-		$specialty = strip_tags($specialty);
-		$specialty = htmlspecialchars($specialty);
+	$specialty = trim($_POST['specialty']);
+	$specialty = strip_tags($specialty);
+	$specialty = htmlspecialchars($specialty);
+	
+	if (!$error) {
+
+		$fullname = $_POST['fullname'];
+		$email = $_POST['email'];
+		$level = $_POST['level'];
+		$specialty = $_POST['specialty'];
 		
-		if (!$error) {
-
-			$fullname = $_POST['fullname'];
-			$email = $_POST['email'];
-			$level = $_POST['level'];
-			$specialty = $_POST['specialty'];
+		$query = "UPDATE user SET fullname='$fullname', email='$email' WHERE user_id =".$_SESSION['user'];
+		$res = mysqli_query($mysqli, $query);
 			
-			$query = "UPDATE user SET fullname='$fullname', email='$email' WHERE user_id =".$_SESSION['user'];
-			$res = mysqli_query($mysqli, $query);
-				
-			$memquery = "UPDATE member SET fullname='$fullname', level='$level' WHERE user_id =".$_SESSION['user'];
-			$res = mysqli_query($mysqli, $memquery);			
-				
-			$traquery = "UPDATE trainer SET fullname='$fullname', specialty='$specialty' WHERE user_id =".$_SESSION['user'];
-			$res = mysqli_query($mysqli, $traquery);				
-
+		$memquery = "UPDATE member SET fullname='$fullname', level='$level' WHERE user_id =".$_SESSION['user'];
+		$res = mysqli_query($mysqli, $memquery);			
 			
-		    if ($res) {
-			 $alertType = "success";
-			 $errMsg = "Successfully updated profile.";
-		    } else {
-			 $errType = "danger";
-			 $errMsg = "Something went wrong, try again later..."; 
-		    } 
+		$traquery = "UPDATE trainer SET fullname='$fullname', specialty='$specialty' WHERE user_id =".$_SESSION['user'];
+		$res = mysqli_query($mysqli, $traquery);				
+
+		
+		if ($res) {
+		 $alertType = "success";
+		 $errMsg = "Successfully updated profile.";
+		} else {
+		 $alertType = "danger";
+		 $alertMsg = "Something went wrong, try again later..."; 
+		} 
+	}
+	}
+	
+if(isset($_POST['picupload'])){
+ 
+	$id = $userRow['user_id'];
+	$checkoriginal = mysqli_query($mysqli, "SELECT * from avatar WHERE user_id ='$id'");
+	$count = mysqli_num_rows($checkoriginal);
+	if ($count > 0) {
+		$findimage = mysqli_query($mysqli, "SELECT image_name FROM avatar WHERE user_id ='$userRow[0]'");
+		$findimage = mysqli_fetch_array($findimage);
+		$image = $findimage['image_name'];
+		$image_src = "images/upload/".$image;
+		unlink($image_src);
+		$query = mysqli_query($mysqli, "DELETE from avatar where user_id = '$id'");
+	}
+	
+	$name = $_FILES['image']['name'];
+	$target_dir = "images/upload/";
+	$target_file = $target_dir . basename($_FILES['image']['name']);
+
+	// Select file type
+	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+	// Valid file extensions
+	$extensions_arr = array("jpg","jpeg","png");
+
+	
+	// Check extension
+	if(in_array($imageFileType, $extensions_arr)){
+		
+		// change name of file if exists same name
+		if(file_exists("images/upload/".$name)) {
+			$actual_name = pathinfo($name,PATHINFO_FILENAME);
+			$original_name = $actual_name;
+			$extension = pathinfo($name, PATHINFO_EXTENSION);
+			
+			$i = 1;
+			while(file_exists('images/upload/'.$actual_name.".".$extension))
+			{           
+				$actual_name = (string)$original_name.$i;
+				$name = $actual_name.".".$extension;
+				$i++;
+			}
+		}
+		
+		// Insert record
+		$insert = mysqli_query($mysqli,"insert into avatar(image_name, user_id) values('".$name."','$id')");
+		// Upload file
+		$upload = move_uploaded_file($_FILES['image']['tmp_name'],'images/upload/'.$name);
+
+		if($insert && $upload){
+			$alertType = "success";
+			$alertMsg = "Successfully uploaded profile picture.";
+		}
+		else {
+			$alertType = "danger";
+			$alertMsg = "Failed to upload image.";
+		} 
+	}
+	
+	else {
+			$alertType = "danger";
+			$alertMsg = "Invalid file extension. (.jpg or .png only)";
+	} 
+ 
+}
+
+if(isset($_POST["remove"])){
+	
+	$id = $userRow['user_id'];
+	$checkoriginal = mysqli_query($mysqli, "SELECT * from avatar WHERE user_id ='$id'");
+	$count = mysqli_num_rows($checkoriginal);
+	if ($count > 0) {
+		$findimage = mysqli_query($mysqli, "SELECT image_name FROM avatar WHERE user_id ='$userRow[0]'");
+		$findimage = mysqli_fetch_array($findimage);
+		$image = $findimage['image_name'];
+		$image_src = "images/upload/".$image;
+		unlink($image_src);
+		$query = mysqli_query($mysqli, "DELETE from avatar where user_id = '$id'");
+		if ($query) {
+			$alertType = "success";
+			$alertMsg = "Successfully removed profile picture.";
 		}
 	}
+	
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>View Profile - ROUTE</title>
+	<title>View Profile - WJ HELPFIT</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="favicon.ico" type="image/x-icon"> 
@@ -153,7 +238,7 @@
 					<div class="col-lg-6">
 						<div class="alert alert-box-s type-<?php echo $alertType; ?> alert-dismissable text-center">
 						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-							&nbsp;<?php echo $errMsg; ?>
+							&nbsp;<?php echo $alertMsg; ?>
 						</div>
 					</div>
 				<?php } ?>
@@ -176,55 +261,77 @@
 					<div class="profile-wrap text-center">
 						<div class="profile-form">
 							<div class="row text-center">
-								
-								<form class="col-lg-12" action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" autocomplete="off">
-									<div class = "group">
-										<img src="images/man.png" class="photo"><hr>
-										<label for = "type" class = "photolabel"><?php echo $row[1]?></label>
-										<br>
-										<a href="passwordchange.php"><p class="change">CHANGE PASSWORD</p></a>
+								<form class="col-lg-12" action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" autocomplete="off" enctype="multipart/form-data">
+									<div class="row">
+										<div class = "group">
+											<?php
+											$findimage = mysqli_query($mysqli, "SELECT image_name FROM avatar WHERE user_id ='$userRow[0]'");
+											$count = mysqli_num_rows($findimage);
+											if($count > 0){
+												$findimage = mysqli_fetch_array($findimage);
+												$image = $findimage['image_name'];
+												$image_src = "images/upload/".$image;
+												
+												echo "<img class=\"photo\" src=\"$image_src\" width=\"250\" height=\"250\">";
+												echo '<div class="row"><button type="submit" name="remove" class="button-remove">Remove Image</button></div>';
+											}
+											else {
+												echo '<img src="images/man.png" class="photo"><br>';
+											}
+						
+											?>
+											<br>
+											<div class="col lg-6 col-lg-offset-4">
+												<input type="file" name="image"/>
+											</div>
+											<br>
+											<div class="col-lg-4 col-lg-offset-4">	
+												<input type="submit" name="picupload" class="button" value="Upload"/>
+											</div>	
+											
+										</div>
+										
 									</div>
-
-									<div class = "group">
-										<div class="row">
-											<div class="col-lg-6">
-												<div class="group">
-													<label for = "username" class = "label">USERNAME</label>
-													<p class="info"><?php echo $row[2]?></p>
-												</div>
-											</div>
-											<div class="col-lg-6">
-												<div class="group">
-													<label for = "fullname" class = "label">FULL NAME</label>
-													<input id="fullname" type="text" name="fullname" class="input" value="<?php echo $row[4]?>" required>
-												</div>
-											</div>
-										</div>	
-										<div class="row">
-											<div class="col-lg-6">	
-												<div class="group">
-													<label for = "date" class = "label">DATE CREATED</label>
-													<p class="info"><?php  $date = date('j F Y',strtotime($row[6]));
-													echo $date; ?></p>
-												</div>
-											</div>
-											<div class="col-lg-6">											
-												<div class="group">
-													<label for = "email" class = "label">E-MAIL</label>
-													<input id="email" type="email" name="email" class="input" value="<?php echo $row[3]?>" required></input>
-												</div>
+									<hr>
+									<div class="row">
+										<div class="col-lg-6">
+											<div class="group">
+												<label for = "username" class = "label">USERNAME</label>
+												<p class="info"><?php echo $row[2]?></p>
 											</div>
 										</div>
-										<div class="row">
-											<div class="col-lg-6">
-												<div class="group">
-													<label for = "time" class = "label">TIME CREATED</label>
-													<p class="info"><?php $time = date('g:i A',strtotime($row[6]));
-													echo $time; ?></p>
-												</div>
+										<div class="col-lg-6">
+											<div class="group">
+												<label for = "fullname" class = "label">FULL NAME</label>
+												<input id="fullname" type="text" name="fullname" class="input" value="<?php echo $row[4]?>" required>
 											</div>
-											<div class="col-lg-6">											
-												<div class="details" id="member" style="display: none;">
+										</div>
+									</div>	
+									<div class="row">
+										<div class="col-lg-6">	
+											<div class="group">
+												<label for = "date" class = "label">DATE CREATED</label>
+												<p class="info"><?php  $date = date('j F Y',strtotime($row[6]));
+												echo $date; ?></p>
+											</div>
+										</div>
+										<div class="col-lg-6">											
+											<div class="group">
+												<label for = "email" class = "label">E-MAIL</label>
+												<input id="email" type="email" name="email" class="input" value="<?php echo $row[3]?>" required></input>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-lg-6">
+											<div class="group">
+												<label for = "time" class = "label">TIME CREATED</label>
+												<p class="info"><?php $time = date('g:i A',strtotime($row[6]));
+												echo $time; ?></p>
+											</div>
+										</div>
+										<div class="col-lg-6">											
+											<div class="details" id="member" style="display: none;">
 
 												<div class = "group">
 													<label for ="level" class = "label">LEVEL</label>
@@ -233,53 +340,46 @@
 															<option value="intermediate" <?php if ($mrow[3] == "intermediate") echo "selected"; ?>>Intermediate</option>
 															<option value="expert" <?php if ($mrow[3] == "expert") echo "selected"; ?>>Expert</option>
 														</select>
-													</div>
-												</div>
-												
-												<div class="form" id="trainer" style="display: none;">
-												
-												<div class="group">
-													<label for="session" class="label">SPECIALTY</label>
-													<input id="specialty" type="text" name="specialty" class = "input" value="<?php echo $trow[3]; ?>"></div>
-												</div>
-												
-												<?php 
-													if ($row[1] == 'member') {
-														$showdiv = 'member';
-													}
-													else if ($row[1] == 'trainer') {
-														$showdiv = 'trainer';
-													}
-													echo "<script type=\"text/javascript\">document.getElementById('".$showdiv."').style.display = 'block';</script>";
-												?>
-												<div class = "group">
-													<button type="submit" name="update" class="button" value="Update Profile">UPDATE</button>
 												</div>
 											</div>
-										</div>		
-									</div>											
-								</div>
-							<?php
-								if ( isset($errType) ) {
-							?>
-								<div class="form-group">
-									<div class="alert alert-boxalert type-<?php echo $errType; ?> alert-dismissable">
-										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-							<?php echo $errMSG; ?>
-									</div>
-								</div>
-							<?php
-								}
-							?>											
+											
+											<div class="form" id="trainer" style="display: none;">
+											
+												<div class="group">
+													<label for="session" class="label">SPECIALTY</label>
+													<input id="specialty" type="text" name="specialty" class = "input" value="<?php echo $trow[3]; ?>">
+												</div>
+												
+											</div>
+											
+											<?php 
+												if ($row[1] == 'member') {
+													$showdiv = 'member';
+												}
+												else if ($row[1] == 'trainer') {
+													$showdiv = 'trainer';
+												}
+												echo "<script type=\"text/javascript\">document.getElementById('".$showdiv."').style.display = 'block';</script>";
+											?>
+										</div>
+										<div class="row">
+											<div class="col-lg-12">
+												<a href="passwordchange.php"><p class="change">CHANGE PASSWORD</p></a>
+											</div>
+										</div>
+										<div class = "group">
+											<button type="submit" name="update" class="button" value="Update Profile">UPDATE</button>
+										</div>	
+									</div>					
+								</form>	
+							</div>									
 						</div>
-					</form>	
-				</div>									
+					</div>	
+				</div>
 			</div>
-		</div>	
+		</div>
 	</div>
-	</div>
-
-
+	
 	<div class="container-fluid footer-container">
 		
 		<div class="container footer-col">
@@ -303,7 +403,7 @@
 		<div class="container sub-footer"><!-- Sub Footer -->				
 			
 			<div class="col-sm-12 col-lg-6">
-			&copy Copyright 2017 <strong>ROUTE.</strong>
+			&copy Copyright 2017 <strong>WJ HELPFIT.</strong>
 			</div>
 			
 			<div class="col-sm-12 col-lg-6">

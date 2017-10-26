@@ -174,55 +174,171 @@
 								
 								<form id="#rating" class="col-lg-12" action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" autocomplete="off">
 									
-									<div class="rating">
-										<span class="inline pull-left">Professionalism Rating:</span>
-										<div class="rating-wrap">
-											<input class="star star-5" id="pstar-5" type="radio" name="prating" value="5"></input>
-											<label class="star star-5" for="pstar-5"></label>
-											<input class="star star-4" id="pstar-4" type="radio" name="prating" value="4"></input>
-											<label class="star star-4" for="pstar-4"></label>
-											<input class="star star-3" id="pstar-3" type="radio" name="prating" value="3"></input>
-											<label class="star star-3" for="pstar-3"></label>
-											<input class="star star-2" id="pstar-2" type="radio" name="prating" value="2"></input>
-											<label class="star star-2" for="pstar-2"></label>
-											<input class="star star-1" id="pstar-1" type="radio" name="prating" value="1"></input>
-											<label class="star star-1" for="pstar-1"></label>
-										</div>
-									</div>
+									<table class="rating-table noborder"><col width=150><col width=180><col width=80>
+										<tr>
+											<td style="vertical-align: middle;"><span class="inline pull-left">Professionalism Rating:</span></td>
+											<td>
+													<input class="star star-5" id="pstar-5" type="radio" name="prating" value=5 onclick="pvalue(); overall();"></input>
+													<label class="star star-5" for="pstar-5"></label>
+													<input class="star star-4" id="pstar-4" type="radio" name="prating" value=4 onclick="pvalue(); overall();"></input>
+													<label class="star star-4" for="pstar-4"></label>
+													<input class="star star-3" id="pstar-3" type="radio" name="prating" value=3 onclick="pvalue(); overall();"></input>
+													<label class="star star-3" for="pstar-3"></label>
+													<input class="star star-2" id="pstar-2" type="radio" name="prating" value=2 onclick="pvalue(); overall();"></input>
+													<label class="star star-2" for="pstar-2"></label>
+													<input class="star star-1" id="pstar-1" type="radio" name="prating" value=1 onclick="pvalue(); overall();"></input>
+													<label class="star star-1" for="pstar-1"></label>
+												
+											</td>
+											<script>
+											function pvalue() {
+												var prating = document.getElementsByName("prating");
+												var pselected;
 
-									<div class="rating">
-										<span class="inline pull-left">Engagement Rating:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-										<div class="rating-wrap">
-											<input class="star star-5" id="estar-5" type="radio" name="erating" value="5"></input>
-											<label class="star star-5" for="estar-5"></label>
-											<input class="star star-4" id="estar-4" type="radio" name="erating" value="4"></input>
-											<label class="star star-4" for="estar-4"></label>
-											<input class="star star-3" id="estar-3" type="radio" name="erating" value="3"></input>
-											<label class="star star-3" for="estar-3"></label>
-											<input class="star star-2" id="estar-2" type="radio" name="erating" value="2"></input>
-											<label class="star star-2" for="estar-2"></label>
-											<input class="star star-1" id="estar-1" type="radio" name="erating" value="1"></input>
-											<label class="star star-1" for="estar-1"></label>
-										</div>
-									</div>
+												for(var i = 0; i < prating.length; i++) {
+													if(prating[i].checked)
+														pselected = prating[i].value;
+												}
+												
+												var btncolor;
+												if (pselected >= 4)
+													btncolor = "btn-green";
+												else if (pselected >= 3)
+													btncolor = "btn-yellow";
+												else if (pselected >= 1)
+													btncolor = "btn-red";
+												document.getElementById("prating").innerHTML = "<small><button onclick=\"return false;\" class=\"btn "+btncolor+" btn-static btn-xs btn-review num\">"+pselected+".0</button></small>";
+											}
+											</script>
+											<td><span id="prating" class="inline pull-right"><small><button onclick="return false;" class="btn btn-red btn-static btn-xs btn-review num">N/A</button></small></span></td>
+										</tr>
 
-									<div class="rating">
-										<span class="inline pull-left">Session Rating:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-										<div class="rating-wrap">
-											<input class="star star-5" id="sstar-5" type="radio" name="srating" value="5"></input>
-											<label class="star star-5" for="sstar-5"></label>
-											<input class="star star-4" id="sstar-4" type="radio" name="srating" value="4"></input>
-											<label class="star star-4" for="sstar-4"></label>
-											<input class="star star-3" id="sstar-3" type="radio" name="srating" value="3"></input>
-											<label class="star star-3" for="sstar-3"></label>
-											<input class="star star-2" id="sstar-2" type="radio" name="srating" value="2"></input>
-											<label class="star star-2" for="sstar-2"></label>
-											<input class="star star-1" id="sstar-1" type="radio" name="srating" value="1"></input>
-											<label class="star star-1" for="sstar-1"></label>
-										</div>
-										
-									</div>
-									
+										<tr>
+											<td><span class="inline pull-left">Engagement Rating:</span></td>
+											<td>
+													<input class="star star-5" id="estar-5" type="radio" name="erating" value=5 onclick="evalue(); overall();"></input>
+													<label class="star star-5" for="estar-5"></label>
+													<input class="star star-4" id="estar-4" type="radio" name="erating" value=4 onclick="evalue(); overall();"></input>
+													<label class="star star-4" for="estar-4"></label>
+													<input class="star star-3" id="estar-3" type="radio" name="erating" value=3 onclick="evalue(); overall();"></input>
+													<label class="star star-3" for="estar-3"></label>
+													<input class="star star-2" id="estar-2" type="radio" name="erating" value=2 onclick="evalue(); overall();"></input>
+													<label class="star star-2" for="estar-2"></label>
+													<input class="star star-1" id="estar-1" type="radio" name="erating" value=1 onclick="evalue(); overall();"></input>
+													<label class="star star-1" for="estar-1"></label>
+												
+											</td>
+												<script>
+												function evalue() {
+													var erating = document.getElementsByName("erating");
+													var eselected;
+													
+													for(var i = 0; i < erating.length; i++) {
+														if(erating[i].checked)
+															eselected = erating[i].value;
+													}
+													
+													var btncolor;
+													if (eselected >= 4)
+														btncolor = "btn-green";
+													else if (eselected >= 3)
+														btncolor = "btn-yellow";
+													else if (eselected >= 1)
+														btncolor = "btn-red";
+													document.getElementById("erating").innerHTML = "<small><button onclick=\"return false;\" class=\"btn "+btncolor+" btn-static btn-xs btn-review num\">"+eselected+".0</button></small>";
+												}
+												</script>
+											<td><span id="erating" class="inline pull-right"><small><button onclick="return false;" class="btn btn-red btn-static btn-xs btn-review num">N/A</button></small></span></td>
+										</tr>
+
+										<tr>
+											<td><span class="inline pull-left">Session Rating:</span></td>
+											<td>
+													<input class="star star-5" id="sstar-5" type="radio" name="srating" value=5 onclick="svalue(); overall();"></input>
+													<label class="star star-5" for="sstar-5"></label>
+													<input class="star star-4" id="sstar-4" type="radio" name="srating" value=4 onclick="svalue(); overall();"></input>
+													<label class="star star-4" for="sstar-4"></label>
+													<input class="star star-3" id="sstar-3" type="radio" name="srating" value=3 onclick="svalue(); overall();"></input>
+													<label class="star star-3" for="sstar-3"></label>
+													<input class="star star-2" id="sstar-2" type="radio" name="srating" value=2 onclick="svalue(); overall();"></input>
+													<label class="star star-2" for="sstar-2"></label>
+													<input class="star star-1" id="sstar-1" type="radio" name="srating" value=1 onclick="svalue(); overall();"></input>
+													<label class="star star-1" for="sstar-1"></label>
+												
+											</td>
+											<script>
+											function svalue() {
+												var srating = document.getElementsByName("srating");
+												var sselected; 
+												
+												for(var i = 0; i < srating.length; i++) {
+													if(srating[i].checked)
+														sselected = srating[i].value;
+												}
+												var btncolor;
+												if (sselected >= 4)
+													btncolor = "btn-green";
+												else if (sselected >= 3)
+													btncolor = "btn-yellow";
+												else if (sselected >= 1)
+													btncolor = "btn-red";
+												document.getElementById("srating").innerHTML = "<small><button onclick=\"return false;\" class=\"btn "+btncolor+" btn-static btn-xs btn-review num\">"+sselected+".0</button></small>";
+											}
+											</script>
+											<td><span id="srating" class="inline pull-right"><small><button onclick="return false;" class="btn btn-red btn-static btn-xs btn-review num">N/A</button></small></span></td>
+										</tr>
+										<tr class="hr"><td></td><td></td><td></td></tr>
+										<tr class="average">
+											<td><span class="inline pull-left">Overall Average Rating:</span></td>
+											<td></td>
+											<td>
+											<div id="average" class="inline pull-right"><small><button onclick="return false;" class="btn btn-red btn-static btn-xs btn-review num">N/A</button></small></div>
+											</td>
+											<script>
+											function overall() {
+												var prating = document.getElementsByName("prating");
+												var pselected;
+
+												for(var i = 0; i < prating.length; i++) {
+													if(prating[i].checked)
+														pselected = parseInt(prating[i].value);
+												}
+												
+												var erating = document.getElementsByName("erating");
+												var eselected;
+												
+												for(var i = 0; i < erating.length; i++) {
+													if(erating[i].checked)
+														eselected = parseInt(erating[i].value);
+												}
+												
+												var srating = document.getElementsByName("srating");
+												var sselected; 
+												
+												for(var i = 0; i < srating.length; i++) {
+													if(srating[i].checked)
+														sselected = parseInt(srating[i].value);
+												}
+												
+												var total = pselected + eselected + sselected;
+												var average = parseFloat(total / 3.0).toFixed(2);
+												var btncolor;
+												if (average >= 3.75)
+													btncolor = "btn-green";
+												else if (average >= 2.8)
+													btncolor = "btn-yellow";
+												else if (average >= 0)
+													btncolor = "btn-red";
+												
+												if (pselected > 0 && eselected > 0 && sselected > 0) {
+													document.getElementById("average").innerHTML = "<small><button onclick=\"return false;\" class=\"btn "+btncolor+" btn-static btn-xs btn-review num\">"+average+"</button></small>";
+												}
+												
+											}
+											</script>
+										</tr>
+									</table>
+									<br><br>
 									<div class="group">
 										<label for="comments" class="label">Comments</label>
 										<textarea id="comments"  type="text" name="comments" rows="8" class="input-text"></textarea>
@@ -254,7 +370,7 @@
 										<div class="col-lg-6">
 											<ul class="session">
 												<li><strong>Session Name: </strong><?php echo ucfirst($row[2]); ?></li>
-												<li><strong>Date: </strong><?php echo ucfirst($row[3]); ?></li>
+												<li><strong>Date: </strong><?php $date = date('j F Y',strtotime($row[3])); echo $date; ?></li>
 												<li><strong>Fee: </strong>RM <?php echo ucfirst($row[5]); ?></li>
 												<li><strong>Status: </strong><?php echo ucfirst($row[6]); ?></li>
 												

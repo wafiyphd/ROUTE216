@@ -1,4 +1,4 @@
-.profile-fluid {background: #eaeaea; }
+.profile-fluid {background: #eaeaea}
 
 .profile-container h3 {font-weight: bold; text-align: center;  color: black;}
 .profile-container h4 {text-align: center;  color: white;}
@@ -6,20 +6,22 @@
 
 .profile-wrap {box-shadow:1px 6px 10px 0 rgba(0,0,0,.3); margin: auto; margin-top: 40px; margin-bottom: 40px; }
 .profile-form {padding:40px 40px 35px 40px; background: rgba(255,255,255,.8); }
-.profile-form .photo {border: 6px solid #eee; border-radius: 250px; }
+.profile-form .photo {border: 7px solid #eee; border-radius: 250px; }
 .profile-form .group{margin-top: 10px; margin-bottom:20px;}
 
 .profile-form .photolabel {text-transform: uppercase; color: #80bfff; }
 .profile-form .change {font-family: "Quicksand"; font-size: 75%; font-weight: bold; color: #66b3ff; }
-.profile-form .label {width:100%; color:#ff9999; display:block; outline: none; font-size: 85%; text-align: left; font-family: "Quicksand"; }
+.profile-form .label {width:100%; color:#ff9999; display:block; outline: none; font-size: 90%; text-align: left; font-family: "Quicksand"; }
 .profile-form .info {font-size: 100%; color: #595959; font-family: "Palanquin"; text-align: left; padding: 5px 0 20px 7.5px;}
-.profile-form .input {width:100%; color:#d9d9d9; display:block; outline: none; font-size: 95%; font-family: "Quicksand"; }
-.profile-form .input {border:0.5px solid #cce6ff; padding:10px 15px; border-radius:5px; background:rgba(64,64,64,.5); color:#fff; }
+.profile-form .input {width:100%; color: #6C7181; display:block; outline: none; font-size: 95%; font-family: "Quicksand"; border:0.5px solid #fccfcf; padding:10px 15px; border-radius:5px; background: #E5E7E9;}
+.profile-form .input:focus {color:black; border:0.5px solid #FF5733; }
 .profile-form .button{width:100%; color:#fff; display:block; outline: none; font-size: 100%; border:none; padding:10px 20px; border-radius:7px; }
 .profile-form .group select {font-family: "Quicksand"; border-radius:5px;}
 
-.profile-form .button{font-family: "Quicksand"; font-weight:bold; font-size: 95%; background: rgba(246, 101, 101, 0.9); box-shadow: 0 1px 4px rgba(0, 0, 0, .5); }
+.profile-form .button{width: 100%; font-family: "Quicksand"; font-weight:bold; font-size: 95%; background: rgba(246, 101, 101, 0.9); box-shadow: 0 1px 4px rgba(0, 0, 0, .5); }
 .profile-form .button:hover{background: rgba(255, 102, 102, 1); }
+
+.profile-form .button-remove {padding:0;margin-top: 10px; font-family: "Quicksand";  background: none; font-size: 90%; font-weight: bold; color: #66b3ff; border: none;}
 
 .profile-form .radio {cursor: pointer; }
 .profile-form .radio input { visibility: hidden; }
