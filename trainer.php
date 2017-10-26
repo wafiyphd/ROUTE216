@@ -277,11 +277,11 @@
 					  <div class="tbl-content">
 						<table class="table-hover" cellpadding="0" cellspacing="0" border="0">
 						  <tbody>
-							<col width="150">
+							<col width="140">
 							<col width="90">
-							<col width="100">
+							<col width="110">
 							<?php $userid = $userRow['user_id'];
-							$sessions = "SELECT category, title, date, status, member_name from session s, personal_session p 
+							$sessions = "SELECT category, title, date, status, member_name, member_id from session s, personal_session p 
 							WHERE s.session_id = p.session_id AND category='personal' AND trainer_id = '$userid' AND NOT status = 'Completed' AND NOT status='Cancelled' ORDER BY date LIMIT 5";
 							if ($result = mysqli_query($mysqli, $sessions)) {
 								if ((mysqli_num_rows($result)) == 0) { ?>
@@ -295,7 +295,20 @@
 							<tr>
 								<td><?php echo $row[1]; ?></td>
 								<td><?php $date = date('j F Y',strtotime($row[2])); echo $date; ?></td>
-								<td><?php if (is_null($row[4])) {echo 'No member joined.';} else {echo ucwords($row[4]);}?></td>
+								<td><?php if (is_null($row[4])) {echo 'No member joined.';} else {
+										$findimage = mysqli_query($mysqli, "SELECT image_name FROM avatar WHERE user_id ='$row[5]'");
+										$count = mysqli_num_rows($findimage);
+										if($count > 0){
+											$findimage = mysqli_fetch_array($findimage);
+											$image = $findimage['image_name'];
+											$image_src = "images/upload/".$image;
+											
+											echo "<img class=\"small-photo img-responsive\" src=\"$image_src\" width=\"20\" height=\"20\">";
+										}
+										else {
+											echo "<img src=\"images/man.png\" class=\"small-photo img-responsive\" width=\"20\" height=\"20\">";
+										} echo "&nbsp;"; echo ucwords($row[4]); 
+								}?></td>
 							</tr>
 							<?php }}} ?>
 						  </tbody>
