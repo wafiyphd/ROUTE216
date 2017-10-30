@@ -7,46 +7,50 @@
 	.info-container .pic-container .overlay:hover .moreinfo  {opacity: 1; color: white;  font-size: 100%; position: absolute; font-weight: bold; top: 60%; left: 5%; width: 90%;}
 }
 
-.main-fluid {background-image: url(../images/abstract2.jpg); background-size: cover; padding-left: 0 !important; padding-right: 0 !important; box-shadow: 0 5px 3px rgba(0,0,0,0.30), 0 5px 3px rgba(0,0,0,0.15); }
+.main-fluid {background-image: url(../images/header.jpeg); background-size: cover; padding-left: 0 !important; padding-right: 0 !important; box-shadow: 0 2px 2px rgba(0,0,0,0.05), 0 2px 2px rgba(0,0,0,0.05); }
 	
-.main-container .main-header {margin-top: 40px; font-size: 320%; font-weight: bold; color: white;}
-.main-container .main-header hr{margin-left: 0; margin-top: 20px; width:50%;}
-.main-container hr { width: 50%;}
+.main-container .main-header {font-family: "Palanquin"; text-align: center; margin-top: 40px; font-size: 320%; color: #737373; }
+.main-container .title {font-size: 180%; font-weight: bold; color: #ffffff; }
+.main-container .description {font-size: 65%; color: #f2f2f2; font-family: "Muli"; }
+.main-container .main-header hr{margin-left: 0; margin-top: 20px; width:50%; }
+.main-container hr {width: 50%; }
 
-.info-fluid {background-image: url(../images/info.jpg);}
+.info-fluid {}
 .info-fluid > .container >.container {padding-top: 10px }
-.info-container {margin-bottom: 30px;}
-.info-container h3 {font-size: 300%; font-weight: bold; color: white}
+.info-container {margin-bottom: 30px; background-color: #fff; }
+.info-container h3 {font-size: 230%; color: #a6a6a6; text-align: right; font-family: "Muli"; }
 .info-container p {font-size: 120% }
-.info-container .pic-container img {margin: auto; max-height: 100%; max-width: 100%; position: relative; -webkit-transition: all 0.8s;}
-.info-container .pic-container .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); overflow: hidden;}
-.info-container .pic-container .overlay:hover  {background: rgba(0,0,0,0.4);}
-.info-container .pic-container .caption {color: white; font-size: 200%; font-weight: bold; position: absolute; top: 45%; left: 0; width: 100%; }
-.info-container .pic-container .caption hr {margin-top: 0; width: 50%; border: 1px solid white; }
+.info-container .pic-container img {margin: auto; max-height: 100%; max-width: 100%; position: relative; }
+.info-container .pic-container .about {font-family: "Quicksand"; text-align:justified; }
+.info-container .pic-container .point {font-size: 190%;}
+.info-container .pic-container .about hr {margin-top: 0; width: 60%; border: 0.5px solid #b3b3b3; }
 .info-container .big {font-weight: bold; font-size: 200%}
 .info-container .row > hr {margin-top: 50px; width: 50%; padding-bottom: 15px;}
 .info-container .pull-right {color: white; font-size: 110%; font-weight: bold}
 .info-container .padding-0 {padding: 0; margin: 0}
 
-.features-container {color: white; background-image: url(../images/comp.jpg); background-size: cover; padding-top: 15px; padding-bottom: 25px;}
+.features-container {background-size: cover; background-color: #fff; padding-top: 15px; padding-bottom: 25px; border-top: 1px solid #f2f2f2; }
 .features-container hr { width: 50%; padding-bottom: 15px;}
-.features-container h3 {font-size: 300%; font-weight: bold;}
+.features-container h3 {font-size: 230%; color: #a6a6a6; text-align: right; font-family: "Muli"; }
 .features-container p {font-size: 120% }
-.features-container .pic-row .caption {font-size: 105%; padding-top: 10px; text-transform: uppercase; font-weight: bold;}
-.features-container .pic-row .img-responsive { margin: 0 auto;}
-.features-container .big {font-weight: bold; font-size: 200%;}
+.features-container .pic-row .caption {font-size: 100%; margin-left: 30px; padding-top: 10px; text-align: left; font-family: "Muli"; }
+.features-container .pic-row .contents {font-size: 160%; padding-top: 10px; text-align: left; font-family: "Quicksand"; color: #595959; }
+.features-container .pic-row .caption-right {font-size: 100%; margin-right: 30px; padding-top: 10px; text-align: right; font-family: "Muli"; }
+.features-container .pic-row .contents-right {font-size: 160%; padding-top: 10px; text-align: right; font-family: "Quicksand"; color: #595959; }
+.features-container .pic-row .img-responsive {margin: 0 auto; }
+.features-container .big {font-size: 190%; text-transform: uppercase; }
 .features-container .images {padding-top: 20px; padding-bottom: 25px; }
 
-.combine {background-image: url(../images/wood.jpg); background-size: cover; }
+.combine {border-top: 1px solid #f2f2f2; background-image: url(../images/contact.jpeg); background-size: cover; }
 .combine hr {width: 70%}
 
 .signup-container .header {text-align: left; }
 .contact-container .header {text-align: right;}
 
-.signup-container .main-header, .contact-container .main-header {color: white; margin-top: 70px; margin-bottom: 50px;}
-.signup-container .main-header .big, .contact-container .main-header .big{font-size: 250%; font-weight: bold; }
-.signup-container .main-header p, .contact-container .main-header p{font-size: 200%;}
+.signup-container .main-header {font-family: "Quicksand"; color: #808080; margin-top: 70px; margin-bottom: 35px;}
+.signup-container .main-header .big {font-size: 180%; font-weight: bold; }
+.signup-container .main-header p {font-size: 180%;}
 
-.signup-container .btn, .contact-container .btn {padding: 10px; font-size: 120%; width:100%; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); border-radius:3px; font-weight: bold; background: rgba(246, 101, 101, 0.9); margin-top: 20px; }
-.signup-container .btn:hover, .contact-container .btn:hover {color: white; background: rgba(250, 97, 85, 1) }
-.signup-container a, .contact-container a {text-decoration: none; color: white; }
+.signup-container .btn.btn {padding: 10px; font-family: "Quicksand"; font-size: 110%; width:65%; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); border-radius:3px; font-weight: bold; background: rgba(246, 101, 101, 0.9); margin-top: 10px; }
+.signup-container .btn:hover {color: white; background: rgba(250, 97, 85, 1) }
+.signup-container a {text-decoration: none; color: white; }

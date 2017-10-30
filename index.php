@@ -65,6 +65,7 @@ if( isset($_POST['login']) ) {
   }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -81,7 +82,8 @@ if( isset($_POST['login']) ) {
 	<link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Palanquin" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
-
+	<link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+	
 	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" href="css/login.css">
 	<link rel="stylesheet" href="css/alert.css">
@@ -140,9 +142,9 @@ if( isset($_POST['login']) ) {
 		<div class="container main-container">
 
 			<div class = "main-header">
-				<br> ROUTE. <br>
-				Commit to a healthier lifestyle.
-				<hr><br><br><br><br>
+				<br><br> <div class = "title">ROUTE</div>
+				<div class = "description">Commit to a healthier lifestyle.</div>
+				<br><br><br>
 			</div>
 			
 		</div>
@@ -156,6 +158,7 @@ if( isset($_POST['login']) ) {
 					<div class="login-container">
 						<h3><strong>Log In</strong></h3>
 						<hr>
+						
 						<div class="login-form">
 						
 							<form id="login" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" autocomplete="off">
@@ -195,109 +198,125 @@ if( isset($_POST['login']) ) {
 		
 	<div class="container-fluid info-fluid text-center">
 		
-		
-		
 		<div class="container info-container">
 			
 			<div class="container">
-			<h3>About ROUTE.</h3>
-			<hr>
+			
 				<div class="row">
+				
+					<div class="col-xs-12 col-sm-12 col-sm-offset-0 col-lg-12">
+						<br>
+						<h3>About ROUTE</h3>
+						<br><br>
+						<div class="pic-container col-sm-4 col-lg-4">
+							<div class = "about"><img src="images/phone.png"></img>
+							<br><br>
+								<div class = "point">CONVENIENCE</div><br>Despite a busy schedule, 
+								both parties can simply book sessions online, review a trainer, etc. from anywhere.
+								</div>
+							</div>
 					
-					<div class="pic-container col-sm-4 col-lg-4 padding-0">
-						<img src="images/phone.jpg"></img><div class="overlay"><div class="caption">CONVENIENCE<hr></div><div class="moreinfo">Despite a busy schedule, 
-														both parties can simply book sessions online, review a trainer, etc. from anywhere.</div></div>
+						<div class="pic-container col-sm-4 col-lg-4">
+							<div class = "about"><img src="images/calendar.png"></img>
+							<br><br>
+							<div class = "point">PRODUCTIVITY</div><br>Allow sessions to be booked on the go,
+							without having to interfere with your schedule, with real-time updates.
+							</div>
+						</div>
+					
+						<div class="pic-container col-sm-4 col-lg-4">
+							<div class = "about"><img src="images/clock.png"></img>
+							<br><br>
+							<div class = "point">TIME-SAVING</div><br>Book a session without having to 
+							physically be at a gym or a studio. No more lines and no more waiting.
+							</div>
+						</div>
+						<br>
 					</div>
-					
-					<div class="pic-container col-sm-4 col-lg-4 padding-0">
-						<img src="images/mirror.jpg"></img><div class="overlay"><div class="caption">PRODUCTIVITY<hr></div><div class="moreinfo">Allow sessions to be booked on the go,
-						without having to interfere with a trainer’s or member’s busy schedule, with real-time updates.</div></div>
-					</div>
-					
-					<div class="pic-container col-sm-4 col-lg-4 padding-0">
-						<img src="images/winner.jpg"></img><div class="overlay"></img><div class="caption">TIME-SAVING<hr></div><div class="moreinfo">Book a session without having to 
-						physically be at a gym or a studio. No more lines and no more waiting. Just show up.</div></div>
-					</div>
-					
+				
 				</div>
-				<hr>
-				<a href="about.php"><button class="btn btn-more pull-right">Learn More&nbsp;</button></a>
+				<br><br>
+				<a href="about.php"><button class="btn btn-more pull-center">Learn More&nbsp;</button></a>		
 			</div>
+			<br>
 		</div>
 	</div>
 	
 	<div class="container-fluid features-container text-center">
 		
 		<div class="container">
-			<h3>ROUTE Features.</h3>
-			<hr>
+			<br>
+				<h3>Features of ROUTE</h3>
+			<br>
 			
-			<span class="big">As a Member</span>
-			<div class="row pic-row">
-				
+			<div class="row pic-row">			
 				<div class="col-lg-6 col-xs-12 images">
-					<img class="img-responsive" src="images/1.png">
+					<img class="img-responsive" src="images/memberpage.png">
 				</div>
-				<div class=" col-lg-6 col-xs-12 images">
-					<img class="img-responsive " src="images/3.png"><div class="caption"></div>
+				
+				<div class=" col-lg-6 col-xs-12">
+					<br><br><br><br>
+					<div class="caption">
+						<span class="big">As a Member</span>
+						<br>
+						<div class="contents">Join sessions
+							<br>Review trainers
+							<br>Customize your profile
+						</div>
+					</div>
 				</div>
+				<br>
 			</div>
-			<hr>
-			<span class="big">As a Trainer</span>
+			<br>
+			
 			<div class="row pic-row">
 				
-				<div class="col-lg-6 col-xs-12 images">
-					<img class="img-responsive" src="images/2.png">
+				<div class="col-lg-6 col-xs-12">
+					<br><br><br><br>
+					<div class="caption-right">
+						<span class="big">As a Trainer</span>
+						<br>
+						<div class="contents-right">Create sessions
+							<br>Receive feedback
+							<br>Customize your profile
+						</div>
+					</div>
 				</div>
+				
 				<div class="col-lg-6 col-xs-12 images ">
-					<img class="img-responsive" src="images/4.png"><div class="caption"></div>
+					<img class="img-responsive" src="images/trainerpage.png">
 				</div>
 			</div>
-		</div>
-		
+		</div>		
 	</div>
 
 	<div class="container-fluid combine">
+	
 		<div class="container-fluid signup-container ">
+		
 			<div class="container main-header">
+			
 				<div class="row">
-					<div class="col-lg-6 col-xs-12 header">
-						<span class="big">Register for ROUTE.</span><br>
-						<p>Free to join. <br> Free sessions every week.</p>
-						
+					<div class="col-lg-4 col-xs-12 col-lg-offset-1 header">
+						<span class="big">Ready to join us?</span>
+						<br>
+						<a href='signup.php'><button class="btn"><strong>Sign Up</strong></button></a>
+						<br><br>
+						<span class="big">Register for ROUTE.</span>
+						<br>
+						<p>Free to join. <br> Free sessions weekly.</p>
+						<br>						
 					</div>
 					
-					<div class="col-lg-6 col-xs-12 text-center">
-						<span class="big">Ready to join up?</span>
-						<div class="row">
-							<div class="col-lg-12 col-xs-12">
-								<a href='signup.php'><button class="btn"><strong>Sign Up</strong></button></a>
-							</div>
-						</div>
+					<div class = "col-lg-2 text-center">
+						<p><br><br><br>- or -</p>
 					</div>
-				</div>
-			</div>
-		</div>
-		<hr>
-		<div class="container-fluid contact-container ">
-			<div class="container main-header">
-				
-				<div class="row">
-					<div class="col-lg-6 col-xs-12 text-center">
-						<span class="big">Got any inquries?</span>
-						<div class="row">
-							<div class="col-lg-12 col-xs-12">
-								<a href='contact.php'><button class="btn"><strong>Contact Us</strong></button></a>
-							</div>
-						</div>
-					</div>
-						
-					<div class="row">
-						<div class="col-lg-6 col-xs-12 pull-right header">
-							<span class="big">Contact Us.</span><br>
-							<p>Send any feedback.<br>Send any inquiries.</p>
 							
-						</div>
+					<div class="col-lg-4 col-xs-12 text-right">
+						<span class="big">Contact us.</span><br>
+						<p>Ask us anything.<br>Send us feedback.</p>
+						<span class="big">Still have questions?</span><br>
+						<a href='contact.php'><button class="btn"><strong>Contact Us</strong></button></a>			
 					</div>
 				</div>
 			</div>
