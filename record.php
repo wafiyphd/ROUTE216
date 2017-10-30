@@ -336,18 +336,18 @@
 							</div>
 
 							<div class="group">			
-								<label for="session" class="label-center">TYPE OF SESSION</label>
+								<label for="session" class="label">TYPE OF SESSION</label>
 									<div class="row">
 										<div class="col-sm-12 col-lg-6">
 											<label class="radio">
 												<input type="radio" name="session" value="personal" onclick="show1();">
-												<div class="choice">PERSONAL</div>
+												<div class="choice">Personal</div>
 											</label>
 										</div>
 									<div class="col-sm-12 col-lg-6">
 										<label class="radio">
 											<input type="radio" name="session" value="group" onclick="show2();">
-											<div class="choice">GROUP</div>
+											<div class="choice">Group</div>
 										</label>
 									</div>
 								</div>
@@ -357,19 +357,21 @@
 								<label for="session" class="label">SESSION TYPE</label>
 									<label class="radio">
 										<input type="radio" name="type" value="Sport">
-										<div class="choice">SPORT</div>
+										<div class="choice">Sport</div>
 									</label>
 									
 									<label class="radio">
 										<input type="radio" name="type" value="Dance">
-										<div class="choice">DANCE</div>
+										<div class="choice">Dance</div>
 									</label>
 									
 									<label class="radio">
 										<input type="radio" name="type" value="MMA">
 										<div class="choice">MMA</div>
 									</label>
-												
+									
+									<br>
+									
 									<label for = "participants" class = "label">NO. OF PARTICIPANTS</label>
 									<input id = "maxpax" type = "number" name = "maxpax" class = "input" min="2" max= "30">
 							</div>
@@ -381,7 +383,7 @@
 								</div>
 											
 						<div class = "group">
-							<button type="submit" name="record" class="button" value="Record">RECORD</button>
+							<button type="submit" name="record" class="button" value="Record">Record</button>
 						</div>
 						
 						<?php

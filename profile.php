@@ -403,7 +403,7 @@ if(isset($_POST["remove"])){
 		<div class="container sub-footer"><!-- Sub Footer -->				
 			
 			<div class="col-sm-12 col-lg-6">
-			&copy Copyright 2017 <strong>WJ HELPFIT.</strong>
+			&copy Copyright 2017 <strong>ROUTE.</strong>
 			</div>
 			
 			<div class="col-sm-12 col-lg-6">

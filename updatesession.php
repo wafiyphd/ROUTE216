@@ -384,12 +384,12 @@
 										<label for="session" class="label">SESSION TYPE</label>
 											<label class="radio">
 												<input type="radio" name="type" value="Sport"  checked="<?php if ($grow[0] == "sport") echo "checked"; ?>">
-												<div class="choice">SPORT</div>
+												<div class="choice">Sport</div>
 											</label>
 											
 											<label class="radio">
 												<input type="radio" name="type" value="Dance" checked="<?php if ($grow[0] == "dance") echo "checked"; ?>">
-												<div class="choice">DANCE</div>
+												<div class="choice">Dance</div>
 											</label>
 											
 											<label class="radio">
@@ -415,7 +415,7 @@
 										</div>
 											
 										<div class="group">
-											<input type="submit" name="update" class="button" value="UPDATE"></input>
+											<input type="submit" name="update" class="button" value="Update"></input>
 										</div>
 											
 									</form>		

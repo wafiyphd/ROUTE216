@@ -5,27 +5,27 @@
 .update-container h4 {text-align: center;  color: white;}
 
 .update-wrap {box-shadow:1px 6px 10px 0 rgba(0,0,0,.3); margin: auto; margin-top: 20px; margin-bottom: 50px; }
-.update-form {padding:40px 40px 50px 40px; background: rgba(77,77,77,.9); }
+.update-form {padding:40px 40px 50px 40px; background: #FDFEFE; }
 .update-form .group{margin-top: 10px; margin-bottom:20px;}
 
-.update-form .label {width:100%; color:#9fbfdf; display:block; outline: none; font-size: 85%; text-align: left; font-family: "Quicksand"; }
-.update-form .input {width:100%; color:#d9d9d9; display:block; outline: none; font-size: 100%; font-family: "Roboto"; }
-.update-form .input {border:0.5px solid #666; padding:10px 20px; border-radius:5px; background:rgba(64,64,64,.5); color:#fff; }
+.update-form .label {width:100%; color:#f66565; display:block; outline: none; font-size: 85%; text-align: left; font-family: "Quicksand"; }
+.update-form .input {width:100%; color:#f66565; display:block; outline: none; font-size: 85%; font-family: "Quicksand"; }
+.update-form .input {border:0.5px solid #fccfcf; padding:10px 20px; border-radius:5px; background: #E5E7E9; color: black; }
 .update-form .button{width:100%; color:#fff; display:block; outline: none; font-size: 100%; border:none; padding:10px 20px; border-radius:7px; box-shadow: 0 1px 4px rgba(0, 0, 0, .5);}
-.update-form .date {font-family: "Roboto"}
-.update-form .group select {font-family: "Roboto"; border-radius:5px;}
+.update-form .date {font-family: "Quicksand"}
+.update-form .group select {font-family: "Quicksand"; border-radius:5px;}
 
 .update-form .timeperiod input { position: absolute; visibility: hidden; display: none; }
-.update-form .timeperiod label { color: white; display: inline-block; cursor: pointer; padding: 10px 10px; font-family: "Quicksand"; border-radius:5px;}
+.update-form .timeperiod label { color: #f66565; display: inline-block; cursor: pointer; padding: 10px 10px; font-family: "Quicksand"; border-radius:5px;}
 .update-form .timeperiod input:checked + label { color: white; border: 0.6px solid #6eb3f7; background-color: rgba(101, 173, 246, 0.85); }
 
 .update-form p {color:#aaa; font-size: 80%; padding-top: 20px;}
 .update-form h3 {color: #eee;}
 
-.update-form .button{font-family: "Quicksand"; font-weight:bold; font-size: 95%; background: 	rgba(246, 101, 101, 0.9); }
+.update-form .button{font-family: "Quicksand"; font-weight:bold; font-size: 95%; background: rgba(246, 101, 101, 0.9); }
 .update-form .button:hover{background: rgba(255, 102, 102, 1); }
 
 .update-form .radio {cursor: pointer; }
 .update-form .radio input { visibility: hidden; }
-.update-form .radio .choice { font-family: "Quicksand"; font-size: 90%; width:100%; padding: 10px; border: 0.6px solid #d9d9d9; display: inline-block; color: #f2f2f2; border-radius: 5px; }
-.update-form .radio input:checked + .choice { border-color: #64B5F6; background-color: rgba(101, 173, 246, 0.85); }
+.update-form .radio .choice { font-family: "Quicksand"; font-size: 90%; width:100%; padding: 10px; border: 0.6px solid #d9d9d9; display: inline-block; color: #aaa; border-radius: 5px; }
+.update-form .radio input:checked + .choice { border-color: #64B5F6; background-color: rgba(101, 173, 246, 0.85); color: white; }

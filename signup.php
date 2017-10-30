@@ -359,7 +359,7 @@
 								</div>
 								
 								<div id="#member" class="group member">
-									<label for="level" class="label">Training Level</label>
+									<label for="level" class="label">TRAINING LEVEL</label>
 									<label class="radio">
 									  <input type="radio" name="level" value="beginner">
 									  <div class="choice">Beginner</div>
@@ -375,7 +375,7 @@
 								</div>
 								
 								<div id="#trainer" class="group trainer">
-									<label for="specialty" class="label">Specialty</label>
+									<label for="specialty" class="label">SPECIALTY</label>
 									<input id="specialty" type="text" name="specialty" class="input">
 								</div>
 								
