@@ -162,7 +162,7 @@
 									<ul>
 										<li><strong>&nbsp; </strong></li>
 										<li><strong>No. of sessions joined:  </strong><?php echo $memberRow['joined']; ?></li>
-										<li><strong>No. of reviews submitted:  </strong><?php echo $count; ?></li>
+										<li><strong>No. of reviews submitted:  </strong><?php echo $count; ?> (<a href="allmemberreviews.php">View</a>)</li>
 									<ul>
 								</div>
 							</div>
