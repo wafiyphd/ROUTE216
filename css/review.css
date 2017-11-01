@@ -8,10 +8,10 @@
 	label.star { float: right; padding: 5px; font-size: 18px; transition: all .2s; }
 }
 
-.content-container {background-image: url(../images/abstract2.jpg); background-size: cover;}
+.content-container {background: #eaeaea}
 .review-container {margin-top: 20px; }
 
-.review-wrap {box-shadow:0 12px 15px 0 rgba(0,0,0,.24); margin: auto; margin-top: 30px; margin-bottom: 50px; }
+.review-wrap {box-shadow:0 5px 5px 0 rgba(0,0,0,.24); margin: auto; margin-top: 30px; margin-bottom: 50px; }
 .review-form {padding:60px 40px 40px; background: #FDFEFE }
 .review-form .group{margin-top: 10px; margin-bottom:20px;}
 
@@ -51,10 +51,12 @@ label.star:before { font-family: FontAwesome; content: '\f006'; color:#6C7181 }
 .rating-table .hr td {padding:10px;}
 .rating-table .average td {padding-top: 10px;}
 
-.info-wrap {border: none; margin: auto; margin-top: 30px; margin-bottom: 20px; }
+.info-wrap {border: none; margin: auto; margin-top: 30px; }
 .info-content .big {color: #0aabf5; font-weight: bold; font-size: 120%; }
-.info-content {border:none; font-family: "Quicksand"; color: #6C7181 ; padding:40px 40px 40px; background: #FDFEFE; text-align: left; margin: 5px;  box-shadow: 0 1px 4px rgba(0, 0, 0, .5); }
+.info-content {border:none; font-family: "Quicksand"; color: #6C7181 ; padding:30px 40px 20px; background: #FDFEFE; text-align: left; margin: 5px;  box-shadow:0 3px 3px 0 rgba(0,0,0,.24); }
 .info-content ul {list-style-type: none; margin: 0; padding: 0; }
 .info-content ul li {font-family: "Roboto"; font-size: 95%; }
-.info-content hr {height: 1px; border: 0; border-top: 1px solid #ABB2B9; padding: 0px 0 0px 0;	}
+.info-content hr {height: 1px; border: 0; border-top: 1px solid #ABB2B9;}
+
+.small-photo {border: 1px solid #eee; border-radius: 250px; float: right; margin-right: 5px;}
 

@@ -1,11 +1,24 @@
-.main-fluid {background-image: url(../images/abstract3.jpg); background-size: cover; min-height: 70vh;}
+.main-fluid {background: #eaeaea; min-height: 70vh; padding-bottom: 20px;}
 .review-container {margin-top: 20px; }
 
-.panel {border:none; box-shadow:0 10px 10px 0 rgba(0,0,0,.25);}
+.panel {border:none; border-radius: 0; box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.25); margin-bottom: 10px;}
+.panel a {text-decoration: none; color: inherit; }
+.panel-heading {padding: 0; margin: 0}
+.panel-title {font-size: 100%; display: block; background: #fafafa; padding: 13px 11px 8px 11px	; -webkit-transition: ease-out 0.6s;}
 .review {list-style-type: none; padding: 0; margin: 0;}
-.comments {padding-top: 35px}
-.title {font-size: 125%; font-family: "Quicksand" }
+.title {font-size: 115%; font-family: "Catamaran" }
+.small-photo {border-radius: 250px; float: left; margin-right: 5px;}
+.date{position: absolute; right: 35px;}
+.comments {margin-top: 20px }
+.fa {padding-top: 3px;}
+.photo {border: 7px solid #eee; border-radius: 250px; margin: 0 auto; margin-bottom: 10px;}
 
+.panel-title:hover {background: rgba(0,0,0,0.1) }
+
+a[aria-expanded=true] .fa-chevron-right { display: none; }
+a[aria-expanded=false] .fa-chevron-down { display: none; }
 .border-right {border-right: 1px solid #CCD1D1 ;}
 
-.noborder { border: 0px; padding:0;  margin:0; border-collapse: collapse; }
+.btn-review {background: rgba(246, 101, 101, 0.9); margin-bottom: 15px; margin-right: 10px; color: white; text-decoration: none; font-weight: bold; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);}
+.btn-review:hover {background: rgba(250, 97, 85, 1); color: white;}
+.btn-review:active, .btn-review:focus {color: white}

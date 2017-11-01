@@ -6,8 +6,7 @@
 .type-primary {background-color: #85C1E9 !important; color: #fff; font-size: 150%;}
 .close {float: right; padding-right: 15px; }
 
-.info-box {color: #6C7181; font-family: "Quicksand"; text-align: center; padding:20px 20px 20px 20px; background: #E5E7E9; box-shadow: 0 5px 3px rgba(0,0,0,0.30), 0 5px 3px rgba(0,0,0,0.15); 
-			-webkit-animation: fadein 1.5s;}
+.info-box {color: #6C7181; font-family: "Quicksand"; text-align: center; padding:20px 20px 20px 20px; background: #f2f2f2; box-shadow: 0 2px 3px rgba(0,0,0,0.20);  -webkit-animation: fadein 1s;}
 @keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }

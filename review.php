@@ -164,7 +164,17 @@
 		
 		<div class="container review-container">
 		<?php $session = mysqli_query($mysqli, "SELECT * from session WHERE session_id = '$sessionid'");
-		$row = mysqli_fetch_row($session); ?>
+		$row = mysqli_fetch_row($session); 
+		if ($row[1] == "personal"){
+			$personal_query = mysqli_query($mysqli, "SELECT notes from personal_session where session_id='$sessionid'");
+			$personalRow = mysqli_fetch_row($personal_query);
+		}
+		else {
+			$group_query = mysqli_query($mysqli, "SELECT type, maxpax, count from group_session where session_id='$sessionid'");
+			$groupRow = mysqli_fetch_row($group_query);
+		}
+		
+		?>
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="review-wrap text-center">
@@ -372,13 +382,18 @@
 												<li><strong>Session Name: </strong><?php echo ucfirst($row[2]); ?></li>
 												<li><strong>Date: </strong><?php $date = date('j F Y',strtotime($row[3])); echo $date; ?></li>
 												<li><strong>Fee: </strong>RM <?php echo ucfirst($row[5]); ?></li>
-												<li><strong>Status: </strong><?php echo ucfirst($row[6]); ?></li>
-												
 											</ul>
 										</div>
 										<div class="col-lg-6">
 											<ul class="session">
 												<li><strong>Category: </strong><?php echo ucfirst($row[1]); ?></li>
+												<?php if ($row[1] == "personal"){ ?>
+												<li><strong>Notes: </strong><?php echo $personalRow[0]; ?></li>
+												<?php } else {?>
+												<li><strong>Session Type: </strong><?php echo $groupRow[0]; ?></li>
+												<li><strong>Max participants: </strong><?php echo $groupRow[1]; ?></li>
+												<li><strong>Joined: </strong><?php echo $groupRow[2]; ?></li>
+												<?php } ?>
 											</ul>
 										</div>
 									</div>
@@ -433,7 +448,19 @@
 										$scount = mysqli_fetch_array($sessioncount);
 										$scount = $scount['count'];
 										?>
-										
+											<?php $findimage = mysqli_query($mysqli, "SELECT image_name FROM avatar WHERE user_id ='$trainerid'");
+											$count = mysqli_num_rows($findimage);
+											if($count > 0){
+												$findimage = mysqli_fetch_array($findimage);
+												$image = $findimage['image_name'];
+												$image_src = "images/upload/".$image;
+												
+												echo "<img class=\"small-photo img-responsive\" src=\"$image_src\" width=\"120\" height=\"120\">";
+											}
+											else {
+												echo "<img src=\"images/man.jpg\" class=\"small-photo img-responsive\" width=\"120\" height=\"120\">";
+											}
+											?>
 											<ul class="trainer">
 												<li><strong>Trainer Name: </strong><?php echo ucfirst($row[8]); ?></li>
 												<li><strong>Total Sessions Managed: </strong><?php echo $scount; ?></li>

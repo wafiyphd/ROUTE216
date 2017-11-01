@@ -19,5 +19,4 @@ Done:
 10. User profiles
 
 What to do:
-1. Not allow user to review the same session more than once
-2. V i s u a l  a e s t h e t i c s
+1. V i s u a l  a e s t h e t i c s

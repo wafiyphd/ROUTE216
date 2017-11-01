@@ -11,41 +11,9 @@
 	}
 	
 	$id = $userRow['user_id'];
-	
-	//count total reviews received 
-	$count = mysqli_query($mysqli, "SELECT COUNT(*) AS count FROM review WHERE trainer_id='$id'");
-	$count = mysqli_fetch_array($count);
+	$reviewcount = mysqli_query($mysqli, "SELECT COUNT(*) as count FROM review WHERE reviewer_id = '$id'");
+	$count = mysqli_fetch_array($reviewcount);
 	$count = $count['count'];
-	
-	if ($count == 0) {
-		$paverage = "N/A";
-		$eaverage = "N/A";
-		$saverage = "N/A";
-		$selfaverage = "N/A";
-	}
-	
-	else {
-		//get average ratings of all criteria for the trainer
-		$paverage = mysqli_query($mysqli, "SELECT AVG(profrat) AS average FROM review WHERE trainer_id='$id'");
-		$paverage = mysqli_fetch_array($paverage);
-		$paverage = $paverage['average'];
-		$paverage = number_format((float)$paverage, 2, '.', '');
-		
-		$eaverage = mysqli_query($mysqli, "SELECT AVG(engrat) AS average FROM review WHERE trainer_id='$id'");
-		$eaverage = mysqli_fetch_array($eaverage);
-		$eaverage = $eaverage['average'];
-		$eaverage = number_format((float)$eaverage, 2, '.', '');
-		
-		$saverage = mysqli_query($mysqli, "SELECT AVG(sesrat) AS average FROM review WHERE trainer_id='$id'");
-		$saverage = mysqli_fetch_array($saverage);
-		$saverage = $saverage['average'];
-		$saverage = number_format((float)$saverage, 2, '.', '');
-		
-		$selfaverage = mysqli_query($mysqli, "SELECT AVG(totalrating) AS average FROM review WHERE trainer_id='$id'");
-		$selfaverage = mysqli_fetch_array($selfaverage);
-		$selfaverage = $selfaverage['average'];
-		$selfaverage = number_format((float)$selfaverage, 2, '.', '');
-	}
 	
 	// how long ago function
 	function time_elapsed_string($datetime, $full = false) {
@@ -182,40 +150,27 @@
 			<div class="row">
 			<div class="col-lg-3" >
 					<div class="panel panel-default">
-						<div class="panel-body">
+						<div class="panel-body text-center">
 							<ul class="review">
-								
-								<li><p><strong>Overall Review Information</strong></p></li>
-								<li><strong>Total reviews received: </strong><?php echo $count; ?></li>
-								<li>&nbsp;</li>
-								<table class="noborder">
-									 <col width="150">
-									<col width="80">
-									<tr><td><strong>Overall average rating:</strong></td><td>
-																					<small><?php echo '<button class="btn btn-static btn-xs '; 
-																						if ($selfaverage >= 3.5) { echo ' btn-green'; }
-																						elseif ($selfaverage >=2.5) { echo ' btn-yellow'; }
-																						elseif ($selfaverage >= 0) { echo ' btn-red'; }
-																						echo ' num">'; echo $selfaverage; echo '</button>' ?></small></td></tr>
-								<tr><td><strong>Average Professionalism:</strong></td><td> <small><?php echo '<button class="btn btn-static btn-xs '; 
-																						if ($paverage >= 3.5) { echo ' btn-green'; }
-																						elseif ($paverage >=2.5) { echo ' btn-yellow'; }
-																						elseif ($paverage >= 0) { echo ' btn-red'; }
-																						echo ' num">'; echo $paverage; echo '</button>' ?></small></td></tr>
-								<tr><td><strong>Average Engagement:</strong></td><td>
-																				<small><?php echo '<button class="btn btn-static btn-xs '; 
-																						if ($saverage >= 3.5) { echo ' btn-green'; }
-																						elseif ($saverage >=2.5) { echo ' btn-yellow'; }
-																						elseif ($saverage >= 0) { echo ' btn-red'; }
-																						echo ' num">'; echo $saverage; echo '</button>' ?></small></td></tr>
-								<tr><td><strong>Average Session:</strong></td><td>
-																				<small><?php echo '<button class="btn btn-static btn-xs '; 
-																						if ($eaverage >= 3.5) { echo ' btn-green'; }
-																						elseif ($eaverage >=2.5) { echo ' btn-yellow'; }
-																						elseif ($eaverage >= 0) { echo ' btn-red'; }
-																						echo ' num">'; echo $eaverage; echo '</button>' ?></small></td></tr>
-								</table>
-								
+								<?php
+								$findimage = mysqli_query($mysqli, "SELECT image_name FROM avatar WHERE user_id ='$id'");
+								$count = mysqli_num_rows($findimage);
+								if($count > 0){
+									$findimage = mysqli_fetch_array($findimage);
+									$image = $findimage['image_name'];
+									$image_src = "images/upload/".$image;
+									
+									echo "<img class=\"photo\" src=\"$image_src\" width=\"130\" height=\"130\">";
+								}
+								else {
+									echo "<img src=\"images/man.jpg\" class=\"photo img-responsive\" width=\"130\" height=\"130\">";
+								}
+								 
+								$reviewcount = mysqli_query($mysqli, "SELECT COUNT(*) as count FROM review WHERE reviewer_id = '$id'");
+								$count = mysqli_fetch_array($reviewcount);
+								$count = $count['count'];
+								?>
+								<li><strong>Total reviews written: </strong><?php echo $count; ?></li>
 							</ul>
 						</div>
 					</div>
@@ -232,8 +187,8 @@
 					});
 				</script>
 				
-			<?php $i=0; $reviews = "SELECT reviewer_name, r.trainer_id, r.session_id, title, timestamp, profrat, engrat, sesrat, totalrating, comments, date, category, reviewer_id from review r, session s
-								WHERE r.session_id = s.session_id AND r.trainer_id = '$id' ORDER BY timestamp DESC";
+			<?php $i=0; $reviews = "SELECT reviewer_name, r.trainer_id, r.session_id, title, timestamp, profrat, engrat, sesrat, totalrating, comments, date, category, reviewer_id, r.trainer_name from review r, session s
+								WHERE r.session_id = s.session_id AND reviewer_id = '$id' ORDER BY timestamp DESC";
 				if ($result = mysqli_query($mysqli, $reviews)) {
 					while ($row = mysqli_fetch_row($result)){ $i++;?>
 						<div class="col-xs-12 col-lg-9 pull-right">
@@ -244,18 +199,7 @@
 										<a data-toggle="collapse" href="#panelcontent<?php echo $i?>" class="panel-title" aria-expanded="false">
 											
 											<strong><span class="title">
-											<?php $findimage = mysqli_query($mysqli, "SELECT image_name FROM avatar WHERE user_id ='$row[12]'");
-											$count = mysqli_num_rows($findimage);
-											if($count > 0){
-												$findimage = mysqli_fetch_array($findimage);
-												$image = $findimage['image_name'];
-												$image_src = "images/upload/".$image;
-												
-												echo "<img class=\"small-photo img-responsive\" src=\"$image_src\" width=\"25\" height=\"25\">";
-											}
-											else {
-												echo "<img src=\"images/man.jpg\" class=\"small-photo img-responsive\" width=\"25\" height=\"25\">";
-											} echo ucfirst($row[0]); ?></span></strong><small>&nbsp;&nbsp;
+											<?php echo $row[3]; ?></span></strong><small>&nbsp;&nbsp;
 											<?php echo '<button class="btn btn-static btn-xs '; 
 												if ($row[8] >= 3.5) { echo ' btn-green'; }
 												elseif ($row[8] >=2.5) { echo ' btn-yellow'; }
@@ -272,6 +216,26 @@
 									<div id="panelcontent<?php echo $i?>" class="panel-collapse collapse">		
 									
 										<div class="panel-body">
+											<div class="row">
+												<div class="col-lg-12 text-center">
+													<?php
+													$findimage = mysqli_query($mysqli, "SELECT image_name FROM avatar WHERE user_id ='$row[1]'");
+													$count = mysqli_num_rows($findimage);
+													if($count > 0){
+														$findimage = mysqli_fetch_array($findimage);
+														$image = $findimage['image_name'];
+														$image_src = "images/upload/".$image;
+														
+														echo "<img class=\"photo\" src=\"$image_src\" width=\"130\" height=\"130\">";
+													}
+													else {
+														echo "<img src=\"images/man.jpg\" class=\"photo img-responsive\" width=\"130\" height=\"130\">";
+													}
+													?><br>
+													<strong>Trainer Name: </strong><?php echo $row[13] ?>
+												</div>
+											</div>
+											<br>
 											<div class="col-lg-6">
 												<ul class="review">
 													<li><strong>Session Name: </strong><?php echo $row[3]; ?></li>
@@ -325,7 +289,11 @@
 						
 				<?php }}
 				 ?>
-				<?php if ($count == 0) { ?>
+				<?php 
+				$reviewcount = mysqli_query($mysqli, "SELECT COUNT(*) as count FROM review WHERE reviewer_id = '$id'");
+				$count = mysqli_fetch_array($reviewcount);
+				$count = $count['count'];
+				if ($count == 0) { ?>
 				<div class="col-lg-9">
 					<div class="alert alert-box type-primary alert-dismissable">
 						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
