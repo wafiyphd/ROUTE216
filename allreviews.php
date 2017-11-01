@@ -183,9 +183,27 @@
 			<div class="col-lg-3" >
 					<div class="panel panel-default">
 						<div class="panel-body">
-							<ul class="review">
+							<ul class="review text-center">
 								
-								<li><p><strong>Overall Review Information</strong></p></li>
+								<strong>Overall Review Information</strong></p>
+								<?php
+								$findimage = mysqli_query($mysqli, "SELECT image_name FROM avatar WHERE user_id ='$id'");
+								$count = mysqli_num_rows($findimage);
+								if($count > 0){
+									$findimage = mysqli_fetch_array($findimage);
+									$image = $findimage['image_name'];
+									$image_src = "images/upload/".$image;
+									
+									echo "<img class=\"photo\" src=\"$image_src\" width=\"130\" height=\"130\">";
+								}
+								else {
+									echo "<img src=\"images/man.jpg\" class=\"photo img-responsive\" width=\"130\" height=\"130\">";
+								}
+								 
+								$reviewcount = mysqli_query($mysqli, "SELECT COUNT(*) as count FROM review WHERE reviewer_id = '$id'");
+								$count = mysqli_fetch_array($reviewcount);
+								$count = $count['count'];
+								?>
 								<li><strong>Total reviews received: </strong><?php echo $count; ?></li>
 								<li>&nbsp;</li>
 								<table class="noborder">
@@ -324,8 +342,10 @@
 						
 						
 				<?php }}
-				 ?>
-				<?php if ($count == 0) { ?>
+				$count = mysqli_query($mysqli, "SELECT COUNT(*) AS count FROM review WHERE trainer_id='$id'");
+				$count = mysqli_fetch_array($count);
+				$count = $count['count'];
+				if ($count == 0) { ?>
 				<div class="col-lg-9">
 					<div class="alert alert-box type-primary alert-dismissable">
 						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

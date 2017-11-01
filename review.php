@@ -45,16 +45,18 @@
 			
 			$avg = ($prating + $erating + $srating) / 3;
 
-			$comments = htmlspecialchars($_POST['comments']);
+			$comments = $_POST['comments'];
+			$comments =  mysqli_real_escape_string($mysqli, $comments);
 			
-			$query = "INSERT INTO review(reviewer_id, reviewer_name, trainer_id, trainer_name, session_id, timestamp, profrat, engrat, sesrat, totalrating, comments) 
-						VALUES('$reviewerid','$reviewername','$trainerid','$trainername','$sessionid', NOW(),'$prating','$erating','$srating','$avg','$comments')";
+			$query = "INSERT INTO review(reviewer_id, reviewer_name, trainer_id, trainer_name, session_id, profrat, engrat, sesrat, totalrating, comments) 
+						VALUES('$reviewerid','$reviewername','$trainerid','$trainername','$sessionid','$prating','$erating','$srating','$avg','$comments')";
 			$res = mysqli_query($mysqli, $query);
 			
 		    if ($res) {
 			 $errType = "success";
 			 $errMSG = "Successfully submitted review";
 			 header("Location: member.php?success=0");
+			 unset($reviewerid);unset($reviewername);unset($trainerid);unset($trainername);unset($sessionid);unset($prating);unset($erating);unset($srating);unset($avg);unset($comments);
 		    } else {
 			 $errType = "danger";
 			 $errMSG = "Something went wrong, try again later..."; 

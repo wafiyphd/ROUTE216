@@ -206,32 +206,28 @@ $error = false;
 										$checkalreadyreviewed = mysqli_fetch_array($checkalreadyreviewed);
 										$checkalreadyreviewed = $checkalreadyreviewed['reviewed'];
 										?>
-										
-										<form id="join-personal" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
-											<input name="id" value="<?php echo $row[0]; ?>" class="hidden"/>
 											
 											<?php if ($userkind == "member") {
-													if ($checkalreadyreviewed > 0) { ?> <button type="submit" name="review" id="review" class="btn btn-un pull-right" disabled>Already Reviewed</button> <?php }
+													if ($checkalreadyreviewed > 0) { ?> <button name="review" id="review" class="btn btn-un pull-right" disabled>Already Reviewed</button> <?php }
 													else {
 														if ($row[6] == "Available") { ?>
-															<button type="submit" name="review" id="review" class="btn btn-un pull-right" disabled>Review</button> 
+															<button name="review" id="review" class="btn btn-un pull-right" disabled>Review</button> 
 												<?php } elseif ($row[6] == "Unavailable") { ?>
-															<button type="submit" name="review" id="review" class="btn btn-un pull-right" disabled>Review</button>
+															<button name="review" id="review" class="btn btn-un pull-right" disabled>Review</button>
 												<?php } elseif ($row[6] == "Completed") { ?>
-															<button type="submit" name="review" id="review" class="btn btn-join pull-right"><a href="review.php?id=<?php echo $row[0]; ?>"> Review</a></button> 
+															<a href="review.php?id=<?php echo $row[0]; ?>"><button name="review" id="review" class="btn btn-join pull-right">Review</button></a>
 												<?php } elseif ($row[6] == "Cancelled") { ?>
-														<button type="submit" name="review" id="review" class="btn btn-un pull-right" disabled>Review</button>
+														<button name="review" id="review" class="btn btn-un pull-right" disabled>Review</button>
 												<?php }}} elseif ($userkind == "trainer") {
 															if ($row[6] == "Available") { ?>
-																<button type="submit" name="update" id="update" class="btn btn-join pull-right"><a href="updatesession.php?id=<?php echo $row[0]; ?>">Update</a></button>
+																<a href="updatesession.php?id=<?php echo $row[0]; ?>"><button name="update" id="update" class="btn btn-join pull-right">Update</button></a>
 												<?php		} elseif ($row[6] == "Unavailable") { ?>
-																<button type="submit" name="update" id="update" class="btn btn-join pull-right"><a href="updatesession.php?id=<?php echo $row[0]; ?>">Update</a></button>
+																<a href="updatesession.php?id=<?php echo $row[0]; ?>"><button name="update" id="update" class="btn btn-join pull-right">Update</button></a>
 												<?php 		} elseif ($row[6] == "Completed") { ?>
-																<button type="submit" name="update" id="update" class="btn btn-join pull-right"><a href="updatesession.php?id=<?php echo $row[0]; ?>">Update</a></button>
+																<a href="updatesession.php?id=<?php echo $row[0]; ?>"><button name="update" id="update" class="btn btn-join pull-right">Update</button></a>
 												<?php 		} elseif ($row[6] == "Cancelled") { ?>
-																<button type="submit" name="update" id="update" class="btn btn-join pull-right"><a href="updatesession.php?id=<?php echo $row[0]; ?>">Update</a></button>
+																<a href="updatesession.php?id=<?php echo $row[0]; ?>"><button name="update" id="update" class="btn btn-join pull-right">Update</button></a>
 												<?php }} ?>											
-										</form>
 									</div>
 								</div>
 							</div>
@@ -306,9 +302,7 @@ $error = false;
 											<li>&nbsp;</li>
 										</ul>
 										<?php } ?>
-										
-										<form id="join-group" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
-											<input name="id" value="<?php echo $row[0]; ?>" class="hidden"/>
+						
 											<?php $userid = $userRow['user_id'];
 											$checkjoin = mysqli_query($mysqli, "SELECT j.session_id, member_id FROM joined_group j, group_session g WHERE j.session_id = '$row[0]' AND member_id = '$userid'");
 											$checkjoin = mysqli_fetch_row($checkjoin);	
@@ -317,38 +311,36 @@ $error = false;
 											$checkalreadyreviewed = $checkalreadyreviewed['reviewed'];
 																						
 											if ($userkind == "member") {
-												if ($checkalreadyreviewed > 0) { ?> <button type="submit" name="review" id="review" class="btn btn-un pull-right" disabled>Already Reviewed</button> <?php } 
+												if ($checkalreadyreviewed > 0) { ?> <button name="review" id="review" class="btn btn-un pull-right" disabled>Already Reviewed</button> <?php } 
 												else { 
 													if ($row[6] == "Available") { 
 														if ($row[11] < $row[10]) {
 															if ($checkjoin > 0 ) {?>
-																<button type="submit" name="review" id="review" class="btn btn-un pull-right" disabled>Review</button> 
+																<button name="review" id="review" class="btn btn-un pull-right" disabled>Review</button> 
 												<?php 		} else { ?>
-																<button type="submit" name="review" id="review" class="btn btn-un pull-right" disabled>Review</button> 		
+																<button name="review" id="review" class="btn btn-un pull-right" disabled>Review</button> 		
 												<?php 	}} elseif ($row[11] == $row[10] && $checkjoin > 0) { ?>
-																<button type="submit" name="review" id="review" class="btn btn-un pull-right" disabled>Review</button> 
+																<button name="review" id="review" class="btn btn-un pull-right" disabled>Review</button> 
 												<?php 		} else { ?>
-																<button type="submit" name="review" id="review" class="btn btn-un pull-right" disabled>Review</button> 
+																<button name="review" id="review" class="btn btn-un pull-right" disabled>Review</button> 
 												<?php }} elseif ($row[6] == "Completed") { ?>
-																<button type="submit" name="review" id="review" class="btn btn-join pull-right"><a href="review.php?id=<?php echo $row[0]; ?>">Review</a></button> 	
+																<a href="review.php?id=<?php echo $row[0]; ?>"><button name="review" id="review" class="btn btn-join pull-right">Review</button></a> 	
 												<?php }}} elseif ($userkind == "trainer") {
 															if ($row[6] == "Available") { ?>
-																<button type="submit" name="update" id="update" class="btn btn-join pull-right"><a href="updatesession.php?id=<?php echo $row[0]; ?>">Update</a></button>
+																<a href="updatesession.php?id=<?php echo $row[0]; ?>"><button name="update" id="update" class="btn btn-join pull-right">Update</button></a>
 												<?php		} elseif ($row[6] == "Unavailable") { ?>
-																<button type="submit" name="update" id="update" class="btn btn-join pull-right"><a href="updatesession.php?id=<?php echo $row[0]; ?>">Update</a></button>
+																<a href="updatesession.php?id=<?php echo $row[0]; ?>"><button name="update" id="update" class="btn btn-join pull-right">Update</button></a>
 												<?php 		} elseif ($row[6] == "Completed") { ?>
-																<button type="submit" name="update" id="update" class="btn btn-join pull-right"><a href="updatesession.php?id=<?php echo $row[0]; ?>">Update</a></button>
+																<a href="updatesession.php?id=<?php echo $row[0]; ?>"><button name="update" id="update" class="btn btn-join pull-right">Update</button></a>
 												<?php 		} elseif ($row[6] == "Cancelled") { ?>
-																<button type="submit" name="update" id="update" class="btn btn-join pull-right"><a href="updatesession.php?id=<?php echo $row[0]; ?>">Update</a></button>
-												<?php 		}
-													}
+																<a href="updatesession.php?id=<?php echo $row[0]; ?>"><button name="update" id="update" class="btn btn-join pull-right">Update</button></a>
+												<?php }
 											?>
-										</form>
 									</div>
 								</div>
 							</div>
 						</div>
-				<?php }}
+				<?php }}}
 				 ?>
 			</div>
 			
