@@ -340,14 +340,15 @@ $error = false;
 																<button type="submit" name="update" id="update" class="btn btn-join pull-right"><a href="updatesession.php?id=<?php echo $row[0]; ?>">Update</a></button>
 												<?php 		} elseif ($row[6] == "Cancelled") { ?>
 																<button type="submit" name="update" id="update" class="btn btn-join pull-right"><a href="updatesession.php?id=<?php echo $row[0]; ?>">Update</a></button>
-												<?php }
+												<?php 		}
+													}
 											?>
 										</form>
 									</div>
 								</div>
 							</div>
 						</div>
-				<?php }}}
+				<?php }}
 				 ?>
 			</div>
 			
