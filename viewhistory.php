@@ -334,13 +334,13 @@ $error = false;
 																<a href="updatesession.php?id=<?php echo $row[0]; ?>"><button name="update" id="update" class="btn btn-join pull-right">Update</button></a>
 												<?php 		} elseif ($row[6] == "Cancelled") { ?>
 																<a href="updatesession.php?id=<?php echo $row[0]; ?>"><button name="update" id="update" class="btn btn-join pull-right">Update</button></a>
-												<?php }
+												<?php }}
 											?>
 									</div>
 								</div>
 							</div>
 						</div>
-				<?php }}}
+					<?php }}
 				 ?>
 			</div>
 			
