@@ -252,9 +252,26 @@
 											<br>
 											<div class="col-lg-6">
 												<ul class="review">
+													<?php
+													if ($row[11] == "personal"){
+														$personal_query = mysqli_query($mysqli, "SELECT notes from personal_session where session_id='$row[2]'");
+														$personalRow = mysqli_fetch_row($personal_query);
+													}
+													else {
+														$group_query = mysqli_query($mysqli, "SELECT type, maxpax, count from group_session where session_id='$row[2]'");
+														$groupRow = mysqli_fetch_row($group_query); 
+													}
+													?>
 													<li><strong>Session Name: </strong><?php echo $row[3]; ?></li>
 													<li><strong>Session Date: </strong><?php $date = date('j F Y',strtotime($row[10])); echo $date; ?></li>
-													<li><strong>Category: </strong><?php echo ucfirst($row[11]); ?></li>					
+													<li><strong>Category: </strong><?php echo ucfirst($row[11]); ?></li>		
+													<?php if ($row[11] == "personal"){ ?>
+													<li><strong>Notes: </strong><?php echo $personalRow[0]; ?></li>
+													<?php } else {?>
+													<li><strong>Session Type: </strong><?php echo $groupRow[0]; ?></li>
+													<li><strong>Max participants: </strong><?php echo $groupRow[1]; ?></li>
+													<li><strong>Joined: </strong><?php echo $groupRow[2]; ?></li>
+													<?php } ?>					
 												</ul>
 											</div>
 										

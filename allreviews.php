@@ -267,15 +267,7 @@
 			<?php $i=0; $reviews = "SELECT reviewer_name, r.trainer_id, r.session_id, title, timestamp, profrat, engrat, sesrat, totalrating, comments, date, category, reviewer_id, category from review r, session s
 								WHERE r.session_id = s.session_id AND r.trainer_id = '$id' ORDER BY timestamp DESC";
 				if ($result = mysqli_query($mysqli, $reviews)) {
-					while ($row = mysqli_fetch_row($result)){ $i++;
-					if ($row[13] == "personal"){
-						$personal_query = mysqli_query($mysqli, "SELECT notes from personal_session where session_id='$sessionid'");
-						$personalRow = mysqli_fetch_row($personal_query);
-					}
-					else {
-						$group_query = mysqli_query($mysqli, "SELECT type, maxpax, count from group_session where session_id='$sessionid'");
-						$groupRow = mysqli_fetch_row($group_query);
-					} ?>
+					while ($row = mysqli_fetch_row($result)){ $i++; ?>
 						<div class="col-xs-12 col-lg-9 pull-right">
 							
 							<div class="row">
@@ -313,7 +305,16 @@
 									
 										<div class="panel-body">
 											<div class="col-lg-6">
-												<ul class="review">
+												<ul class="review"><?php
+													if ($row[13] == "personal"){
+														$personal_query = mysqli_query($mysqli, "SELECT notes from personal_session where session_id='$row[2]'");
+														$personalRow = mysqli_fetch_row($personal_query);
+													}
+													else {
+														$group_query = mysqli_query($mysqli, "SELECT type, maxpax, count from group_session where session_id='$row[2]'");
+														$groupRow = mysqli_fetch_row($group_query); 
+													}
+													?>
 													<li><strong>Session Name: </strong><?php echo $row[3]; ?></li>
 													<li><strong>Session Date: </strong><?php $date = date('j F Y',strtotime($row[10])); echo $date; ?></li>
 													<li><strong>Category: </strong><?php echo ucfirst($row[11]); ?></li>
