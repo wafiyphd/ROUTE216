@@ -232,8 +232,8 @@ if (isset($_SESSION['user'])!="" ) {
 					</ul>
 	
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="signup.php"><button class="btn navbar-btn" >Sign Up</button></a></li>
-						<li><a><button class="btn navbar-btn" data-toggle="modal" data-target="#loginModal">Log In</button></a></li>
+						<li><a href="signup.php"><button class="btn navbar-btn" ><strong>Sign Up</strong></button></a></li>
+						<li><a><button class="btn navbar-btn" data-toggle="modal" data-target="#loginModal"><strong>Log In</strong></button></a></li>
 					</ul>
 				</div>
 			</div>
