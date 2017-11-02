@@ -10,8 +10,16 @@
 		header("Location: index.php");	
 	}
 	
+	$userid = $userRow['user_id'];
+	
+	if ($userRow['user_kind'] == 'trainer') {
+		header("Location: trainer.php");
+	}
+	
 	if ( isset($_GET['id']) ) {
 		$sessionid = $_GET['id'];
+	} else {
+		header("Location: viewhistory.php");	
 	}
 	
 	if ( isset($_GET['danger']) && $_GET['danger'] == 1) {
@@ -63,6 +71,37 @@
 		    } 
 		}
 	 
+	}
+	
+	// not allow reviewing based on entering id in URL
+	$checkalreadyreviewed = mysqli_query($mysqli, "SELECT COUNT(*) AS reviewed FROM review WHERE reviewer_id='$userid' AND session_id='$sessionid'");
+	$checkalreadyreviewed = mysqli_fetch_array($checkalreadyreviewed);
+	$checkalreadyreviewed = $checkalreadyreviewed['reviewed'];
+	if ($checkalreadyreviewed > 0) { 
+		header("Location: index.php");	
+	}
+	
+	$checksession = mysqli_query($mysqli, "SELECT category, status FROM session WHERE session_id='$sessionid'");
+	$checksession = mysqli_fetch_row($checksession);
+	$category = $checksession[0]; $status = $checksession[1];
+	
+	if ($status != "Completed") {
+		header("Location: viewhistory.php");	
+	}
+	
+	if ($category == "personal") {
+		$personal = mysqli_query($mysqli, "SELECT member_id FROM personal_session WHERE session_id='$sessionid'");
+		$personal = mysqli_fetch_row($personal);
+		$checkid = $personal[0];
+		if ($checkid != $userid)
+			header("Location: viewhistory.php");	
+	}
+	
+	elseif ($category == "group") {
+		$checkjoin = mysqli_query($mysqli, "SELECT j.session_id, member_id FROM joined_group j, group_session g WHERE j.session_id = '$sessionid' AND member_id = '$userid'");
+		$checkjoin = mysqli_fetch_row($checkjoin);
+		if ($checkjoin == 0)
+			header("Location: viewhistory.php");
 	}
 	
 	
@@ -123,6 +162,16 @@
 								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo ucwords($userRow['fullname']); ?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
 							</a>
 								<ul class="dropdown-menu">
+									<?php if ($userRow['user_kind'] == 'member') { ?>
+									<li><a href="joinsessionslist.php">View Available Sessions</a></li>
+									<li><a href="managemember.php">Manage Joined Sesssions</a></li>
+									<li><a href="viewhistory.php">View Completed Sessions</a></li>
+									<li><a href="allmemberreviews.php">All My Reviews</a></li>
+									<?php } else { ?>
+									<li><a href="record.php">Record New Session</a></li>
+									<li><a href="viewhistory.php">Manage My Sessions</a></li>
+									<li><a href="allreviews.php">View All Reviews</a></li>
+									<?php } ?>
 									<li><a href="profile.php">Profile</a></li>
 									<li class="divider"></li>
 									<li><a href="logout.php?logout"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span>&nbsp;Log Out</a></li>
@@ -521,7 +570,12 @@
 			
 				<div class="col-lg-6">
 					<span style="float:right;"><a href="#top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a></span>
-					
+					<script>
+					  $("a[href='#top']").click(function() {
+						 $("html, body").animate({ scrollTop: 0 }, "slow");
+						 return false;
+					  });
+					</script>
 				</div>
 			</div>
 		</div>

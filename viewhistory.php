@@ -80,6 +80,16 @@ $error = false;
 								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo ucwords($userRow['fullname']); ?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
 							</a>
 								<ul class="dropdown-menu">
+									<?php if ($userRow['user_kind'] == 'member') { ?>
+									<li><a href="joinsessionslist.php">View Available Sessions</a></li>
+									<li><a href="managemember.php">Manage Joined Sesssions</a></li>
+									<li><a href="viewhistory.php">View Completed Sessions</a></li>
+									<li><a href="allmemberreviews.php">All My Reviews</a></li>
+									<?php } else { ?>
+									<li><a href="record.php">Record New Session</a></li>
+									<li><a href="viewhistory.php">Manage My Sessions</a></li>
+									<li><a href="allreviews.php">View All Reviews</a></li>
+									<?php } ?>
 									<li><a href="profile.php">Profile</a></li>
 									<li class="divider"></li>
 									<li><a href="logout.php?logout"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span>&nbsp;Log Out</a></li>
@@ -146,17 +156,17 @@ $error = false;
 				<?php $userkind = $userRow['user_kind'];
 				if ($userkind == "member") {
 					$personal_query = "SELECT p.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, notes, member_id 
-				from session s, personal_session p where category='personal' AND status='completed' AND p.session_id = s.session_id
+				from session s, personal_session p where category='personal' AND status='Completed' AND p.session_id = s.session_id
 				AND member_id=".$_SESSION['user']; " ORDER BY date";
 				} elseif ($userkind == "trainer") {
 					$personal_query = "SELECT p.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, notes, member_id 
-				from session s, personal_session p where category='personal' AND p.session_id = s.session_id
+				from session s, personal_session p where category='personal' AND p.session_id = s.session_id AND NOT status='Completed' AND NOT status='Cancelled'
 				AND trainer_id=".$_SESSION['user']; " ORDER BY date";					
 				}
 				if ($result = mysqli_query($mysqli, $personal_query)) {
 					while ($row = mysqli_fetch_row($result)){ ?>
 						<div class="col-lg-6">
-							<div class="panel panel-default">
+							<div class="panel panel-default session-panel">
 								<div class="panel-body">
 									
 									<div class="col-lg-6 <?php if ($userkind == "member")  { ?> border-right <?php } else {} ?>">
@@ -243,18 +253,18 @@ $error = false;
 				<?php $userkind = $userRow['user_kind'];
 				if ($userkind == "member") {
 					$group_query = "SELECT g.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, type, maxpax, count 
-					from session s, group_session g, joined_group j WHERE category='group' AND status='completed' AND g.session_id = s.session_id 
+					from session s, group_session g, joined_group j WHERE category='group' AND status='Completed' AND g.session_id = s.session_id 
 					AND j.session_id = s.session_id AND j.member_id=".$_SESSION['user']; " ORDER BY date";
 				} elseif ($userkind == "trainer") {
 					$group_query = "SELECT g.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, type, maxpax, count 
-					from session s, group_session g WHERE category='group' AND g.session_id = s.session_id 
+					from session s, group_session g WHERE category='group' AND g.session_id = s.session_id  AND NOT status='Completed' AND NOT status='Cancelled'
 					AND s.trainer_id=".$_SESSION['user']; " ORDER BY date";
 				}
 				if ($result = mysqli_query($mysqli, $group_query)) {
 					while ($row = mysqli_fetch_row($result)){ 
 						?>
 						<div class="col-lg-6">
-							<div class="panel panel-default">
+							<div class="panel panel-default session-panel">
 								<div class="panel-body">
 									<div class="col-lg-6 <?php if ($userkind == "member")  { ?> border-right <?php } else {} ?>">
 										<ul>
@@ -344,6 +354,193 @@ $error = false;
 				 ?>
 			</div>
 			
+			<div class="row">
+				<?php $kind = $userRow['user_kind'];
+				if ($kind == "trainer") {?>
+				<hr>
+				<div class="col-lg-12">
+					<ul class="nav	nav-tabs nav-justified">
+					  <li class="active"><a data-toggle="tab" href="#completed">Completed Sessions</a></li>
+					  <li><a data-toggle="tab" href="#cancelled">Cancelled Sessions</a></li>
+					</ul>
+					<br>
+				</div>
+				<div class="col-lg-12">	
+					<div class="tab-content">
+						<div id="completed" class="tab-pane fade in active">
+							<div class="row">
+								<div class="col-lg-6">
+									<p class="ctitle">PERSONAL</p>
+									<?php $i=0; $personal_query = "SELECT p.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, notes, member_id 
+									from session s, personal_session p where status='Completed' AND category='personal' AND p.session_id = s.session_id
+									AND trainer_id=".$_SESSION['user']; " ORDER BY date";					
+									
+									if ($result = mysqli_query($mysqli, $personal_query)) {
+										while ($row = mysqli_fetch_row($result)){ $i++ ?>
+											<div class="col-lg-12">
+												<div class="panel panel-default complete-panel">
+													<div class="panel-heading" id="acc_headingp<?php echo $i?>">
+														<a data-toggle="collapse" href="#panelcontentp<?php echo $i?>" class="panel-title" aria-expanded="false">
+															<?php echo $row[2]; ?>
+															<span class="pull-right">
+																<span class="date"><?php $date = date('j M Y',strtotime($row[3])); echo $date; ?></span>
+																<i class="fa fa-chevron-right pull-right"></i>
+																<i class="fa fa-chevron-down pull-right"></i>
+															</span>
+														</a>
+													</div>
+													
+													<div id="panelcontentp<?php echo $i?>" class="panel-collapse collapse">		
+													
+														<div class="panel-body">
+															<div class="col-lg-6">
+																<ul>
+																	<li><strong>Session Title: </strong><?php echo ucfirst($row[2]); ?> </li>
+																	<li><strong>Date: </strong><?php $date = date('j F Y',strtotime($row[3])); echo $date; ?></li>
+																	<li><strong>Time: </strong><?php echo $row[4]; ?></li>
+																	<li><strong>Fee: </strong>RM <?php echo $row[5]; ?></li>
+																	<li><strong>Notes: </strong><?php echo $row[9]; ?></li>							
+																</ul>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+									<?php } } ?>
+								</div>
+								
+								<div class="col-lg-6">
+									<p class="ctitle">GROUP</p>
+									<?php $i=0; $group_query = "SELECT g.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, type, maxpax, count 
+									from session s, group_session g WHERE status='Completed' AND category='group' AND g.session_id = s.session_id 
+									AND s.trainer_id=".$_SESSION['user']; " ORDER BY date";
+									
+								if ($result = mysqli_query($mysqli, $group_query)) {
+									while ($row = mysqli_fetch_row($result)){ $i++; ?>
+									<div class="col-lg-12">
+										<div class="panel panel-default complete-panel">
+											<div class="panel-heading" id="acc_headingg<?php echo $i?>">
+												<a data-toggle="collapse" href="#panelcontentg<?php echo $i?>" class="panel-title" aria-expanded="false">
+													<?php echo $row[2]; ?>
+													<span class="pull-right">
+														<span class="date"><?php $date = date('j M Y',strtotime($row[3])); echo $date; ?></span>
+														<i class="fa fa-chevron-right pull-right"></i>
+														<i class="fa fa-chevron-down pull-right"></i>
+													</span>
+												</a>
+											</div>
+											
+											<div id="panelcontentg<?php echo $i?>" class="panel-collapse collapse">		
+											
+												<div class="panel-body">
+													<div class="col-lg-6">
+														<ul>
+															<li><strong>Session title:  </strong><?php echo ucfirst($row[2]); ?></li>
+															<li><strong>Date: </strong><?php $date = date('j F Y',strtotime($row[3])); echo $date; ?></li>
+															<li><strong>Joined (current/max): </strong><?php echo $row[11]; ?> / <?php echo$row[10]; ?></li>
+															<li><strong>Type: </strong><?php echo $row[9]; ?></li>
+															<li><strong>Time: </strong><?php echo $row[4]; ?></li>
+															<li><strong>Fee: </strong>RM <?php echo $row[5]; ?></li>					
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+							<?php }} ?>
+								</div>
+							</div>
+						</div>
+						
+						<div id="cancelled" class="tab-pane fade in">
+							<div class="row">
+								<div class="col-lg-6">
+									<p class="ctitle">PERSONAL</p>
+									<?php $i=0; $personal_query = "SELECT p.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, notes, member_id 
+									from session s, personal_session p where status='Cancelled' AND category='personal' AND p.session_id = s.session_id
+									AND trainer_id=".$_SESSION['user']; " ORDER BY date";					
+									
+									if ($result = mysqli_query($mysqli, $personal_query)) {
+										while ($row = mysqli_fetch_row($result)){ $i++ ?>
+											<div class="col-lg-12">
+												<div class="panel panel-default complete-panel">
+													<div class="panel-heading" id="acc_headingpc<?php echo $i?>">
+														<a data-toggle="collapse" href="#panelcontentpc<?php echo $i?>" class="panel-title" aria-expanded="false">
+															<?php echo $row[2]; ?>
+															<span class="pull-right">
+																<span class="date"><?php $date = date('j M Y',strtotime($row[3])); echo $date; ?></span>
+																<i class="fa fa-chevron-right pull-right"></i>
+																<i class="fa fa-chevron-down pull-right"></i>
+															</span>
+														</a>
+													</div>
+													
+													<div id="panelcontentpc<?php echo $i?>" class="panel-collapse collapse">		
+													
+														<div class="panel-body">
+															<div class="col-lg-6">
+																<ul>
+																	<li><strong>Session Title: </strong><?php echo ucfirst($row[2]); ?> </li>
+																	<li><strong>Date: </strong><?php $date = date('j F Y',strtotime($row[3])); echo $date; ?></li>
+																	<li><strong>Time: </strong><?php echo $row[4]; ?></li>
+																	<li><strong>Fee: </strong>RM <?php echo $row[5]; ?></li>
+																	<li><strong>Notes: </strong><?php echo $row[9]; ?></li>							
+																</ul>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+									<?php } } ?>
+								</div>
+								
+								<div class="col-lg-6">
+									<p class="ctitle">GROUP</p>
+									<?php $i=0; $group_query = "SELECT g.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, type, maxpax, count 
+									from session s, group_session g WHERE status='Completed' AND category='group' AND g.session_id = s.session_id 
+									AND s.trainer_id=".$_SESSION['user']; " ORDER BY date";
+									
+								if ($result = mysqli_query($mysqli, $group_query)) {
+									while ($row = mysqli_fetch_row($result)){ $i++; ?>
+									<div class="col-lg-12">
+										<div class="panel panel-default complete-panel">
+											<div class="panel-heading" id="acc_headingg<?php echo $i?>">
+												<a data-toggle="collapse" href="#panelcontentg<?php echo $i?>" class="panel-title" aria-expanded="false">
+													<?php echo $row[2]; ?>
+													<span class="pull-right">
+														<span class="date"><?php $date = date('j M Y',strtotime($row[3])); echo $date; ?></span>
+														<i class="fa fa-chevron-right pull-right"></i>
+														<i class="fa fa-chevron-down pull-right"></i>
+													</span>
+												</a>
+											</div>
+											
+											<div id="panelcontentg<?php echo $i?>" class="panel-collapse collapse">		
+											
+												<div class="panel-body">
+													<div class="col-lg-6">
+														<ul>
+															<li><strong>Session title:  </strong><?php echo ucfirst($row[2]); ?></li>
+															<li><strong>Date: </strong><?php $date = date('j F Y',strtotime($row[3])); echo $date; ?></li>
+															<li><strong>Joined (current/max): </strong><?php echo $row[11]; ?> / <?php echo$row[10]; ?></li>
+															<li><strong>Type: </strong><?php echo $row[9]; ?></li>
+															<li><strong>Time: </strong><?php echo $row[4]; ?></li>
+															<li><strong>Fee: </strong>RM <?php echo $row[5]; ?></li>					
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+							<?php }} ?>
+								</div>
+							</div>
+						</div>
+			
+					</div>
+				</div>
+			<?php } ?>
+			</div>
 		</div>
 	</div>
 	
@@ -362,7 +559,12 @@ $error = false;
 			
 				<div class="col-lg-6">
 					<span style="float:right;"><a href="#top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a></span>
-					
+					<script>
+					  $("a[href='#top']").click(function() {
+						 $("html, body").animate({ scrollTop: 0 }, "slow");
+						 return false;
+					  });
+					</script>
 				</div>
 			</div>
 		</div>

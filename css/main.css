@@ -7,11 +7,11 @@
 	.info-container .pic-container .overlay:hover .moreinfo  {opacity: 1; color: white;  font-size: 100%; position: absolute; font-weight: bold; top: 60%; left: 5%; width: 90%;}
 }
 
-.main-fluid {background-image: url(../images/header.jpeg); background-size: cover; padding-left: 0 !important; padding-right: 0 !important; box-shadow: 0 2px 2px rgba(0,0,0,0.05), 0 2px 2px rgba(0,0,0,0.05); }
+.main-fluid {background-image: url(../images/header.jpg); background-size: cover; padding-left: 0 !important; padding-right: 0 !important; box-shadow: 0 2px 2px rgba(0,0,0,0.05), 0 2px 2px rgba(0,0,0,0.05); }
 	
 .main-container .main-header {font-family: "Palanquin"; text-align: center; margin-top: 40px; font-size: 340%;}
-.main-container .title {font-size: 180%; font-weight: bold; color: #666666; }
-.main-container .description {font-size: 65%; color: #666666; font-family: "Muli"; }
+.main-container .title {font-size: 180%; font-weight: bold; color: white; }
+.main-container .description {font-size: 65%; color: white; font-family: "Muli"; }
 .main-container .main-header hr{margin-left: 0; margin-top: 20px; width:50%; }
 .main-container hr {width: 50%; }
 

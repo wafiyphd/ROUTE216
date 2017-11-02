@@ -17,8 +17,6 @@ Done:
 8. Users' home page
 9. Update a session's details/information (trainer)
 10. User profiles
+11. V i s u a l  a e s t h e t i c s
 
 What to do:
-1. Move/hide completed sessions from trainers' view history 
-2. Move/hide alraedy reviewed sessions from members' view history
-1. V i s u a l  a e s t h e t i c s

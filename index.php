@@ -338,7 +338,12 @@ if( isset($_POST['login']) ) {
 			
 				<div class="col-lg-6">
 					<span style="float:right;"><a href="#top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a></span>
-					
+					<script>
+					  $("a[href='#top']").click(function() {
+						 $("html, body").animate({ scrollTop: 0 }, "slow");
+						 return false;
+					  });
+					</script>
 				</div>
 			</div>
 		</div>

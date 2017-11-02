@@ -1,8 +1,8 @@
-.info {background: #eaeaea;}
+.info {background: #eaeaea; padding-bottom: 10px;}
 
 .sessions-container {margin-top: 20px; min-height: 65vh; }
 
-.panel {border:none; box-shadow:0 10px 10px 0 rgba(0,0,0,.25);}
+.panel {border:none; border-radius: 0; box-shadow:0 3px 3px 0 rgba(0,0,0,.25);}
 .panel .border-right {border-right: 1px solid #CCD1D1 ;}
 .panel  .btn-join {color: white; font-weight: bold; border:none; background: #5499C7; margin-top: 40px; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); }
 .panel  .btn-un {color:white; border-radius: 3px;  font-weight: bold; border: none; background: rgba(205, 97, 85, 1); margin-top: 40px; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);}
@@ -14,8 +14,8 @@
 .panel-body {text-align: left; margin: 5px;}
 .hidden {display:none}
 
-.big { font-size: 180%; font-weight: bold; color: #6C7181; font-family: "Quicksand"}
-hr { width: 80%;  height: 2px; border: 0; border-top: 2px solid #9E9E9E }
+.big { font-size: 180%; color: #6C7181; font-family: "Quicksand"}
+hr { width: 90%;  height: 1px; border: 0; border-top: 1px solid #9E9E9E }
 
 .personal {display: block }
 .group {display:none; }
@@ -31,3 +31,19 @@ hr { width: 80%;  height: 2px; border: 0; border-top: 2px solid #9E9E9E }
          -webkit-filter: brightness(0.8) grayscale(1) opacity(.7); -moz-filter: brightness(0.8) grayscale(1) opacity(.7); }
 		 
 .picker:hover{ -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9); -moz-filter: brightness(1.2) grayscale(.5) opacity(.9); }
+
+a[aria-expanded=true] .fa-chevron-right { display: none; }
+a[aria-expanded=false] .fa-chevron-down { display: none; }
+.complete-panel {border:none; border-radius: 0; box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.25); margin-bottom: 10px;}
+.complete-panel a {text-decoration: none; color: inherit; }
+.complete-panel a:hover {text-decoration: none; color: inherit; }
+.complete-panel .panel-heading {padding: 0; margin: 0}
+.complete-panel .panel-title {text-align: left; font-size: 100%; display: block; background: white; padding: 13px 11px 8px 11px	; -webkit-transition: ease-out 0.6s;}
+.complete-panel .panel-title:hover {background: rgba(0,0,0,0.1) }
+.fa {padding-top: 3px;}
+.date{position: absolute; right: 45px;}
+.ctitle {padding-top: 15px; font-size: 120%; color: #0aabf5}
+
+.nav-justified a {color: black; text-decoration: none}
+.nav-justified a:hover {color: black; text-decoration: none}
+.nav-justified li { font-family: "Quicksand"; border: none; border-radius: 0; font-size: 120%; -webkit-transition: background-color 0.5s ease-out 0.1s; background-color: #f2f2f2}

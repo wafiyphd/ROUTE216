@@ -13,6 +13,10 @@
 	} else {
 		header("Location: index.php");	
 	}
+	
+	if ($userRow['user_kind'] == 'member') {
+		header("Location: member.php");
+	}
 
 	if (isset($_POST['record'])) {
 		$title = trim($_POST["title"]);
@@ -58,57 +62,57 @@
 		// date validation --
 		if ($day < 1 Or $day > 31) {
 			$error = true;
-			$errTyp = "danger";
-			$errMsg = "Please enter a valid date.";
+			$alertType = "danger";
+			$alertMsg = "Please enter a valid date.";
 		}
 		
 		if ($month == 4 or $month == 6 or $month == 9 or $month == 11) {
 			if ($day > 30) {
 				$error = true;
-				$errTyp = "danger";
-				$errMsg = "Please enter a valid date.";
+				$alertType= "danger";
+				$alertMsg = "Please enter a valid date.";
 			}
 		}
 		
 		if ($month == 2) {
 			if ($day > 29) {
 				$error = true;
-				$errTyp = "danger";
-				$errMsg = "Please enter a valid date.";
+				$alertType = "danger";
+				$alertMsg = "Please enter a valid date.";
 			}
 		}
 		
 		if ($year < 2017) {
 			$error = true;
-			$errTyp = "danger";
-			$errMsg = "Please enter a valid year.";
+			$alertType = "danger";
+			$alertMsg = "Please enter a valid year.";
 		}
 		// -- ends here 
 		
 		if (!isset($_POST['timeperiod'])) {
 			$error = true;
-			$errTyp = "danger";
-			$errMsg = "Please select AM or PM.";
+			$alertType = "danger";
+			$alertMsg = "Please select AM or PM.";
 		}
 			
 		if ($category == "group") {
 			if (!isset($_POST['type'])) {
 				$error = true;
-				$errTyp = "danger";
-				$errMsg = "Please pick a session type.";
+				$alertType = "danger";
+				$alertMsg = "Please pick a session type.";
 			}
 			
 			if (empty(($_POST['maxpax']))) {
 				$error = true;
-				$errTyp = "danger";
-				$errMsg = "Please enter a maximum number of participants.";
+				$alertType = "danger";
+				$alertMsg = "Please enter a maximum number of participants.";
 			}
 		}
 		
 		if(!isset($_POST['session'])) {
 			$error = true;
-			$errTyp = "danger";
-			$errMsg = "Please select either Personal or Group.";
+			$alertType = "danger";
+			$alertMsg = "Please select either Personal or Group.";
 		}
 		
 		if( !$error ) {
@@ -146,14 +150,12 @@
 			}
 			
 			if ($res) {
-				$errTyp = "success";
-				$errMsg = "Successfully recorded a training session.";
 				unset($title); unset($date); unset($time); unset($fee); unset($notes); unset($type); unset($maxpax);
 				header("Location: trainer.php?success=0");
 				
 			} else {
-				$errTyp = "danger";
-				$errMsg = "Something went wrong, try again later..."; 
+				$alertType = "danger";
+				$alertMsg = "Something went wrong, try again later..."; 
 			}
 		}
 	}
@@ -224,6 +226,16 @@
 								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo ucwords($userRow['fullname']); ?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
 							</a>
 								<ul class="dropdown-menu">
+									<?php if ($userRow['user_kind'] == 'member') { ?>
+									<li><a href="joinsessionslist.php">View Available Sessions</a></li>
+									<li><a href="managemember.php">Manage Joined Sesssions</a></li>
+									<li><a href="viewhistory.php">View Completed Sessions</a></li>
+									<li><a href="allmemberreviews.php">All My Reviews</a></li>
+									<?php } else { ?>
+									<li><a href="record.php">Record New Session</a></li>
+									<li><a href="viewhistory.php">Manage My Sessions</a></li>
+									<li><a href="allreviews.php">View All Reviews</a></li>
+									<?php } ?>
 									<li><a href="profile.php">Profile</a></li>
 									<li class="divider"></li>
 									<li><a href="logout.php?logout"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span>&nbsp;Log Out</a></li>
@@ -258,7 +270,7 @@
 					<div class="col-lg-6">
 						<div class="alert alert-box-s type-<?php echo $alertType; ?> alert-dismissable text-center">
 						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-							&nbsp;<?php echo $errMSG; ?>
+							&nbsp;<?php echo $alertMsg; ?>
 						</div>
 					</div>
 				<?php } ?>
@@ -275,7 +287,7 @@
 						<form action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" autocomplete="off">
 							<div class = "group">
 								<label for="title" class="label">TITLE</label>
-								<input id="title" type="text" name="title" class="input" required>
+								<input id="title" type="text" name="title" class="input" value="<?php echo $title ?>" required>
 							</div>
 
 							<div class = "group">
@@ -291,8 +303,8 @@
 											<option value="3">March</option><option value="4">April</option>
 											<option value="5">May</option><option value="6">June</option>
 											<option value="7">July</option><option value="8">August</option>
-											<option value="9" selected>September</option><option value="10">October</option>
-											<option value="11">November</option><option value="12">December</option>
+											<option value="9">September</option><option value="10">October</option>
+											<option value="11" selected>November</option><option value="12">December</option>
 										</select>
 									</div>
 									<div class="col-lg-3">
@@ -303,9 +315,10 @@
 							</div>
 
 							<div class = "group">
-								<label for="time" class="label">TIME</label>
+								
 								<div class="row">
 									<div class="col-lg-9">
+									<label for="time" class="label">TIME</label>
 										<select id="clock" name="clock" class="input" required>
 											<option value="1:00">1:00</option><option value="1:30">1:30</option>
 											<option value="2:00">2:00</option><option value="2:30">2:30</option>
@@ -322,6 +335,7 @@
 										</select>
 									</div>
 									<div class="col-lg-3">
+										<label for="time" class="label">PERIOD</label>
 										<div class="radio-group timeperiod">
 											<input type="radio" id="AM" name="timeperiod" value="AM"><label for="AM">AM</label>
 											<input type="radio" id="PM" name="timeperiod" value="PM"><label for="PM">&nbsp;PM</label>
@@ -332,7 +346,7 @@
 
 							<div class = "group">
 								<label for="fee" class="label">FEE</label>
-								<input id="fee" type="number" name="fee" class="input" required>
+								<input id="fee" type="number" name="fee" class="input" value="<?php echo $fee ?>" required>
 							</div>
 
 							<div class="group">			
@@ -382,22 +396,10 @@
 									<input id="notes" input type="text" name="notes" class = "input"></div>
 								</div>
 											
-						<div class = "group">
-							<button type="submit" name="record" class="button" value="Record">Record</button>
-						</div>
-						
-						<?php
-						if ( isset($errTyp) ) {
-						?>
-						<div class="form-group">
-								 <div class="alert alert-box type-<?php echo $errTyp; ?> alert-dismissable">
-								  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-									 <?php echo $errMsg; ?>
-								</div>
-						</div>
-									<?php
-					   }
-					   ?>
+							<div class = "group">
+								<button type="submit" name="record" class="button" value="Record">Record</button>
+							</div>
+		
 						</div>
 					</form>
 				</div>
@@ -421,7 +423,12 @@
 			
 				<div class="col-lg-6">
 					<span style="float:right;"><a href="#top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a></span>
-					
+					<script>
+					  $("a[href='#top']").click(function() {
+						 $("html, body").animate({ scrollTop: 0 }, "slow");
+						 return false;
+					  });
+					</script>
 				</div>
 			</div>
 		</div>

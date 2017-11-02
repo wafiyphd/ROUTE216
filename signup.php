@@ -4,6 +4,9 @@
  date_default_timezone_set('Asia/Singapore');
  
  include_once 'dbconnect.php';
+if (isset($_SESSION['user'])!="" ) { 
+	header("Location: index.php");	
+}
 
  $error = false;
  // user login php
@@ -35,20 +38,18 @@
 	   if( $count == 1 && $row['password']==$password ) {
 		   if ($cm == 1) {
 			   $_SESSION['user'] = $row['user_id'];
-			   $errMSG = "Successful Login";
 		       header("Location: member.php");	
 		   }
 		   
 		   else {
 			   $_SESSION['user'] = $row['user_id'];
-			   $errMSG = "Successful Login";
 		       header("Location: trainer.php");	
 		   }   
 	   } 
 	   
 	   else {
-		   $errTyp = "danger";
-		   $errMSG = "Incorrect Credentials, Try again...";
+		   $alertType = "danger";
+		   $alertMsg = "Incorrect Credentials, Try again...";
 	   }
   }
 }
@@ -85,7 +86,7 @@
   if (mysqli_num_rows($sql)) {
 	$error = true;
 	$alertType = "danger";
-	$errMSG = "Username is already taken."; 
+	$alertMsg = "Username is already taken."; 
   }
   
   //check if username is taken
@@ -94,13 +95,13 @@
   if (mysqli_num_rows($sql)) {
 	$error = true;
 	$alertType = "danger";
-	$errMSG = "Email address is already taken."; 
+	$alertMsg = "Email address is already taken."; 
   } 
   
   if($pass != $rpass){
 	$error = true;
 	$alertType = "danger";
-	$errMSG = "Password does not match."; 
+	$alertMsg = "Password does not match."; 
     }
 
   if ($userkind == "trainer") {
@@ -108,7 +109,7 @@
 	  if (empty(($_POST['specialty']))) {
 			$error = true;
 			$alertType = "danger";
-			$errMSG = "Please enter your specialty as a trainer.";
+			$alertMsg = "Please enter your specialty as a trainer.";
 		}
 	}
 	
@@ -116,14 +117,14 @@
 		if (!isset($_POST['level'])) {
 			$error = true;
 			$alertType= "danger";
-			$errMSG = "Please pick a training level.";
+			$alertMsg = "Please pick a training level.";
 		}
 	}
 	
   if(!isset($_POST['user'])) {
 	$error = true;
 	$alertType = "danger";
-	$errMSG = "Please select either Member or Trainer.";
+	$alertMsg = "Please select either Member or Trainer.";
 	}
 
   // if there's no error, continue to signup
@@ -157,14 +158,14 @@
 	
    if ($res) {
     $alertType = "success";
-	$errMSG = "Successfully signed up. You may now log in.";
+	$alertMsg = "Successfully signed up. You may now log in.";
 	
     unset($username); unset($name); unset($email); unset($pass); unset($rpass); unset($specialty); unset($level);
    } 
    
    else {
 	   $alertType = "danger";
-	   $errMSG = "Something went wrong, try again later..."; 
+	   $alertMsg = "Something went wrong, try again later..."; 
    } 
   }
  }
@@ -292,11 +293,11 @@
 				<div class="col-lg-3 info-box ">
 					<strong>SIGNING UP TO ROUTE</strong>
 				</div>
-				<?php if (isset($errTyp)) { ?>
+				<?php if (isset($alertType)) { ?>
 					<div class="col-lg-6">
-						<div class="alert alert-box-s type-<?php echo $errTyp; ?> alert-dismissable text-center">
+						<div class="alert alert-box-s type-<?php echo $alertType; ?> alert-dismissable text-center">
 						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-							&nbsp;<?php echo $errMSG; ?>
+							&nbsp;<?php echo $alertMsg; ?>
 						</div>
 					</div>
 				<?php } ?>
@@ -384,19 +385,6 @@
 									<input type="submit" name="signup" class="button" value="Sign Up"></input>
 								</div>
 								
-								<?php
-								if ( isset($alertType) ) {
-								?>
-								<div class="form-group">
-										 <div class="alert alert-box type-<?php echo $alertType; ?> alert-dismissable">
-										  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-											 <?php echo $errMSG; ?>
-										</div>
-							    </div>
-											<?php
-							   }
-							   ?>
-								
 							</form>
 							
 						</div>
@@ -422,7 +410,12 @@
 			
 				<div class="col-lg-6">
 					<span style="float:right;"><a href="#top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a></span>
-					
+					<script>
+					  $("a[href='#top']").click(function() {
+						 $("html, body").animate({ scrollTop: 0 }, "slow");
+						 return false;
+					  });
+					</script>
 				</div>
 			</div>
 		</div>

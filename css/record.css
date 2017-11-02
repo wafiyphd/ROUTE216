@@ -1,4 +1,4 @@
-.main-container {background: url(../images/abstract2.jpg); background-size: cover;}
+.main-container {background: #eaeaea; min-height: 65vh;}
 
 .record-container {padding-top: 40px;}
 .record-container h3 {font-weight: bold; text-align: center;  color: white;}
@@ -12,6 +12,7 @@
 .record-form .label-center {width:100%; color:#f66565; display:block; outline: none; font-size: 85%; text-align: center; font-family: "Quicksand"; }
 .record-form .input {width:100%; display:block; outline: none; font-size: 85%; font-family: "Quicksand"; }
 .record-form .input {border:0.5px solid #fccfcf; padding:10px 20px; border-radius:5px; background: #E5E7E9; color: black; }
+.record-form .input:focus {border:0.5px solid #FF5733; }
 .record-form .button{width:100%; color:#fff; display:block; outline: none; font-size: 100%; border:none; padding:10px 20px; border-radius:7px; box-shadow: 0 1px 4px rgba(0, 0, 0, .5); }
 .record-form .date {font-family: "Quicksand"}
 .record-form .group select {font-family: "Quicksand"; border-radius:5px;}

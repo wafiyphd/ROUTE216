@@ -27,14 +27,14 @@
 		
 		if ($currentpass != $oldpassword) {
 			$error = true;
-			$errType = "danger";
-			$errMsg = "The old password you have entered is wrong.";
+			$alertType = "danger";
+			$alertMsg = "The old password you have entered is wrong.";
 		}
 		
 		if ($newpass != $confpassword) {
 			$error = true;
-			$errType = "danger";
-			$errMsg = "Your new and confirmed passwords do not match.";
+			$alertType = "danger";
+			$alertMsg = "Your new and confirmed passwords do not match.";
 		}
 		
 		if (!$error) {
@@ -47,12 +47,12 @@
 			}
 			
 			if ($res) {
-				$errType = "success";
-				$errMsg = "Successfully updated password.";
+				$alertType = "success";
+				$alertMsg = "Successfully updated password.";
 				header("Location: profile.php?success=0");
 			} else {
-				$errType = "danger";
-				$errMsg = "Something went wrong, please try again.";
+				$alertType = "danger";
+				$alertMsg = "Something went wrong, please try again.";
 			}
 		}
 	}
@@ -113,6 +113,16 @@
 								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo ucwords($userRow['fullname']); ?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
 							</a>
 								<ul class="dropdown-menu">
+									<?php if ($userRow['user_kind'] == 'member') { ?>
+									<li><a href="joinsessionslist.php">View Available Sessions</a></li>
+									<li><a href="managemember.php">Manage Joined Sesssions</a></li>
+									<li><a href="viewhistory.php">View Completed Sessions</a></li>
+									<li><a href="allmemberreviews.php">All My Reviews</a></li>
+									<?php } else { ?>
+									<li><a href="record.php">Record New Session</a></li>
+									<li><a href="viewhistory.php">Manage My Sessions</a></li>
+									<li><a href="allreviews.php">View All Reviews</a></li>
+									<?php } ?>
 									<li><a href="profile.php">Profile</a></li>
 									<li class="divider"></li>
 									<li><a href="logout.php?logout"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span>&nbsp;Log Out</a></li>
@@ -147,7 +157,7 @@
 					<div class="col-lg-6">
 						<div class="alert alert-box-s type-<?php echo $alertType; ?> alert-dismissable text-center">
 						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-							&nbsp;<?php echo $errMsg; ?>
+							&nbsp;<?php echo $alertMsg; ?>
 						</div>
 					</div>
 				<?php } ?>
@@ -178,18 +188,6 @@
 									<div class = "group">
 										<button type="submit" name="updatepassword" class="button" value="Update Password">UPDATE</button>
 									</div>
-									<?php
-										if ( isset($errType) ) {
-									?>
-										<div class="form-group">
-											<div class="alert alert-boxalert type-<?php echo $errType; ?> alert-dismissable">
-												<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-									<?php echo $errMsg; ?>
-											</div>
-										</div>
-									<?php
-										}
-									?>	
 								</form>
 							</div>
 						</div>	
@@ -214,7 +212,12 @@
 			
 				<div class="col-lg-6">
 					<span style="float:right;"><a href="#top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a></span>
-					
+					<script>
+					  $("a[href='#top']").click(function() {
+						 $("html, body").animate({ scrollTop: 0 }, "slow");
+						 return false;
+					  });
+					</script>
 				</div>
 			</div>
 		</div>

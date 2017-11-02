@@ -12,6 +12,10 @@
 	
 	$id = $userRow['user_id'];
 	
+	if ($userRow['user_kind'] == 'member') {
+		header("Location: member.php");
+	}
+	
 	//count total reviews received 
 	$count = mysqli_query($mysqli, "SELECT COUNT(*) AS count FROM review WHERE trainer_id='$id'");
 	$count = mysqli_fetch_array($count);
@@ -137,6 +141,16 @@
 								<button class="btn navbar-btn"><span><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;&nbsp;<strong><?php echo ucwords($userRow['fullname']); ?></strong>&nbsp;&nbsp;<b class="caret"></b></button>
 							</a>
 								<ul class="dropdown-menu">
+									<?php if ($userRow['user_kind'] == 'member') { ?>
+									<li><a href="joinsessionslist.php">View Available Sessions</a></li>
+									<li><a href="managemember.php">Manage Joined Sesssions</a></li>
+									<li><a href="viewhistory.php">View Completed Sessions</a></li>
+									<li><a href="allmemberreviews.php">All My Reviews</a></li>
+									<?php } else { ?>
+									<li><a href="record.php">Record New Session</a></li>
+									<li><a href="viewhistory.php">Manage My Sessions</a></li>
+									<li><a href="allreviews.php">View All Reviews</a></li>
+									<?php } ?>
 									<li><a href="profile.php">Profile</a></li>
 									<li class="divider"></li>
 									<li><a href="logout.php?logout"><span><i class="fa fa-sign-out" aria-hidden="true"></i></span>&nbsp;Log Out</a></li>
@@ -200,7 +214,7 @@
 									echo "<img src=\"images/man.jpg\" class=\"photo img-responsive\" width=\"130\" height=\"130\">";
 								}
 								 
-								$reviewcount = mysqli_query($mysqli, "SELECT COUNT(*) as count FROM review WHERE reviewer_id = '$id'");
+								$reviewcount = mysqli_query($mysqli, "SELECT COUNT(*) as count FROM review WHERE trainer_id = '$id'");
 								$count = mysqli_fetch_array($reviewcount);
 								$count = $count['count'];
 								?>
@@ -250,10 +264,18 @@
 					});
 				</script>
 				
-			<?php $i=0; $reviews = "SELECT reviewer_name, r.trainer_id, r.session_id, title, timestamp, profrat, engrat, sesrat, totalrating, comments, date, category, reviewer_id from review r, session s
+			<?php $i=0; $reviews = "SELECT reviewer_name, r.trainer_id, r.session_id, title, timestamp, profrat, engrat, sesrat, totalrating, comments, date, category, reviewer_id, category from review r, session s
 								WHERE r.session_id = s.session_id AND r.trainer_id = '$id' ORDER BY timestamp DESC";
 				if ($result = mysqli_query($mysqli, $reviews)) {
-					while ($row = mysqli_fetch_row($result)){ $i++;?>
+					while ($row = mysqli_fetch_row($result)){ $i++;
+					if ($row[13] == "personal"){
+						$personal_query = mysqli_query($mysqli, "SELECT notes from personal_session where session_id='$sessionid'");
+						$personalRow = mysqli_fetch_row($personal_query);
+					}
+					else {
+						$group_query = mysqli_query($mysqli, "SELECT type, maxpax, count from group_session where session_id='$sessionid'");
+						$groupRow = mysqli_fetch_row($group_query);
+					} ?>
 						<div class="col-xs-12 col-lg-9 pull-right">
 							
 							<div class="row">
@@ -273,7 +295,7 @@
 											}
 											else {
 												echo "<img src=\"images/man.jpg\" class=\"small-photo img-responsive\" width=\"25\" height=\"25\">";
-											} echo ucfirst($row[0]); ?></span></strong><small>&nbsp;&nbsp;
+											} echo ucfirst($row[0]); ?></span></strong>&nbsp; | &nbsp;<?php echo $row[3]; ?><small>&nbsp;&nbsp;
 											<?php echo '<button class="btn btn-static btn-xs '; 
 												if ($row[8] >= 3.5) { echo ' btn-green'; }
 												elseif ($row[8] >=2.5) { echo ' btn-yellow'; }
@@ -294,7 +316,14 @@
 												<ul class="review">
 													<li><strong>Session Name: </strong><?php echo $row[3]; ?></li>
 													<li><strong>Session Date: </strong><?php $date = date('j F Y',strtotime($row[10])); echo $date; ?></li>
-													<li><strong>Category: </strong><?php echo ucfirst($row[11]); ?></li>					
+													<li><strong>Category: </strong><?php echo ucfirst($row[11]); ?></li>
+													<?php if ($row[13] == "personal"){ ?>
+													<li><strong>Notes: </strong><?php echo $personalRow[0]; ?></li>
+													<?php } else {?>
+													<li><strong>Session Type: </strong><?php echo $groupRow[0]; ?></li>
+													<li><strong>Max participants: </strong><?php echo $groupRow[1]; ?></li>
+													<li><strong>Joined: </strong><?php echo $groupRow[2]; ?></li>
+													<?php } ?>																
 												</ul>
 											</div>
 										
@@ -373,7 +402,12 @@
 			
 				<div class="col-lg-6">
 					<span style="float:right;"><a href="#top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a></span>
-					
+					<script>
+					  $("a[href='#top']").click(function() {
+						 $("html, body").animate({ scrollTop: 0 }, "slow");
+						 return false;
+					  });
+					</script>
 				</div>
 			</div>
 		</div>
