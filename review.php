@@ -22,6 +22,37 @@
 		header("Location: viewhistory.php");	
 	}
 	
+	// not allow reviewing based on entering id in URL
+	$checkalreadyreviewed = mysqli_query($mysqli, "SELECT COUNT(*) AS reviewed FROM review WHERE reviewer_id='$userid' AND session_id='$sessionid'");
+	$checkalreadyreviewed = mysqli_fetch_array($checkalreadyreviewed);
+	$checkalreadyreviewed = $checkalreadyreviewed['reviewed'];
+	if ($checkalreadyreviewed > 0) { 
+		header("Location: index.php");	
+	}
+	
+	$checksession = mysqli_query($mysqli, "SELECT category, status FROM session WHERE session_id='$sessionid'");
+	$checksession = mysqli_fetch_row($checksession);
+	$category = $checksession[0]; $status = $checksession[1];
+	
+	if ($status != "Completed") {
+		header("Location: viewhistory.php");	
+	}
+	
+	if ($category == "personal") {
+		$personal = mysqli_query($mysqli, "SELECT member_id FROM personal_session WHERE session_id='$sessionid'");
+		$personal = mysqli_fetch_row($personal);
+		$checkid = $personal[0];
+		if ($checkid != $userid)
+			header("Location: viewhistory.php");	
+	}
+	
+	elseif ($category == "group") {
+		$checkjoin = mysqli_query($mysqli, "SELECT j.session_id, member_id FROM joined_group j, group_session g WHERE j.session_id = '$sessionid' AND member_id = '$userid'");
+		$checkjoin = mysqli_fetch_row($checkjoin);
+		if ($checkjoin == 0)
+			header("Location: viewhistory.php");
+	}
+	
 	if ( isset($_GET['danger']) && $_GET['danger'] == 1) {
 		$alertType = "danger";
 		$errMSG = "Please enter a rating for all criterias."; 
@@ -71,37 +102,6 @@
 		    } 
 		}
 	 
-	}
-	
-	// not allow reviewing based on entering id in URL
-	$checkalreadyreviewed = mysqli_query($mysqli, "SELECT COUNT(*) AS reviewed FROM review WHERE reviewer_id='$userid' AND session_id='$sessionid'");
-	$checkalreadyreviewed = mysqli_fetch_array($checkalreadyreviewed);
-	$checkalreadyreviewed = $checkalreadyreviewed['reviewed'];
-	if ($checkalreadyreviewed > 0) { 
-		header("Location: index.php");	
-	}
-	
-	$checksession = mysqli_query($mysqli, "SELECT category, status FROM session WHERE session_id='$sessionid'");
-	$checksession = mysqli_fetch_row($checksession);
-	$category = $checksession[0]; $status = $checksession[1];
-	
-	if ($status != "Completed") {
-		header("Location: viewhistory.php");	
-	}
-	
-	if ($category == "personal") {
-		$personal = mysqli_query($mysqli, "SELECT member_id FROM personal_session WHERE session_id='$sessionid'");
-		$personal = mysqli_fetch_row($personal);
-		$checkid = $personal[0];
-		if ($checkid != $userid)
-			header("Location: viewhistory.php");	
-	}
-	
-	elseif ($category == "group") {
-		$checkjoin = mysqli_query($mysqli, "SELECT j.session_id, member_id FROM joined_group j, group_session g WHERE j.session_id = '$sessionid' AND member_id = '$userid'");
-		$checkjoin = mysqli_fetch_row($checkjoin);
-		if ($checkjoin == 0)
-			header("Location: viewhistory.php");
 	}
 	
 	
