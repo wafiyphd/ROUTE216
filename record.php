@@ -22,6 +22,7 @@
 		$title = trim($_POST["title"]);
 		$title = strip_tags($title);
 		$title = htmlspecialchars($title);
+		$title =  mysqli_real_escape_string($mysqli, $title);
 	  
 		$day = trim($_POST["day"]);
 		$day = strip_tags($day);
