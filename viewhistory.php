@@ -497,7 +497,7 @@ $error = false;
 								<div class="col-lg-6">
 									<p class="ctitle">GROUP</p>
 									<?php $i=0; $group_query = "SELECT g.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, type, maxpax, count 
-									from session s, group_session g WHERE status='Completed' AND category='group' AND g.session_id = s.session_id 
+									from session s, group_session g WHERE status='Cancelled' AND category='group' AND g.session_id = s.session_id 
 									AND s.trainer_id=".$_SESSION['user']; " ORDER BY date";
 									
 								if ($result = mysqli_query($mysqli, $group_query)) {
