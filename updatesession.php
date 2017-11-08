@@ -380,6 +380,7 @@
 										<div class="row">
 											<div class="col-lg-12">
 												<select id="status" name="status" class="input" required>
+													<option value="Unavailable" <?php if ($row[6] == "Unavailable") echo "selected"; ?>>Unavailable</option>
 													<option value="Cancelled" <?php if ($row[6] == "Cancelled") echo "selected"; ?>>Cancelled</option>
 													<option value="Completed" <?php if ($row[6] == "Completed") echo "selected"; ?>>Completed</option>
 													<option value="Available" <?php if ($row[6] == "Available") echo "selected"; ?>>Available</option>
@@ -397,18 +398,17 @@
 										
 										<div class="form" id="group" style="display: none;">
 										<label for="session" class="label">SESSION TYPE</label>
-											<label class="radio">
-												<input type="radio" name="type" value="Sport"  checked="<?php if ($grow[0] == "sport") echo "checked"; ?>">
+												<input type="radio" name="type" value="Sport" <?php echo ($grow[0]=='Sport') ? 'checked':'' ?>>
 												<div class="choice">Sport</div>
 											</label>
 											
 											<label class="radio">
-												<input type="radio" name="type" value="Dance" checked="<?php if ($grow[0] == "dance") echo "checked"; ?>">
+												<input type="radio" name="type" value="Dance" <?php echo ($grow[0]=='Dance') ? 'checked':'' ?>>
 												<div class="choice">Dance</div>
 											</label>
 											
 											<label class="radio">
-												<input type="radio" name="type" value="MMA" checked="<?php if ($grow[0] == "mma") echo "checked"; ?>">
+												<input type="radio" name="type" value="MMA" <?php echo ($grow[0]=='MMA') ? 'checked':'' ?>>
 												<div class="choice">MMA</div>
 											</label>
 														
