@@ -398,6 +398,7 @@
 										
 										<div class="form" id="group" style="display: none;">
 										<label for="session" class="label">SESSION TYPE</label>
+											<label class="radio">
 												<input type="radio" name="type" value="Sport" <?php echo ($grow[0]=='Sport') ? 'checked':'' ?>>
 												<div class="choice">Sport</div>
 											</label>
