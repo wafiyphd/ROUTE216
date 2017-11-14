@@ -335,7 +335,7 @@
 													$erating = $row[6];
 													$erating = number_format((float)$erating, 1, '.', '');
 													$srating = $row[7];
-													$srating = number_format((float)$prating, 1, '.', ''); ?>
+													$srating = number_format((float)$srating, 1, '.', ''); ?>
 													<table class="noborder">
 													<col width="125">
 													<col width="80">
