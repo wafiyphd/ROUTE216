@@ -230,16 +230,16 @@
 																							echo ' num">'; echo $paverage; echo '</button>' ?></small></td></tr>
 									<tr><td><strong>Average Engagement:</strong></td><td>
 																					<small><?php echo '<button class="btn btn-static btn-xs '; 
-																							if ($saverage >= 3.5) { echo ' btn-green'; }
-																							elseif ($saverage >=2.5) { echo ' btn-yellow'; }
-																							elseif ($saverage >= 0) { echo ' btn-red'; }
-																							echo ' num">'; echo $saverage; echo '</button>' ?></small></td></tr>
-									<tr><td><strong>Average Session:</strong></td><td>
-																					<small><?php echo '<button class="btn btn-static btn-xs '; 
 																							if ($eaverage >= 3.5) { echo ' btn-green'; }
 																							elseif ($eaverage >=2.5) { echo ' btn-yellow'; }
 																							elseif ($eaverage >= 0) { echo ' btn-red'; }
 																							echo ' num">'; echo $eaverage; echo '</button>' ?></small></td></tr>
+									<tr><td><strong>Average Session:</strong></td><td>
+																					<small><?php echo '<button class="btn btn-static btn-xs '; 
+																							if ($saverage >= 3.5) { echo ' btn-green'; }
+																							elseif ($saverage >=2.5) { echo ' btn-yellow'; }
+																							elseif ($saverage >= 0) { echo ' btn-red'; }
+																							echo ' num">'; echo $saverage; echo '</button>' ?></small></td></tr>
 									</table>
 								</div>
 							</div>
