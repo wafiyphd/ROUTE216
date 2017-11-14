@@ -338,7 +338,7 @@ $error = false;
 																<a href="review.php?id=<?php echo $row[0]; ?>"><button name="review" id="review" class="btn btn-join pull-right">Review</button></a> 	
 												<?php }}} elseif ($userkind == "trainer") { ?>
 																<a href="updatesession.php?id=<?php echo $row[0]; ?>"><button name="update" id="update" class="btn btn-join pull-right">Update</button></a>
-												<?php}
+												<?php }
 											?>
 									</div>
 								</div>
