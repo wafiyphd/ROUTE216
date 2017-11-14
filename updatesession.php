@@ -19,45 +19,50 @@
 
 	if ( isset($_GET['id']) ) {
 		$sessionid = $_GET['id'];
-	}
-	
-	$query = mysqli_query($mysqli, "SELECT trainer_id, date from session where session_id='$sessionid'");
-	$query = mysqli_fetch_array($query);
-	$checkdate = $query['date'];
-	$checktrainer = $query['trainer_id'];
-	
-	// checking whether trainer owns session to be updated
-	if ($checktrainer != $userid) {
-		header("Location: trainer.php?danger=0");
-	}
-	
-	// checking the date of session
-	$checkdate = explode('-', $checkdate);	
-	$checkyear = $date[0]; $checkmonth   = $date[1]; $checkday  = $date[2];
-	$currentyear = date('Y'); $currentmonth = date('m'); $currentday = date('d');
-	
-	if ($checkyear < 2017) {
-		$error = true;
-		$alertType = "danger";
-		$errMsg = "Please update the session date to be valid.";
-	}
+		$query = mysqli_query($mysqli, "SELECT trainer_id from session where session_id='$sessionid'");
+	 	$query = mysqli_fetch_row($query);
+	 	$checktrainer = $query[0];
+	 	
+	 	// checking whether trainer owns session to be updated
+	 	if ($checktrainer != $userid) {
+	 		header("Location: trainer.php?danger=0");
+	 	}
 		
-	else if ($checkyear == $currentyear) {
-		
-		if ($checkmonth < $currentmonth) {
-			$error = true;
-			$alertType = "danger";
-			$errMsg = "Please update the session date to be valid.";
-		}
-		
-		else if ($checkmonth == $currentmonth) {
-			if ($checkday < $currentday || $checkday == $currentday) {
+		else {
+			$query = mysqli_query($mysqli, "SELECT date from session where session_id='$sessionid'");
+			$query = mysqli_fetch_row($query);
+			$checkdate = $query[0];
+			
+			// checking the date of session
+			$checkdate = explode('-', $checkdate);	
+			$checkyear = $checkdate[0]; $checkmonth = $checkdate[1]; $checkday = $checkdate[2];
+			$currentyear = date('Y'); $currentmonth = date('m'); $currentday = date('d');
+			
+			if ($checkyear < 2017) {
 				$error = true;
 				$alertType = "danger";
 				$errMsg = "Please update the session date to be valid.";
 			}
+				
+			else if ($checkyear == $currentyear) {
+				
+				if ($checkmonth < $currentmonth) {
+					$error = true;
+					$alertType = "danger";
+					$errMsg = "Please update the session date to be valid.";
+				}
+				
+				else if ($checkmonth == $currentmonth) {
+					if ($checkday < $currentday || $checkday == $currentday) {
+						$error = true;
+						$alertType = "danger";
+						$errMsg = "Please update the session date to be valid.";
+					}
+				}
+			}
 		}
 	}
+	
 		
 	if ( isset($_GET['danger']) && $_GET['danger'] == 0) {
 		$alertType = "danger";
@@ -71,11 +76,6 @@
 	} elseif ( isset($_GET['danger']) && $_GET['danger'] == 3) {
 		$alertType = "danger";
 		$errMsg = "Please enter a valid no. of max participants.";	
-	}
-	
-	$trquery = "SELECT trainer_id from session WHERE trainer_id='$sessionid'";
-	if (!$res = mysqli_query($mysqli, $trquery)) {
-		header("Location: index.php");
 	}
 	
 	if( isset($_POST['update']) ) {
@@ -149,7 +149,7 @@
 			if ($month < $currentmonth) {
 				$error = true;
 				$errType = "danger";
-			$errMsg = "Please enter a valid date.";
+				$errMsg = "Please enter a valid date.";
 				header('Location: updatesession.php?danger=0&id='.$id);
 			}
 			
