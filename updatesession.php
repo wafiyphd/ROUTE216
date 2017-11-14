@@ -137,53 +137,54 @@
 		$currentyear = date('Y');
 		
 		// date validation --
-		if ($year < 2017) {
-			$error = true;
-			$errType = "danger";
-			$errMsg = "Please enter a valid date.";
-			header('Location: updatesession.php?danger=0&id='.$id);
-		}
-		
-		else if ($year == $currentyear) {
-			
-			if ($month < $currentmonth) {
+		if ($status != "Completed") {
+			if ($year < 2017) {
 				$error = true;
 				$errType = "danger";
 				$errMsg = "Please enter a valid date.";
 				header('Location: updatesession.php?danger=0&id='.$id);
 			}
 			
-			else if ($month == $currentmonth) {
-				if ($day < $currentday || $day == $currentday) {
+			else if ($year == $currentyear) {
+				
+				if ($month < $currentmonth) {
 					$error = true;
 					$errType = "danger";
 					$errMsg = "Please enter a valid date.";
 					header('Location: updatesession.php?danger=0&id='.$id);
 				}
+				
+				else if ($month == $currentmonth) {
+					if ($day < $currentday || $day == $currentday) {
+						$error = true;
+						$errType = "danger";
+						$errMsg = "Please enter a valid date.";
+						header('Location: updatesession.php?danger=0&id='.$id);
+					}
+				}
 			}
-		}
-		
-		if ($day < 1 or $day > 31) {
-			$error = true;
-			$errType = "danger";
-			$errMsg = "Please enter a valid date.";
-			header('Location: updatesession.php?danger=0&id='.$id);
-		}
 			
-		if ($month == 4 or $month == 6 or $month == 9 or $month == 11) {
-			if ($day > 30) {
+			if ($day < 1 or $day > 31) {
 				$error = true;
+				$errType = "danger";
+				$errMsg = "Please enter a valid date.";
 				header('Location: updatesession.php?danger=0&id='.$id);
 			}
-		}
-			
-		if ($month == 2) {
-			if ($day > 29) {
-				$error = true;
-				header('Location: updatesession.php?danger=0&id='.$id);
+				
+			if ($month == 4 or $month == 6 or $month == 9 or $month == 11) {
+				if ($day > 30) {
+					$error = true;
+					header('Location: updatesession.php?danger=0&id='.$id);
+				}
+			}
+				
+			if ($month == 2) {
+				if ($day > 29) {
+					$error = true;
+					header('Location: updatesession.php?danger=0&id='.$id);
+				}
 			}
 		}
-			
 		// -- ends here 
 			
 		if (!isset($_POST['timeperiod'])) {
