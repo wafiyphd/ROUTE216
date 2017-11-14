@@ -25,6 +25,10 @@
 		$alertType = "success";
 		$errMSG = "Successfully updated training session.";
 	}
+	if ( isset($_GET['danger']) && $_GET['danger'] == 0) {
+		$alertType = "danger";
+		$errMSG = "You don't own that session.";
+	}
 ?>
 
 <!DOCTYPE html>

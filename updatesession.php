@@ -8,6 +8,7 @@
 	if (isset($_SESSION['user'])!="" ) { 
 		$res= mysqli_query($mysqli, "SELECT * FROM user WHERE user_id=".$_SESSION['user']);
 		$userRow= mysqli_fetch_array($res);
+		$userid = $userRow['user_id'];
 	} else {
 		header("Location: index.php");	
 	}
@@ -20,6 +21,44 @@
 		$sessionid = $_GET['id'];
 	}
 	
+	$query = mysqli_query($mysqli, "SELECT trainer_id, date from session where session_id='$sessionid'");
+	$query = mysqli_fetch_array($query);
+	$checkdate = $query['date'];
+	$checktrainer = $query['trainer_id'];
+	
+	// checking whether trainer owns session to be updated
+	if ($checktrainer != $userid) {
+		header("Location: trainer.php?danger=0");
+	}
+	
+	// checking the date of session
+	$checkdate = explode('-', $checkdate);	
+	$checkyear = $date[0]; $checkmonth   = $date[1]; $checkday  = $date[2];
+	$currentyear = date('Y'); $currentmonth = date('m'); $currentday = date('d');
+	
+	if ($checkyear < 2017) {
+		$error = true;
+		$alertType = "danger";
+		$errMsg = "Please update the session date to be valid.";
+	}
+		
+	else if ($checkyear == $currentyear) {
+		
+		if ($checkmonth < $currentmonth) {
+			$error = true;
+			$alertType = "danger";
+			$errMsg = "Please update the session date to be valid.";
+		}
+		
+		else if ($checkmonth == $currentmonth) {
+			if ($checkday < $currentday || $checkday == $currentday) {
+				$error = true;
+				$alertType = "danger";
+				$errMsg = "Please update the session date to be valid.";
+			}
+		}
+	}
+		
 	if ( isset($_GET['danger']) && $_GET['danger'] == 0) {
 		$alertType = "danger";
 		$errMsg = "Please enter a valid date.";
@@ -93,7 +132,37 @@
 			}
 		}
 		
+		$currentday = date('d');
+		$currentmonth = date('m');
+		$currentyear = date('Y');
+		
 		// date validation --
+		if ($year < 2017) {
+			$error = true;
+			$errType = "danger";
+			$errMsg = "Please enter a valid date.";
+			header('Location: updatesession.php?danger=0&id='.$id);
+		}
+		
+		else if ($year == $currentyear) {
+			
+			if ($month < $currentmonth) {
+				$error = true;
+				$errType = "danger";
+			$errMsg = "Please enter a valid date.";
+				header('Location: updatesession.php?danger=0&id='.$id);
+			}
+			
+			else if ($month == $currentmonth) {
+				if ($day < $currentday || $day == $currentday) {
+					$error = true;
+					$errType = "danger";
+					$errMsg = "Please enter a valid date.";
+					header('Location: updatesession.php?danger=0&id='.$id);
+				}
+			}
+		}
+		
 		if ($day < 1 or $day > 31) {
 			$error = true;
 			$errType = "danger";
@@ -115,10 +184,6 @@
 			}
 		}
 			
-		if ($year < 2017) {
-			$error = true;
-			header('Location: updatesession.php?danger=1&id='.$id);
-		}
 		// -- ends here 
 			
 		if (!isset($_POST['timeperiod'])) {

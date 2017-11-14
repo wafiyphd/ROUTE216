@@ -60,7 +60,34 @@
 		
 		$category = $_POST['session'];
 	
+		$currentday = date('d');
+		$currentmonth = date('m');
+		$currentyear = date('Y');
+		
 		// date validation --
+		if ($year < 2017) {
+			$error = true;
+			$alertType = "danger";
+			$alertMsg = "Please enter a valid year.";
+		}
+		
+		else if ($year == $currentyear) {
+			
+			if ($month < $currentmonth) {
+				$error = true;
+				$alertType = "danger";
+				$alertMsg = "Please enter a valid date.";
+			}
+			
+			else if ($month == $currentmonth) {
+				if ($day < $currentday || $day == $currentday) {
+					$error = true;
+					$alertType = "danger";
+					$alertMsg = "Please enter a valid date.";
+				}
+			}
+		}
+		
 		if ($day < 1 Or $day > 31) {
 			$error = true;
 			$alertType = "danger";
@@ -83,11 +110,6 @@
 			}
 		}
 		
-		if ($year < 2017) {
-			$error = true;
-			$alertType = "danger";
-			$alertMsg = "Please enter a valid year.";
-		}
 		// -- ends here 
 		
 		if (!isset($_POST['timeperiod'])) {
@@ -295,7 +317,7 @@
 								<div class="row">
 									<div class="col-lg-3">
 										<label for="date" class="label">DAY</label>
-										<input id="day" type="number" name="day" class="input date" value="1" required>
+										<input id="day" type="number" name="day" class="input date" value="<?php if (isset($_POST['day'])){echo $day;} else {echo 1;} ?>" required>
 									</div>
 									<div class="col-lg-6">
 										<label for="date" class="label">MONTH</label>
@@ -338,8 +360,8 @@
 									<div class="col-lg-3">
 										<label for="time" class="label">PERIOD</label>
 										<div class="radio-group timeperiod">
-											<input type="radio" id="AM" name="timeperiod" value="AM"><label for="AM">AM</label>
-											<input type="radio" id="PM" name="timeperiod" value="PM"><label for="PM">&nbsp;PM</label>
+											<input type="radio" id="AM" name="timeperiod" value="AM" <?php if (isset($_POST['timeperiod'])){if ($period == 'AM'){ echo "checked";}} ?>><label for="AM">AM</label>
+											<input type="radio" id="PM" name="timeperiod" value="PM" <?php if (isset($_POST['timeperiod'])){if ($period == 'PM'){ echo "checked";}} ?>><label for="PM">&nbsp;PM</label>
 										</div>
 									</div>
 								</div>
