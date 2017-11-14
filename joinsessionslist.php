@@ -41,12 +41,19 @@ if( isset($_POST['join-group']) ) {
 	$userfullname =$userRow['fullname'];
 	$sessionid = $_POST['id'];
 	$group_query = "SELECT g.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, type, maxpax, count 
-				from session s, group_session g WHERE category='group' AND g.session_id = s.session_id AND status = 'Available' ORDER BY date";
+				from session s, group_session g WHERE g.session_id = s.session_id AND g.session_id = '$sessionid'";
 	
 	$join = mysqli_query($mysqli, "	INSERT INTO joined_group(session_id, member_id, member_name) values ('$sessionid','$userid','$userfullname')");
 	$update = mysqli_query($mysqli, "UPDATE group_session SET count = count + 1 WHERE session_id = $sessionid");
 	$count = mysqli_query ($mysqli, "UPDATE member SET joined=joined+1 WHERE user_id = '$userid'");	
-	if ($join && update && $count){
+	
+	$groupRow = mysqli_query($mysqli, $group_query);
+	$groupRow = mysqli_fetch_row($groupRow);
+	$checkmax = $groupRow[10]; $checkcount = $groupRow[11];
+	if ($checkmax == $checkcount)
+		$full = mysqli_query($mysqli, "UPDATE session SET status = 'Full' WHERE session_id = $sessionid");
+		
+	if ($join && update && $count && full){
 		$alertType = "success";
 		$errMSG = "Successfully joined.&nbsp;&nbsp; <a href=\"managemember.php\"><button class=\"btn btn-view\">View joined sessions.</button></a>";
 	}

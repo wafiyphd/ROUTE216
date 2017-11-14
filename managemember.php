@@ -40,11 +40,19 @@ if( isset($_POST['unjoin-group']) ) {
 	
 	$userid = $userRow['user_id'];
 	$sessionid = $_POST['id'];
+	$group_query = "SELECT g.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, type, maxpax, count 
+				from session s, group_session g WHERE g.session_id = s.session_id AND g.session_id = '$sessionid'";
 	
 	$join = mysqli_query($mysqli, "	DELETE FROM joined_group WHERE member_id = '$userid' AND session_id ='$sessionid' ");
 	$update = mysqli_query($mysqli, "UPDATE group_session SET count = count - 1 WHERE session_id = $sessionid");
 	$count = mysqli_query ($mysqli, "UPDATE member SET joined=joined-1 WHERE user_id = '$userid'");
-	if ($join && update && $count){
+	$groupRow = mysqli_query($mysqli, $group_query);
+	$groupRow = mysqli_fetch_row($groupRow);
+	$checkmax = $groupRow[10]; $checkcount = $groupRow[11];
+	if ($checkmax > $checkcount)
+		$full = mysqli_query($mysqli, "UPDATE session SET status = 'Available' WHERE session_id = $sessionid");
+	
+	if ($join && update && $count && $full){
 		$alertType = "success";
 		$errMSG = "Successfully unjoined.";
 	}

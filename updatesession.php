@@ -453,6 +453,7 @@
 													<option value="Cancelled" <?php if ($row[6] == "Cancelled") echo "selected"; ?>>Cancelled</option>
 													<option value="Completed" <?php if ($row[6] == "Completed") echo "selected"; ?>>Completed</option>
 													<option value="Available" <?php if ($row[6] == "Available") echo "selected"; ?>>Available</option>
+													<?php if ($row[6] == "Full") echo "<option value=\"Full\" selected> Full</option>"; ?>
 												</select>
 											</div>
 										</div>

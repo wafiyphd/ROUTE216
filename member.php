@@ -228,7 +228,8 @@
 								while ($row = mysqli_fetch_row($result)){ ?>
 							<tr>
 								<td><?php echo $row[1]; if ($row[3] == "Available"){ echo '&nbsp;<small><button class="btn btn-static btn-green btn-xs">Available</button></small>';}
-													elseif ($row[3] == "Unavailable") {echo '&nbsp;<small><button class="btn btn-static btn-red btn-xs">Taken</button></small>'; } ?>
+													elseif ($row[3] == "Unavailable") {echo '&nbsp;<small><button class="btn btn-static btn-red btn-xs">Taken</button></small>'; } 
+													elseif ($row[3] == "Full") {echo '&nbsp;<small><button class="btn btn-static btn-red btn-xs">Full</button></small>'; } ?>
 								</td>
 								<td><?php $date = date('j F Y',strtotime($row[2])); echo $date; ?></td>
 								<td><?php echo ucfirst($row[0]); ?></td>
@@ -266,8 +267,8 @@
 							if ($result = mysqli_query($mysqli, $sessions)) {
 								while ($row = mysqli_fetch_row($result)){ ?>
 							<tr>
-								<td><?php echo $row[1]; if ($row[4] < $row[5]){ echo '&nbsp;<small><button class="btn btn-static btn-green btn-xs">Available</button></small>';}
-													elseif ($row[3] == $row[5]) {echo '&nbsp;<small><button class="btn btn-static btn-red btn-xs">Full</button></small>'; } ?>
+								<td><?php echo $row[1]; if ($row[3] == "Available"){ echo '&nbsp;<small><button class="btn btn-static btn-green btn-xs">Available</button></small>';}
+													elseif ($row[3] == "Full") {echo '&nbsp;<small><button class="btn btn-static btn-red btn-xs">Full</button></small>'; } ?>
 								</td>
 								<td><?php $date = date('j F Y',strtotime($row[2])); echo $date; ?></td>
 								<td><?php echo $row[4]; ?></td>

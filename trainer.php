@@ -21,10 +21,7 @@
 	if ( isset($_GET['success']) && $_GET['success'] == 0) {
 		$alertType = "success";
 		$errMSG = "Successfully created new training session.";
-	} elseif ( isset($_GET['success']) && $_GET['success'] == 1) {
-		$alertType = "success";
-		$errMSG = "Successfully updated training session.";
-	}
+	} 
 	if ( isset($_GET['danger']) && $_GET['danger'] == 0) {
 		$alertType = "danger";
 		$errMSG = "You don't own that session.";
@@ -307,7 +304,9 @@
 							else {
 								while ($row = mysqli_fetch_row($result)){ ?>
 							<tr>
-								<td><?php echo $row[1]; ?></td>
+								<td><?php echo $row[1]; if ($row[3] == "Available"){ echo '&nbsp;<small><button class="btn btn-static btn-green btn-xs">Available</button></small>';}
+													elseif ($row[3] == "Unavailable") {echo '&nbsp;<small><button class="btn btn-static btn-red btn-xs">Unavailable</button></small>'; } ?>
+								</td>
 								<td><?php $date = date('j F Y',strtotime($row[2])); echo $date; ?></td>
 								<td><?php if (is_null($row[4])) {echo 'No member joined.';} else {
 										$findimage = mysqli_query($mysqli, "SELECT image_name FROM avatar WHERE user_id ='$row[5]'");
@@ -366,7 +365,9 @@
 							else {
 								while ($row = mysqli_fetch_row($result)){ ?>
 							<tr>
-								<td><?php echo $row[1]; ?></td>
+								<td><?php echo $row[1]; if ($row[3] == "Available"){ echo '&nbsp;<small><button class="btn btn-static btn-green btn-xs">Available</button></small>';}
+													elseif ($row[3] == "Full") {echo '&nbsp;<small><button class="btn btn-static btn-red btn-xs">Full</button></small>'; } ?>
+								</td>
 								<td><?php $date = date('j F Y',strtotime($row[2])); echo $date; ?></td>
 								<td><?php echo $row[4]; ?></td>
 							</tr>

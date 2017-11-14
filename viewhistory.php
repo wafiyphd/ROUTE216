@@ -236,16 +236,9 @@ $error = false;
 															<a href="review.php?id=<?php echo $row[0]; ?>"><button name="review" id="review" class="btn btn-join pull-right">Review</button></a>
 												<?php } elseif ($row[6] == "Cancelled") { ?>
 														<button name="review" id="review" class="btn btn-un pull-right" disabled>Review</button>
-												<?php }}} elseif ($userkind == "trainer") {
-															if ($row[6] == "Available") { ?>
+												<?php }}} elseif ($userkind == "trainer") { ?>
 																<a href="updatesession.php?id=<?php echo $row[0]; ?>"><button name="update" id="update" class="btn btn-join pull-right">Update</button></a>
-												<?php		} elseif ($row[6] == "Unavailable") { ?>
-																<a href="updatesession.php?id=<?php echo $row[0]; ?>"><button name="update" id="update" class="btn btn-join pull-right">Update</button></a>
-												<?php 		} elseif ($row[6] == "Completed") { ?>
-																<a href="updatesession.php?id=<?php echo $row[0]; ?>"><button name="update" id="update" class="btn btn-join pull-right">Update</button></a>
-												<?php 		} elseif ($row[6] == "Cancelled") { ?>
-																<a href="updatesession.php?id=<?php echo $row[0]; ?>"><button name="update" id="update" class="btn btn-join pull-right">Update</button></a>
-												<?php }} ?>											
+												<?php		} ?>											
 									</div>
 								</div>
 							</div>
@@ -343,16 +336,9 @@ $error = false;
 																<button name="review" id="review" class="btn btn-un pull-right" disabled>Review</button> 
 												<?php }} elseif ($row[6] == "Completed") { ?>
 																<a href="review.php?id=<?php echo $row[0]; ?>"><button name="review" id="review" class="btn btn-join pull-right">Review</button></a> 	
-												<?php }}} elseif ($userkind == "trainer") {
-															if ($row[6] == "Available") { ?>
+												<?php }}} elseif ($userkind == "trainer") { ?>
 																<a href="updatesession.php?id=<?php echo $row[0]; ?>"><button name="update" id="update" class="btn btn-join pull-right">Update</button></a>
-												<?php		} elseif ($row[6] == "Unavailable") { ?>
-																<a href="updatesession.php?id=<?php echo $row[0]; ?>"><button name="update" id="update" class="btn btn-join pull-right">Update</button></a>
-												<?php 		} elseif ($row[6] == "Completed") { ?>
-																<a href="updatesession.php?id=<?php echo $row[0]; ?>"><button name="update" id="update" class="btn btn-join pull-right">Update</button></a>
-												<?php 		} elseif ($row[6] == "Cancelled") { ?>
-																<a href="updatesession.php?id=<?php echo $row[0]; ?>"><button name="update" id="update" class="btn btn-join pull-right">Update</button></a>
-												<?php }}
+												<?php}
 											?>
 									</div>
 								</div>
