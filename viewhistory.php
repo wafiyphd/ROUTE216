@@ -5,6 +5,7 @@ require_once 'dbconnect.php';
 if ( isset($_SESSION['user'])!="" ) { 
 $res=mysqli_query($mysqli, "SELECT * FROM user WHERE user_id=".$_SESSION['user']);
 $userRow=mysqli_fetch_array($res);
+$id = $userRow['user_id'];
 } else {
 	header("Location: index.php");	
 }
@@ -157,11 +158,11 @@ $error = false;
 				if ($userkind == "member") {
 					$personal_query = "SELECT p.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, notes, member_id 
 				from session s, personal_session p where category='personal' AND status='Completed' AND p.session_id = s.session_id
-				AND member_id=".$_SESSION['user']; " ORDER BY date";
+				AND member_id='$id' ORDER BY date";
 				} elseif ($userkind == "trainer") {
 					$personal_query = "SELECT p.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, notes, member_id 
 				from session s, personal_session p where category='personal' AND p.session_id = s.session_id AND NOT status='Completed' AND NOT status='Cancelled'
-				AND trainer_id=".$_SESSION['user']; " ORDER BY date";					
+				AND trainer_id='$id' ORDER BY date";					
 				}
 				if ($result = mysqli_query($mysqli, $personal_query)) {
 					while ($row = mysqli_fetch_row($result)){ ?>
@@ -254,11 +255,11 @@ $error = false;
 				if ($userkind == "member") {
 					$group_query = "SELECT g.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, type, maxpax, count 
 					from session s, group_session g, joined_group j WHERE category='group' AND status='Completed' AND g.session_id = s.session_id 
-					AND j.session_id = s.session_id AND j.member_id=".$_SESSION['user']; " ORDER BY date";
+					AND j.session_id = s.session_id AND j.member_id='$id' ORDER BY date";
 				} elseif ($userkind == "trainer") {
 					$group_query = "SELECT g.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, type, maxpax, count 
 					from session s, group_session g WHERE category='group' AND g.session_id = s.session_id  AND NOT status='Completed' AND NOT status='Cancelled'
-					AND s.trainer_id=".$_SESSION['user']; " ORDER BY date";
+					AND s.trainer_id='$id' ORDER BY date";
 				}
 				if ($result = mysqli_query($mysqli, $group_query)) {
 					while ($row = mysqli_fetch_row($result)){ 
@@ -373,7 +374,7 @@ $error = false;
 									<p class="ctitle">PERSONAL</p>
 									<?php $i=0; $personal_query = "SELECT p.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, notes, member_id 
 									from session s, personal_session p where status='Completed' AND category='personal' AND p.session_id = s.session_id
-									AND trainer_id=".$_SESSION['user']; " ORDER BY date";					
+									AND trainer_id='$id' ORDER BY date DESC";					
 									
 									if ($result = mysqli_query($mysqli, $personal_query)) {
 										while ($row = mysqli_fetch_row($result)){ $i++ ?>
@@ -413,7 +414,7 @@ $error = false;
 									<p class="ctitle">GROUP</p>
 									<?php $i=0; $group_query = "SELECT g.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, type, maxpax, count 
 									from session s, group_session g WHERE status='Completed' AND category='group' AND g.session_id = s.session_id 
-									AND s.trainer_id=".$_SESSION['user']; " ORDER BY date";
+									AND s.trainer_id='$id' ORDER BY date DESC";
 									
 								if ($result = mysqli_query($mysqli, $group_query)) {
 									while ($row = mysqli_fetch_row($result)){ $i++; ?>
@@ -458,7 +459,7 @@ $error = false;
 									<p class="ctitle">PERSONAL</p>
 									<?php $i=0; $personal_query = "SELECT p.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, notes, member_id 
 									from session s, personal_session p where status='Cancelled' AND category='personal' AND p.session_id = s.session_id
-									AND trainer_id=".$_SESSION['user']; " ORDER BY date";					
+									AND trainer_id='$id' ORDER BY date DESC";					
 									
 									if ($result = mysqli_query($mysqli, $personal_query)) {
 										while ($row = mysqli_fetch_row($result)){ $i++ ?>
@@ -498,7 +499,7 @@ $error = false;
 									<p class="ctitle">GROUP</p>
 									<?php $i=0; $group_query = "SELECT g.session_id, category, title, date, time, fee, status, trainer_id, trainer_name, type, maxpax, count 
 									from session s, group_session g WHERE status='Cancelled' AND category='group' AND g.session_id = s.session_id 
-									AND s.trainer_id=".$_SESSION['user']; " ORDER BY date";
+									AND s.trainer_id='$id' ORDER BY date DESC";
 									
 								if ($result = mysqli_query($mysqli, $group_query)) {
 									while ($row = mysqli_fetch_row($result)){ $i++; ?>
