@@ -40,23 +40,23 @@
 			
 			if ($checkyear < 2017) {
 				$error = true;
-				$alertType = "danger";
-				$errMsg = "Please update the session date to be valid.";
+				$alertType = "success";
+				$errMsg = "Note: Update the session date to be valid, unless Completed/Cancelled";
 			}
 				
 			else if ($checkyear == $currentyear) {
 				
 				if ($checkmonth < $currentmonth) {
 					$error = true;
-					$alertType = "danger";
-					$errMsg = "Please update the session date to be valid.";
+					$alertType = "success";
+					$errMsg = "Note: Update the session date to be valid, unless Completed/Cancelled";
 				}
 				
 				else if ($checkmonth == $currentmonth) {
 					if ($checkday < $currentday || $checkday == $currentday) {
 						$error = true;
-						$alertType = "danger";
-						$errMsg = "Please update the session date to be valid.";
+						$alertType = "success";
+						$errMsg = "Note: Update the session date to be valid, unless Completed/Cancelled";
 					}
 				}
 			}
@@ -137,7 +137,7 @@
 		$currentyear = date('Y');
 		
 		// date validation --
-		if ($status != "Completed") {
+		if ($status != "Completed" && $status != "Cancelled") {
 			if ($year < 2017) {
 				$error = true;
 				$errType = "danger";
@@ -220,9 +220,12 @@
 
 			
 		    if ($res) {
-				$errType = "success";
-				$errMsg = "Successfully updated training session.";
-				header("Location: viewhistory.php?success=1");
+				if ($status == "Completed")
+					header("Location: viewhistory.php?success=3");
+				else if ($status == "Cancelled")
+					header("Location: viewhistory.php?success=2");
+				else
+					header("Location: viewhistory.php?success=1");
 		    } else {
 				$errType = "danger";
 				$errMsg = "Something went wrong, try again later..."; 
@@ -445,7 +448,7 @@
 										<label for="time" class="label">STATUS</label>
 										<div class="row">
 											<div class="col-lg-12">
-												<select id="status" name="status" class="input" required>
+												<select id="status" name="status" class="input" onchange="checkStatus()" required>
 													<option value="Unavailable" <?php if ($row[6] == "Unavailable") echo "selected"; ?>>Unavailable</option>
 													<option value="Cancelled" <?php if ($row[6] == "Cancelled") echo "selected"; ?>>Cancelled</option>
 													<option value="Completed" <?php if ($row[6] == "Completed") echo "selected"; ?>>Completed</option>
@@ -453,6 +456,7 @@
 												</select>
 											</div>
 										</div>
+										
 									</div>
 									
 									<div class="form" id="personal" style="display: none;">
@@ -495,10 +499,24 @@
 										<div class="group">
 											<input name="sessionid" class="hidden" value="<?php echo $row[0]; ?>"></input>
 										</div>
-											
+										
+										<span id="warning">&nbsp;</span>
+										<script>
+										function checkStatus() {
+											var x = document.getElementById("status").value;
+											if (x == "Completed" )
+												document.getElementById("warning").innerHTML = "Note: You won't be able to update completed sessions anymore.";
+											else if ( x == "Cancelled")
+												document.getElementById("warning").innerHTML = "Note: You won't be able to update cancelled sessions anymore.";
+											else
+												document.getElementById("warning").innerHTML = "";
+										}
+										
+										</script>	
 										<div class="group">
 											<input type="submit" name="update" class="button" value="Update"></input>
 										</div>
+										
 											
 									</form>		
 								</div>

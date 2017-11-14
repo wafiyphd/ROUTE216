@@ -11,9 +11,16 @@ $id = $userRow['user_id'];
 }
 
 if ( isset($_GET['success']) && $_GET['success'] == 1) {
-		$alertType = "success";
-		$errMSG = "Successfully updated session info.";
-	}
+	$alertType = "success";
+	$errMSG = "Successfully updated session info.";
+} elseif ( isset($_GET['success']) && $_GET['success'] == 2) {
+	$alertType = "success";
+	$errMSG = "Successfully cancelled training session.";
+} elseif ( isset($_GET['success']) && $_GET['success'] == 3) {
+	$alertType = "success";
+	$errMSG = "Successfully marked session as completed.";
+}
+	
  
 $error = false;
 ?>
