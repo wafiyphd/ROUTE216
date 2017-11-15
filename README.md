@@ -20,3 +20,4 @@ Done:
 11. V i s u a l  a e s t h e t i c s
 
 What to do:
+I T ' S D O N E ✅
